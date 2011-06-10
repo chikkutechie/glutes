@@ -58,7 +58,9 @@ void GlutAppUi::ConstructL()
     
     iEikonEnv->AppUiFactory()->CreateResourceIndependentFurnitureL(this);
     CEikButtonGroupContainer *cba = CEikButtonGroupContainer::NewL(CEikButtonGroupContainer::ECba,
-                            CEikButtonGroupContainer::EHorizontal, this, R_AVKON_SOFTKEYS_OPTIONS_EXIT);
+                                                    CEikButtonGroupContainer::EHorizontal,
+                                                    this,
+                                                    R_AVKON_SOFTKEYS_OPTIONS_EXIT);
     CEikonEnv::Static()->AppUiFactory()->SwapButtonGroup(cba);
 
     CEikMenuBar * menuBar = new(ELeave) CEikMenuBar;

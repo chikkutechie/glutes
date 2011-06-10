@@ -1,0 +1,105 @@
+/**
+ * Copyright (c) 2010-2015 Ranjith TV.            
+ * All rights reserved.  Email: ranjith.tv@gmail.com                 
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. All advertising materials mentioning features or use of this software
+ *    must display the following acknowledgement:
+ *    This product includes software developed by the <organization>.
+ * 4. Neither the name of the <organization> nor the
+ *    names of its contributors may be used to endorse or promote products
+ *    derived from this software without specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY Ranjith TV ''AS IS'' AND ANY
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL Ranjith TV BE LIABLE FOR ANY
+ * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+TARGET		    glut.dll
+TARGETTYPE	    DLL
+UID			    0x1000008d 0xE0E3DB65
+
+USERINCLUDE	    ../../inc
+USERINCLUDE	    ../s60/inc
+
+SYSTEMINCLUDE   /epoc32/include
+SYSTEMINCLUDE   /epoc32/include/mw
+SYSTEMINCLUDE	/epoc32/include/platform
+SYSTEMINCLUDE	/epoc32/include/platform/mw
+SYSTEMINCLUDE	/epoc32/include/platform/loc
+SYSTEMINCLUDE	/epoc32/include/platform/mw/loc
+SYSTEMINCLUDE	/epoc32/include/platform/loc/sc
+SYSTEMINCLUDE	/epoc32/include/platform/mw/loc/sc
+SYSTEMINCLUDE	/epoc32/include/stdapis
+SYSTEMINCLUDE	/epoc32/include/stdapis/sys
+SYSTEMINCLUDE	/epoc32/include/stdapis/stlportv5
+
+SOURCEPATH		../../src
+SOURCE			glut.cpp
+
+SOURCEPATH  	../s60/src
+SOURCE 	    	eglglutglbinder.cpp
+SOURCE 			glutapplication.cpp
+SOURCE 			glutappui.cpp
+SOURCE 			glutcontrol.cpp
+SOURCE 			glutdocument.cpp
+SOURCE 			gluts60interface.cpp
+
+
+LIBRARY		   	euser.lib
+LIBRARY		   	apparc.lib
+LIBRARY		   	cone.lib
+LIBRARY		   	eikcore.lib
+LIBRARY		   	avkon.lib
+LIBRARY		   	commonengine.lib
+LIBRARY		   	efsrv.lib
+LIBRARY		   	estor.lib
+LIBRARY        	aknnotify.lib
+LIBRARY		   	ws32.lib
+LIBRARY		   	libEGL.lib
+LIBRARY		   	libstdcppv5.lib
+LIBRARY		   	libc.lib
+LIBRARY		   	libm.lib
+LIBRARY		   	libdl.lib
+LIBRARY		   	eikcoctl.lib
+
+CAPABILITY		CAP_GENERAL_DLL
+
+OPTION CW -cwd include -wchar_t on
+OPTION ARMCC --visibility_inlines_hidden --fpmode fast
+#if defined(ARMCC_4_0)
+OPTION ARMCC --import_all_vtbl
+#endif
+OPTION GCCE -fvisibility-inlines-hidden
+
+VERSION 10.0
+
+ARMFPU vfpv2
+
+BYTEPAIRCOMPRESSTARGET
+
+OPTION_REPLACE ARMCC --export_all_vtbl
+
+SMPSAFE
+
+STDCPP
+
+#ifdef WINSCW
+DEFFILE defs/bwins/glut.def
+#elif defined EABI
+DEFFILE defs/eabi/glut.def
+#endif
+

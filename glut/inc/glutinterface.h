@@ -1,0 +1,182 @@
+/**
+ * Copyright (c) 2010-2015 Ranjith TV.            
+ * All rights reserved.  
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. All advertising materials mentioning features or use of this software
+ *    must display the following acknowledgement:
+ *    This product includes software developed by the <organization>.
+ * 4. Neither the name of the <organization> nor the
+ *    names of its contributors may be used to endorse or promote products
+ *    derived from this software without specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY Ranjith TV ''AS IS'' AND ANY
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL Ranjith TV BE LIABLE FOR ANY
+ * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+#ifndef GLUTWINDOW_H_
+#define GLUTWINDOW_H_
+
+#define TitleLength 255
+
+class GlutInterface
+{
+public:
+    enum Renderer 
+        {
+        GL,
+        GLES,
+        GLES2,
+        VG
+        };
+    
+    GlutInterface() {}
+    virtual ~GlutInterface() {}
+    
+    static GlutInterface* getInterface();
+    static bool destroyInterface();
+    
+    virtual void intialize(int argc, char **argv) = 0;
+    virtual void terminate() = 0;
+    virtual int createWindow() = 0;
+    virtual void destroyWindow(int win) = 0;
+    virtual int getWindow() = 0;
+    virtual void setWindow(int win) = 0;
+    virtual void setWindowTitle(const char * title) = 0;
+    virtual void showWindow() = 0;
+    virtual void fullScreen() = 0;
+    virtual void hideWindow() = 0;
+    virtual void positionWindow(int x, int y) = 0;
+    virtual void reshapeWindow(int width, int height) = 0;
+    virtual void popWindow() = 0;
+    virtual void pushWindow() = 0;
+    virtual int getModifiers() = 0;
+    
+    virtual void timerFunc(unsigned int millis, void (*func)(int), int value) = 0;
+    
+    virtual void exec() = 0;
+    virtual void redraw(int win = 0) = 0;
+    virtual void flush() = 0;
+    
+public:
+    void setKeyboardFunc(void (*func)(unsigned char key, int x, int y))
+    {
+        mCallbacks.keyboard = func;
+    }
+
+    void setMouseFunc(void (*func)(int button, int state, int x, int y))
+    {
+        mCallbacks.mouse = func;
+    }
+
+    int setMotionFunc(void (*func)(int x, int y))
+    {
+        mCallbacks.motion = func;
+    }
+    
+    int setPassiveMotionFunc(void (*func)(int x, int y))
+    {
+        mCallbacks.passiveMotion = func;
+    }
+    
+    void setRenderer(Renderer renderer)
+    {
+        this->mRenderer = renderer;
+    }
+
+    Renderer getRenderer() const
+    {
+        return mRenderer;
+    }
+
+    void setPos(int x, int y)
+    {
+        mWindowProperty.mX = x;
+        mWindowProperty.mY = y;
+    }
+    
+    void setSize(int w, int h)
+    {
+        mWindowProperty.mWidth  = w;
+        mWindowProperty.mHeight = h;
+    }
+
+    void setTitle(const char *title)
+    {
+        int i = 0;
+        for (i=0; title[i] != '\0'; ++i) {
+            mWindowProperty.mTitle[i] = title[i];
+        }
+        mWindowProperty.mTitle[i] = '\0';
+    }
+    
+    void setDrawFnc(void (*draw)())
+    {
+        mCallbacks.draw = draw;
+    }
+
+    void setReshapeFunc(void (*reshape)(int, int))
+    {
+        mCallbacks.reshape = reshape;
+    }
+
+    void setDisplayMode(unsigned int mode)
+    {
+        mDisplayMode = mode;
+    }
+    
+protected:
+
+    struct GlutWindowProperty
+    {
+        GlutWindowProperty() : mX(0), mY(0), mWidth(0), mHeight(0) { mTitle[0] = 0; }
+        char mTitle[TitleLength];
+        int mX;
+        int mY;
+        int mWidth;
+        int mHeight;
+    };
+
+    struct GlutCallbacks
+    {
+        GlutCallbacks()
+         : draw(0),
+           reshape(0),
+           repos(0),
+           keyboard(0),
+           mouse(0),
+           motion(0),
+           passiveMotion(0)
+        {}
+        
+        void (*draw)();
+        void (*reshape)(int, int);
+        void (*repos)(int, int);
+        void (*keyboard)(unsigned char key, int x, int y);
+        void (*mouse)(int button, int state, int x, int y);
+        void (*motion)(int x, int y);
+        void (*passiveMotion)(int x, int y);
+    };
+
+    GlutWindowProperty mWindowProperty;
+    unsigned int mDisplayMode;
+    GlutCallbacks mCallbacks;
+    Renderer mRenderer;
+};
+
+#endif
+

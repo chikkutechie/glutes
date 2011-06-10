@@ -273,7 +273,7 @@ void GlutS60Interface::positionWindow(int x, int y)
     if (entry && entry->mControl) {
         TPoint point(x, y);
         if (entry->mControl->Position() != point) {
-			entry->mControl->SetPosition(point);
+            entry->mControl->SetPosition(point);
         }
     }
 }
@@ -284,7 +284,7 @@ void GlutS60Interface::reshapeWindow(int width, int height)
     if (entry && entry->mControl) {
         TSize size(width, height);
         if (entry->mControl->Size() != size) {
-			entry->mControl->SetSize(size);
+            entry->mControl->SetSize(size);
         }
     }
 }
@@ -415,24 +415,24 @@ void GlutS60Interface::rerect(int x, int y, int w, int h)
 {
     ControlEntry * entry = getControlEntry(mCurrentControl);
     if (entry && entry->mControl) {
-    	TRect rect(x, y, w, h);
+        TRect rect(x, y, w, h);
         if (entry->mControl->Rect() != rect) {
-        	entry->mControl->SetSize(TSize(w, h));
-        	entry->mControl->SetPosition(TPoint(x, y));
-		    if (mCallbacks.reshape) {
-		        mCallbacks.reshape(w, h);
-		    }
-			if (mCallbacks.repos) {
-		        mCallbacks.repos(x, y);
-		    }
+            entry->mControl->SetSize(TSize(w, h));
+            entry->mControl->SetPosition(TPoint(x, y));
+            if (mCallbacks.reshape) {
+                mCallbacks.reshape(w, h);
+            }
+            if (mCallbacks.repos) {
+                mCallbacks.repos(x, y);
+            }
         }
     }
 }
 
 void GlutS60Interface::reshape(int w, int h)
 {
-	reshapeWindow(w, h);
-	
+    reshapeWindow(w, h);
+    
     if (mCallbacks.reshape) {
         mCallbacks.reshape(w, h);
     }
@@ -440,9 +440,9 @@ void GlutS60Interface::reshape(int w, int h)
 
 void GlutS60Interface::repos(int x, int y)
 {
-	positionWindow(x, y);
+    positionWindow(x, y);
 
-	if (mCallbacks.repos) {
+    if (mCallbacks.repos) {
         mCallbacks.repos(x, y);
     }
 }

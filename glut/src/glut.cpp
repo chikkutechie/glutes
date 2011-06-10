@@ -285,7 +285,7 @@ APIDEF int glutGetModifiers()
 
 APIDEF int glutGet(GLenum state)
 {
-	return 0;
+    return 0;
 }
 
 #ifdef __cplusplus

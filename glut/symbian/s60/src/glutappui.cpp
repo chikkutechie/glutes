@@ -48,12 +48,12 @@ GlutAppUi::~GlutAppUi()
 
 void GlutAppUi::ConstructL()
 {
-	iEikonEnv->DisableExitChecks(ETrue);
-	
-	TInt flags = CEikAppUi::ENoScreenFurniture |
-			     CEikAppUi::ENonStandardResourceFile |
-			     CAknAppUi::EAknEnableSkin;
-	
+    iEikonEnv->DisableExitChecks(ETrue);
+    
+    TInt flags = CEikAppUi::ENoScreenFurniture |
+                 CEikAppUi::ENonStandardResourceFile |
+                 CAknAppUi::EAknEnableSkin;
+    
     BaseConstructL(flags);
     
     iEikonEnv->AppUiFactory()->CreateResourceIndependentFurnitureL(this);
@@ -76,32 +76,32 @@ void GlutAppUi::setEventHandler(GlutEventHandler * eh)
 
 void GlutAppUi::Exit()
 {
-	CAknAppUi::Exit();
+    CAknAppUi::Exit();
 }
 
 void GlutAppUi::HandleCommandL(TInt command)
 {
-	switch (command) {
-		case EEikCmdExit:
-		case EAknSoftkeyExit: {
+    switch (command) {
+        case EEikCmdExit:
+        case EAknSoftkeyExit: {
             Exit();
-		}
-		break;
-	}
+        }
+        break;
+    }
 }
 
 void GlutAppUi::HandleStatusPaneSizeChange()
 {
-	CAknAppUi::HandleStatusPaneSizeChange();
+    CAknAppUi::HandleStatusPaneSizeChange();
     if (mEH) {
-    	TRect rect = ClientRect();
-    	mEH->rerect(rect.iTl.iX, rect.iTl.iY, rect.Width(), rect.Height());
+        TRect rect = ClientRect();
+        mEH->rerect(rect.iTl.iX, rect.iTl.iY, rect.Width(), rect.Height());
     }
 }
 
 void GlutAppUi::HandleResourceChangeL(TInt type)
 {
-	CAknAppUi::HandleResourceChangeL(type);
+    CAknAppUi::HandleResourceChangeL(type);
 }
 
 void GlutAppUi::HandleWsEventL(const TWsEvent &event, CCoeControl *destination)
@@ -117,20 +117,20 @@ void GlutAppUi::HandleWsEventL(const TWsEvent &event, CCoeControl *destination)
             }
         }
     }
-	CAknAppUi::HandleWsEventL(event, destination);
+    CAknAppUi::HandleWsEventL(event, destination);
 }
 
 void GlutAppUi::ProcessCommandL(TInt command)
 {
-	CAknAppUi::ProcessCommandL(command);
+    CAknAppUi::ProcessCommandL(command);
 }
 
 void GlutAppUi::HandleScreenDeviceChangedL()
 {
-	CAknAppUi::HandleScreenDeviceChangedL();
+    CAknAppUi::HandleScreenDeviceChangedL();
     if (mEH) {
-    	TRect rect = ClientRect();
-    	mEH->rerect(rect.iTl.iX, rect.iTl.iY, rect.Width(), rect.Height());
+        TRect rect = ClientRect();
+        mEH->rerect(rect.iTl.iX, rect.iTl.iY, rect.Width(), rect.Height());
     }
 }
 

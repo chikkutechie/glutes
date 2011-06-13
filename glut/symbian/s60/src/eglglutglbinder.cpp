@@ -118,7 +118,10 @@ bool EGLGlutGLBinder::createContext()
             };
     
         EGLint numConfigs = 0;
-        if (eglChooseConfig(mDisplay, KConfigAttributes, &mConfig, 1, &numConfigs) == EGL_FALSE) {
+        if (eglChooseConfig(mDisplay,
+                            KConfigAttributes,
+                            &mConfig, 1,
+                            &numConfigs) == EGL_FALSE) {
             return false;
         }
         

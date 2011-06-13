@@ -75,7 +75,8 @@ bool EGLGlutGLBinder::initialize()
             eglBindAPI(EGL_OPENVG_API);
         } else if (getBindApi() == OPENGL_API) {
             eglBindAPI(EGL_OPENGL_API);
-        } else if (getBindApi() == OPENGL_ES_API || getBindApi() == OPENGL_ES2_API) {
+        } else if (getBindApi() == OPENGL_ES_API ||
+                   getBindApi() == OPENGL_ES2_API) {
             eglBindAPI(EGL_OPENGL_ES_API);
         }
     }
@@ -86,7 +87,8 @@ bool EGLGlutGLBinder::initialize()
 void EGLGlutGLBinder::terminate()
 {
     if (mDisplay != EGL_NO_DISPLAY) {
-        eglMakeCurrent(mDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
+        eglMakeCurrent(mDisplay, EGL_NO_SURFACE,
+                       EGL_NO_SURFACE, EGL_NO_CONTEXT);
         
         if (mContext != EGL_NO_CONTEXT) {
             eglDestroyContext(mDisplay, mContext);
@@ -143,7 +145,8 @@ bool EGLGlutGLBinder::createContext()
             ContextAttribList = &KContextAttribList2[0];            
         }
 
-        mContext = eglCreateContext(mDisplay, mConfig, EGL_NO_CONTEXT, ContextAttribList);
+        mContext = eglCreateContext(mDisplay, mConfig,
+                                    EGL_NO_CONTEXT, ContextAttribList);
         if ( mContext == EGL_NO_CONTEXT ) {
             return false;
         }
@@ -160,7 +163,8 @@ unsigned int  EGLGlutGLBinder::createSurface(Surface surfaceParam, int, int)
     
     EGLSurface surface = EGL_NO_SURFACE;
     
-    eglMakeCurrent(mDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
+    eglMakeCurrent(mDisplay, EGL_NO_SURFACE,
+                   EGL_NO_SURFACE, EGL_NO_CONTEXT);
     if (surface != EGL_NO_SURFACE) {
         eglDestroySurface(mDisplay, surface);
         surface = EGL_NO_SURFACE;

@@ -26,13 +26,57 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-PRJ_PLATFORMS
-DEFAULT
+TARGET		    glut_static.lib
+TARGETTYPE	    LIB
+UID			    0
 
-PRJ_EXPORTS
-../../inc/glut.h
+MACRO 			GLUT_STATIC
 
-PRJ_MMPFILES
-glut_static.mmp
-glut.mmp
+USERINCLUDE	    ../../inc
+USERINCLUDE	    ../s60/inc
+
+SYSTEMINCLUDE   /epoc32/include
+SYSTEMINCLUDE   /epoc32/include/mw
+SYSTEMINCLUDE	/epoc32/include/platform
+SYSTEMINCLUDE	/epoc32/include/platform/mw
+SYSTEMINCLUDE	/epoc32/include/platform/loc
+SYSTEMINCLUDE	/epoc32/include/platform/mw/loc
+SYSTEMINCLUDE	/epoc32/include/platform/loc/sc
+SYSTEMINCLUDE	/epoc32/include/platform/mw/loc/sc
+SYSTEMINCLUDE	/epoc32/include/stdapis
+SYSTEMINCLUDE	/epoc32/include/stdapis/sys
+SYSTEMINCLUDE	/epoc32/include/stdapis/stlportv5
+
+SOURCEPATH		../../src
+SOURCE			glut.cpp
+
+SOURCEPATH  	../s60/src
+SOURCE 	    	eglglutglbinder.cpp
+SOURCE 			glutapplication.cpp
+SOURCE 			glutappui.cpp
+SOURCE 			glutcontrol.cpp
+SOURCE 			glutdocument.cpp
+SOURCE 			gluts60interface.cpp
+
+
+LIBRARY		   	euser.lib
+LIBRARY		   	apparc.lib
+LIBRARY		   	cone.lib
+LIBRARY		   	eikcore.lib
+LIBRARY		   	avkon.lib
+LIBRARY		   	commonengine.lib
+LIBRARY		   	efsrv.lib
+LIBRARY		   	estor.lib
+LIBRARY        	aknnotify.lib
+LIBRARY		   	ws32.lib
+LIBRARY		   	libEGL.lib
+LIBRARY		   	libstdcppv5.lib
+LIBRARY		   	libc.lib
+LIBRARY		   	libm.lib
+LIBRARY		   	libdl.lib
+LIBRARY		   	eikcoctl.lib
+
+ARMFPU vfpv2
+
+STDCPP
 

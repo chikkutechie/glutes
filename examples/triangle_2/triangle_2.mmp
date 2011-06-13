@@ -65,6 +65,7 @@ LIBRARY		   ws32.lib
 LIBRARY		   hal.lib
 LIBRARY		   gdi.lib
 LIBRARY        libGLESv2.lib
+LIBRARY        libEGL.lib
 LIBRARY        glut.lib
 
 CAPABILITY	   None

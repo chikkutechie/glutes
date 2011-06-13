@@ -147,7 +147,7 @@ bool EGLGlutGLBinder::createContext()
 
         mContext = eglCreateContext(mDisplay, mConfig,
                                     EGL_NO_CONTEXT, ContextAttribList);
-        if ( mContext == EGL_NO_CONTEXT ) {
+        if (mContext == EGL_NO_CONTEXT) {
             return false;
         }
     }

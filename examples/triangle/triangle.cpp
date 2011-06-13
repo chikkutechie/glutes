@@ -130,15 +130,15 @@ void mouseFunction(int button, int , int, int)
                     scaleCount = 0;
                     scaleDir = scaleDir * -1;
                 } else {                    
-                    scaleUnit = 1.0f * 1.0f / 0.8f;
+                    scaleUnit = 1.0f / 0.8f;
                     scaleCount--;
                 }
             } else {
-                if (scaleCount >= 5) {
-                    scaleCount = 5;
+                if (scaleCount >= 10) {
+                    scaleCount = 10;
                     scaleDir = scaleDir * -1;
                 } else {                    
-                    scaleUnit = 1.0f * 0.8f;
+                    scaleUnit = 0.8f;
                     scaleCount++;
                 }
             }

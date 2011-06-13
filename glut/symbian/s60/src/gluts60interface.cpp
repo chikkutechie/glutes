@@ -42,6 +42,7 @@
 
 GlutInterface* GlutInterface::getInterface()
 {
+#if !defined(GLUT_STATIC)
     GlutInterface * interface = (GlutInterface *)Dll::Tls();
     if (!interface) {
         interface = new GlutS60Interface();
@@ -51,13 +52,18 @@ GlutInterface* GlutInterface::getInterface()
             interface = 0;
         }
     }
-    
+
     return interface;
+#else
+    static GlutInterface * interface = new  GlutS60Interface();
+    return interface;
+#endif
 }
 
 bool GlutInterface::destroyInterface()
 {
     bool status = false;
+#if !defined(GLUT_STATIC)
     GlutInterface * interface = (GlutInterface *)Dll::Tls();
     if (interface) {
         if (Dll::SetTls(0) == KErrNone) {
@@ -65,6 +71,9 @@ bool GlutInterface::destroyInterface()
             status = true;
         }
     }
+#else
+    status = true;
+#endif
     return status;
 }
 

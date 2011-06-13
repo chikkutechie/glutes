@@ -5,7 +5,7 @@
 
 
 ; SIS header: name, uid, version
-#{"triangletest"},(0xef1f1218),1,0,0
+#{"triangle"},(0xef1f1218),1,0,0
 
 ; Default localized vendor name
 %{"Vendor"}

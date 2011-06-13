@@ -35,6 +35,9 @@ using namespace std;
 GLfloat xRot = 0.0f;
 GLfloat yRot = 0.0f;
 
+int   scaleCount = 0;
+int   scaleDir   = 1;
+
 void display()
 {
     glClearColor(1.0, 1.0, 1.0, 1.0);
@@ -120,7 +123,26 @@ void mouseFunction(int button, int , int, int)
 {
     switch (button) {
         case GLUT_LEFT_BUTTON: {
-            glTranslatef(0.0f, 0.0f, 5.0f);
+            float scaleUnit = 1.0f;
+            
+            if (scaleDir < 0) {
+                if (scaleCount <= 0) {
+                    scaleCount = 0;
+                    scaleDir = scaleDir * -1;
+                } else {                    
+                    scaleUnit = 1.0f * 1.0f / 0.8f;
+                    scaleCount--;
+                }
+            } else {
+                if (scaleCount >= 5) {
+                    scaleCount = 5;
+                    scaleDir = scaleDir * -1;
+                } else {                    
+                    scaleUnit = 1.0f * 0.8f;
+                    scaleCount++;
+                }
+            }
+            glScalef(scaleUnit, scaleUnit, scaleUnit);
             break;
         }
         case GLUT_MIDDLE_BUTTON: {

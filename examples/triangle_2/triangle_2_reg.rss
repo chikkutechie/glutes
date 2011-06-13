@@ -1,0 +1,13 @@
+#include <triangle_2.rsg>
+#include <appinfo.rh>
+
+UID2 KUidAppRegistrationResourceFile
+UID3 0xef1f1219
+
+RESOURCE APP_REGISTRATION_INFO
+	    {
+    app_file=triangle_2;
+    localisable_resource_file=qtn_loc_resource_file_1;
+    localisable_resource_id = R_LOCALISABLE_APP_INFO;
+    }
+

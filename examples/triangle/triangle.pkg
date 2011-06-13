@@ -1,0 +1,21 @@
+;
+
+; Language
+&EN
+
+
+; SIS header: name, uid, version
+#{"triangle"},(0xef1f1218),1,0,0
+
+; Default localized vendor name
+%{"Vendor"}
+
+
+; Default unique vendor name
+:"Vendor"
+
+; DEPLOYMENT
+"w:/epoc32/release/armv5/urel/triangle.exe" - "!:\sys\bin\triangle.exe"
+"w:/epoc32/data/z/resource/apps/triangle.rsc" - "!:\resource\apps\triangle.rsc"
+"w:/epoc32/data/z/private/10003a3f/import/apps/triangle_reg.rsc" - "!:\private\10003a3f\import\apps\triangle_reg.rsc"
+

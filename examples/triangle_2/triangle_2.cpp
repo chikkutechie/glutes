@@ -105,24 +105,24 @@ float * multimatrix4x4(float matrix1[4*4], float matrix2[4*4], float matrix3[4*4
 {
     for (int i=0; i<4; i++) {
         matrix3[i*4+0] = (matrix1[i*4+0] * matrix2[0*4+0]) +
-                        (matrix1[i*4+1] * matrix2[1*4+0]) +
-                        (matrix1[i*4+2] * matrix2[2*4+0]) +
-                        (matrix1[i*4+3] * matrix2[3*4+0]) ;
+                         (matrix1[i*4+1] * matrix2[1*4+0]) +
+                         (matrix1[i*4+2] * matrix2[2*4+0]) +
+                         (matrix1[i*4+3] * matrix2[3*4+0]);
 
         matrix3[i*4+1] = (matrix1[i*4+0] * matrix2[0*4+1]) + 
-                        (matrix1[i*4+1] * matrix2[1*4+1]) +
-                        (matrix1[i*4+2] * matrix2[2*4+1]) +
-                        (matrix1[i*4+3] * matrix2[3*4+1]) ;
+                         (matrix1[i*4+1] * matrix2[1*4+1]) +
+                         (matrix1[i*4+2] * matrix2[2*4+1]) +
+                         (matrix1[i*4+3] * matrix2[3*4+1]);
 
         matrix3[i*4+2] = (matrix1[i*4+0] * matrix2[0*4+2]) + 
-                        (matrix1[i*4+1] * matrix2[1*4+2]) +
-                        (matrix1[i*4+2] * matrix2[2*4+2]) +
-                        (matrix1[i*4+3] * matrix2[3*4+2]) ;
+                         (matrix1[i*4+1] * matrix2[1*4+2]) +
+                         (matrix1[i*4+2] * matrix2[2*4+2]) +
+                         (matrix1[i*4+3] * matrix2[3*4+2]);
 
         matrix3[i*4+3] = (matrix1[i*4+0] * matrix2[0*4+3]) + 
-                        (matrix1[i*4+1] * matrix2[1*4+3]) +
-                        (matrix1[i*4+2] * matrix2[2*4+3]) +
-                        (matrix1[i*4+3] * matrix2[3*4+3]) ;
+                         (matrix1[i*4+1] * matrix2[1*4+3]) +
+                         (matrix1[i*4+2] * matrix2[2*4+3]) +
+                         (matrix1[i*4+3] * matrix2[3*4+3]);
     }
 
     return matrix3;
@@ -254,20 +254,16 @@ int init()
     triangleColors.push_back(0.0f);
     triangleColors.push_back(1.0f);
     
-    for (GLfloat angle = 0.0f; angle <= (2.0f * M_PI) + 1.0f; angle += M_PI/38.0f)
-        {
+    for (GLfloat angle = 0.0f; angle <= (2.0f * M_PI) + 1.0f; angle += M_PI/38.0f) {
         GLfloat x = 50.0f * sin(angle);
         GLfloat y = 50.0f * cos(angle);
 
-        if (pivot % 2 == 0)
-        {
+        if (pivot % 2 == 0) {
             triangleColors.push_back(0.0f);
             triangleColors.push_back(1.0f);
             triangleColors.push_back(0.0f);
             triangleColors.push_back(1.0f);
-        }
-        else
-        {
+        } else {
             triangleColors.push_back(1.0f);
             triangleColors.push_back(0.0f);
             triangleColors.push_back(0.0f);
@@ -286,14 +282,13 @@ int init()
 void display()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    
+
     glUseProgram(program);
-    
+
     rotate(yRot, 0.0f, 1.0f, 0.0f, matrix);
     translate(0, 0, -5, matrix);
     rotate(xRot, 1.0f, 0.0f, 0.0f, matrix);
-        
-    
+
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     GLint clrLoc = glGetAttribLocation(program, "a_color");
@@ -322,12 +317,9 @@ void reshape(int w, int h)
     GLfloat nRange = 100.0f;
     glViewport(0, 0, w, h);
     
-    if (w <= h) 
-    {
+    if (w <= h) {
         parallel(-nRange, nRange, -nRange*h/w, nRange*h/w, -nRange, nRange, matrix);
-    }
-    else 
-    {
+    } else {
         parallel(-nRange*w/h, nRange*w/h, -nRange, nRange, -nRange, nRange, matrix);
     }
 }
@@ -406,4 +398,3 @@ int main(int argc, char ** argv)
 
     return 0;
 }
-

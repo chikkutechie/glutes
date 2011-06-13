@@ -112,11 +112,13 @@ void GlutAppUi::HandleWsEventL(const TWsEvent &event, CCoeControl *destination)
     if (mEH) {
         switch (event.Type()) {
             case EEventPointer: {
-                    mEH->mouse(event.Pointer()->iType, event.Pointer()->iModifiers,
+                mEH->mouse(event.Pointer()->iType, event.Pointer()->iModifiers,
                                event.Pointer()->iPosition.iX, event.Pointer()->iPosition.iY);
+                break;
             }
             case EEventKey: {
                 mEH->keyboard(event.Key()->iCode, 0, 0);
+                break;
             }
         }
     }

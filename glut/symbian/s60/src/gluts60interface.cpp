@@ -425,7 +425,7 @@ void GlutS60Interface::rerect(int x, int y, int w, int h)
 {
     ControlEntry * entry = getControlEntry(mCurrentControl);
     if (entry && entry->mControl) {
-        TRect rect(x, y, w, h);
+        TRect rect(TPoint(x, y), TSize(w, h));
         if (entry->mControl->Rect() != rect) {
             entry->mControl->SetSize(TSize(w, h));
             entry->mControl->SetPosition(TPoint(x, y));

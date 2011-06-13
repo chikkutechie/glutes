@@ -57,7 +57,8 @@ void GlutAppUi::ConstructL()
     BaseConstructL(flags);
     
     iEikonEnv->AppUiFactory()->CreateResourceIndependentFurnitureL(this);
-    CEikButtonGroupContainer *cba = CEikButtonGroupContainer::NewL(CEikButtonGroupContainer::ECba,
+    CEikButtonGroupContainer *cba = CEikButtonGroupContainer::NewL(
+                                                    CEikButtonGroupContainer::ECba,
                                                     CEikButtonGroupContainer::EHorizontal,
                                                     this,
                                                     R_AVKON_SOFTKEYS_OPTIONS_EXIT);

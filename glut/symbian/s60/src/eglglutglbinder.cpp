@@ -185,7 +185,10 @@ unsigned int  EGLGlutGLBinder::createSurface(Surface surfaceParam, int, int)
 
 bool EGLGlutGLBinder::makeCurrent(unsigned int surface)
 {
-    return eglMakeCurrent(mDisplay, (EGLSurface)surface, (EGLSurface)surface, mContext) == EGL_TRUE;
+    return eglMakeCurrent(mDisplay,
+                          (EGLSurface)surface,
+                          (EGLSurface)surface,
+                          mContext) == EGL_TRUE;
 }
 
 void EGLGlutGLBinder::destroySurface(unsigned int surface)

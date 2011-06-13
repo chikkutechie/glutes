@@ -126,7 +126,8 @@ void GlutS60Interface::intialize(int argc, char ** argv)
             if (error == KErrNone) {
                 mEikonEnv = new CEikonEnv;
                 if (mEikonEnv) {
-                    TRAP(error, mEikonEnv->ConstructAppFromCommandLineL(factory, *commandLine));
+                    TRAP(error, mEikonEnv->ConstructAppFromCommandLineL(factory,
+                                                                        *commandLine));
                 }
             }
         }

@@ -28,6 +28,7 @@
  
 #include "glutappui.h"
 #include "gluteventhandler.h"
+#include "glutinterface.h"
 
 #include <eikmenub.h>
 #include <eikmenup.h>
@@ -53,6 +54,18 @@ void GlutAppUi::ConstructL()
     TInt flags = CEikAppUi::ENoScreenFurniture |
                  CEikAppUi::ENonStandardResourceFile |
                  CAknAppUi::EAknEnableSkin;
+    
+    switch (GlutInterface::getInterface()->getOrientation()) {
+        case GlutInterface::Portrait:
+            flags |= EAppOrientationPortrait;
+            break;
+        case GlutInterface::Landscape:
+            flags |= EAppOrientationLandscape;
+            break;
+        case GlutInterface::Automatic:
+            flags |= EAppOrientationAutomatic;
+            break;
+    }
     
     BaseConstructL(flags);
     

@@ -165,10 +165,9 @@ void timeout(int)
 #if defined(__SYMBIAN32__) || defined(SYMBIAN)
 GLDEF_C TInt E32Main()
 {
-    int    argc = 1;
-    char * argv[2];
 
-    argv[0] = "triangle";
+    char * argv[] = {"triangle", "-renderer", "gles", "-orientation", "automatic"};
+    int    argc = sizeof(argv) / sizeof(argv[0]);
     
 #else
 int main(int argc, char ** argv)

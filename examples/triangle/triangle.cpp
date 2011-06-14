@@ -62,20 +62,16 @@ void display()
     triangleColors.push_back(0.0f);
     triangleColors.push_back(1.0f);
     
-    for (GLfloat angle = 0.0f; angle <= (2.0f * M_PI) + 1.0f; angle += M_PI/38.0f)
-        {
+    for (GLfloat angle = 0.0f; angle <= (2.0f * M_PI) + 1.0f; angle += M_PI/38.0f) {
         GLfloat x = 50.0f * sin(angle);
         GLfloat y = 50.0f * cos(angle);
 
-        if (pivot % 2 == 0)
-        {
+        if (pivot % 2 == 0) {
             triangleColors.push_back(0.0f);
             triangleColors.push_back(1.0f);
             triangleColors.push_back(0.0f);
             triangleColors.push_back(1.0f);
-        }
-        else
-        {
+        } else {
             triangleColors.push_back(1.0f);
             triangleColors.push_back(0.0f);
             triangleColors.push_back(0.0f);
@@ -104,14 +100,13 @@ void reshape(int w, int h)
 {
     GLfloat nRange = 100.0f;
     glViewport(0, 0, w, h);
+    
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    if (w <= h) 
-    {
+    
+    if (w <= h) {
         glOrthof(-nRange, nRange, -nRange*h/w, nRange*h/w, -nRange, nRange);
-    }
-    else 
-    {
+    } else {
         glOrthof(-nRange*w/h, nRange*w/h, -nRange, nRange, -nRange, nRange);
     }
 
@@ -173,7 +168,7 @@ GLDEF_C TInt E32Main()
     int    argc = 1;
     char * argv[2];
 
-    argv[0] = "g1";
+    argv[0] = "triangle";
     
 #else
 int main(int argc, char ** argv)
@@ -190,4 +185,3 @@ int main(int argc, char ** argv)
 
     return 0;
 }
-

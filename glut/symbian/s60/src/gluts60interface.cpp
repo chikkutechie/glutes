@@ -283,7 +283,11 @@ void GlutS60Interface::positionWindow(int x, int y)
     if (entry && entry->mControl) {
         TPoint point(x, y);
         if (entry->mControl->Position() != point) {
-            entry->mControl->SetPosition(point);
+            if (mFullScreen) {
+                entry->mControl->SetExtentToWholeScreen();
+            } else {
+                entry->mControl->SetPosition(point);
+            }
         }
     }
 }
@@ -294,7 +298,11 @@ void GlutS60Interface::reshapeWindow(int width, int height)
     if (entry && entry->mControl) {
         TSize size(width, height);
         if (entry->mControl->Size() != size) {
-            entry->mControl->SetSize(size);
+            if (mFullScreen) {
+                entry->mControl->SetExtentToWholeScreen();
+            } else {
+                entry->mControl->SetSize(size);
+            }
         }
     }
 }
@@ -425,10 +433,13 @@ void GlutS60Interface::rerect(int x, int y, int w, int h)
 {
     ControlEntry * entry = getControlEntry(mCurrentControl);
     if (entry && entry->mControl) {
-        TRect rect(x, y, w, h);
+        TRect rect(TPoint(x, y), TSize(w, h));
         if (entry->mControl->Rect() != rect) {
-            entry->mControl->SetSize(TSize(w, h));
-            entry->mControl->SetPosition(TPoint(x, y));
+            if (mFullScreen) {
+                entry->mControl->SetExtentToWholeScreen();
+            } else {
+                entry->mControl->SetRect(rect);
+            }
             if (mCallbacks.reshape) {
                 mCallbacks.reshape(w, h);
             }

@@ -114,14 +114,17 @@ GlutS60Interface::~GlutS60Interface()
 void GlutS60Interface::intialize(int argc, char ** argv)
 {    
     for (int i=0; i < argc; ++i) {
-        TPtr8 name((TUint8 *)argv[i], strlen(argv[i]), strlen(argv[i]));
+        
+        const int nameLen = strlen(argv[i]);
+        TPtr8 name((TUint8 *)argv[i], nameLen, nameLen);
 
         if (name == KParamRenderer) {
+            
             if (i+1 >= argc) {
                 break;
             }
-            
-            TPtr8 value((TUint8 *)argv[i+1], strlen(argv[i+1]), strlen(argv[i+1]));
+            const int valueLen = strlen(argv[i+1]);
+            TPtr8 value((TUint8 *)argv[i+1], valueLen, valueLen);
             if (value == KParamRendererVG) {
                 setRenderer(VG);
             } else if (value == KParamRendererGLES2) {
@@ -135,11 +138,14 @@ void GlutS60Interface::intialize(int argc, char ** argv)
         }
         
         if (name == KParamOrientation) {
+            
             if (i+1 >= argc) {
                 break;
             }
             
-            TPtr8 value((TUint8 *)argv[i+1], strlen(argv[i+1]), strlen(argv[i+1]));
+            const int valueLen = strlen(argv[i+1]);
+            TPtr8 value((TUint8 *)argv[i+1], valueLen, valueLen);
+            
             if (value == KParamOrientationPortrait) {
                 setOrientation(Portrait);
             } else if (value == KParamOrientationLandscape) {

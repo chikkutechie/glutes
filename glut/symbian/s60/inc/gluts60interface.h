@@ -79,7 +79,7 @@ private:
         unsigned int  mSurface;
         GlutControl * mControl;
     };
-
+    
     int addControl(ControlEntry entry);
     ControlEntry removeControl(int id);
     void removeAllControl();
@@ -100,6 +100,11 @@ private:
     const TPtr8 KParamRendererGL;
     const TPtr8 KParamRendererGLES;
     const TPtr8 KParamRendererGLES2;
+    
+    const TPtr8 KParamOrientation;
+    const TPtr8 KParamOrientationPortrait;
+    const TPtr8 KParamOrientationLandscape;
+    const TPtr8 KParamOrientationAutomatic;
 };
 
 #endif

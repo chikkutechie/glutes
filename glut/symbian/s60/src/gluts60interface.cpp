@@ -93,8 +93,14 @@ GlutS60Interface::GlutS60Interface()
     KParamRendererVG((TUint8 *)"vg", 2, 2),
     KParamRendererGL((TUint8 *)"gl", 2, 2),
     KParamRendererGLES((TUint8 *)"gles", 4, 4),
-    KParamRendererGLES2((TUint8 *)"gles2", 5, 5)
+    KParamRendererGLES2((TUint8 *)"gles2", 5, 5),
+    KParamOrientation((TUint8 *)"-orientation", 12, 12),
+    KParamOrientationPortrait((TUint8 *)"portrait", 8, 8),
+    KParamOrientationLandscape((TUint8 *)"landscape", 9, 9),
+    KParamOrientationAutomatic((TUint8 *)"automatic", 9, 9)
 {
+    setRenderer(GLES);
+    setOrientation(Automatic);
 }
 
 GlutS60Interface::~GlutS60Interface()
@@ -111,6 +117,10 @@ void GlutS60Interface::intialize(int argc, char ** argv)
         TPtr8 name((TUint8 *)argv[i], strlen(argv[i]), strlen(argv[i]));
 
         if (name == KParamRenderer) {
+            if (i+1 >= argc) {
+                break;
+            }
+            
             TPtr8 value((TUint8 *)argv[i+1], strlen(argv[i+1]), strlen(argv[i+1]));
             if (value == KParamRendererVG) {
                 setRenderer(VG);
@@ -120,6 +130,22 @@ void GlutS60Interface::intialize(int argc, char ** argv)
                 setRenderer(GLES);
             } else if (value == KParamRendererGL) {
                 setRenderer(GL);
+            }
+            ++i;
+        }
+        
+        if (name == KParamOrientation) {
+            if (i+1 >= argc) {
+                break;
+            }
+            
+            TPtr8 value((TUint8 *)argv[i+1], strlen(argv[i+1]), strlen(argv[i+1]));
+            if (value == KParamOrientationPortrait) {
+                setOrientation(Portrait);
+            } else if (value == KParamOrientationLandscape) {
+                setOrientation(Landscape);
+            } else if (value == KParamOrientationAutomatic) {
+                setOrientation(Automatic);
             }
             ++i;
         }
@@ -190,21 +216,24 @@ int GlutS60Interface::createWindow()
 {
     GlutControl * control = new GlutControl();
     
+    GlutAppUi * appUI = (GlutAppUi *)CCoeEnv::Static()-> AppUi();
+    
     if (mWindowProperty.mWidth == 0 || mWindowProperty.mHeight == 0) {
-        control->ConstructL(((CEikAppUi*)CCoeEnv::Static()-> AppUi())->ClientRect());
+        control->ConstructL(appUI->ClientRect());
     } else {
         control->ConstructL(TRect(TPoint(mWindowProperty.mX, mWindowProperty.mY),
                 TSize(mWindowProperty.mWidth, mWindowProperty.mHeight)));
     }
 
-    control->SetMopParent(static_cast<CEikAppUi*>(CCoeEnv::Static()-> AppUi()));
+    control->SetMopParent(appUI);
     if (mFullScreen) {
         control->SetExtentToWholeScreen();
     }
+
     control->ControlEnv()->AppUi()->AddToStackL(control);
     
     control->setEventHandler(this);
-    static_cast<GlutAppUi*>(CCoeEnv::Static()-> AppUi())->setEventHandler(this);
+    appUI->setEventHandler(this);
     
     // binding to egl, only window surface is supported
     EGLGlutGLBinder::EGLSurfaceInfo surfaceInfo;

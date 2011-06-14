@@ -35,13 +35,20 @@ class GlutInterface
 {
 public:
     enum Renderer 
-        {
+    {
         GL,
         GLES,
         GLES2,
         VG
-        };
+    };
     
+    enum Orientation
+    {
+        Portrait,
+        Landscape,
+        Automatic
+    };
+
     GlutInterface() {}
     virtual ~GlutInterface() {}
     
@@ -91,14 +98,24 @@ public:
         mCallbacks.passiveMotion = func;
     }
     
-    void setRenderer(Renderer renderer)
+    void setRenderer(Renderer v)
     {
-        this->mRenderer = renderer;
+        this->mRenderer = v;
     }
 
     Renderer getRenderer() const
     {
         return mRenderer;
+    }
+
+    void setOrientation(Orientation v)
+    {
+        this->mOrientation = v;
+    }
+
+    Orientation getOrientation() const
+    {
+        return mOrientation;
     }
 
     void setPos(int x, int y)
@@ -138,7 +155,6 @@ public:
     }
     
 protected:
-
     struct GlutWindowProperty
     {
         GlutWindowProperty() : mX(0), mY(0), mWidth(0), mHeight(0) { mTitle[0] = 0; }
@@ -174,6 +190,7 @@ protected:
     unsigned int mDisplayMode;
     GlutCallbacks mCallbacks;
     Renderer mRenderer;
+    Orientation mOrientation;
 };
 
 #endif

@@ -18,4 +18,5 @@
 ;Unique Vendor name
 :"Ranjith"
 
-"\epoc32\release\armv5\udeb\glut.dll"		  -"!:\sys\bin\glut.dll"
+"\epoc32\release\armv5\urel\glut.dll"		  -"!:\sys\bin\glut.dll"
+

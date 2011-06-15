@@ -384,8 +384,8 @@ int main(int argc, char ** argv)
 #endif
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-    glutFullScreen();
     glutCreateWindow(argv[0]);
+    glutFullScreen();
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
     glutTimerFunc(30, timeout, 0);

@@ -84,6 +84,7 @@ private:
     ControlEntry removeControl(int id);
     void removeAllControl();
     ControlEntry * getControlEntry(int id);
+    void recreateSurface(int win);
     
 private:
     CEikonEnv* mEikonEnv;

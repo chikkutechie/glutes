@@ -90,6 +90,15 @@ void GlutAppUi::setEventHandler(GlutEventHandler * eh)
     this->mEH = eh;
 }
 
+void GlutAppUi::SetFullScreen(bool v)
+{
+    if (v) {
+        SetFullScreenApp(ETrue);
+    } else {
+        SetFullScreenApp(EFalse);
+    }
+}
+
 void GlutAppUi::Exit()
 {
     CAknAppUi::Exit();

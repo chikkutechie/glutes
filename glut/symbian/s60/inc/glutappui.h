@@ -42,7 +42,8 @@ public:
     void HandleCommandL(TInt command);
     void setEventHandler(GlutEventHandler * eh);
     void Exit();
-
+    void SetFullScreen(bool v);
+    
 protected:
     void HandleResourceChangeL(TInt type);
     virtual void HandleWsEventL(const TWsEvent &event, CCoeControl *destination);

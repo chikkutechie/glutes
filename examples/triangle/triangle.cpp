@@ -166,7 +166,7 @@ void timeout(int)
 GLDEF_C TInt E32Main()
 {
 
-    char * argv[] = {"triangle", "-renderer", "gles", "-orientation", "landscape"};
+    char * argv[] = {"triangle", "-renderer", "gles"};
     int    argc = sizeof(argv) / sizeof(argv[0]);
     
 #else

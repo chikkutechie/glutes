@@ -223,6 +223,9 @@ int GlutS60Interface::createWindow()
     GlutControl * control = new GlutControl();
     
     GlutAppUi * appUI = (GlutAppUi *)CCoeEnv::Static()-> AppUi();
+    if (mFullScreen) {
+        appUI->SetFullScreen(true);
+    }
     
     if (mWindowProperty.mWidth == 0 || mWindowProperty.mHeight == 0) {
         control->ConstructL(appUI->ClientRect());
@@ -264,6 +267,21 @@ void GlutS60Interface::destroyWindow(int win)
     }
 }
 
+void GlutS60Interface::recreateSurface(int win)
+{
+    ControlEntry *  entry = getControlEntry(win);
+    if (entry && entry->mSurface) {
+        mBinder->destroySurface(entry->mSurface);
+        
+        EGLGlutGLBinder::EGLSurfaceInfo surfaceInfo;
+        surfaceInfo.mType = EGLGlutGLBinder::EGLSurfaceInfo::TYPE_WINDOW;
+        surfaceInfo.mData = (void *)&entry->mControl->nativeWindow();
+        
+        entry->mSurface = mBinder->createSurface((GlutGLBinder::Surface)&surfaceInfo, 0, 0);
+        mBinder->makeCurrent(entry->mSurface);
+    }
+}
+
 int GlutS60Interface::getWindow()
 {
     return mCurrentControl;
@@ -291,16 +309,21 @@ void GlutS60Interface::showWindow()
 {
     ControlEntry * entry = getControlEntry(mCurrentControl);
     if (entry) {
-        entry->mControl->MakeVisible(true);
+        entry->mControl->MakeVisible(ETrue);
     }
 }
 
 void GlutS60Interface::fullScreen()
 {
     mFullScreen = true;
+	
     ControlEntry * entry = getControlEntry(mCurrentControl);
     if (entry) {
         entry->mControl->SetExtentToWholeScreen();
+        entry->mControl->MakeVisible(ETrue);
+        // in some device EGLSurface need to recreate
+        // once size is changed
+        recreateSurface(mCurrentControl);
     }
 }
 
@@ -308,7 +331,7 @@ void GlutS60Interface::hideWindow()
 {
     ControlEntry * entry = getControlEntry(mCurrentControl);
     if (entry) {
-        entry->mControl->MakeVisible(false);
+        entry->mControl->MakeVisible(EFalse);
     }
 }
 
@@ -322,6 +345,9 @@ void GlutS60Interface::positionWindow(int x, int y)
                 entry->mControl->SetExtentToWholeScreen();
             } else {
                 entry->mControl->SetPosition(point);
+                // in some device EGLSurface need to recreate
+                // once size is changed 
+                recreateSurface(mCurrentControl);
             }
         }
     }
@@ -337,6 +363,9 @@ void GlutS60Interface::reshapeWindow(int width, int height)
                 entry->mControl->SetExtentToWholeScreen();
             } else {
                 entry->mControl->SetSize(size);
+                // in some device EGLSurface need to recreate
+                // once size is changed
+                recreateSurface(mCurrentControl);
             }
         }
     }
@@ -390,6 +419,7 @@ GlutS60Interface::ControlEntry * GlutS60Interface::getControlEntry(int id)
 GlutS60Interface::ControlEntry GlutS60Interface::removeControl(int id)
 {
     ControlEntry entry;
+    
     if (getControlEntry(id)) {
         if (id == mCurrentControl) {
             mCurrentControl = 0;
@@ -404,6 +434,7 @@ GlutS60Interface::ControlEntry GlutS60Interface::removeControl(int id)
             mControllist.Remove(index);
         }
     }
+    
     return entry;
 }
 
@@ -474,6 +505,9 @@ void GlutS60Interface::rerect(int x, int y, int w, int h)
                 entry->mControl->SetExtentToWholeScreen();
             } else {
                 entry->mControl->SetRect(rect);
+                // in some device EGLSurface need to recreate
+                // once size is changed 
+                recreateSurface(mCurrentControl);
             }
             if (mCallbacks.reshape) {
                 mCallbacks.reshape(w, h);

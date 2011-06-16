@@ -240,7 +240,7 @@ int init()
         return 0;
         }
     
-    glClearColor(1.0, 1.0, 1.0, 1.0);
+    glClearColor(1.0, 1.0, 0.0, 1.0);
     glFrontFace(GL_CW);
 
     int pivot = 1;

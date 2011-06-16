@@ -283,7 +283,7 @@ APIDEF int glutGetModifiers()
     return 0;
 }
 
-APIDEF int glutGet(GLenum state)
+APIDEF int glutGet(unsigned int state)
 {
     return 0;
 }

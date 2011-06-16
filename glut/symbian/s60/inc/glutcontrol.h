@@ -49,8 +49,6 @@ protected:
     void Draw(const TRect& aRect) const;
     void SizeChanged();
     void PositionChanged();
-    void HandlePointerEvent(const TPointerEvent& aPointerEvent);
-    TKeyResponse OfferKeyEvent(const TKeyEvent& aKeyEvent,TEventCode aType);
     
 private:
     GlutEventHandler * mEH;

@@ -129,31 +129,33 @@ void reshape(int w, int h)
     vgLoadIdentity();
 }
 
-void mouseFunction(int button, int , int, int)
+void mouseFunction(int button, int state, int, int)
 {
     switch (button) {
         case GLUT_LEFT_BUTTON: {
-            float scaleUnit = 1.0f;
-            
-            if (scaleDir < 0) {
-                if (scaleCount <= 0) {
-                    scaleCount = 0;
-                    scaleDir = scaleDir * -1;
-                } else {                    
-                    scaleUnit = 1.0f / 0.8f;
-                    scaleCount--;
+            if (state == GLUT_DOWN) {
+                float scaleUnit = 1.0f;
+                
+                if (scaleDir < 0) {
+                    if (scaleCount <= 0) {
+                        scaleCount = 0;
+                        scaleDir = scaleDir * -1;
+                    } else {                    
+                        scaleUnit = 1.0f / 0.8f;
+                        scaleCount--;
+                    }
+                } else {
+                    if (scaleCount >= 10) {
+                        scaleCount = 10;
+                        scaleDir = scaleDir * -1;
+                    } else {                    
+                        scaleUnit = 0.8f;
+                        scaleCount++;
+                    }
                 }
-            } else {
-                if (scaleCount >= 10) {
-                    scaleCount = 10;
-                    scaleDir = scaleDir * -1;
-                } else {                    
-                    scaleUnit = 0.8f;
-                    scaleCount++;
-                }
+    
+                vgScale(scaleUnit, scaleUnit);
             }
-
-            vgScale(scaleUnit, scaleUnit);
             break;
         }
         case GLUT_MIDDLE_BUTTON: {

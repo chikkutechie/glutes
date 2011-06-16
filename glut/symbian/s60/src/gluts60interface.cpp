@@ -108,7 +108,6 @@ GlutS60Interface::~GlutS60Interface()
     terminate();
     removeAllControl();
     mControllist.Close();
-
 }
 
 void GlutS60Interface::intialize(int argc, char ** argv)

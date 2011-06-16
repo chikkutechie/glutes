@@ -215,7 +215,6 @@ void generateMMPFile(std::vector<struct NameValPair*> & pairs)
     }
     mmpfile << std::endl;
     
-    mmpfile << "LIBRARY           glut.lib" << std::endl;
     mmpfile << "LIBRARY           libstdcppv5.lib" << std::endl;
     mmpfile << "LIBRARY           libpthread.lib" << std::endl;
     mmpfile << "LIBRARY           libc.lib" << std::endl;
@@ -233,6 +232,7 @@ void generateMMPFile(std::vector<struct NameValPair*> & pairs)
     mmpfile << "LIBRARY           ws32.lib" << std::endl;
     mmpfile << "LIBRARY           hal.lib" << std::endl;
     mmpfile << "LIBRARY           gdi.lib" << std::endl;
+    mmpfile << "LIBRARY           libEGL.lib" << std::endl;
 
     files = getFiles(LIBRARY, pairs);
     if (files) {

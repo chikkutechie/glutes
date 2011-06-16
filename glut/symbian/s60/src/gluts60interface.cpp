@@ -503,6 +503,10 @@ void GlutS60Interface::rerect(int x, int y, int w, int h)
         if (entry->mControl->Rect() != rect) {
             if (mFullScreen) {
                 entry->mControl->SetExtentToWholeScreen();
+                w = entry->mControl->Size().iWidth;
+                h = entry->mControl->Size().iHeight;
+                x = entry->mControl->Position().iX;
+                y = entry->mControl->Position().iY;
             } else {
                 entry->mControl->SetRect(rect);
                 // in some device EGLSurface need to recreate

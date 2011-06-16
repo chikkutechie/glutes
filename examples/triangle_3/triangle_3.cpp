@@ -86,12 +86,17 @@ void init()
                               VG_COLOR_RAMP_SPREAD_REPEAT);
 
     const VGfloat fillStops[] = {
-        0.0, 0.0, 1.0, 0.0, 1.0,
-        1.0, 1.0, 0.0, 0.0, 1.0 
+        0.0f/6.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+        1.0f/6.0f, 0.0f, 1.0f, 0.0f, 1.0f,
+        2.0f/6.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+        3.0f/6.0f, 0.0f, 1.0f, 0.0f, 1.0f,
+        4.0f/6.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+        5.0f/6.0f, 0.0f, 1.0f, 0.0f, 1.0f,
+        6.0f/6.0f, 1.0f, 0.0f, 0.0f, 1.0f
     };
     
     vgSetParameterfv(paint, VG_PAINT_COLOR_RAMP_STOPS,   
-                                      5*2, fillStops);
+                                      5*7, fillStops);
     
     VGfloat bgColor[] = {1.0, 1.0, 0.0, 1.0};
     vgSetfv(VG_CLEAR_COLOR, 4, bgColor);

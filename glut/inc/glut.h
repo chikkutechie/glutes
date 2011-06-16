@@ -118,7 +118,7 @@ APIENTRY int  glutGetModifiers();
 APIENTRY void glutTimerFunc(unsigned int millis, void (*func)(int), int value);
 APIENTRY void glutFullScreen();
 
-APIENTRY int glutGet(GLenum state);
+APIENTRY int glutGet(unsigned int state);
 
 #if defined(__cplusplus)
 }

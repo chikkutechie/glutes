@@ -1,0 +1,15 @@
+/********************************************
+ * auto generated do not edit
+ ********************************************/
+
+#define BLD_INF_triangle_3
+
+prj_platforms
+WINSCW GCCE ARMV5 ARMV6
+
+prj_mmpfiles
+triangle_3.mmp
+
+#if defined(WINSCW)
+#endif
+

@@ -73,20 +73,3 @@ RWindow& GlutControl::nativeWindow()
     return Window();
 }
 
-void GlutControl::HandlePointerEvent(const TPointerEvent& aPointerEvent)
-{
-    if (mEH) {
-        mEH->mouse(aPointerEvent.iType, aPointerEvent.iModifiers,
-                  aPointerEvent.iPosition.iX, aPointerEvent.iPosition.iY);
-    }
-}
-
-TKeyResponse GlutControl::OfferKeyEvent(const TKeyEvent& aKeyEvent, TEventCode)
-{
-    if (mEH) {
-        mEH->keyboard(aKeyEvent.iCode, 0, 0);
-    }
-    
-    return EKeyWasConsumed;
-}
-

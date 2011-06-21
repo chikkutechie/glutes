@@ -28,4 +28,11 @@ EXPORTS
 	glutMotionFunc @ 27 NONAME
 	glutPassiveMotionFunc @ 28 NONAME
 	glutGetModifiers @ 29 NONAME
+	glutAddMenuEntry @ 30 NONAME
+	glutAttachMenu @ 31 NONAME
+	glutCreateMenu @ 32 NONAME
+	glutDestroyMenu @ 33 NONAME
+	glutGetMenu @ 34 NONAME
+	glutSetMenu @ 35 NONAME
+	glutRemoveMenuItem @ 36 NONAME
 

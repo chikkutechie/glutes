@@ -38,7 +38,8 @@
 #include <e32std.h>
 #include <string.h>
 
-#define  ID_START_INDEX 100 
+#define  ID_START_INDEX   100
+#define  MENU_START_INDEX 10
 
 GlutInterface* GlutInterface::getInterface()
 {
@@ -89,6 +90,8 @@ GlutS60Interface::GlutS60Interface()
     mTimer(0),
     mFullScreen(false),
     mMouseModifier(0),
+    mCurrentMenu(0),
+    mAttachedMenuButton(-1),
     KParamRenderer((TUint8 *)"-renderer", 9, 9),
     KParamRendererVG((TUint8 *)"vg", 2, 2),
     KParamRendererGL((TUint8 *)"gl", 2, 2),
@@ -106,7 +109,6 @@ GlutS60Interface::GlutS60Interface()
 GlutS60Interface::~GlutS60Interface()
 {
     terminate();
-    removeAllControl();
     mControllist.Close();
 }
 
@@ -205,6 +207,7 @@ void GlutS60Interface::terminate()
         mBinder = 0;
     }
 
+    removeMenuEntries();
     removeAllControl();
 
     if (mEikonEnv != 0) {
@@ -292,7 +295,7 @@ void GlutS60Interface::setWindow(int win)
         ControlEntry * entry = getControlEntry(win);
         if (entry) {
             mBinder->makeCurrent(entry->mSurface);
-            mCurrentControl = entry->id;
+            mCurrentControl = entry->mId;
         }
     }
 }
@@ -375,7 +378,7 @@ void GlutS60Interface::popWindow()
     int count = mControlStack.Count();
     if (count > 0) {
         ControlEntry entry = mControlStack[count - 1];
-        setWindow(entry.id);
+        setWindow(entry.mId);
         mControlStack.Remove(count - 1);
     }
 }
@@ -388,16 +391,16 @@ void GlutS60Interface::pushWindow()
         if (entry) {
             mControlStack.Append(*entry);
         }
-        setWindow(getControlEntry(mCurrentControl-1)->id);
+        setWindow(getControlEntry(mCurrentControl-1)->mId);
     }
 }
 
 int GlutS60Interface::addControl(ControlEntry entry)
 {
-    entry.id = ID_START_INDEX + mControllist.Count();
+    entry.mId = ID_START_INDEX + mControllist.Count();
     mControllist.Append(entry);   
     
-    return entry.id;
+    return entry.mId;
 }
 
 GlutS60Interface::ControlEntry * GlutS60Interface::getControlEntry(int id)
@@ -406,7 +409,7 @@ GlutS60Interface::ControlEntry * GlutS60Interface::getControlEntry(int id)
     int count = mControllist.Count();
     
     for (int i=0; i<count; ++i) {
-        if (mControllist[i].id == id) {
+        if (mControllist[i].mId == id) {
             entry = &mControllist[i];
             break;
         }
@@ -551,7 +554,7 @@ void GlutS60Interface::mouse(int button, int modifier, int x, int y)
 {
     mMouseModifier = modifier;
     
-    if (mCallbacks.mouse) {
+    if (mCallbacks.mouse || mAttachedMenuButton != -1) {
         int glutButton = -1;
         int glutState  = -1;
         
@@ -587,8 +590,20 @@ void GlutS60Interface::mouse(int button, int modifier, int x, int y)
                 break;
             }
         }
+        
         if (glutButton != -1) {
-            mCallbacks.mouse(glutButton, glutState, x, y);
+            if (mAttachedMenuButton == glutButton && glutState == GLUT_DOWN) {
+                MenuEntry * entry = getMenuEntry(mCurrentMenu);
+                if (entry) {
+                    entry->mPopupMenu->SetPosition(TPoint(x, y));
+                    entry->mPopupMenu->ShowMenu();
+                    return;
+                }
+            }
+            
+            if (mCallbacks.mouse) {
+                mCallbacks.mouse(glutButton, glutState, x, y);
+            }
         }
     }
     
@@ -655,7 +670,8 @@ TInt callbackFunction(TAny * a)
     return 0;
 }
 
-void GlutS60Interface::timerFunc(unsigned int millis, void (*func)(int), int value)
+void GlutS60Interface::timerFunc(unsigned int millis,
+                                 void (*func)(int), int value)
 {
     delete mTimer;
     mTimer = 0;
@@ -667,4 +683,246 @@ void GlutS60Interface::timerFunc(unsigned int millis, void (*func)(int), int val
     TCallBack callback(callbackFunction, arg);
     
     mTimer->Start(millis * 1000, 0, callback);
+}
+
+GlutS60Interface::MenuEntry * GlutS60Interface::getMenuEntry(int id)
+{
+    MenuEntry * entry = 0;
+    
+    const int count = mMenuList.Count();
+    
+    for (int i=0; i<count; ++i) {
+        if (mMenuList[i]->mId == id) {
+            entry = mMenuList[i];
+            break;
+        }
+    }
+    
+    return entry;
+}
+
+void GlutS60Interface::removeMenuEntries()
+{
+    mCurrentMenu = 0;
+    mAttachedMenuButton = -1;
+    mMenuList.ResetAndDestroy();    
+}
+
+int GlutS60Interface::createMenu(void (*callback)(int))
+{
+    int id = 0;
+
+    if (!callback) {
+        return 0;
+    }
+    
+    MenuEntry * entry = new MenuEntry;
+    
+    TRAP(id, entry->mPopupMenu = CAknStylusPopUpMenu::NewL( 
+                                    entry, TPoint(0, 0), 0); );
+    if (id != KErrNone) {
+        delete entry;
+        return 0;
+    }
+
+    if (mMenuList.Append(entry) != KErrNone) {
+        delete entry;
+        return 0;
+    }
+
+    entry->mId = MENU_START_INDEX + mMenuList.Count();
+    entry->mCallback = callback;
+    
+    mCurrentMenu = entry->mId;
+    
+    return mCurrentMenu;
+}
+
+void GlutS60Interface::destroyMenu(int menu)
+{
+    if (menu == mCurrentMenu) {
+        mCurrentMenu = 0;
+        mAttachedMenuButton = -1;
+    }
+    
+    const int count = mMenuList.Count();
+    for (int i=0; i<count; ++i) {
+        if (mMenuList[i]->mId == menu) {
+            delete mMenuList[i];
+            mMenuList.Remove(i);
+            break;
+        }
+    }
+}
+
+int GlutS60Interface::getMenu()
+{
+    return mCurrentMenu;
+}
+
+void GlutS60Interface::setMenu(int menu)
+{
+    MenuEntry * entry = getMenuEntry(menu);
+    if (entry) {
+        mCurrentMenu = menu;        
+    }
+}
+
+void GlutS60Interface::addMenuEntry(const char * label, int value)
+{
+    const int BiasedId = value+0x6000;
+    
+    MenuEntry * entry = getMenuEntry(mCurrentMenu);
+    if (entry) {
+        const int llen = strlen(label);
+        if (llen < 255) {
+            TBuf<255> item;
+            item.Copy(TPtrC8((const TUint8 *)label, llen));
+
+            TRAPD(err, entry->mPopupMenu->AddMenuItemL(item, BiasedId); );
+            if (err == KErrNone) {
+                entry->mMenuItems.Append(BiasedId);
+            }
+        }
+    }
+}
+
+void GlutS60Interface::removeMenuItem(int item)
+{
+    item = item - 1;
+
+    MenuEntry * entry = getMenuEntry(mCurrentMenu);
+    if (entry) {
+        if (item < entry->mMenuItems.Count()) {
+            const int BiasedId = entry->mMenuItems[item]+0x6000; 
+            entry->mPopupMenu->RemoveMenuItem(BiasedId);
+            entry->mMenuItems.Remove(item);
+        }
+    }
+}
+
+void GlutS60Interface::attachMenu(int button)
+{
+    if (mCurrentMenu) {
+        mAttachedMenuButton = button;
+    }
+}
+
+int GlutS60Interface::getValue(unsigned int state)
+{
+    int value = 0;
+    switch (state) {
+        case GLUT_WINDOW_X: {
+            ControlEntry * entry = getControlEntry(mCurrentControl);
+            if (entry && entry->mControl) {
+                value = entry->mControl->Position().iX;
+            }
+            break;
+        }
+        
+        case GLUT_WINDOW_Y: {
+            ControlEntry * entry = getControlEntry(mCurrentControl);
+            if (entry && entry->mControl) {
+                value = entry->mControl->Position().iY;
+            }        
+            break;
+        }
+        
+        case GLUT_WINDOW_WIDTH: {
+            ControlEntry * entry = getControlEntry(mCurrentControl);
+            if (entry && entry->mControl) {
+                value = entry->mControl->Size().iWidth;
+            }
+            break;
+        }
+
+        case GLUT_WINDOW_HEIGHT: {
+            ControlEntry * entry = getControlEntry(mCurrentControl);
+            if (entry && entry->mControl) {
+                value = entry->mControl->Size().iHeight;
+            }
+            break;
+        }
+
+        case GLUT_WINDOW_BUFFER_SIZE: {
+            value = mBinder->getBufferSize();
+            break;
+        }
+            
+        case GLUT_WINDOW_STENCIL_SIZE: {
+            value = mBinder->getStencilSize();
+            break;
+        }
+        
+        case GLUT_WINDOW_DEPTH_SIZE: {
+            value = mBinder->getDepthSize();
+            break;
+        }
+        
+        case GLUT_WINDOW_RED_SIZE: {
+            value = mBinder->getRedSize();
+            break;
+        }
+        
+        case GLUT_WINDOW_GREEN_SIZE: {
+            value = mBinder->getGreenSize();
+            break;
+        }
+        
+        case GLUT_WINDOW_BLUE_SIZE: {
+            value = mBinder->getBlueSize();
+            break;
+        }
+        
+        case GLUT_WINDOW_ALPHA_SIZE: {
+            value = mBinder->getAlphaSize();
+            break;
+        }
+        
+        case GLUT_WINDOW_DOUBLEBUFFER: {
+            value = 1;
+            break;
+        }
+                
+        case GLUT_SCREEN_WIDTH: {
+            if (mEikonEnv) {
+                value = mEikonEnv->ScreenDevice()->SizeInPixels().iWidth;
+            }
+            break;
+        }
+        
+        case GLUT_SCREEN_HEIGHT: {
+            if (mEikonEnv) {
+                value = mEikonEnv->ScreenDevice()->SizeInPixels().iHeight;
+            }
+            break;
+        }
+        
+        case GLUT_SCREEN_WIDTH_MM: {
+            if (mEikonEnv) {
+                value = mEikonEnv->ScreenDevice()->SizeInTwips().iWidth;
+                value = static_cast<int>(10.0f/567.0f * (float)value);
+            }
+            break;
+        }
+        
+        case GLUT_SCREEN_HEIGHT_MM: {
+            if (mEikonEnv) {
+                value = mEikonEnv->ScreenDevice()->SizeInTwips().iHeight;
+                value = static_cast<int>(10.0f/567.0f * (float)value);
+            }
+            break;
+        }
+
+        case GLUT_MENU_NUM_ITEMS: {
+            MenuEntry * entry = getMenuEntry(mCurrentMenu);
+            if (entry) {
+                value = entry->mMenuItems.Count();
+            }
+            break;
+        }
+
+    }
+    
+    return value;
 }

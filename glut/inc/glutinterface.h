@@ -69,13 +69,23 @@ public:
     virtual void reshapeWindow(int width, int height) = 0;
     virtual void popWindow() = 0;
     virtual void pushWindow() = 0;
-    virtual int getModifiers() = 0;
     
     virtual void timerFunc(unsigned int millis, void (*func)(int), int value) = 0;
     
     virtual void exec() = 0;
     virtual void redraw(int win = 0) = 0;
     virtual void flush() = 0;
+    
+    virtual int createMenu(void (*)(int menu)) = 0;
+    virtual void destroyMenu(int menu) = 0;
+    virtual int getMenu() = 0;
+    virtual void setMenu(int menu) = 0;
+    virtual void addMenuEntry(const char* label, int value) = 0;
+    virtual void removeMenuItem(int item) = 0;
+    virtual void attachMenu(int button) = 0;
+
+    virtual int getModifiers() = 0;
+    virtual int getValue(unsigned int state) = 0;
     
 public:
     void setKeyboardFunc(void (*func)(unsigned char key, int x, int y))

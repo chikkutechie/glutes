@@ -46,7 +46,7 @@ public:
     
 protected:
     void HandleResourceChangeL(TInt type);
-    virtual void HandleWsEventL(const TWsEvent &event, CCoeControl *destination);
+    void HandleWsEventL(const TWsEvent &event, CCoeControl *destination);
     virtual void ProcessCommandL(TInt aCommand);
     virtual void HandleScreenDeviceChangedL();
     void HandleStatusPaneSizeChange();

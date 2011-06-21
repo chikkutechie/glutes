@@ -58,9 +58,39 @@ public:
     void swapBuffer(unsigned int surface);
     void terminate();
 
+    int getBufferSize()
+    {
+        return getValue(EGL_BUFFER_SIZE);
+    }
+    int getRedSize()
+    {
+        return getValue(EGL_RED_SIZE);
+    }
+    int getGreenSize()
+    {
+        return getValue(EGL_GREEN_SIZE);
+    }
+    int getBlueSize()
+    {
+        return getValue(EGL_BLUE_SIZE);
+    }
+    int getAlphaSize()
+    {
+        return getValue(EGL_ALPHA_SIZE);
+    }
+    int getDepthSize()
+    {
+        return getValue(EGL_DEPTH_SIZE);
+    }
+    int getStencilSize()
+    {
+        return getValue(EGL_STENCIL_SIZE);
+    }
+
 private:
     bool createContext();
-
+    int getValue(int state);
+    
 private:
     EGLDisplay mDisplay;
     EGLContext mContext;

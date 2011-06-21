@@ -33,6 +33,10 @@
 #include "glutinterface.h"
 #include "gluteventhandler.h"
 
+#include <e32cmn.h>
+#include <eikmobs.h>
+#include <aknstyluspopupmenu.h>
+
 class GlutControl;
 class CEikonEnv;
 class GlutGLBinder;
@@ -61,9 +65,7 @@ public:
     void exec();
     void redraw(int win = 0);
     void flush();
-    int getModifiers();
     
-public:
     virtual void draw();
     virtual void reshape(int, int);
     virtual void rerect(int, int, int, int);
@@ -71,21 +73,74 @@ public:
     virtual void keyboard(unsigned char key, int x, int y);
     virtual void mouse(int button, int modifier, int x, int y);
 
+    virtual int createMenu(void (*)(int menu));
+    virtual void destroyMenu(int menu);
+    virtual int getMenu();
+    virtual void setMenu(int menu);
+    virtual void addMenuEntry(const char* label, int value);
+    virtual void removeMenuItem(int item);
+    virtual void attachMenu(int button);
+
+    int getModifiers();
+    virtual int getValue(unsigned int state);
+    
 private:
-    struct ControlEntry
+    class ControlEntry
     {
-        ControlEntry() : id(0), mSurface(0), mControl(0) {}
-        int id;
+    public:
+        ControlEntry()
+         : mId(0),
+           mSurface(0),
+           mControl(0)
+        {}
+        
+        int mId;
         unsigned int  mSurface;
         GlutControl * mControl;
     };
     
+    class MenuEntry: public MEikMenuObserver
+    {
+    public:
+        MenuEntry()
+         : mId(0),
+           mCallback(0),
+           mPopupMenu(0),
+           mMenuItems(6)
+        {}
+
+        ~MenuEntry()
+        {
+            mMenuItems.Close();
+            delete mPopupMenu;
+        }
+    
+        void ProcessCommandL(TInt id)
+        {
+            if (id != KErrCancel) {
+                mCallback(id - 0x6000);
+            }
+        }
+        
+        void SetEmphasis(CCoeControl *, TBool)
+        {}
+        
+        int mId;
+        void (*mCallback)(int);
+        CAknStylusPopUpMenu * mPopupMenu;
+        RArray<int> mMenuItems;
+    };
+
     int addControl(ControlEntry entry);
     ControlEntry removeControl(int id);
     void removeAllControl();
     ControlEntry * getControlEntry(int id);
-    void recreateSurface(int win);
+
+    MenuEntry * getMenuEntry(int id);
+    void removeMenuEntries();
     
+    void recreateSurface(int win);
+
 private:
     CEikonEnv* mEikonEnv;
     int mCurrentControl;
@@ -93,15 +148,20 @@ private:
     CPeriodic * mTimer;
     RArray<ControlEntry> mControllist;
     RArray<ControlEntry> mControlStack;
+
     bool mFullScreen;
     int mMouseModifier;
-    
+
+    RPointerArray<MenuEntry> mMenuList;
+    int mCurrentMenu;
+    int mAttachedMenuButton;
+
     const TPtr8 KParamRenderer;
     const TPtr8 KParamRendererVG;
     const TPtr8 KParamRendererGL;
     const TPtr8 KParamRendererGLES;
     const TPtr8 KParamRendererGLES2;
-    
+
     const TPtr8 KParamOrientation;
     const TPtr8 KParamOrientationPortrait;
     const TPtr8 KParamOrientationLandscape;

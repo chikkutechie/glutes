@@ -44,11 +44,13 @@ public:
     ~GlutControl();
     void setEventHandler(GlutEventHandler * eh);
     RWindow& nativeWindow();
-    
+
 protected:
     void Draw(const TRect& aRect) const;
     void SizeChanged();
     void PositionChanged();
+    void HandlePointerEventL(const TPointerEvent& aPointerEvent);
+    TKeyResponse OfferKeyEventL(const TKeyEvent& aKeyEvent,TEventCode aType);
     
 private:
     GlutEventHandler * mEH;

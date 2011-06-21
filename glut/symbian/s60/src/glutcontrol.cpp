@@ -40,6 +40,7 @@ void GlutControl::ConstructL(const TRect& aRect)
     CreateWindowL();
     SetRect(aRect);
     ActivateL();
+    SetPointerCapture(ETrue);
 }
 
 GlutControl::~GlutControl()
@@ -65,7 +66,26 @@ void GlutControl::SizeChanged()
 
 void GlutControl::PositionChanged()
 {
-    CCoeControl::PositionChanged();    
+    CCoeControl::PositionChanged();
+}
+
+void GlutControl::HandlePointerEventL(const TPointerEvent & aPointerEvent)
+{
+    if (mEH) {
+            mEH->mouse(aPointerEvent.iType,
+                    aPointerEvent.iModifiers,
+                    aPointerEvent.iPosition.iX, aPointerEvent.iPosition.iY);
+    }
+    CCoeControl::HandlePointerEventL(aPointerEvent);
+}
+
+TKeyResponse GlutControl::OfferKeyEventL(const TKeyEvent& aKeyEvent, TEventCode aType)
+{
+    if (mEH) {
+        if (aType == EEventKeyUp) {
+            mEH->keyboard(aKeyEvent.iScanCode, 0, 0);
+        }
+    }
 }
 
 RWindow& GlutControl::nativeWindow()

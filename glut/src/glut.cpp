@@ -285,7 +285,72 @@ APIDEF int glutGetModifiers()
 
 APIDEF int glutGet(unsigned int state)
 {
+    GlutInterface * interface = getInterface(); 
+    if (interface) {
+        return interface->getValue(state);
+    }
+
     return 0;
+}
+
+APIDEF int glutCreateMenu(void (*menu)(int))
+{
+    GlutInterface * interface = getInterface(); 
+    if (interface) {
+        return interface->createMenu(menu);
+    }
+    
+    return 0;
+}
+
+APIDEF void glutDestroyMenu(int menu)
+{
+    GlutInterface * interface = getInterface(); 
+    if (interface) {
+        interface->destroyMenu(menu);
+    }
+}
+
+APIDEF int glutGetMenu()
+{
+    GlutInterface * interface = getInterface(); 
+    if (interface) {
+        return interface->getMenu();
+    }
+    
+    return 0;
+}
+
+APIDEF void glutSetMenu(int menu)
+{
+    GlutInterface * interface = getInterface(); 
+    if (interface) {
+        interface->setMenu(menu);
+    }
+}
+
+APIDEF void glutAddMenuEntry(const char* label, int value)
+{
+    GlutInterface * interface = getInterface(); 
+    if (interface) {
+        interface->addMenuEntry(label, value);
+    }
+}
+
+APIDEF void glutRemoveMenuItem(int item)
+{
+    GlutInterface * interface = getInterface(); 
+    if (interface) {
+        interface->removeMenuItem(item);
+    }
+}
+
+APIDEF void glutAttachMenu(int button)
+{
+    GlutInterface * interface = getInterface(); 
+    if (interface) {
+        interface->attachMenu(button);
+    }
 }
 
 #ifdef __cplusplus

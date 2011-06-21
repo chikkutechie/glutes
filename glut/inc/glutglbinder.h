@@ -53,7 +53,7 @@ public:
     virtual void destroySurface(unsigned int surface) = 0;
     virtual void swapBuffer(unsigned int surface) = 0;
     virtual void terminate() = 0;
-    
+
     void setBindApi(API api)
     {
         this->mAPI = api;
@@ -64,6 +64,35 @@ public:
         return mAPI;
     }
 
+    virtual int getBufferSize()
+    {
+        return 0;
+    }
+    virtual int getRedSize()
+    {
+        return 0;
+    }
+    virtual int getGreenSize()
+    {
+        return 0;
+    }
+    virtual int getBlueSize()
+    {
+        return 0;
+    }
+    virtual int getAlphaSize()
+    {
+        return 0;
+    }
+    virtual int getDepthSize()
+    {
+        return 0;
+    }
+    virtual int getStencilSize()
+    {
+        return 0;
+    }
+    
 protected:
     API mAPI;
 };

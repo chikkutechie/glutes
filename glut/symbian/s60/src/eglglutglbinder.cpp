@@ -210,3 +210,14 @@ void EGLGlutGLBinder::swapBuffer(unsigned int surface)
         eglSwapBuffers(mDisplay, (EGLSurface)surface);
     }
 }
+
+int EGLGlutGLBinder::getValue(int state)
+{
+    EGLint value = 0;
+    
+    if (mDisplay != EGL_NO_DISPLAY && mConfig) {
+        eglGetConfigAttrib(mDisplay, mConfig, state, &value);
+    }
+    
+    return value;
+}

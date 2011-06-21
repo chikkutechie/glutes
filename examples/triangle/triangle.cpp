@@ -114,43 +114,30 @@ void reshape(int w, int h)
     glLoadIdentity();
 }
 
-void mouseFunction(int button, int state, int, int)
+void scale()
 {
-    switch (button) {
-        case GLUT_LEFT_BUTTON: {
-            if (state == GLUT_DOWN) {
-                float scaleUnit = 1.0f;
+    float scaleUnit = 1.0f;
 
-                if (scaleDir < 0) {
-                    if (scaleCount <= 0) {
-                        scaleCount = 0;
-                        scaleDir = scaleDir * -1;
-                    } else {                    
-                        scaleUnit = 1.0f / 0.8f;
-                        scaleCount--;
-                    }
-                } else {
-                    if (scaleCount >= 10) {
-                        scaleCount = 10;
-                        scaleDir = scaleDir * -1;
-                    } else {                    
-                        scaleUnit = 0.8f;
-                        scaleCount++;
-                    }
-                }
-                glScalef(scaleUnit, scaleUnit, scaleUnit);
-            }
-            break;
+    if (scaleDir < 0) {
+        if (scaleCount <= 0) {
+            scaleCount = 0;
+            scaleDir = scaleDir * -1;
+        } else {                    
+            scaleUnit = 1.0f / 0.8f;
+            scaleCount--;
         }
-        case GLUT_MIDDLE_BUTTON: {
-            break;
+    } else {
+        if (scaleCount >= 10) {
+            scaleCount = 10;
+            scaleDir = scaleDir * -1;
+        } else {                    
+            scaleUnit = 0.8f;
+            scaleCount++;
         }
-        case GLUT_RIGHT_BUTTON: {
-            break;
-        }
-            
     }
+    glScalef(scaleUnit, scaleUnit, scaleUnit);
 }
+
 void timeout(int)
 {
     if (xRot >= 360.0f) {
@@ -162,6 +149,15 @@ void timeout(int)
     
     glutPostRedisplay();
     glutTimerFunc(20, timeout, 0);
+}
+
+void menu(int id)
+{
+    if (id == 1) {
+        scale();
+    } else if (id == 2) {
+        exit(0);
+    }
 }
 
 #if defined(__SYMBIAN32__) || defined(SYMBIAN)
@@ -178,10 +174,16 @@ int main(int argc, char ** argv)
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutCreateWindow(argv[0]);
+    glutFullScreen();
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
     glutTimerFunc(20, timeout, 0);
-    glutMouseFunc(mouseFunction);
+    
+    glutCreateMenu(menu);
+    glutAddMenuEntry("scale", 1);
+    glutAddMenuEntry("exit", 2);
+    glutAttachMenu(GLUT_LEFT_BUTTON);
+    
     glutMainLoop();
 
     return 0;

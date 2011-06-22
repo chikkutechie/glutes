@@ -1,12 +1,16 @@
-#include <triangle.rsg>
+/********************************************
+ * auto generated do not edit
+ ********************************************/
+
+#include <triangle_vg.rsg>
 #include <appinfo.rh>
 
 UID2 KUidAppRegistrationResourceFile
-UID3 0xef1f1218
+UID3 0xefac053b
 
 RESOURCE APP_REGISTRATION_INFO
-	    {
-    app_file=triangle;
+    {
+    app_file=triangle_vg;
     localisable_resource_file=qtn_loc_resource_file_1;
     localisable_resource_id = R_LOCALISABLE_APP_INFO;
     }

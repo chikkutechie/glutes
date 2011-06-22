@@ -33,13 +33,13 @@ class GlutEventHandler
 {
 public:
     virtual ~GlutEventHandler(){}
-    
-    virtual void draw() {}
-    virtual void reshape(int, int) {}
-    virtual void repos(int, int) {}
-    virtual void rerect(int, int, int, int) {}
-    virtual void keyboard(unsigned char, int, int) {}
-    virtual void mouse(int, int, int, int) {}
+
+    virtual void draw() = 0;
+    virtual void reshape(int w, int h) = 0;
+    virtual void rerect(int x, int y, int w, int h) = 0;
+    virtual void repos(int x, int y) = 0;
+    virtual void keyboard(unsigned char key, unsigned int modifier, int x, int y) = 0;
+    virtual void mouse(int button, int modifier, int x, int y) = 0;
 };
 
 #endif

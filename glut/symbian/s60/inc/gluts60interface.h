@@ -67,10 +67,10 @@ public:
     void flush();
     
     virtual void draw();
-    virtual void reshape(int, int);
-    virtual void rerect(int, int, int, int);
-    virtual void repos(int, int);
-    virtual void keyboard(unsigned char key, int x, int y);
+    virtual void reshape(int w, int h);
+    virtual void rerect(int x, int y, int w, int h);
+    virtual void repos(int x, int y);
+    virtual void keyboard(unsigned char key, unsigned int modifier, int x, int y);
     virtual void mouse(int button, int modifier, int x, int y);
 
     virtual int createMenu(void (*)(int menu));
@@ -150,7 +150,7 @@ private:
     RArray<ControlEntry> mControlStack;
 
     bool mFullScreen;
-    int mMouseModifier;
+    int mModifier;
 
     RPointerArray<MenuEntry> mMenuList;
     int mCurrentMenu;

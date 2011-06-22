@@ -101,11 +101,13 @@ public:
     int setMotionFunc(void (*func)(int x, int y))
     {
         mCallbacks.motion = func;
+        return 0;
     }
     
     int setPassiveMotionFunc(void (*func)(int x, int y))
     {
         mCallbacks.passiveMotion = func;
+        return 0;
     }
     
     void setRenderer(Renderer v)

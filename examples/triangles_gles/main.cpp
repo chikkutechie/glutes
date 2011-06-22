@@ -26,7 +26,17 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
  
+#if defined(__SYMBIAN32__) || defined(SYMBIAN)
+#if !defined(GLES)
+#define GLES
+#endif
+#endif
+#if defined(GLES)
 #include <glut.h>
+#else
+#include <GL/glut.h>
+#endif
+
 #include <vector>
 #include <math.h>
 
@@ -105,9 +115,17 @@ void reshape(int w, int h)
     glLoadIdentity();
     
     if (w <= h) {
+#if defined(__SYMBIAN32__) || defined(SYMBIAN)
         glOrthof(-nRange, nRange, -nRange*h/w, nRange*h/w, -nRange, nRange);
+#else
+        glOrtho(-nRange, nRange, -nRange*h/w, nRange*h/w, -nRange, nRange);
+#endif
     } else {
+#if defined(__SYMBIAN32__) || defined(SYMBIAN)
         glOrthof(-nRange*w/h, nRange*w/h, -nRange, nRange, -nRange, nRange);
+#else
+        glOrtho(-nRange*w/h, nRange*w/h, -nRange, nRange, -nRange, nRange);
+#endif
     }
 
     glMatrixMode(GL_MODELVIEW);

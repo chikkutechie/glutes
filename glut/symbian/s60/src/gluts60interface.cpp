@@ -89,7 +89,7 @@ GlutS60Interface::GlutS60Interface()
     mBinder(0),
     mTimer(0),
     mFullScreen(false),
-    mMouseModifier(0),
+    mModifier(0),
     mCurrentMenu(0),
     mAttachedMenuButton(-1),
     KParamRenderer((TUint8 *)"-renderer", 9, 9),
@@ -543,16 +543,17 @@ void GlutS60Interface::repos(int x, int y)
     }
 }
 
-void GlutS60Interface::keyboard(unsigned char key, int x, int y)
+void GlutS60Interface::keyboard(unsigned char key, unsigned int modifier, int x, int y)
 {
     if (mCallbacks.keyboard) {
+        mModifier = modifier;
         mCallbacks.keyboard(key, x, y);
     }
 }
 
 void GlutS60Interface::mouse(int button, int modifier, int x, int y)
 {
-    mMouseModifier = modifier;
+    mModifier = modifier;
     
     if (mCallbacks.mouse || mAttachedMenuButton != -1) {
         int glutButton = -1;
@@ -630,7 +631,7 @@ int GlutS60Interface::getModifiers()
 {
     int modifier = 0;
     
-    switch (mMouseModifier) {
+    switch (mModifier) {
         case EModifierAlt:
         case EModifierLeftAlt:
         case EModifierRightAlt: {            

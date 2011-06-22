@@ -76,6 +76,7 @@ void GlutControl::HandlePointerEventL(const TPointerEvent & aPointerEvent)
                     aPointerEvent.iModifiers,
                     aPointerEvent.iPosition.iX, aPointerEvent.iPosition.iY);
     }
+    
     CCoeControl::HandlePointerEventL(aPointerEvent);
 }
 
@@ -83,9 +84,12 @@ TKeyResponse GlutControl::OfferKeyEventL(const TKeyEvent& aKeyEvent, TEventCode 
 {
     if (mEH) {
         if (aType == EEventKeyUp) {
-            mEH->keyboard(aKeyEvent.iScanCode, 0, 0);
+            mEH->keyboard(aKeyEvent.iScanCode, aKeyEvent.iModifiers, 0, 0);
+            return EKeyWasConsumed;
         }
     }
+    
+    return EKeyWasNotConsumed;
 }
 
 RWindow& GlutControl::nativeWindow()

@@ -83,6 +83,7 @@ void GlutAppUi::ConstructL()
     AddToStackL(menuBar, ECoeStackPriorityMenu, ECoeStackFlagRefusesFocus);
     CEikonEnv::Static()->AppUiFactory()->SwapMenuBar(menuBar);
     cba->ActivateL();
+    
 }
 
 void GlutAppUi::setEventHandler(GlutEventHandler * eh)

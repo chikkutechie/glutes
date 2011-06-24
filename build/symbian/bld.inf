@@ -26,20 +26,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef GLUTDOCUMENT_H_
-#define GLUTDOCUMENT_H_
+#include "../../glut/symbian/group/bld.inf"
 
-#include <AknDoc.h>
+#include "../../examples/build/symbian/bld.inf"
 
-class GlutDocument : public CAknDocument
-{
-public:
-    GlutDocument(CEikApplication &mainApplication);
-    
-    virtual ~GlutDocument();
-    
-    virtual CEikAppUi *CreateAppUiL();
-
-};
-
-#endif

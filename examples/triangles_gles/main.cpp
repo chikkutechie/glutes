@@ -192,15 +192,14 @@ int main(int argc, char ** argv)
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutCreateWindow(argv[0]);
-    glutFullScreen();
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
     glutTimerFunc(20, timeout, 0);
     
-    glutCreateMenu(menu);
-    glutAddMenuEntry("scale", 1);
-    glutAddMenuEntry("exit", 2);
-    glutAttachMenu(GLUT_LEFT_BUTTON);
+//    glutCreateMenu(menu);
+//    glutAddMenuEntry("scale", 1);
+//    glutAddMenuEntry("exit", 2);
+//    glutAttachMenu(GLUT_LEFT_BUTTON);
     
     glutMainLoop();
 

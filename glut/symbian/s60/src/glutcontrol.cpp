@@ -71,13 +71,15 @@ void GlutControl::PositionChanged()
 
 void GlutControl::HandlePointerEventL(const TPointerEvent & aPointerEvent)
 {
-    if (mEH) {
+    if (Rect().Contains(aPointerEvent.iPosition)) {
+        if (mEH) {
             mEH->mouse(aPointerEvent.iType,
-                    aPointerEvent.iModifiers,
-                    aPointerEvent.iPosition.iX, aPointerEvent.iPosition.iY);
+                aPointerEvent.iModifiers,
+                aPointerEvent.iPosition.iX, aPointerEvent.iPosition.iY);
+        }
+        CCoeControl::HandlePointerEventL(aPointerEvent);
     }
     
-    CCoeControl::HandlePointerEventL(aPointerEvent);
 }
 
 TKeyResponse GlutControl::OfferKeyEventL(const TKeyEvent& aKeyEvent, TEventCode aType)
@@ -85,7 +87,6 @@ TKeyResponse GlutControl::OfferKeyEventL(const TKeyEvent& aKeyEvent, TEventCode 
     if (mEH) {
         if (aType == EEventKeyUp) {
             mEH->keyboard(aKeyEvent.iScanCode, aKeyEvent.iModifiers, 0, 0);
-            return EKeyWasConsumed;
         }
     }
     

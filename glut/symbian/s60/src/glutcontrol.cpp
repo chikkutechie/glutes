@@ -40,7 +40,6 @@ void GlutControl::ConstructL(const TRect& aRect)
     CreateWindowL();
     SetRect(aRect);
     ActivateL();
-    SetPointerCapture(ETrue);
 }
 
 GlutControl::~GlutControl()

@@ -43,6 +43,11 @@ class GlutGLBinder;
 
 class GlutS60Interface: public GlutInterface, public GlutEventHandler
 {
+private:
+    static const int ID_START_INDEX = 100;
+    static const int MENU_START_INDEX = 10;
+    static const int MENU_ITEM_BIAS = 0x6000;
+
 public:
     GlutS60Interface();
     ~GlutS60Interface();
@@ -80,7 +85,8 @@ public:
     virtual void addMenuEntry(const char* label, int value);
     virtual void removeMenuItem(int item);
     virtual void attachMenu(int button);
-
+    virtual void detachMenu(int button);
+    
     int getModifiers();
     virtual int getValue(unsigned int state);
     
@@ -118,7 +124,7 @@ private:
         void ProcessCommandL(TInt id)
         {
             if (id != KErrCancel) {
-                mCallback(id - 0x6000);
+                mCallback(id - MENU_ITEM_BIAS);
             }
         }
         

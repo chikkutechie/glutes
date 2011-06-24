@@ -33,8 +33,10 @@
 #endif
 #if defined(GLES)
 #include <glut.h>
+#define GLORTHO glOrthof
 #else
 #include <GL/glut.h>
+#define GLORTHO glOrtho
 #endif
 
 #include <vector>
@@ -42,11 +44,61 @@
 
 using namespace std;
 
-GLfloat xRot = 0.0f;
-GLfloat yRot = 0.0f;
+enum MenuIds
+{
+    ZoomMenu = 10,
+    ExitMenu = 20
+};
 
-int   scaleCount = 0;
-int   scaleDir   = 1;
+char * ZoomInText  = "Zoom In";
+char * ZoomOutText = "Zoom Out";
+char * PauseText   = "Pause";
+char * ResumeText  = "Resume";
+char * ExitText    = "Exit";
+
+class TrianglesState
+{
+public:
+    GLfloat xRot;
+    GLfloat yRot;
+    
+    int scaleCount;
+    int scaleDir;
+    int doRotations;
+    int changeAnimState;
+    int menuId;
+    char * zoomMenuText;
+    char * animMenuText;
+};
+
+TrianglesState * state = 0;
+
+void init();
+void scale();
+void display();
+void reshape(int w, int h);
+void menu(int id);
+void scale();
+void timeout(int);
+void createMenu();
+
+void init()
+{
+    state = new TrianglesState;
+    
+    state->xRot        = 0.0f;
+    state->yRot        = 0.0f;
+    
+    state->scaleCount      = 0;
+    state->scaleDir        = 1;
+    state->doRotations     = 1;
+    state->changeAnimState = 0;
+    state->menuId          = 0;
+    state->zoomMenuText  = ZoomOutText;
+    state->animMenuText  = PauseText;
+    
+    createMenu();
+}
 
 void display()
 {
@@ -55,8 +107,8 @@ void display()
     glShadeModel(GL_SMOOTH);
     glFrontFace(GL_CW);
     glPushMatrix();
-    glRotatef(xRot, 1.0f, 0.0f, 0.0f);
-    glRotatef(yRot, 0.0f, 1.0f, 0.0f);
+    glRotatef(state->xRot, 1.0f, 0.0f, 0.0f);
+    glRotatef(state->yRot, 0.0f, 1.0f, 0.0f);
     
     int pivot = 1;
     
@@ -72,7 +124,10 @@ void display()
     triangleColors.push_back(0.0f);
     triangleColors.push_back(1.0f);
     
-    for (GLfloat angle = 0.0f; angle <= (2.0f * M_PI) + 1.0f; angle += M_PI/38.0f) {
+    for (GLfloat angle = 0.0f;
+            angle <= (2.0f * M_PI) + 1.0f;
+            angle += M_PI/38.0f) {
+        
         GLfloat x = 50.0f * sin(angle);
         GLfloat y = 50.0f * cos(angle);
 
@@ -115,67 +170,92 @@ void reshape(int w, int h)
     glLoadIdentity();
     
     if (w <= h) {
-#if defined(__SYMBIAN32__) || defined(SYMBIAN)
-        glOrthof(-nRange, nRange, -nRange*h/w, nRange*h/w, -nRange, nRange);
-#else
-        glOrtho(-nRange, nRange, -nRange*h/w, nRange*h/w, -nRange, nRange);
-#endif
+        GLORTHO(-nRange, nRange, -nRange*h/w, nRange*h/w, -nRange, nRange);
     } else {
-#if defined(__SYMBIAN32__) || defined(SYMBIAN)
-        glOrthof(-nRange*w/h, nRange*w/h, -nRange, nRange, -nRange, nRange);
-#else
-        glOrtho(-nRange*w/h, nRange*w/h, -nRange, nRange, -nRange, nRange);
-#endif
+        GLORTHO(-nRange*w/h, nRange*w/h, -nRange, nRange, -nRange, nRange);
     }
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 }
 
+void menu(int id)
+{
+    switch (id) {
+        case ZoomMenu: {
+            scale();
+            break;
+        }
+                
+        case ExitMenu: {
+            exit(0);
+            break;
+        }
+    }
+}
+
 void scale()
 {
     float scaleUnit = 1.0f;
 
-    if (scaleDir < 0) {
-        if (scaleCount <= 0) {
-            scaleCount = 0;
-            scaleDir = scaleDir * -1;
+    if (state->scaleDir < 0) {
+        if (state->scaleCount <= 0) {
+            state->scaleCount = 0;
+            state->scaleDir = state->scaleDir * -1;
+            
+            state->zoomMenuText = ZoomOutText;
+
+            createMenu();
+
         } else {                    
             scaleUnit = 1.0f / 0.8f;
-            scaleCount--;
+            state->scaleCount--;
         }
     } else {
-        if (scaleCount >= 10) {
-            scaleCount = 10;
-            scaleDir = scaleDir * -1;
+        if (state->scaleCount >= 10) {
+            state->scaleCount = 10;
+            state->scaleDir = state->scaleDir * -1;
+            
+            state->zoomMenuText = ZoomInText;
+            
+            createMenu();
+
         } else {                    
             scaleUnit = 0.8f;
-            scaleCount++;
+            state->scaleCount++;
         }
     }
     glScalef(scaleUnit, scaleUnit, scaleUnit);
 }
 
 void timeout(int)
-{
-    if (xRot >= 360.0f) {
-        xRot = 0.0f;
+{    
+    if (state->doRotations) {
+        if (state->xRot >= 360.0f) {
+            state->xRot = 0.0f;
+        }
+        
+        state->xRot += 5.0f;
+        state->yRot = state->xRot;
+        
+        glutPostRedisplay();
+        glutTimerFunc(20, timeout, 0);
     }
-    
-    xRot += 5.0f;
-    yRot = xRot;
-    
-    glutPostRedisplay();
-    glutTimerFunc(20, timeout, 0);
 }
 
-void menu(int id)
+void createMenu()
 {
-    if (id == 1) {
-        scale();
-    } else if (id == 2) {
-        exit(0);
+    if (state->menuId) {
+        glutDestroyMenu(state->menuId);
+        state->menuId = 0;
     }
+        
+    state->menuId = glutCreateMenu(menu);
+    
+    glutAddMenuEntry(state->zoomMenuText, ZoomMenu);
+    glutAddMenuEntry(ExitText, ExitMenu);
+
+    glutAttachMenu(GLUT_LEFT_BUTTON);
 }
 
 #if defined(__SYMBIAN32__) || defined(SYMBIAN)
@@ -192,15 +272,13 @@ int main(int argc, char ** argv)
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutCreateWindow(argv[0]);
+    
+    init();
+        
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
     glutTimerFunc(20, timeout, 0);
-    
-    glutCreateMenu(menu);
-    glutAddMenuEntry("scale", 1);
-    glutAddMenuEntry("exit", 2);
-    glutAttachMenu(GLUT_LEFT_BUTTON);
-    
+        
     glutMainLoop();
 
     return 0;

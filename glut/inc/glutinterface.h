@@ -83,7 +83,8 @@ public:
     virtual void addMenuEntry(const char* label, int value) = 0;
     virtual void removeMenuItem(int item) = 0;
     virtual void attachMenu(int button) = 0;
-
+    virtual void detachMenu(int button) = 0;
+    
     virtual int getModifiers() = 0;
     virtual int getValue(unsigned int state) = 0;
     

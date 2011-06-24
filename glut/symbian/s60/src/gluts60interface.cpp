@@ -600,29 +600,24 @@ void GlutS60Interface::mouse(int button, int modifier, int x, int y)
                     entry->mPopupMenu->ShowMenu();
                     return;
                 }
-            }
-            
-            if (mCallbacks.mouse) {
+            } else if (mCallbacks.mouse) {
                 mCallbacks.mouse(glutButton, glutState, x, y);
             }
         }
     }
     
-    if (mCallbacks.motion) {
-        switch (button) {
-            case TPointerEvent::EDrag: {
+    switch (button) {
+        case TPointerEvent::EDrag: {
+            if (mCallbacks.motion) {
                 mCallbacks.motion(x, y);
-                break;
             }
+            break;
         }
-    }
-
-    if (mCallbacks.passiveMotion) {
-        switch (button) {
-            case TPointerEvent::EMove: {
+        case TPointerEvent::EMove: {
+            if (mCallbacks.passiveMotion) {
                 mCallbacks.passiveMotion(x, y);
-                break;
             }
+            break;
         }
     }
 }

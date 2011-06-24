@@ -183,6 +183,7 @@ APIENTRY void glutSetMenu(int menu);
 APIENTRY void glutAddMenuEntry(const char* label, int value);
 APIENTRY void glutRemoveMenuItem(int item);
 APIENTRY void glutAttachMenu(int button);
+APIENTRY void glutDetachMenu(int button);
 
 /* 
  * State retrieval functions 

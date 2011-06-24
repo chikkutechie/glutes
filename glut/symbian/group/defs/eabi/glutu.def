@@ -35,4 +35,5 @@ EXPORTS
 	glutGetMenu @ 34 NONAME
 	glutRemoveMenuItem @ 35 NONAME
 	glutSetMenu @ 36 NONAME
+	glutDetachMenu @ 37 NONAME
 

@@ -353,6 +353,14 @@ APIDEF void glutAttachMenu(int button)
     }
 }
 
+APIDEF void glutDetachMenu(int button)
+{
+    GlutInterface * interface = getInterface(); 
+    if (interface) {
+        interface->detachMenu(button);
+    }
+}
+
 #ifdef __cplusplus
 }
 #endif

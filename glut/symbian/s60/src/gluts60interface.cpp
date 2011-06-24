@@ -38,9 +38,6 @@
 #include <e32std.h>
 #include <string.h>
 
-#define  ID_START_INDEX   100
-#define  MENU_START_INDEX 10
-
 GlutInterface* GlutInterface::getInterface()
 {
 #if !defined(GLUT_STATIC)
@@ -766,10 +763,18 @@ void GlutS60Interface::setMenu(int menu)
 
 void GlutS60Interface::addMenuEntry(const char * label, int value)
 {
-    const int BiasedId = value+0x6000;
+    const int BiasedId = value + MENU_ITEM_BIAS;
     
     MenuEntry * entry = getMenuEntry(mCurrentMenu);
     if (entry) {
+        
+        const int count = mMenuList.Count();
+        for (int i=0; i<count; ++i) {
+            if (mMenuList[i]->mId == BiasedId) {
+                return;
+            }
+        }
+
         const int llen = strlen(label);
         if (llen < 255) {
             TBuf<255> item;
@@ -789,9 +794,8 @@ void GlutS60Interface::removeMenuItem(int item)
 
     MenuEntry * entry = getMenuEntry(mCurrentMenu);
     if (entry) {
-        if (item < entry->mMenuItems.Count()) {
-            const int BiasedId = entry->mMenuItems[item]+0x6000; 
-            entry->mPopupMenu->RemoveMenuItem(BiasedId);
+        if (item >= 0 && item < entry->mMenuItems.Count()) {
+            entry->mPopupMenu->RemoveMenuItem(entry->mMenuItems[item]);
             entry->mMenuItems.Remove(item);
         }
     }
@@ -804,9 +808,17 @@ void GlutS60Interface::attachMenu(int button)
     }
 }
 
+void GlutS60Interface::detachMenu(int button)
+{
+    if (mCurrentMenu && mAttachedMenuButton == button) {
+        mAttachedMenuButton = -1;
+    }
+}
+
 int GlutS60Interface::getValue(unsigned int state)
 {
     int value = 0;
+    
     switch (state) {
         case GLUT_WINDOW_X: {
             ControlEntry * entry = getControlEntry(mCurrentControl);

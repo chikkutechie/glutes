@@ -196,10 +196,10 @@ int main(int argc, char ** argv)
     glutReshapeFunc(reshape);
     glutTimerFunc(20, timeout, 0);
     
-//    glutCreateMenu(menu);
-//    glutAddMenuEntry("scale", 1);
-//    glutAddMenuEntry("exit", 2);
-//    glutAttachMenu(GLUT_LEFT_BUTTON);
+    glutCreateMenu(menu);
+    glutAddMenuEntry("scale", 1);
+    glutAddMenuEntry("exit", 2);
+    glutAttachMenu(GLUT_LEFT_BUTTON);
     
     glutMainLoop();
 

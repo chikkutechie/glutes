@@ -26,13 +26,14 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef GLUTWINDOW_H_
-#define GLUTWINDOW_H_
-
-#define TitleLength 255
+#ifndef GLUTINTERFACE_H_
+#define GLUTINTERFACE_H_
 
 class GlutInterface
 {
+public:
+    static const int TitleLength = 255;
+    
 public:
     enum Renderer 
     {
@@ -57,6 +58,8 @@ public:
     
     virtual void intialize(int argc, char **argv) = 0;
     virtual void terminate() = 0;
+    virtual void initDisplayMode(unsigned int mode) = 0;
+
     virtual int createWindow() = 0;
     virtual void destroyWindow(int win) = 0;
     virtual int getWindow() = 0;
@@ -161,11 +164,6 @@ public:
     {
         mCallbacks.reshape = reshape;
     }
-
-    void setDisplayMode(unsigned int mode)
-    {
-        mDisplayMode = mode;
-    }
     
 protected:
     struct GlutWindowProperty
@@ -200,7 +198,6 @@ protected:
     };
 
     GlutWindowProperty mWindowProperty;
-    unsigned int mDisplayMode;
     GlutCallbacks mCallbacks;
     Renderer mRenderer;
     Orientation mOrientation;

@@ -81,7 +81,9 @@ bool EGLGlutGLBinder::initialize()
         }
     }
     
-    return createContext();
+    addProperty(EGL_RENDERABLE_TYPE, mRendererType);
+
+    return true;
 }
 
 void EGLGlutGLBinder::terminate()
@@ -103,25 +105,16 @@ void EGLGlutGLBinder::terminate()
 bool EGLGlutGLBinder::createContext()
 {
     if (mDisplay == EGL_NO_DISPLAY) {
-        return false;
+        if (!initialize()) {
+            return false;
+        }
     }
-    if (mContext == EGL_NO_CONTEXT) {
-        
-        const EGLint KConfigAttributes[] =
-            {
-            EGL_SURFACE_TYPE,    EGL_WINDOW_BIT |
-            EGL_VG_ALPHA_FORMAT_PRE_BIT,
-            EGL_RENDERABLE_TYPE, mRendererType,
-            EGL_RED_SIZE, 8,
-            EGL_GREEN_SIZE, 8,
-            EGL_BLUE_SIZE, 8,
-            EGL_DEPTH_SIZE, 8,
-            EGL_NONE
-            };
     
+    if (mContext == EGL_NO_CONTEXT) {
+            
         EGLint numConfigs = 0;
         if (eglChooseConfig(mDisplay,
-                            KConfigAttributes,
+                            getAttributes(mConfigAttributes),
                             &mConfig, 1,
                             &numConfigs) == EGL_FALSE) {
             return false;
@@ -133,6 +126,7 @@ bool EGLGlutGLBinder::createContext()
                     EGL_CONTEXT_CLIENT_VERSION, 1,
                     EGL_NONE
                     };
+        
         EGLint KContextAttribList2[] =
                     {
                     EGL_CONTEXT_CLIENT_VERSION, 2,
@@ -157,25 +151,26 @@ bool EGLGlutGLBinder::createContext()
 
 unsigned int  EGLGlutGLBinder::createSurface(Surface surfaceParam, int, int)
 {
-    if (mContext == EGL_NO_CONTEXT) {
-        return 0;
-    }
-    
     EGLSurface surface = EGL_NO_SURFACE;
     
     eglMakeCurrent(mDisplay, EGL_NO_SURFACE,
                    EGL_NO_SURFACE, EGL_NO_CONTEXT);
-    if (surface != EGL_NO_SURFACE) {
-        eglDestroySurface(mDisplay, surface);
-        surface = EGL_NO_SURFACE;
-    }
     
     mSurfaceInfo = *((EGLSurfaceInfo*) surfaceParam);
     switch (mSurfaceInfo.mType) {
-        case EGLSurfaceInfo::TYPE_WINDOW: {        
-        RWindow * win= (RWindow *)mSurfaceInfo.mData;
-        surface = eglCreateWindowSurface(mDisplay, mConfig, win, 0);
-        break;
+        case EGLSurfaceInfo::TYPE_WINDOW: {
+                        
+            addProperty(EGL_SURFACE_TYPE, EGL_WINDOW_BIT |
+                                          EGL_VG_ALPHA_FORMAT_PRE_BIT);
+
+            if (!createContext()) {
+                return EGL_NO_SURFACE;
+            }
+
+            RWindow * win= (RWindow *)mSurfaceInfo.mData;
+            surface = eglCreateWindowSurface(mDisplay, mConfig, win,
+                                        getAttributes(mSurfaceAttributes));
+            break;
         }
         
         case EGLSurfaceInfo::TYPE_PBUFFER: {
@@ -221,3 +216,82 @@ int EGLGlutGLBinder::getValue(int state)
     
     return value;
 }
+
+EGLint * EGLGlutGLBinder::getAttributes(Attributes & attributes)
+{
+    EGLint * attr = 0;
+    
+    if (!attributes.empty()) {
+
+        bool nonepresent = false;
+        
+        for (AttributesIter iter = mConfigAttributes.begin();
+                iter != mConfigAttributes.end(); ++iter) {
+            if (iter->first == EGL_NONE) {
+                nonepresent = true;
+                break;
+            }
+        }
+        
+        if (!nonepresent) {
+            mConfigAttributes.push_back(AttributePair(EGL_NONE, 0));
+        }
+    
+        attr = (EGLint *)&mConfigAttributes[0];
+    }
+    
+    return attr;
+}
+
+void EGLGlutGLBinder::addProperty(EGLint name, EGLint value)
+{
+    addProperty(mConfigAttributes, name, value);    
+}
+
+void EGLGlutGLBinder::removeProperty(int name)
+{
+    removeProperty(mConfigAttributes, name);
+}
+
+void EGLGlutGLBinder::addProperty(Attributes & attributes, int name, int value)
+{
+    int update = false;
+    
+    for (AttributesIter iter = attributes.begin();
+            iter != attributes.end(); ++iter) {
+        
+        if (iter->first == name) {
+            update = true;
+            
+            switch (iter->first) {
+                case EGL_SURFACE_TYPE: {
+                    iter->second |= value;
+                    break;
+                }
+                
+                default: {
+                    iter->second = value;
+                    break;
+                }
+            }
+
+            break;
+        }
+    }
+    
+    if (!update) {
+        attributes.insert(attributes.begin(), AttributePair(name, value));
+    }
+}
+
+void EGLGlutGLBinder::removeProperty(Attributes & attributes, int name)
+{
+    for (AttributesIter iter = attributes.begin();
+            iter != attributes.end(); ++iter) {
+        if (iter->first == name) {
+            attributes.erase(iter);
+            break;
+        }
+    }
+}
+

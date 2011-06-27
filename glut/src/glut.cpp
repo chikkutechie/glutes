@@ -59,7 +59,7 @@ APIDEF void glutInitDisplayMode(unsigned int mode)
 {
     GlutInterface * interface = getInterface(); 
     if (interface) {
-        interface->setDisplayMode(mode);
+        interface->initDisplayMode(mode);
     }
 } 
 

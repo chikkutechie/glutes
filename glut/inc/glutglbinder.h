@@ -53,7 +53,15 @@ public:
     virtual void destroySurface(unsigned int surface) = 0;
     virtual void swapBuffer(unsigned int surface) = 0;
     virtual void terminate() = 0;
-
+    
+    virtual void addProperty(int, int) {}
+    virtual void removeProperty(int) {}
+    
+    virtual void setStencil(bool enable, int size = 8) = 0;
+    virtual void setDepth(bool enable, int size = 8) = 0;
+    virtual void setSingleBuffer(bool enable) = 0;
+    virtual void setDoubleBuffer(bool enable) = 0;
+    
     void setBindApi(API api)
     {
         this->mAPI = api;
@@ -68,30 +76,57 @@ public:
     {
         return 0;
     }
+    virtual void setBufferSize(int)
+    {}    
+
     virtual int getRedSize()
     {
         return 0;
     }
+    virtual void setRedSize(int)
+    {}
+
     virtual int getGreenSize()
     {
         return 0;
     }
+    virtual void setGreenSize(int)
+    {}
+
     virtual int getBlueSize()
     {
         return 0;
     }
+    virtual void setBlueSize(int)
+    {}
+
     virtual int getAlphaSize()
     {
         return 0;
     }
+    virtual void setAlphaSize(int)
+    {}
+
     virtual int getDepthSize()
     {
         return 0;
     }
+    virtual void setDepthSize(int)
+    {}
+
     virtual int getStencilSize()
     {
         return 0;
     }
+    virtual void setStencilSize(int)
+    {}
+
+    virtual int getLuminanceSize()
+    {
+        return 0;
+    }
+    virtual void setLuminanceSize(int)
+    {}
     
 protected:
     API mAPI;

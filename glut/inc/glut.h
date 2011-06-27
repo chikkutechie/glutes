@@ -77,7 +77,7 @@ extern "C" {
 #define GLUT_ACCUM                          4
 #define GLUT_ALPHA                          8
 #define GLUT_DEPTH                          16
-
+#define GLUT_STENCIL                        32
 /* 
  * RGB color component 
  */

@@ -81,7 +81,8 @@ CApaApplication *newApplication()
 }
 
 GlutS60Interface::GlutS60Interface()
-  : mEikonEnv(0),
+  : mDisplayMode(0),
+    mEikonEnv(0),
     mCurrentControl(0),
     mBinder(0),
     mTimer(0),
@@ -217,6 +218,28 @@ void GlutS60Interface::terminate()
     mTimer = 0;
 }
 
+void GlutS60Interface::initDisplayMode(unsigned int mode)
+{
+    mDisplayMode = mode;
+
+    int rgb = mDisplayMode & 1; 
+    if (rgb == 0) {
+        // GLUT_RGBA or GLUT_RGB
+        mBinder->setRedSize(8);
+        mBinder->setGreenSize(8);
+        mBinder->setBlueSize(8);
+        mBinder->setAlphaSize(8);
+    }
+        
+    if (mDisplayMode & GLUT_DEPTH) {
+        mBinder->setDepth(true);
+    }
+    
+    if (mDisplayMode & GLUT_STENCIL) {
+        mBinder->setStencil(true);
+    }
+}
+
 int GlutS60Interface::createWindow()
 {
     GlutControl * control = new GlutControl();
@@ -249,8 +272,17 @@ int GlutS60Interface::createWindow()
     surfaceInfo.mData = (void *)&control->nativeWindow();
     
     ControlEntry entry;
-    entry.mSurface = mBinder->createSurface((GlutGLBinder::Surface)&surfaceInfo, 0, 0);
+    entry.mSurface = mBinder->createSurface(
+                                (GlutGLBinder::Surface)&surfaceInfo, 0, 0);
+   
+    if (entry.mSurface == 0) {
+        appUI->RemoveFromStack(control);
+        delete control;
+        return 0;
+    }
+    
     entry.mControl = control;
+    
     
     int id = addControl(entry);
     setWindow(id);
@@ -276,7 +308,8 @@ void GlutS60Interface::recreateSurface(int win)
         surfaceInfo.mType = EGLGlutGLBinder::EGLSurfaceInfo::TYPE_WINDOW;
         surfaceInfo.mData = (void *)&entry->mControl->nativeWindow();
         
-        entry->mSurface = mBinder->createSurface((GlutGLBinder::Surface)&surfaceInfo, 0, 0);
+        entry->mSurface = mBinder->createSurface(
+                                   (GlutGLBinder::Surface)&surfaceInfo, 0, 0);
         mBinder->makeCurrent(entry->mSurface);
     }
 }

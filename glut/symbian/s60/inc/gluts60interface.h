@@ -54,6 +54,8 @@ public:
     
     void intialize(int argc, char **argv);
     void terminate();
+    void initDisplayMode(unsigned int mode);
+
     void timerFunc(unsigned int millis, void (*func)(int), int value);
     int  createWindow();
     void destroyWindow(int win);
@@ -148,6 +150,7 @@ private:
     void recreateSurface(int win);
 
 private:
+    unsigned int mDisplayMode;
     CEikonEnv* mEikonEnv;
     int mCurrentControl;
     GlutGLBinder * mBinder;

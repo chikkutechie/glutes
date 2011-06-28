@@ -171,6 +171,11 @@ public:
         addProperty(EGL_LUMINANCE_SIZE, size);
     }
 
+    EGLint lastError() const
+    {
+        return mLastError;
+    }
+    
 private:
     typedef std::pair<EGLint, EGLint> AttributePair;
     typedef  std::vector<AttributePair> Attributes; 
@@ -179,9 +184,10 @@ private:
 
 private:
     bool createContext();
-    int getValue(int state);
-    EGLint * getAttributes(Attributes & attributes);
     
+    int getValue(int state) const;
+    
+    EGLint * getAttributes(Attributes & attributes);
     void addProperty(Attributes & attributes, int name, int value);
     void removeProperty(Attributes & attributes, int name);
 
@@ -189,9 +195,11 @@ private:
     EGLDisplay mDisplay;
     EGLContext mContext;
     EGLConfig  mConfig;
+    EGLint mLastError;
     EGLSurfaceInfo mSurfaceInfo;
     int mRendererType;
     Attributes mConfigAttributes;
+    Attributes mContextAttributes;
     Attributes mSurfaceAttributes;
 };
 

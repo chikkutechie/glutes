@@ -26,34 +26,74 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
  
-#ifndef GLUTAPPUI_H_
-#define GLUTAPPUI_H_
+#include "rglutcontrol.h"
+#include "rgluteventhandler.h"
 
-#include <aknappui.h>
-
-class GlutEventHandler;
-
-class GlutAppUi : public CAknAppUi
+RGlutControl::RGlutControl()
+  : CCoeControl(),
+    mEH(0)
 {
-public:
-    GlutAppUi();
-    virtual ~GlutAppUi();
-    virtual void ConstructL();
-    void HandleCommandL(TInt command);
-    void setEventHandler(GlutEventHandler * eh);
-    void Exit();
-    void SetFullScreen(bool v);
-    
-protected:
-    void HandleResourceChangeL(TInt type);
-    void HandleWsEventL(const TWsEvent &event, CCoeControl *destination);
-    virtual void ProcessCommandL(TInt aCommand);
-    virtual void HandleScreenDeviceChangedL();
-    void HandleStatusPaneSizeChange();
-    
-private:
-    GlutEventHandler * mEH;
-};
+}
 
-#endif
+void RGlutControl::ConstructL(const TRect& aRect)
+{
+    CreateWindowL();
+    SetRect(aRect);
+    ActivateL();
+}
+
+RGlutControl::~RGlutControl()
+{
+}
+
+void RGlutControl::setEventHandler(RGlutEventHandler * eh)
+{
+    this->mEH = eh;
+}
+
+void RGlutControl::Draw(const TRect &) const
+{        
+    if (mEH) {
+        mEH->draw();
+    }
+}
+
+void RGlutControl::SizeChanged()
+{
+    CCoeControl::SizeChanged();
+}
+
+void RGlutControl::PositionChanged()
+{
+    CCoeControl::PositionChanged();
+}
+
+void RGlutControl::HandlePointerEventL(const TPointerEvent & aPointerEvent)
+{
+    if (Rect().Contains(aPointerEvent.iPosition)) {
+        if (mEH) {
+            mEH->mouse(aPointerEvent.iType,
+                aPointerEvent.iModifiers,
+                aPointerEvent.iPosition.iX, aPointerEvent.iPosition.iY);
+        }
+        CCoeControl::HandlePointerEventL(aPointerEvent);
+    }
+    
+}
+
+TKeyResponse RGlutControl::OfferKeyEventL(const TKeyEvent& aKeyEvent, TEventCode aType)
+{
+    if (mEH) {
+        if (aType == EEventKeyUp) {
+            mEH->keyboard(aKeyEvent.iScanCode, aKeyEvent.iModifiers, 0, 0);
+        }
+    }
+    
+    return EKeyWasNotConsumed;
+}
+
+RWindow& RGlutControl::nativeWindow()
+{
+    return Window();
+}
 

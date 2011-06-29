@@ -26,20 +26,58 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef GLUTDOCUMENT_H_
-#define GLUTDOCUMENT_H_
+#ifndef EGLPROPERTIES_H_
+#define EGLPROPERTIES_H_
 
-#include <AknDoc.h>
+#include <vector>
+#include <EGL/egl.h>
 
-class GlutDocument : public CAknDocument
+class REGLProperties
 {
-public:
-    GlutDocument(CEikApplication &mainApplication);
-    
-    virtual ~GlutDocument();
-    
-    virtual CEikAppUi *CreateAppUiL();
+private:
+    class AttributePair
+    {
+    public:
+        EGLint mName;
+        EGLint mValue;
+        
+        AttributePair(EGLint n, EGLint v)
+         : mName(n),
+           mValue(v)
+        {}
+    };
 
+    typedef  std::vector<AttributePair> Attributes; 
+    typedef  Attributes::iterator AttributesIter; 
+    typedef  Attributes::const_iterator AttributesConstIter;
+
+public:
+    enum Type
+    {
+        ConfigAttribute,
+        ContextAttribute,
+        SurfaceAttribute,
+    };
+
+    REGLProperties()
+    {}
+
+    void addProperty(int name, int value);
+    void removeProperty(int name);
+
+    EGLint * getAttributes(Type type);
+
+private:
+    void addProperty(Attributes & attributes, int name, int value);
+    void removeProperty(Attributes & attributes, int name);
+
+    Attributes * getAttributesVector(Type type);
+
+private:
+    Attributes mConfigAttributes;
+    Attributes mContextAttributes;
+    Attributes mSurfaceAttributes;    
 };
 
 #endif
+

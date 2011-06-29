@@ -26,11 +26,11 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
  
-#include "gluts60interface.h"
-#include "glutApplication.h"
-#include "eglglutglbinder.h"
-#include "glutcontrol.h"
-#include "glutappui.h"
+#include "rgluts60interface.h"
+#include "rglutApplication.h"
+#include "reglglutglbinder.h"
+#include "rglutcontrol.h"
+#include "rglutappui.h"
 
 #include <pointerevent.h>
 #include <apacmdln.h>
@@ -38,12 +38,12 @@
 #include <e32std.h>
 #include <string.h>
 
-GlutInterface* GlutInterface::getInterface()
+RGlutInterface* RGlutInterface::getInterface()
 {
 #if !defined(GLUT_STATIC)
-    GlutInterface * interface = (GlutInterface *)Dll::Tls();
+    RGlutInterface * interface = (RGlutInterface *)Dll::Tls();
     if (!interface) {
-        interface = new GlutS60Interface();
+        interface = new RGlutS60Interface();
         TInt error = Dll::SetTls((TAny *)interface);
         if (error != KErrNone) {
             delete interface;
@@ -53,16 +53,16 @@ GlutInterface* GlutInterface::getInterface()
 
     return interface;
 #else
-    static GlutInterface * interface = new  GlutS60Interface();
+    static RGlutInterface * interface = new  RGlutS60Interface();
     return interface;
 #endif
 }
 
-bool GlutInterface::destroyInterface()
+bool RGlutInterface::destroyInterface()
 {
     bool status = false;
 #if !defined(GLUT_STATIC)
-    GlutInterface * interface = (GlutInterface *)Dll::Tls();
+    RGlutInterface * interface = (RGlutInterface *)Dll::Tls();
     if (interface) {
         if (Dll::SetTls(0) == KErrNone) {
             delete interface;
@@ -77,10 +77,10 @@ bool GlutInterface::destroyInterface()
 
 CApaApplication *newApplication()
 {
-    return new GlutApplication();
+    return new RGlutApplication();
 }
 
-GlutS60Interface::GlutS60Interface()
+RGlutS60Interface::RGlutS60Interface()
   : mDisplayMode(0),
     mEikonEnv(0),
     mCurrentControl(0),
@@ -104,13 +104,13 @@ GlutS60Interface::GlutS60Interface()
     setOrientation(Automatic);
 }
 
-GlutS60Interface::~GlutS60Interface()
+RGlutS60Interface::~RGlutS60Interface()
 {
     terminate();
     mControllist.Close();
 }
 
-void GlutS60Interface::intialize(int argc, char ** argv)
+void RGlutS60Interface::intialize(int argc, char ** argv)
 {    
     for (int i=0; i < argc; ++i) {
         
@@ -159,15 +159,17 @@ void GlutS60Interface::intialize(int argc, char ** argv)
     if (!CCoeEnv::Static()) {
         TApaApplicationFactory factory(newApplication);
         CApaCommandLine* commandLine = 0;
-        TInt error = CApaCommandLine::GetCommandLineFromProcessEnvironment(commandLine);
+        TInt error = 
+           CApaCommandLine::GetCommandLineFromProcessEnvironment(commandLine);
         if (error == KErrNone) {
             TFileName executableFileName = RProcess().FileName();
             error = User::RenameThread(TParsePtrC(executableFileName).Name());
             if (error == KErrNone) {
                 mEikonEnv = new CEikonEnv;
                 if (mEikonEnv) {
-                    TRAP(error, mEikonEnv->ConstructAppFromCommandLineL(factory,
-                                                                        *commandLine));
+                    TRAP(error,
+                        mEikonEnv->ConstructAppFromCommandLineL(factory,
+                                                               *commandLine));
                 }
             }
         }
@@ -175,29 +177,32 @@ void GlutS60Interface::intialize(int argc, char ** argv)
         delete commandLine;
     }
 
-    // currently egl is used to bind native window system with opengl/openvg/opengles
-    GlutGLBinder::API api;
+    /*
+     * currently egl is used to bind native window system
+     * with opengl/openvg/opengles 
+     */ 
+    RGlutGLBinder::API api;
     switch (getRenderer()) {
         case GL:
-            api = GlutGLBinder::OPENGL_API;
+            api = RGlutGLBinder::OPENGL_API;
             break;
         case GLES2:
-            api = GlutGLBinder::OPENGL_ES2_API;
+            api = RGlutGLBinder::OPENGL_ES2_API;
             break;
         case VG:
-            api = GlutGLBinder::OPENVG_API;
+            api = RGlutGLBinder::OPENVG_API;
             break;
         case GLES:
         default:
-            api = GlutGLBinder::OPENGL_ES_API;
+            api = RGlutGLBinder::OPENGL_ES_API;
             break;            
     }
     
-    mBinder = new EGLGlutGLBinder(api);
+    mBinder = new REGLGlutGLBinder(api);
     mBinder->initialize();
 }
 
-void GlutS60Interface::terminate()
+void RGlutS60Interface::terminate()
 {
     if (mBinder) {
         mBinder->terminate();
@@ -218,7 +223,7 @@ void GlutS60Interface::terminate()
     mTimer = 0;
 }
 
-void GlutS60Interface::initDisplayMode(unsigned int mode)
+void RGlutS60Interface::initDisplayMode(unsigned int mode)
 {
     mDisplayMode = mode;
 
@@ -240,11 +245,11 @@ void GlutS60Interface::initDisplayMode(unsigned int mode)
     }
 }
 
-int GlutS60Interface::createWindow()
+int RGlutS60Interface::createWindow()
 {
-    GlutControl * control = new GlutControl();
+    RGlutControl * control = new RGlutControl();
     
-    GlutAppUi * appUI = (GlutAppUi *)CCoeEnv::Static()-> AppUi();
+    RGlutAppUi * appUI = (RGlutAppUi *)CCoeEnv::Static()-> AppUi();
     if (mFullScreen) {
         appUI->SetFullScreen(true);
     }
@@ -252,8 +257,9 @@ int GlutS60Interface::createWindow()
     if (mWindowProperty.mWidth == 0 || mWindowProperty.mHeight == 0) {
         control->ConstructL(appUI->ClientRect());
     } else {
-        control->ConstructL(TRect(TPoint(mWindowProperty.mX, mWindowProperty.mY),
-                TSize(mWindowProperty.mWidth, mWindowProperty.mHeight)));
+        control->ConstructL(
+                    TRect(TPoint(mWindowProperty.mX, mWindowProperty.mY),
+                    TSize(mWindowProperty.mWidth, mWindowProperty.mHeight)));
     }
 
     control->SetMopParent(appUI);
@@ -267,13 +273,13 @@ int GlutS60Interface::createWindow()
     appUI->setEventHandler(this);
     
     // binding to egl, only window surface is supported
-    EGLGlutGLBinder::EGLSurfaceInfo surfaceInfo;
-    surfaceInfo.mType = EGLGlutGLBinder::EGLSurfaceInfo::TYPE_WINDOW;
+    REGLGlutGLBinder::EGLSurfaceInfo surfaceInfo;
+    surfaceInfo.mType = REGLGlutGLBinder::EGLSurfaceInfo::TYPE_WINDOW;
     surfaceInfo.mData = (void *)&control->nativeWindow();
     
     ControlEntry entry;
     entry.mSurface = mBinder->createSurface(
-                                (GlutGLBinder::Surface)&surfaceInfo, 0, 0);
+                                (RGlutGLBinder::Surface)&surfaceInfo, 0, 0);
    
     if (entry.mSurface == 0) {
         appUI->RemoveFromStack(control);
@@ -290,7 +296,7 @@ int GlutS60Interface::createWindow()
     return id;
 }
 
-void GlutS60Interface::destroyWindow(int win)
+void RGlutS60Interface::destroyWindow(int win)
 {
     ControlEntry entry = removeControl(win);
     if (entry.mSurface) {
@@ -298,28 +304,28 @@ void GlutS60Interface::destroyWindow(int win)
     }
 }
 
-void GlutS60Interface::recreateSurface(int win)
+void RGlutS60Interface::recreateSurface(int win)
 {
     ControlEntry *  entry = getControlEntry(win);
     if (entry && entry->mSurface) {
         mBinder->destroySurface(entry->mSurface);
         
-        EGLGlutGLBinder::EGLSurfaceInfo surfaceInfo;
-        surfaceInfo.mType = EGLGlutGLBinder::EGLSurfaceInfo::TYPE_WINDOW;
+        REGLGlutGLBinder::EGLSurfaceInfo surfaceInfo;
+        surfaceInfo.mType = REGLGlutGLBinder::EGLSurfaceInfo::TYPE_WINDOW;
         surfaceInfo.mData = (void *)&entry->mControl->nativeWindow();
         
         entry->mSurface = mBinder->createSurface(
-                                   (GlutGLBinder::Surface)&surfaceInfo, 0, 0);
+                                (RGlutGLBinder::Surface)&surfaceInfo, 0, 0);
         mBinder->makeCurrent(entry->mSurface);
     }
 }
 
-int GlutS60Interface::getWindow()
+int RGlutS60Interface::getWindow()
 {
     return mCurrentControl;
 }
 
-void GlutS60Interface::setWindow(int win)
+void RGlutS60Interface::setWindow(int win)
 {
     if (win != mCurrentControl) {
         ControlEntry * entry = getControlEntry(win);
@@ -330,14 +336,14 @@ void GlutS60Interface::setWindow(int win)
     }
 }
 
-void GlutS60Interface::setWindowTitle(const char * title)
+void RGlutS60Interface::setWindowTitle(const char * title)
 {
     if (title) {
         ;
     }
 }
 
-void GlutS60Interface::showWindow()
+void RGlutS60Interface::showWindow()
 {
     ControlEntry * entry = getControlEntry(mCurrentControl);
     if (entry) {
@@ -345,7 +351,7 @@ void GlutS60Interface::showWindow()
     }
 }
 
-void GlutS60Interface::fullScreen()
+void RGlutS60Interface::fullScreen()
 {
     mFullScreen = true;
 	
@@ -359,7 +365,7 @@ void GlutS60Interface::fullScreen()
     }
 }
 
-void GlutS60Interface::hideWindow()
+void RGlutS60Interface::hideWindow()
 {
     ControlEntry * entry = getControlEntry(mCurrentControl);
     if (entry) {
@@ -367,7 +373,7 @@ void GlutS60Interface::hideWindow()
     }
 }
 
-void GlutS60Interface::positionWindow(int x, int y)
+void RGlutS60Interface::positionWindow(int x, int y)
 {
     ControlEntry * entry = getControlEntry(mCurrentControl);
     if (entry && entry->mControl) {
@@ -385,7 +391,7 @@ void GlutS60Interface::positionWindow(int x, int y)
     }
 }
 
-void GlutS60Interface::reshapeWindow(int width, int height)
+void RGlutS60Interface::reshapeWindow(int width, int height)
 {
     ControlEntry * entry = getControlEntry(mCurrentControl);
     if (entry && entry->mControl) {
@@ -403,7 +409,7 @@ void GlutS60Interface::reshapeWindow(int width, int height)
     }
 }
 
-void GlutS60Interface::popWindow()
+void RGlutS60Interface::popWindow()
 {
     int count = mControlStack.Count();
     if (count > 0) {
@@ -413,7 +419,7 @@ void GlutS60Interface::popWindow()
     }
 }
 
-void GlutS60Interface::pushWindow()
+void RGlutS60Interface::pushWindow()
 {
     int cntcount = mControllist.Count();
     if (cntcount > 1) {
@@ -425,7 +431,7 @@ void GlutS60Interface::pushWindow()
     }
 }
 
-int GlutS60Interface::addControl(ControlEntry entry)
+int RGlutS60Interface::addControl(ControlEntry entry)
 {
     entry.mId = ID_START_INDEX + mControllist.Count();
     mControllist.Append(entry);   
@@ -433,7 +439,7 @@ int GlutS60Interface::addControl(ControlEntry entry)
     return entry.mId;
 }
 
-GlutS60Interface::ControlEntry * GlutS60Interface::getControlEntry(int id)
+RGlutS60Interface::ControlEntry * RGlutS60Interface::getControlEntry(int id)
 {
     ControlEntry * entry = 0;
     int count = mControllist.Count();
@@ -448,7 +454,7 @@ GlutS60Interface::ControlEntry * GlutS60Interface::getControlEntry(int id)
     return entry;
 }
 
-GlutS60Interface::ControlEntry GlutS60Interface::removeControl(int id)
+RGlutS60Interface::ControlEntry RGlutS60Interface::removeControl(int id)
 {
     ControlEntry entry;
     
@@ -460,7 +466,7 @@ GlutS60Interface::ControlEntry GlutS60Interface::removeControl(int id)
         int index = id - ID_START_INDEX;
         if (index < mControllist.Count()) {
             entry = mControllist[index];
-            GlutControl * ctrl = entry.mControl;
+            RGlutControl * ctrl = entry.mControl;
             ctrl->ControlEnv()->AppUi()->RemoveFromStack(ctrl);
             delete ctrl;
             mControllist.Remove(index);
@@ -470,23 +476,24 @@ GlutS60Interface::ControlEntry GlutS60Interface::removeControl(int id)
     return entry;
 }
 
-void GlutS60Interface::removeAllControl()
+void RGlutS60Interface::removeAllControl()
 {
     int count = mControllist.Count();
 
     for (int i=0; i<count; ++i) {
-        GlutControl * ctrl = mControllist[i].mControl;
+        RGlutControl * ctrl = mControllist[i].mControl;
         ctrl->ControlEnv()->AppUi()->RemoveFromStack(ctrl);
         delete ctrl;
     }
     mControllist.Reset();
 }
 
-void GlutS60Interface::exec()
+void RGlutS60Interface::exec()
 {
     ControlEntry * entry = getControlEntry(mCurrentControl);
     if (entry && entry->mControl) {
-        reshape(entry->mControl->Rect().Width(), entry->mControl->Rect().Height());
+        reshape(entry->mControl->Rect().Width(),
+                entry->mControl->Rect().Height());
 
         if (mEikonEnv) {
             mEikonEnv->Execute();
@@ -495,7 +502,7 @@ void GlutS60Interface::exec()
     terminate();
 }
 
-void GlutS60Interface::redraw(int win)
+void RGlutS60Interface::redraw(int win)
 {
     if (win == 0) {
         ControlEntry * entry = getControlEntry(mCurrentControl);
@@ -510,7 +517,7 @@ void GlutS60Interface::redraw(int win)
     }
 }
 
-void GlutS60Interface::flush()
+void RGlutS60Interface::flush()
 {
     if (mBinder) {
         ControlEntry * entry = getControlEntry(mCurrentControl);
@@ -520,14 +527,14 @@ void GlutS60Interface::flush()
     }
 }
 
-void GlutS60Interface::draw()
+void RGlutS60Interface::draw()
 {
     if (mCallbacks.draw) {
         mCallbacks.draw();
     }
 }
 
-void GlutS60Interface::rerect(int x, int y, int w, int h)
+void RGlutS60Interface::rerect(int x, int y, int w, int h)
 {
     ControlEntry * entry = getControlEntry(mCurrentControl);
     if (entry && entry->mControl) {
@@ -555,7 +562,7 @@ void GlutS60Interface::rerect(int x, int y, int w, int h)
     }
 }
 
-void GlutS60Interface::reshape(int w, int h)
+void RGlutS60Interface::reshape(int w, int h)
 {
     reshapeWindow(w, h);
     
@@ -564,7 +571,7 @@ void GlutS60Interface::reshape(int w, int h)
     }
 }
 
-void GlutS60Interface::repos(int x, int y)
+void RGlutS60Interface::repos(int x, int y)
 {
     positionWindow(x, y);
 
@@ -573,7 +580,7 @@ void GlutS60Interface::repos(int x, int y)
     }
 }
 
-void GlutS60Interface::keyboard(unsigned char key, unsigned int modifier, int x, int y)
+void RGlutS60Interface::keyboard(unsigned char key, unsigned int modifier, int x, int y)
 {
     if (mCallbacks.keyboard) {
         mModifier = modifier;
@@ -581,7 +588,7 @@ void GlutS60Interface::keyboard(unsigned char key, unsigned int modifier, int x,
     }
 }
 
-void GlutS60Interface::mouse(int button, int modifier, int x, int y)
+void RGlutS60Interface::mouse(int button, int modifier, int x, int y)
 {
     mModifier = modifier;
     
@@ -652,7 +659,7 @@ void GlutS60Interface::mouse(int button, int modifier, int x, int y)
     }
 }
 
-int GlutS60Interface::getModifiers()
+int RGlutS60Interface::getModifiers()
 {
     int modifier = 0;
     
@@ -696,7 +703,7 @@ TInt callbackFunction(TAny * a)
     return 0;
 }
 
-void GlutS60Interface::timerFunc(unsigned int millis,
+void RGlutS60Interface::timerFunc(unsigned int millis,
                                  void (*func)(int), int value)
 {
     delete mTimer;
@@ -711,7 +718,7 @@ void GlutS60Interface::timerFunc(unsigned int millis,
     mTimer->Start(millis * 1000, 0, callback);
 }
 
-GlutS60Interface::MenuEntry * GlutS60Interface::getMenuEntry(int id)
+RGlutS60Interface::MenuEntry * RGlutS60Interface::getMenuEntry(int id)
 {
     MenuEntry * entry = 0;
     
@@ -727,14 +734,14 @@ GlutS60Interface::MenuEntry * GlutS60Interface::getMenuEntry(int id)
     return entry;
 }
 
-void GlutS60Interface::removeMenuEntries()
+void RGlutS60Interface::removeMenuEntries()
 {
     mCurrentMenu = 0;
     mAttachedMenuButton = -1;
     mMenuList.ResetAndDestroy();    
 }
 
-int GlutS60Interface::createMenu(void (*callback)(int))
+int RGlutS60Interface::createMenu(void (*callback)(int))
 {
     int id = 0;
 
@@ -764,7 +771,7 @@ int GlutS60Interface::createMenu(void (*callback)(int))
     return mCurrentMenu;
 }
 
-void GlutS60Interface::destroyMenu(int menu)
+void RGlutS60Interface::destroyMenu(int menu)
 {
     if (menu == mCurrentMenu) {
         mCurrentMenu = 0;
@@ -781,12 +788,12 @@ void GlutS60Interface::destroyMenu(int menu)
     }
 }
 
-int GlutS60Interface::getMenu()
+int RGlutS60Interface::getMenu()
 {
     return mCurrentMenu;
 }
 
-void GlutS60Interface::setMenu(int menu)
+void RGlutS60Interface::setMenu(int menu)
 {
     MenuEntry * entry = getMenuEntry(menu);
     if (entry) {
@@ -794,7 +801,7 @@ void GlutS60Interface::setMenu(int menu)
     }
 }
 
-void GlutS60Interface::addMenuEntry(const char * label, int value)
+void RGlutS60Interface::addMenuEntry(const char * label, int value)
 {
     const int BiasedId = value + MENU_ITEM_BIAS;
     
@@ -821,7 +828,7 @@ void GlutS60Interface::addMenuEntry(const char * label, int value)
     }
 }
 
-void GlutS60Interface::removeMenuItem(int item)
+void RGlutS60Interface::removeMenuItem(int item)
 {
     item = item - 1;
 
@@ -834,21 +841,21 @@ void GlutS60Interface::removeMenuItem(int item)
     }
 }
 
-void GlutS60Interface::attachMenu(int button)
+void RGlutS60Interface::attachMenu(int button)
 {
     if (mCurrentMenu) {
         mAttachedMenuButton = button;
     }
 }
 
-void GlutS60Interface::detachMenu(int button)
+void RGlutS60Interface::detachMenu(int button)
 {
     if (mCurrentMenu && mAttachedMenuButton == button) {
         mAttachedMenuButton = -1;
     }
 }
 
-int GlutS60Interface::getValue(unsigned int state)
+int RGlutS60Interface::getValue(unsigned int state)
 {
     int value = 0;
     

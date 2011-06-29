@@ -26,74 +26,24 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
  
-#include "glutcontrol.h"
-#include "gluteventhandler.h"
+#ifndef GLUTAPPLICATION_H_
+#define GLUTAPPLICATION_H_
 
-GlutControl::GlutControl()
-  : CCoeControl(),
-    mEH(0)
+#include <aknapp.h>
+
+class RGlutApplication : public CAknApplication
 {
-}
+public:
+    RGlutApplication();
+    virtual TUid AppDllUid() const;
+    virtual void PreDocConstructL();
+    TFileName ResourceFileName() const;
 
-void GlutControl::ConstructL(const TRect& aRect)
-{
-    CreateWindowL();
-    SetRect(aRect);
-    ActivateL();
-}
+protected:
+    virtual CApaDocument *CreateDocumentL();
+private:
+    mutable TUid mUID;
+};
 
-GlutControl::~GlutControl()
-{
-}
-
-void GlutControl::setEventHandler(GlutEventHandler * eh)
-{
-    this->mEH = eh;
-}
-
-void GlutControl::Draw(const TRect &) const
-{        
-    if (mEH) {
-        mEH->draw();
-    }
-}
-
-void GlutControl::SizeChanged()
-{
-    CCoeControl::SizeChanged();
-}
-
-void GlutControl::PositionChanged()
-{
-    CCoeControl::PositionChanged();
-}
-
-void GlutControl::HandlePointerEventL(const TPointerEvent & aPointerEvent)
-{
-    if (Rect().Contains(aPointerEvent.iPosition)) {
-        if (mEH) {
-            mEH->mouse(aPointerEvent.iType,
-                aPointerEvent.iModifiers,
-                aPointerEvent.iPosition.iX, aPointerEvent.iPosition.iY);
-        }
-        CCoeControl::HandlePointerEventL(aPointerEvent);
-    }
-    
-}
-
-TKeyResponse GlutControl::OfferKeyEventL(const TKeyEvent& aKeyEvent, TEventCode aType)
-{
-    if (mEH) {
-        if (aType == EEventKeyUp) {
-            mEH->keyboard(aKeyEvent.iScanCode, aKeyEvent.iModifiers, 0, 0);
-        }
-    }
-    
-    return EKeyWasNotConsumed;
-}
-
-RWindow& GlutControl::nativeWindow()
-{
-    return Window();
-}
+#endif
 

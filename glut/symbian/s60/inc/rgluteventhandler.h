@@ -25,59 +25,21 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+ 
+#ifndef GLUTEVENTHANDLER_H_
+#define GLUTEVENTHANDLER_H_
 
-TARGET		    glut_static.lib
-TARGETTYPE	    LIB
-UID			    0
+class RGlutEventHandler
+{
+public:
+    virtual ~RGlutEventHandler(){}
 
-MACRO 			GLUT_STATIC
+    virtual void draw() = 0;
+    virtual void reshape(int w, int h) = 0;
+    virtual void rerect(int x, int y, int w, int h) = 0;
+    virtual void repos(int x, int y) = 0;
+    virtual void keyboard(unsigned char key, unsigned int modifier, int x, int y) = 0;
+    virtual void mouse(int button, int modifier, int x, int y) = 0;
+};
 
-USERINCLUDE	    ../../inc
-USERINCLUDE	    ../s60/inc
-
-SYSTEMINCLUDE   /epoc32/include
-SYSTEMINCLUDE   /epoc32/include/mw
-SYSTEMINCLUDE	/epoc32/include/platform
-SYSTEMINCLUDE	/epoc32/include/platform/mw
-SYSTEMINCLUDE	/epoc32/include/platform/loc
-SYSTEMINCLUDE	/epoc32/include/platform/mw/loc
-SYSTEMINCLUDE	/epoc32/include/platform/loc/sc
-SYSTEMINCLUDE	/epoc32/include/platform/mw/loc/sc
-SYSTEMINCLUDE	/epoc32/include/stdapis
-SYSTEMINCLUDE	/epoc32/include/stdapis/sys
-SYSTEMINCLUDE	/epoc32/include/stdapis/stlportv5
-
-SOURCEPATH		../../src
-SOURCE			glut.cpp
-
-SOURCEPATH  	../s60/src
-SOURCE 			reglglutglbinder.cpp
-SOURCE 			reglproperties.cpp
-SOURCE 			rglutapplication.cpp
-SOURCE 			rglutappui.cpp
-SOURCE 			rglutcontrol.cpp
-SOURCE 			rglutdocument.cpp
-SOURCE 			rgluts60interface.cpp
-
-
-LIBRARY		   	euser.lib
-LIBRARY		   	apparc.lib
-LIBRARY		   	cone.lib
-LIBRARY		   	eikcore.lib
-LIBRARY		   	avkon.lib
-LIBRARY		   	commonengine.lib
-LIBRARY		   	efsrv.lib
-LIBRARY		   	estor.lib
-LIBRARY        	aknnotify.lib
-LIBRARY		   	ws32.lib
-LIBRARY		   	libEGL.lib
-LIBRARY		   	libstdcppv5.lib
-LIBRARY		   	libc.lib
-LIBRARY		   	libm.lib
-LIBRARY		   	libdl.lib
-LIBRARY		   	eikcoctl.lib
-
-ARMFPU vfpv2
-
-STDCPP
-
+#endif

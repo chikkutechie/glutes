@@ -29,12 +29,12 @@
 #ifndef EGLGLUTGLBINDER_H_
 #define EGLGLUTGLBINDER_H_
 
-#include <vector>
+#include <EGL/egl.h>
 
-#include "glutglbinder.h"
-#include "EGL/egl.h"
+#include "rglutglbinder.h"
+#include "reglproperties.h"
 
-class EGLGlutGLBinder: public GlutGLBinder
+class REGLGlutGLBinder: public RGlutGLBinder
 {
 public:
     struct EGLSurfaceInfo
@@ -45,13 +45,14 @@ public:
             TYPE_PIXMAP,
             TYPE_PBUFFER
         };
+
         Type   mType;
         void * mData;
     };
     
 public:
-    EGLGlutGLBinder(API api);
-    ~EGLGlutGLBinder();
+    REGLGlutGLBinder(API api);
+    ~REGLGlutGLBinder();
     
     bool initialize();
     unsigned int createSurface(Surface  surface, int width, int height);
@@ -60,8 +61,14 @@ public:
     void swapBuffer(unsigned int surface);
     void terminate();
 
-    void addProperty(int name, int value);
-    void removeProperty(int name);
+    void addProperty(int name, int value)
+    {
+        mProperties.addProperty(name, value);
+    }
+    void removeProperty(int name)
+    {
+        mProperties.removeProperty(name);
+    }
 
     void setStencil(bool enable, int size = 8)
     {
@@ -84,18 +91,18 @@ public:
     void setSingleBuffer(bool enable)
     {
         if (enable) {
-            addProperty(mSurfaceAttributes, EGL_RENDER_BUFFER, EGL_SINGLE_BUFFER);
+            addProperty(EGL_RENDER_BUFFER, EGL_SINGLE_BUFFER);
         } else {
-            removeProperty(mSurfaceAttributes, EGL_RENDER_BUFFER);
+            removeProperty(EGL_RENDER_BUFFER);
         }
     }
     
     void setDoubleBuffer(bool enable)
     {
         if (enable) {
-            addProperty(mSurfaceAttributes, EGL_RENDER_BUFFER, EGL_BACK_BUFFER);
+            addProperty(EGL_RENDER_BUFFER, EGL_BACK_BUFFER);
         } else {
-            removeProperty(mSurfaceAttributes, EGL_RENDER_BUFFER);
+            removeProperty(EGL_RENDER_BUFFER);
         }
     }
 
@@ -112,7 +119,7 @@ public:
     {
         return getValue(EGL_RED_SIZE);
     }
-    virtual void setRedSize(int size)
+    void setRedSize(int size)
     {
         addProperty(EGL_RED_SIZE, size);
     }
@@ -121,7 +128,7 @@ public:
     {
         return getValue(EGL_GREEN_SIZE);
     }
-    virtual void setGreenSize(int size)
+    void setGreenSize(int size)
     {
         addProperty(EGL_GREEN_SIZE, size);
     }
@@ -130,7 +137,7 @@ public:
     {
         return getValue(EGL_BLUE_SIZE);
     }
-    virtual void setBlueSize(int size)
+    void setBlueSize(int size)
     {
         addProperty(EGL_BLUE_SIZE, size);
     }
@@ -139,7 +146,7 @@ public:
     {
         return getValue(EGL_ALPHA_SIZE);
     }
-    virtual void setAlphaSize(int size)
+    void setAlphaSize(int size)
     {
         addProperty(EGL_ALPHA_SIZE, size);
     }
@@ -148,7 +155,7 @@ public:
     {
         return getValue(EGL_DEPTH_SIZE);
     }
-    virtual void setDepthSize(int size)
+    void setDepthSize(int size)
     {
         addProperty(EGL_DEPTH_SIZE, size);
     }
@@ -157,7 +164,7 @@ public:
     {
         return getValue(EGL_STENCIL_SIZE);
     }
-    virtual void setStencilSize(int size)
+    void setStencilSize(int size)
     {
         addProperty(EGL_STENCIL_SIZE, size);
     }
@@ -177,19 +184,8 @@ public:
     }
     
 private:
-    typedef std::pair<EGLint, EGLint> AttributePair;
-    typedef  std::vector<AttributePair> Attributes; 
-    typedef  Attributes::iterator AttributesIter; 
-    typedef  Attributes::const_iterator AttributesConstIter;
-
-private:
     bool createContext();
-    
     int getValue(int state) const;
-    
-    EGLint * getAttributes(Attributes & attributes);
-    void addProperty(Attributes & attributes, int name, int value);
-    void removeProperty(Attributes & attributes, int name);
 
 private:
     EGLDisplay mDisplay;
@@ -198,9 +194,7 @@ private:
     EGLint mLastError;
     EGLSurfaceInfo mSurfaceInfo;
     int mRendererType;
-    Attributes mConfigAttributes;
-    Attributes mContextAttributes;
-    Attributes mSurfaceAttributes;
+    REGLProperties mProperties;
 };
 
 #endif

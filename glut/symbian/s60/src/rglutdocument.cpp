@@ -26,19 +26,19 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "glutdocument.h"
-#include "glutappui.h"
+#include "rglutdocument.h"
+#include "rglutappui.h"
 
-GlutDocument::GlutDocument(CEikApplication &mainApplication)
+RGlutDocument::RGlutDocument(CEikApplication &mainApplication)
     : CAknDocument(mainApplication)
 {
 }
 
-GlutDocument::~GlutDocument()
+RGlutDocument::~RGlutDocument()
 {
 }
 
-CEikAppUi * GlutDocument::CreateAppUiL()
+CEikAppUi * RGlutDocument::CreateAppUiL()
 {
-    return (static_cast <CEikAppUi*>(new(ELeave) GlutAppUi));
+    return (static_cast <CEikAppUi*>(new(ELeave) RGlutAppUi));
 } 

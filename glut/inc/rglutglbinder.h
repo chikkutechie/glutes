@@ -30,7 +30,7 @@
 #define GLUTGLBINDER_H_
 
 
-class GlutGLBinder
+class RGlutGLBinder
 {
 public:
     enum API
@@ -44,8 +44,8 @@ public:
     typedef int * Surface;
     
 public:
-    GlutGLBinder(API a = OPENGL_ES_API) : mAPI(a) {}
-    virtual ~GlutGLBinder() {}
+    RGlutGLBinder(API a = OPENGL_ES_API) : mAPI(a) {}
+    virtual ~RGlutGLBinder() {}
     
     virtual bool initialize() = 0;
     virtual unsigned int createSurface(Surface surface, int width, int height) = 0;

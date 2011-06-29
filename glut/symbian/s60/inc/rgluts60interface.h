@@ -30,18 +30,19 @@
 #define GLUTS60INTERFACE_H_
 
 #include "glut.h"
-#include "glutinterface.h"
-#include "gluteventhandler.h"
+#include "rglutinterface.h"
+#include "rgluteventhandler.h"
 
 #include <e32cmn.h>
 #include <eikmobs.h>
 #include <aknstyluspopupmenu.h>
 
-class GlutControl;
 class CEikonEnv;
-class GlutGLBinder;
 
-class GlutS60Interface: public GlutInterface, public GlutEventHandler
+class RGlutControl;
+class RGlutGLBinder;
+
+class RGlutS60Interface: public RGlutInterface, public RGlutEventHandler
 {
 private:
     static const int ID_START_INDEX = 100;
@@ -49,8 +50,8 @@ private:
     static const int MENU_ITEM_BIAS = 0x6000;
 
 public:
-    GlutS60Interface();
-    ~GlutS60Interface();
+    RGlutS60Interface();
+    ~RGlutS60Interface();
     
     void intialize(int argc, char **argv);
     void terminate();
@@ -104,7 +105,7 @@ private:
         
         int mId;
         unsigned int  mSurface;
-        GlutControl * mControl;
+        RGlutControl * mControl;
     };
     
     class MenuEntry: public MEikMenuObserver
@@ -153,7 +154,7 @@ private:
     unsigned int mDisplayMode;
     CEikonEnv* mEikonEnv;
     int mCurrentControl;
-    GlutGLBinder * mBinder;
+    RGlutGLBinder * mBinder;
     CPeriodic * mTimer;
     RArray<ControlEntry> mControllist;
     RArray<ControlEntry> mControlStack;

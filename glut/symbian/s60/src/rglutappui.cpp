@@ -26,9 +26,9 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
  
-#include "glutappui.h"
-#include "gluteventhandler.h"
-#include "glutinterface.h"
+#include "rglutappui.h"
+#include "rgluteventhandler.h"
+#include "rglutinterface.h"
 
 #include <eikmenub.h>
 #include <eikmenup.h>
@@ -38,16 +38,16 @@
 #include <avkon.hrh>
 #include <avkon.rsg>
 
-GlutAppUi::GlutAppUi()
+RGlutAppUi::RGlutAppUi()
   : mEH(0)
 {
 }
 
-GlutAppUi::~GlutAppUi()
+RGlutAppUi::~RGlutAppUi()
 {
 }
 
-void GlutAppUi::ConstructL()
+void RGlutAppUi::ConstructL()
 {
     iEikonEnv->DisableExitChecks(ETrue);
     
@@ -55,14 +55,14 @@ void GlutAppUi::ConstructL()
                  CEikAppUi::ENonStandardResourceFile |
                  CAknAppUi::EAknEnableSkin;
     
-    switch (GlutInterface::getInterface()->getOrientation()) {
-        case GlutInterface::Portrait:
+    switch (RGlutInterface::getInterface()->getOrientation()) {
+        case RGlutInterface::Portrait:
             flags |= EAppOrientationPortrait;
             break;
-        case GlutInterface::Landscape:
+        case RGlutInterface::Landscape:
             flags |= EAppOrientationLandscape;
             break;
-        case GlutInterface::Automatic:
+        case RGlutInterface::Automatic:
             flags |= EAppOrientationAutomatic;
             break;
     }
@@ -86,12 +86,12 @@ void GlutAppUi::ConstructL()
     
 }
 
-void GlutAppUi::setEventHandler(GlutEventHandler * eh)
+void RGlutAppUi::setEventHandler(RGlutEventHandler * eh)
 {
     this->mEH = eh;
 }
 
-void GlutAppUi::SetFullScreen(bool v)
+void RGlutAppUi::SetFullScreen(bool v)
 {
     if (v) {
         SetFullScreenApp(ETrue);
@@ -100,12 +100,12 @@ void GlutAppUi::SetFullScreen(bool v)
     }
 }
 
-void GlutAppUi::Exit()
+void RGlutAppUi::Exit()
 {
     CAknAppUi::Exit();
 }
 
-void GlutAppUi::HandleCommandL(TInt command)
+void RGlutAppUi::HandleCommandL(TInt command)
 {
     switch (command) {
         case EEikCmdExit:
@@ -116,7 +116,7 @@ void GlutAppUi::HandleCommandL(TInt command)
     }
 }
 
-void GlutAppUi::HandleStatusPaneSizeChange()
+void RGlutAppUi::HandleStatusPaneSizeChange()
 {
     CAknAppUi::HandleStatusPaneSizeChange();
     if (mEH) {
@@ -125,22 +125,22 @@ void GlutAppUi::HandleStatusPaneSizeChange()
     }
 }
 
-void GlutAppUi::HandleResourceChangeL(TInt type)
+void RGlutAppUi::HandleResourceChangeL(TInt type)
 {
     CAknAppUi::HandleResourceChangeL(type);
 }
 
-void GlutAppUi::HandleWsEventL(const TWsEvent &event, CCoeControl *destination)
+void RGlutAppUi::HandleWsEventL(const TWsEvent &event, CCoeControl *destination)
 {
     CAknAppUi::HandleWsEventL(event, destination);
 }
 
-void GlutAppUi::ProcessCommandL(TInt command)
+void RGlutAppUi::ProcessCommandL(TInt command)
 {
     CAknAppUi::ProcessCommandL(command);
 }
 
-void GlutAppUi::HandleScreenDeviceChangedL()
+void RGlutAppUi::HandleScreenDeviceChangedL()
 {
     CAknAppUi::HandleScreenDeviceChangedL();
     if (mEH) {

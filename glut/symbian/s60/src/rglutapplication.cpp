@@ -26,23 +26,24 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
  
-#include "glutapplication.h"
-#include "glutdocument.h"
+#include "rglutapplication.h"
+#include "rglutdocument.h"
+
 #include <eikapp.h>
 #include <coemain.h>
 #include <f32file.h>
 
-GlutApplication::GlutApplication()
+RGlutApplication::RGlutApplication()
   : mUID(KNullUid)
 {
 }
 
-CApaDocument *GlutApplication::CreateDocumentL()
+CApaDocument *RGlutApplication::CreateDocumentL()
 {
-    return new (ELeave) GlutDocument(*this);
+    return new (ELeave) RGlutDocument(*this);
 }
 
-TUid GlutApplication::AppDllUid() const
+TUid RGlutApplication::AppDllUid() const
 {
     if (mUID == KNullUid) {
         mUID = RProcess().SecureId().operator TUid();
@@ -50,12 +51,12 @@ TUid GlutApplication::AppDllUid() const
     return mUID;
 }
 
-void GlutApplication::PreDocConstructL()
+void RGlutApplication::PreDocConstructL()
 {
     CAknApplication::PreDocConstructL();
 }
 
-TFileName GlutApplication::ResourceFileName() const
+TFileName RGlutApplication::ResourceFileName() const
 {
     return KNullDesC();
 }

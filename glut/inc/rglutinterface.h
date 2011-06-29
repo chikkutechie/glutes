@@ -29,7 +29,7 @@
 #ifndef GLUTINTERFACE_H_
 #define GLUTINTERFACE_H_
 
-class GlutInterface
+class RGlutInterface
 {
 public:
     static const int TitleLength = 255;
@@ -50,10 +50,10 @@ public:
         Automatic
     };
 
-    GlutInterface() {}
-    virtual ~GlutInterface() {}
+    RGlutInterface() {}
+    virtual ~RGlutInterface() {}
     
-    static GlutInterface* getInterface();
+    static RGlutInterface* getInterface();
     static bool destroyInterface();
     
     virtual void intialize(int argc, char **argv) = 0;

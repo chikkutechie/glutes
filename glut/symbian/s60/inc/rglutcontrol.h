@@ -26,24 +26,34 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
  
-#ifndef GLUTAPPLICATION_H_
-#define GLUTAPPLICATION_H_
+#ifndef GLUTCONTROL_H_
+#define GLUTCONTROL_H_
 
-#include <aknapp.h>
+#include <w32std.h>
+#include <coecntrl.h>
+#include <eikenv.h>
+#include <eikappui.h>
 
-class GlutApplication : public CAknApplication
+class RGlutEventHandler;
+
+class RGlutControl: public CCoeControl
 {
 public:
-    GlutApplication();
-    virtual TUid AppDllUid() const;
-    virtual void PreDocConstructL();
-    TFileName ResourceFileName() const;
+    RGlutControl();
+    void ConstructL(const TRect& aRect);
+    ~RGlutControl();
+    void setEventHandler(RGlutEventHandler * eh);
+    RWindow& nativeWindow();
 
 protected:
-    virtual CApaDocument *CreateDocumentL();
+    void Draw(const TRect& aRect) const;
+    void SizeChanged();
+    void PositionChanged();
+    void HandlePointerEventL(const TPointerEvent& aPointerEvent);
+    TKeyResponse OfferKeyEventL(const TKeyEvent& aKeyEvent,TEventCode aType);
+    
 private:
-    mutable TUid mUID;
+    RGlutEventHandler * mEH;
 };
 
 #endif
-

@@ -25,35 +25,21 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
- 
-#ifndef GLUTCONTROL_H_
-#define GLUTCONTROL_H_
 
-#include <w32std.h>
-#include <coecntrl.h>
-#include <eikenv.h>
-#include <eikappui.h>
+#ifndef GLUTDOCUMENT_H_
+#define GLUTDOCUMENT_H_
 
-class GlutEventHandler;
+#include <AknDoc.h>
 
-class GlutControl: public CCoeControl
+class RGlutDocument : public CAknDocument
 {
 public:
-    GlutControl();
-    void ConstructL(const TRect& aRect);
-    ~GlutControl();
-    void setEventHandler(GlutEventHandler * eh);
-    RWindow& nativeWindow();
-
-protected:
-    void Draw(const TRect& aRect) const;
-    void SizeChanged();
-    void PositionChanged();
-    void HandlePointerEventL(const TPointerEvent& aPointerEvent);
-    TKeyResponse OfferKeyEventL(const TKeyEvent& aKeyEvent,TEventCode aType);
+    RGlutDocument(CEikApplication &mainApplication);
     
-private:
-    GlutEventHandler * mEH;
+    virtual ~RGlutDocument();
+    
+    virtual CEikAppUi *CreateAppUiL();
+
 };
 
 #endif

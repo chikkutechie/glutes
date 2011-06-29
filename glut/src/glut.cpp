@@ -27,7 +27,7 @@
  */
 
 #include "glut.h"
-#include "glutinterface.h"
+#include "rglutinterface.h"
 
 #if defined(GLUT_OS_SYMBIAN)
 #define APIDEF  EXPORT_C
@@ -41,15 +41,15 @@
 extern "C" {
 #endif
 
-inline GlutInterface * getInterface()
+inline RGlutInterface * getInterface()
 {
-    return GlutInterface::getInterface() ;
+    return RGlutInterface::getInterface() ;
 }
 
 
 APIDEF void glutInit(int *argp, char **argv)
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->intialize(*argp, argv);    
     }
@@ -57,7 +57,7 @@ APIDEF void glutInit(int *argp, char **argv)
 
 APIDEF void glutInitDisplayMode(unsigned int mode)
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->initDisplayMode(mode);
     }
@@ -65,7 +65,7 @@ APIDEF void glutInitDisplayMode(unsigned int mode)
 
 APIDEF void glutInitWindowPosition(int x, int y)
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->setPos(x, y);
     }
@@ -73,7 +73,7 @@ APIDEF void glutInitWindowPosition(int x, int y)
 
 APIDEF void glutInitWindowSize(int width, int height)
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->setSize(width, height);
     }
@@ -83,7 +83,7 @@ APIDEF int glutCreateWindow(const char *title)
 {
     int window = 0;
     
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->setTitle(title);
         window = interface->createWindow();
@@ -94,7 +94,7 @@ APIDEF int glutCreateWindow(const char *title)
 
 APIDEF void glutDestroyWindow(int win)
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->destroyWindow(win);
     }
@@ -102,7 +102,7 @@ APIDEF void glutDestroyWindow(int win)
 
 APIDEF void glutPostRedisplay()
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->redraw();
     }
@@ -112,7 +112,7 @@ APIDEF int glutGetWindow()
 {
     int win = 0;
     
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         win = interface->getWindow();
     }
@@ -122,7 +122,7 @@ APIDEF int glutGetWindow()
 
 APIDEF void glutSetWindow(int win)
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->setWindow(win);
     }
@@ -130,7 +130,7 @@ APIDEF void glutSetWindow(int win)
 
 APIDEF void glutPostWindowRedisplay(int win)
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->redraw(win);
     }
@@ -138,7 +138,7 @@ APIDEF void glutPostWindowRedisplay(int win)
 
 APIDEF void glutSetWindowTitle(const char *title)
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->setWindowTitle(title);
     }
@@ -146,7 +146,7 @@ APIDEF void glutSetWindowTitle(const char *title)
 
 APIDEF void glutShowWindow()
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->showWindow();
     }
@@ -154,7 +154,7 @@ APIDEF void glutShowWindow()
 
 APIDEF void glutFullScreen()
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->fullScreen();
     }
@@ -162,7 +162,7 @@ APIDEF void glutFullScreen()
 
 APIDEF void glutHideWindow()
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->hideWindow();
     }
@@ -170,7 +170,7 @@ APIDEF void glutHideWindow()
 
 APIDEF void glutPositionWindow(int x, int y)
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->positionWindow(x, y);
     }
@@ -178,7 +178,7 @@ APIDEF void glutPositionWindow(int x, int y)
 
 APIDEF void glutReshapeWindow(int width, int height)
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->reshapeWindow(width, height);
     }
@@ -186,7 +186,7 @@ APIDEF void glutReshapeWindow(int width, int height)
 
 APIDEF void glutPopWindow()
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->popWindow();
     }
@@ -194,7 +194,7 @@ APIDEF void glutPopWindow()
 
 APIDEF void glutPushWindow()
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->pushWindow();
     }
@@ -202,7 +202,7 @@ APIDEF void glutPushWindow()
 
 APIDEF void glutSwapBuffers()
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->flush();
     }
@@ -210,16 +210,16 @@ APIDEF void glutSwapBuffers()
 
 APIDEF void glutMainLoop()
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->exec();
     }
-    GlutInterface::destroyInterface();
+    RGlutInterface::destroyInterface();
 }
 
 APIDEF void glutTimerFunc(unsigned int millis, void (*func)(int), int value)
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->timerFunc(millis, func, value);
     }
@@ -227,7 +227,7 @@ APIDEF void glutTimerFunc(unsigned int millis, void (*func)(int), int value)
 
 APIDEF void glutDisplayFunc(void (*func)())
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->setDrawFnc(func);
     }
@@ -235,7 +235,7 @@ APIDEF void glutDisplayFunc(void (*func)())
 
 APIDEF void glutReshapeFunc(void (*func)(int, int))
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->setReshapeFunc(func);
     }
@@ -243,7 +243,7 @@ APIDEF void glutReshapeFunc(void (*func)(int, int))
 
 APIDEF void glutKeyboardFunc(void (*func)(unsigned char key, int x, int y))
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->setKeyboardFunc(func);
     }
@@ -251,7 +251,7 @@ APIDEF void glutKeyboardFunc(void (*func)(unsigned char key, int x, int y))
 
 APIDEF void glutMouseFunc(void (*func)(int button, int state, int x, int y))
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->setMouseFunc(func);
     }
@@ -259,7 +259,7 @@ APIDEF void glutMouseFunc(void (*func)(int button, int state, int x, int y))
 
 APIDEF void glutMotionFunc(void (*func)(int x, int y))
 {   
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->setMotionFunc(func);
     }
@@ -267,7 +267,7 @@ APIDEF void glutMotionFunc(void (*func)(int x, int y))
 
 APIDEF void glutPassiveMotionFunc(void (*func)(int x, int y))
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->setPassiveMotionFunc(func);
     }
@@ -275,7 +275,7 @@ APIDEF void glutPassiveMotionFunc(void (*func)(int x, int y))
 
 APIDEF int glutGetModifiers()
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         return interface->getModifiers();
     }    
@@ -285,7 +285,7 @@ APIDEF int glutGetModifiers()
 
 APIDEF int glutGet(unsigned int state)
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         return interface->getValue(state);
     }
@@ -295,7 +295,7 @@ APIDEF int glutGet(unsigned int state)
 
 APIDEF int glutCreateMenu(void (*menu)(int))
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         return interface->createMenu(menu);
     }
@@ -305,7 +305,7 @@ APIDEF int glutCreateMenu(void (*menu)(int))
 
 APIDEF void glutDestroyMenu(int menu)
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->destroyMenu(menu);
     }
@@ -313,7 +313,7 @@ APIDEF void glutDestroyMenu(int menu)
 
 APIDEF int glutGetMenu()
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         return interface->getMenu();
     }
@@ -323,7 +323,7 @@ APIDEF int glutGetMenu()
 
 APIDEF void glutSetMenu(int menu)
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->setMenu(menu);
     }
@@ -331,7 +331,7 @@ APIDEF void glutSetMenu(int menu)
 
 APIDEF void glutAddMenuEntry(const char* label, int value)
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->addMenuEntry(label, value);
     }
@@ -339,7 +339,7 @@ APIDEF void glutAddMenuEntry(const char* label, int value)
 
 APIDEF void glutRemoveMenuItem(int item)
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->removeMenuItem(item);
     }
@@ -347,7 +347,7 @@ APIDEF void glutRemoveMenuItem(int item)
 
 APIDEF void glutAttachMenu(int button)
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->attachMenu(button);
     }
@@ -355,7 +355,7 @@ APIDEF void glutAttachMenu(int button)
 
 APIDEF void glutDetachMenu(int button)
 {
-    GlutInterface * interface = getInterface(); 
+    RGlutInterface * interface = getInterface(); 
     if (interface) {
         interface->detachMenu(button);
     }

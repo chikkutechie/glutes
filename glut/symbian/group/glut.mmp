@@ -49,13 +49,13 @@ SOURCEPATH		../../src
 SOURCE			glut.cpp
 
 SOURCEPATH  	../s60/src
-SOURCE 	    	eglglutglbinder.cpp
-SOURCE 			glutapplication.cpp
-SOURCE 			glutappui.cpp
-SOURCE 			glutcontrol.cpp
-SOURCE 			glutdocument.cpp
-SOURCE 			gluts60interface.cpp
-
+SOURCE 			reglglutglbinder.cpp
+SOURCE 			reglproperties.cpp
+SOURCE 			rglutapplication.cpp
+SOURCE 			rglutappui.cpp
+SOURCE 			rglutcontrol.cpp
+SOURCE 			rglutdocument.cpp
+SOURCE 			rgluts60interface.cpp
 
 LIBRARY		   	euser.lib
 LIBRARY		   	apparc.lib

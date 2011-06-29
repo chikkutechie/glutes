@@ -26,20 +26,34 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
  
-#ifndef GLUTEVENTHANDLER_H_
-#define GLUTEVENTHANDLER_H_
+#ifndef GLUTAPPUI_H_
+#define GLUTAPPUI_H_
 
-class GlutEventHandler
+#include <aknappui.h>
+
+class RGlutEventHandler;
+
+class RGlutAppUi : public CAknAppUi
 {
 public:
-    virtual ~GlutEventHandler(){}
-
-    virtual void draw() = 0;
-    virtual void reshape(int w, int h) = 0;
-    virtual void rerect(int x, int y, int w, int h) = 0;
-    virtual void repos(int x, int y) = 0;
-    virtual void keyboard(unsigned char key, unsigned int modifier, int x, int y) = 0;
-    virtual void mouse(int button, int modifier, int x, int y) = 0;
+    RGlutAppUi();
+    virtual ~RGlutAppUi();
+    virtual void ConstructL();
+    void HandleCommandL(TInt command);
+    void setEventHandler(RGlutEventHandler * eh);
+    void Exit();
+    void SetFullScreen(bool v);
+    
+protected:
+    void HandleResourceChangeL(TInt type);
+    void HandleWsEventL(const TWsEvent &event, CCoeControl *destination);
+    virtual void ProcessCommandL(TInt aCommand);
+    virtual void HandleScreenDeviceChangedL();
+    void HandleStatusPaneSizeChange();
+    
+private:
+    RGlutEventHandler * mEH;
 };
 
 #endif
+

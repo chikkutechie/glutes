@@ -26,23 +26,22 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
  
-#include "eglglutglbinder.h"
-#include <w32std.h>
+#include "reglglutglbinder.h"
 
-EGLGlutGLBinder::EGLGlutGLBinder(GlutGLBinder::API api)
-  : GlutGLBinder(api),
+REGLGlutGLBinder::REGLGlutGLBinder(RGlutGLBinder::API api)
+  : RGlutGLBinder(api),
     mDisplay(EGL_NO_DISPLAY),
     mContext(EGL_NO_CONTEXT),
     mConfig(0),
     mLastError(0)
 {}
 
-EGLGlutGLBinder::~EGLGlutGLBinder()
+REGLGlutGLBinder::~REGLGlutGLBinder()
 {
     terminate();
 }
 
-bool EGLGlutGLBinder::initialize()
+bool REGLGlutGLBinder::initialize()
 {
     if (mDisplay == EGL_NO_DISPLAY) {
         mDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
@@ -89,7 +88,7 @@ bool EGLGlutGLBinder::initialize()
     return true;
 }
 
-void EGLGlutGLBinder::terminate()
+void REGLGlutGLBinder::terminate()
 {
     if (mDisplay != EGL_NO_DISPLAY) {
         eglMakeCurrent(mDisplay, EGL_NO_SURFACE,
@@ -105,7 +104,7 @@ void EGLGlutGLBinder::terminate()
     }
 }
 
-bool EGLGlutGLBinder::createContext()
+bool REGLGlutGLBinder::createContext()
 {
     if (mDisplay == EGL_NO_DISPLAY) {
         if (!initialize()) {
@@ -116,16 +115,22 @@ bool EGLGlutGLBinder::createContext()
     if (mContext == EGL_NO_CONTEXT) {
         EGLint numConfigs = 0;
         
+        EGLint * attr =  
+                mProperties.getAttributes(REGLProperties::ConfigAttribute);
+
         if (eglChooseConfig(mDisplay,
-                            getAttributes(mConfigAttributes),
+                            attr,
                             &mConfig, 1,
                             &numConfigs) == EGL_FALSE) {
             mLastError = eglGetError();
             return false;
         }
-        mContext = eglCreateContext(mDisplay, mConfig,
-                                    EGL_NO_CONTEXT,
-                                    getAttributes(mContextAttributes));
+        attr = mProperties.getAttributes(REGLProperties::ContextAttribute);
+        
+        mContext = eglCreateContext(mDisplay,
+                  mConfig,
+                  EGL_NO_CONTEXT,
+                  attr);
         if (mContext == EGL_NO_CONTEXT) {
             mLastError = eglGetError();
         }
@@ -134,7 +139,8 @@ bool EGLGlutGLBinder::createContext()
     return (mContext != EGL_NO_CONTEXT);
 }
 
-unsigned int  EGLGlutGLBinder::createSurface(Surface surfaceParam, int width, int height)
+unsigned int  REGLGlutGLBinder::createSurface(Surface surfaceParam, 
+                                             int width, int height)
 {
     EGLSurface surface = EGL_NO_SURFACE;
     
@@ -152,9 +158,12 @@ unsigned int  EGLGlutGLBinder::createSurface(Surface surfaceParam, int width, in
                     return EGL_NO_SURFACE;
                 }
     
-                RWindow * win= (RWindow *)mSurfaceInfo.mData;
-                surface = eglCreateWindowSurface(mDisplay, mConfig, win,
-                                            getAttributes(mSurfaceAttributes));
+                EGLint * attr =  
+                  mProperties.getAttributes(REGLProperties::SurfaceAttribute);
+
+                surface = eglCreateWindowSurface(mDisplay, mConfig,
+                                     (EGLNativeWindowType)mSurfaceInfo.mData,
+                                     attr);
             }
             break;
         }
@@ -171,8 +180,12 @@ unsigned int  EGLGlutGLBinder::createSurface(Surface surfaceParam, int width, in
                 addProperty(EGL_WIDTH, width);
                 addProperty(EGL_WIDTH, height);
     
-                surface = eglCreatePbufferSurface(mDisplay, mConfig,
-                                            getAttributes(mSurfaceAttributes));
+                EGLint * attr =  
+                  mProperties.getAttributes(REGLProperties::SurfaceAttribute);
+
+                surface = eglCreatePbufferSurface(mDisplay,
+                                                  mConfig,
+                                                  attr);
             }
             break;
         }
@@ -181,14 +194,19 @@ unsigned int  EGLGlutGLBinder::createSurface(Surface surfaceParam, int width, in
             if (mSurfaceInfo.mData) {
                 addProperty(EGL_SURFACE_TYPE, EGL_PIXMAP_BIT |
                                               EGL_VG_ALPHA_FORMAT_PRE_BIT);
-                addProperty(EGL_MATCH_NATIVE_PIXMAP, (EGLint)mSurfaceInfo.mData);
+                addProperty(EGL_MATCH_NATIVE_PIXMAP,
+                                                (EGLint)mSurfaceInfo.mData);
     
                 if (!createContext()) {
                     return EGL_NO_SURFACE;
                 }
     
+                EGLint * attr =  
+                  mProperties.getAttributes(REGLProperties::SurfaceAttribute);
+
                 surface = eglCreatePixmapSurface(mDisplay, mConfig,
-                                                        mSurfaceInfo.mData, 0);
+                                                 mSurfaceInfo.mData, 
+                                                 attr);
             }
             break;
         }
@@ -197,7 +215,7 @@ unsigned int  EGLGlutGLBinder::createSurface(Surface surfaceParam, int width, in
     return (unsigned int)surface;
 }
 
-bool EGLGlutGLBinder::makeCurrent(unsigned int surface)
+bool REGLGlutGLBinder::makeCurrent(unsigned int surface)
 {
     return eglMakeCurrent(mDisplay,
                           (EGLSurface)surface,
@@ -205,20 +223,20 @@ bool EGLGlutGLBinder::makeCurrent(unsigned int surface)
                           mContext) == EGL_TRUE;
 }
 
-void EGLGlutGLBinder::destroySurface(unsigned int surface)
+void REGLGlutGLBinder::destroySurface(unsigned int surface)
 {
     eglMakeCurrent(mDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
     eglDestroySurface(mDisplay, (EGLSurface)surface);
 }
 
-void EGLGlutGLBinder::swapBuffer(unsigned int surface)
+void REGLGlutGLBinder::swapBuffer(unsigned int surface)
 {
     if (mDisplay != EGL_NO_DISPLAY && (EGLSurface)surface != EGL_NO_SURFACE) {
         eglSwapBuffers(mDisplay, (EGLSurface)surface);
     }
 }
 
-int EGLGlutGLBinder::getValue(int state) const
+int REGLGlutGLBinder::getValue(int state) const
 {
     EGLint value = 0;
     
@@ -228,122 +246,3 @@ int EGLGlutGLBinder::getValue(int state) const
     
     return value;
 }
-
-EGLint * EGLGlutGLBinder::getAttributes(Attributes & attributes)
-{
-    EGLint * attr = 0;
-    
-    if (!attributes.empty()) {
-
-        bool nonepresent = false;
-        
-        for (AttributesIter iter = attributes.begin();
-                iter != attributes.end(); ++iter) {
-            if (iter->first == EGL_NONE) {
-                nonepresent = true;
-                break;
-            }
-        }
-        
-        if (!nonepresent) {
-            attributes.push_back(AttributePair(EGL_NONE, 0));
-        }
-    
-        attr = (EGLint *)&attributes[0];
-    }
-
-    return attr;
-}
-
-void EGLGlutGLBinder::addProperty(EGLint name, EGLint value)
-{
-    switch (name) {
-        case EGL_CONTEXT_CLIENT_VERSION:
-        case EGL_CONTEXT_CLIENT_TYPE:
-            addProperty(mContextAttributes, name, value);
-            break;
-
-        case EGL_WIDTH:
-        case EGL_HEIGHT:
-        case EGL_LARGEST_PBUFFER:
-        case EGL_TEXTURE_FORMAT:
-        case EGL_MIPMAP_TEXTURE:
-        case EGL_RENDER_BUFFER:
-        case EGL_VG_COLORSPACE:
-        case EGL_VG_ALPHA_FORMAT:
-            addProperty(mSurfaceAttributes, name, value);
-            break;
-
-        default:
-            addProperty(mConfigAttributes, name, value);
-            break;
-    }
-}
-
-void EGLGlutGLBinder::removeProperty(int name)
-{
-    switch (name) {
-        case EGL_CONTEXT_CLIENT_VERSION:
-        case EGL_CONTEXT_CLIENT_TYPE:
-            removeProperty(mContextAttributes, name);
-            break;
-
-        case EGL_WIDTH:
-        case EGL_HEIGHT:
-        case EGL_LARGEST_PBUFFER:
-        case EGL_TEXTURE_FORMAT:
-        case EGL_MIPMAP_TEXTURE:
-        case EGL_RENDER_BUFFER:
-        case EGL_VG_COLORSPACE:
-        case EGL_VG_ALPHA_FORMAT:
-            removeProperty(mSurfaceAttributes, name);
-            break;
-
-        default:
-            removeProperty(mConfigAttributes, name);
-            break;
-    }
-}
-
-void EGLGlutGLBinder::addProperty(Attributes & attributes, int name, int value)
-{
-    int update = false;
-    
-    for (AttributesIter iter = attributes.begin();
-            iter != attributes.end(); ++iter) {
-        
-        if (iter->first == name) {
-            update = true;
-            
-            switch (iter->first) {
-                case EGL_SURFACE_TYPE: {
-                    iter->second |= value;
-                    break;
-                }
-                
-                default: {
-                    iter->second = value;
-                    break;
-                }
-            }
-
-            break;
-        }
-    }
-    
-    if (!update) {
-        attributes.insert(attributes.begin(), AttributePair(name, value));
-    }
-}
-
-void EGLGlutGLBinder::removeProperty(Attributes & attributes, int name)
-{
-    for (AttributesIter iter = attributes.begin();
-            iter != attributes.end(); ++iter) {
-        if (iter->first == name) {
-            attributes.erase(iter);
-            break;
-        }
-    }
-}
-

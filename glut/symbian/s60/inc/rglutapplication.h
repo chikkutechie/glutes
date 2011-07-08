@@ -31,7 +31,7 @@
 
 #include <aknapp.h>
 
-class RGlutApplication : public CAknApplication
+NONSHARABLE_CLASS(RGlutApplication) : public CAknApplication
 {
 public:
     RGlutApplication();

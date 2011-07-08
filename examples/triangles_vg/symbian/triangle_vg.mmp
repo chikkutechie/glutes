@@ -26,21 +26,15 @@ DEPENDS        triangle_vg.rsg
 TARGETPATH     /private/10003a3f/import/apps
 END
 
-SYSTEMINCLUDE  /epoc32/include/mw
 SYSTEMINCLUDE  /epoc32/include
+SYSTEMINCLUDE  /epoc32/include/mw
 SYSTEMINCLUDE  /epoc32/include/stdapis
 SYSTEMINCLUDE  /epoc32/include/stdapis/sys
 SYSTEMINCLUDE  /epoc32/include/stdapis/stlportv5
 SYSTEMINCLUDE  /epoc32/include/platform/mw
 SYSTEMINCLUDE  /epoc32/include/platform
-SYSTEMINCLUDE  /epoc32/include/platform/loc
-SYSTEMINCLUDE  /epoc32/include/platform/mw/loc
-SYSTEMINCLUDE  /epoc32/include/platform/loc/sc
-SYSTEMINCLUDE  /epoc32/include/platform/mw/loc/sc
 SYSTEMINCLUDE  /epoc32/include/app
 SYSTEMINCLUDE  /epoc32/include/platform/app
-SYSTEMINCLUDE  /epoc32/include/platform/app/loc
-SYSTEMINCLUDE  /epoc32/include/platform/app/loc/sc
 
 SOURCEPATH     .
 SOURCE        ../main.cpp

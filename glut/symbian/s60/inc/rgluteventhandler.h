@@ -29,7 +29,7 @@
 #ifndef GLUTEVENTHANDLER_H_
 #define GLUTEVENTHANDLER_H_
 
-class RGlutEventHandler
+NONSHARABLE_CLASS(RGlutEventHandler)
 {
 public:
     virtual ~RGlutEventHandler(){}

@@ -34,7 +34,7 @@
 #include "rglutglbinder.h"
 #include "reglproperties.h"
 
-class REGLGlutGLBinder: public RGlutGLBinder
+NONSHARABLE_CLASS(REGLGlutGLBinder): public RGlutGLBinder
 {
 public:
     struct EGLSurfaceInfo

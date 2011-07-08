@@ -42,7 +42,7 @@ class CEikonEnv;
 class RGlutControl;
 class RGlutGLBinder;
 
-class RGlutS60Interface: public RGlutInterface, public RGlutEventHandler
+NONSHARABLE_CLASS(RGlutS60Interface): public RGlutInterface, public RGlutEventHandler
 {
 private:
     static const int ID_START_INDEX = 100;

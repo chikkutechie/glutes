@@ -29,8 +29,7 @@
 #ifndef GLUTGLBINDER_H_
 #define GLUTGLBINDER_H_
 
-
-class RGlutGLBinder
+NONSHARABLE_CLASS(RGlutGLBinder)
 {
 public:
     enum API

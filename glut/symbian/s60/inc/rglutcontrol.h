@@ -36,7 +36,7 @@
 
 class RGlutEventHandler;
 
-class RGlutControl: public CCoeControl
+NONSHARABLE_CLASS(RGlutControl): public CCoeControl
 {
 public:
     RGlutControl();

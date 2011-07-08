@@ -31,7 +31,7 @@
 
 #include <AknDoc.h>
 
-class RGlutDocument : public CAknDocument
+NONSHARABLE_CLASS(RGlutDocument): public CAknDocument
 {
 public:
     RGlutDocument(CEikApplication &mainApplication);

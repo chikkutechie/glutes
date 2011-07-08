@@ -32,7 +32,7 @@
 #include <vector>
 #include <EGL/egl.h>
 
-class REGLProperties
+NONSHARABLE_CLASS(REGLProperties)
 {
 private:
     class AttributePair

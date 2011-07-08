@@ -29,7 +29,7 @@
 #ifndef GLUTINTERFACE_H_
 #define GLUTINTERFACE_H_
 
-class RGlutInterface
+NONSHARABLE_CLASS(RGlutInterface)
 {
 public:
     static const int TitleLength = 255;

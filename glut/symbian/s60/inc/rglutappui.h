@@ -33,7 +33,7 @@
 
 class RGlutEventHandler;
 
-class RGlutAppUi : public CAknAppUi
+NONSHARABLE_CLASS(RGlutAppUi) : public CAknAppUi
 {
 public:
     RGlutAppUi();

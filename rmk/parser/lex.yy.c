@@ -508,11 +508,38 @@ int yy_flex_debug = 0;
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
 #line 1 "rmk.l"
-#line 3 "rmk.l"
+/**
+ * Copyright (c) 2010-2015, Ranjith TV
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ *   * Redistributions of source code must retain the above copyright notice,
+ *     this list of conditions and the following disclaimer.
+ *   * Redistributions in binary form must reproduce the above copyright notice,
+       this list of conditions and the following disclaimer
+ *     in the documentation and/or other materials provided with the distribution.
+ *   * Neither the name the Ranjith nor the names of its contributors may be used
+       to endorse or promote products derived
+ *     from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+ * IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+ * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+#line 30 "rmk.l"
 #include <math.h>
 #include "rmk.tab.h"
 int currentline = 0;
-#line 516 "lex.yy.c"
+#line 543 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -699,10 +726,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 12 "rmk.l"
+#line 39 "rmk.l"
 
 
-#line 706 "lex.yy.c"
+#line 733 "lex.yy.c"
 
 	if ( !(yy_init) )
 		{
@@ -787,67 +814,67 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 14 "rmk.l"
+#line 41 "rmk.l"
 { yylval.doubVal = atoi(yytext);
 			  return NUM;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 17 "rmk.l"
+#line 44 "rmk.l"
 { yylval.intVal = BINPRG; return BINPRG; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 18 "rmk.l"
+#line 45 "rmk.l"
 { yylval.intVal = SOURCE; return SOURCE; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 19 "rmk.l"
+#line 46 "rmk.l"
 { yylval.intVal = HEADER; return HEADER; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 20 "rmk.l"
+#line 47 "rmk.l"
 { yylval.intVal = LIBRARY; return LIBRARY;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 21 "rmk.l"
+#line 48 "rmk.l"
 { yylval.intVal = INCLUDE; return INCLUDE;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 23 "rmk.l"
+#line 50 "rmk.l"
 {yylval.strVal = yytext;  return WORD; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 24 "rmk.l"
+#line 51 "rmk.l"
 {yylval.strVal = yytext;  return WORD;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 26 "rmk.l"
+#line 53 "rmk.l"
 {}
 	YY_BREAK
 case 10:
 /* rule 10 can match eol */
 YY_RULE_SETUP
-#line 27 "rmk.l"
+#line 54 "rmk.l"
 {currentline++; return yytext[0];}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 28 "rmk.l"
+#line 55 "rmk.l"
 {return yytext[0];}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 30 "rmk.l"
+#line 57 "rmk.l"
 ECHO;
 	YY_BREAK
-#line 851 "lex.yy.c"
+#line 878 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1845,7 +1872,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 30 "rmk.l"
+#line 57 "rmk.l"
 
 
 

@@ -68,10 +68,11 @@
 /* Copy the first part of user declarations.  */
 
 /* Line 189 of yacc.c  */
-#line 2 "rmk.y"
+#line 29 "rmk.y"
 
     #define YYSTYPE double
     #include <math.h>
+    #include <string.h>
     #include "rmk.h"
     
     int yylex ();
@@ -79,7 +80,7 @@
 
 
 /* Line 189 of yacc.c  */
-#line 83 "rmk.tab.c"
+#line 84 "rmk.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -123,7 +124,7 @@ typedef union YYSTYPE
 {
 
 /* Line 214 of yacc.c  */
-#line 11 "rmk.y"
+#line 39 "rmk.y"
 
 	int	   intVal;
 	double doubVal;
@@ -133,7 +134,7 @@ typedef union YYSTYPE
 
 
 /* Line 214 of yacc.c  */
-#line 137 "rmk.tab.c"
+#line 138 "rmk.tab.c"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -145,7 +146,7 @@ typedef union YYSTYPE
 
 
 /* Line 264 of yacc.c  */
-#line 149 "rmk.tab.c"
+#line 150 "rmk.tab.c"
 
 #ifdef short
 # undef short
@@ -431,8 +432,8 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    29,    29,    30,    33,    34,    37,    40,    41,    44,
-      47,    48,    49,    50,    51
+       0,    57,    57,    58,    61,    62,    65,    68,    69,    72,
+      75,    76,    77,    78,    79
 };
 #endif
 
@@ -1337,70 +1338,70 @@ yyreduce:
         case 6:
 
 /* Line 1455 of yacc.c  */
-#line 37 "rmk.y"
+#line 65 "rmk.y"
     {addNameValPairProperty((yyvsp[(1) - (3)].intVal), (yyvsp[(3) - (3)].pair));;}
     break;
 
   case 7:
 
 /* Line 1455 of yacc.c  */
-#line 40 "rmk.y"
+#line 68 "rmk.y"
     {(yyval.pair) = addNVPair((yyvsp[(2) - (2)].pair), 0, (yyvsp[(1) - (2)].strVal));free((yyvsp[(1) - (2)].strVal));;}
     break;
 
   case 8:
 
 /* Line 1455 of yacc.c  */
-#line 41 "rmk.y"
+#line 69 "rmk.y"
     {(yyval.pair) = createNVPair(0, (yyvsp[(1) - (1)].strVal)); free((yyvsp[(1) - (1)].strVal));;}
     break;
 
   case 9:
 
 /* Line 1455 of yacc.c  */
-#line 44 "rmk.y"
+#line 72 "rmk.y"
     {(yyval.strVal) = (char *) malloc(strlen((yyvsp[(1) - (1)].strVal))+2); strcpy((yyval.strVal), (yyvsp[(1) - (1)].strVal));;}
     break;
 
   case 10:
 
 /* Line 1455 of yacc.c  */
-#line 47 "rmk.y"
+#line 75 "rmk.y"
     {(yyval.intVal) = (yyvsp[(1) - (1)].intVal);;}
     break;
 
   case 11:
 
 /* Line 1455 of yacc.c  */
-#line 48 "rmk.y"
+#line 76 "rmk.y"
     {(yyval.intVal) = (yyvsp[(1) - (1)].intVal);;}
     break;
 
   case 12:
 
 /* Line 1455 of yacc.c  */
-#line 49 "rmk.y"
+#line 77 "rmk.y"
     {(yyval.intVal) = (yyvsp[(1) - (1)].intVal);;}
     break;
 
   case 13:
 
 /* Line 1455 of yacc.c  */
-#line 50 "rmk.y"
+#line 78 "rmk.y"
     {(yyval.intVal) = (yyvsp[(1) - (1)].intVal);;}
     break;
 
   case 14:
 
 /* Line 1455 of yacc.c  */
-#line 51 "rmk.y"
+#line 79 "rmk.y"
     {(yyval.intVal) = (yyvsp[(1) - (1)].intVal);;}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 1404 "rmk.tab.c"
+#line 1405 "rmk.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);

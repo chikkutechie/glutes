@@ -56,7 +56,7 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 11 "rmk.y"
+#line 39 "rmk.y"
 
 	int	   intVal;
 	double doubVal;

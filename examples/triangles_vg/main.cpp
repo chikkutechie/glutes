@@ -39,12 +39,16 @@ using namespace std;
 
 VGPath path;
 
-VGPaint paint;
+VGPaint paintStroke;
+VGPaint paintFill;
 
 VGfloat rotation = 0.0f;
 
 int   scaleCount = 0;
 int   scaleDir   = 1;
+
+VGfloat gsx = 1.0f;
+VGfloat gsy = 1.0f;
 
 int width;
 int height;
@@ -74,15 +78,16 @@ void init()
     vgSeti(VG_STROKE_CAP_STYLE, VG_CAP_ROUND);
     vgSeti(VG_STROKE_JOIN_STYLE, VG_JOIN_MITER);
     
-    paint = vgCreatePaint();
+    paintFill = vgCreatePaint();
+    paintStroke = vgCreatePaint();
     
-    vgSetPaint(paint, VG_FILL_PATH);
-    vgSetParameteri(paint, VG_PAINT_TYPE, VG_PAINT_TYPE_LINEAR_GRADIENT);
+    vgSetPaint(paintFill, VG_FILL_PATH);
+    vgSetParameteri(paintFill, VG_PAINT_TYPE, VG_PAINT_TYPE_LINEAR_GRADIENT);
     
     const VGfloat gradientParam[] = {-1.0, 0.0f, 1.0f, 1.0f};
-    vgSetParameterfv(paint, VG_PAINT_LINEAR_GRADIENT, 4, gradientParam);
+    vgSetParameterfv(paintFill, VG_PAINT_LINEAR_GRADIENT, 4, gradientParam);
     
-    vgSetParameteri(paint, VG_PAINT_COLOR_RAMP_SPREAD_MODE,
+    vgSetParameteri(paintFill, VG_PAINT_COLOR_RAMP_SPREAD_MODE,
                               VG_COLOR_RAMP_SPREAD_REPEAT);
 
     const VGfloat fillStops[] = {
@@ -95,9 +100,19 @@ void init()
         6.0f/6.0f, 1.0f, 0.0f, 0.0f, 1.0f
     };
     
-    vgSetParameterfv(paint, VG_PAINT_COLOR_RAMP_STOPS,   
+    vgSetParameterfv(paintFill, VG_PAINT_COLOR_RAMP_STOPS,   
                                       5*7, fillStops);
+
+    vgSetPaint(paintStroke, VG_STROKE_PATH);
+    vgSetf(VG_STROKE_LINE_WIDTH, 1.0f);
+    vgSeti(VG_STROKE_CAP_STYLE, VG_CAP_ROUND);
+    vgSeti(VG_STROKE_JOIN_STYLE, VG_JOIN_ROUND);
+    vgSetf(VG_STROKE_MITER_LIMIT, 3.0f);
+    vgSetParameteri(paintStroke, VG_PAINT_TYPE, VG_PAINT_TYPE_COLOR);
     
+    VGfloat  strokeColor[] = { 0.5f, 1.0f, 0.5f, 0.7f };
+    vgSetParameterfv(paintStroke, VG_PAINT_COLOR, 4, strokeColor);
+
     VGfloat bgColor[] = {1.0, 1.0, 0.0, 1.0};
     vgSetfv(VG_CLEAR_COLOR, 4, bgColor);
 }
@@ -115,9 +130,11 @@ void display()
     vgTranslate(tx, ty);
     vgRotate(rotation);
     vgScale(sx, sy);
+    vgScale(gsx, gsy);
     
-    vgDrawPath(path, VG_FILL_PATH);
+    vgDrawPath(path, VG_FILL_PATH|VG_STROKE_PATH);
     
+    vgScale(1.0f/gsx, 1.0f/gsy);
     vgScale(1.0f/sx, 1.0f/sy);
     vgRotate(-rotation);
     vgTranslate(-tx, -ty);
@@ -159,7 +176,8 @@ void mouseFunction(int button, int state, int, int)
                     }
                 }
     
-                vgScale(scaleUnit, scaleUnit);
+                gsx *= scaleUnit;
+                gsy *= scaleUnit;
             }
             break;
         }

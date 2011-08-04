@@ -178,7 +178,7 @@ unsigned int  REGLGlutGLBinder::createSurface(Surface surfaceParam,
                 }
     
                 addProperty(EGL_WIDTH, width);
-                addProperty(EGL_WIDTH, height);
+                addProperty(EGL_HEIGHT, height);
     
                 EGLint * attr =  
                   mProperties.getAttributes(REGLProperties::SurfaceAttribute);

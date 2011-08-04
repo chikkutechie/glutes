@@ -1,0 +1,17 @@
+/********************************************
+ * auto generated do not edit
+ ********************************************/
+
+#include <appinfo.rh>
+RESOURCE LOCALISABLE_APP_INFO r_localisable_app_info
+    {
+    short_caption = "triangle_vg";
+    caption_and_icon =
+    CAPTION_AND_ICON_INFO
+        {
+        caption = "triangle_vg";
+        number_of_icons = 0;
+        icon_file = "";
+        };
+    }
+

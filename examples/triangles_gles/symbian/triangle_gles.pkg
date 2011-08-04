@@ -1,0 +1,17 @@
+; Language
+&EN
+
+; SIS header: name, uid, version
+#{"triangle_gles"},(0xefac050c),1,0,0
+
+; Default localized vendor name
+%{"Vendor"}
+
+; Default unique vendor name
+:"Vendor"
+
+; DEPLOYMENT
+"/epoc32/release/armv5/urel/triangle_gles.exe" - "!:\sys\bin\triangle_gles.exe"
+"/epoc32/data/z/resource/apps/triangle_gles.rsc" - "!:\resource\apps\triangle_gles.rsc"
+"/epoc32/data/z/private/10003a3f/import/apps/triangle_gles_reg.rsc" - "!:\private\10003a3f\import\apps\triangle_gles_reg.rsc"
+

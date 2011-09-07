@@ -29,6 +29,8 @@
 #ifndef GLUTGLBINDER_H_
 #define GLUTGLBINDER_H_
 
+#include "rcommon.h"
+
 NONSHARABLE_CLASS(RGlutGLBinder)
 {
 public:

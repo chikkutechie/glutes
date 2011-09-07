@@ -31,6 +31,7 @@
 
 #include <EGL/egl.h>
 
+#include "rcommon.h"
 #include "rglutglbinder.h"
 #include "reglproperties.h"
 
@@ -53,7 +54,12 @@ public:
 public:
     REGLGlutGLBinder(API api);
     ~REGLGlutGLBinder();
-    
+
+    void setNativeDisplay(int display)
+    {
+        mNativeDisplay = display;
+    }
+
     bool initialize();
     unsigned int createSurface(Surface  surface, int width, int height);
     bool makeCurrent(unsigned int surface);
@@ -178,20 +184,15 @@ public:
         addProperty(EGL_LUMINANCE_SIZE, size);
     }
 
-    EGLint lastError() const
-    {
-        return mLastError;
-    }
-    
 private:
     bool createContext();
     int getValue(int state) const;
 
 private:
+    int mNativeDisplay;
     EGLDisplay mDisplay;
     EGLContext mContext;
     EGLConfig  mConfig;
-    EGLint mLastError;
     EGLSurfaceInfo mSurfaceInfo;
     int mRendererType;
     REGLProperties mProperties;

@@ -34,6 +34,7 @@ MACRO 			GLUT_STATIC
 
 USERINCLUDE	    ../../inc
 USERINCLUDE	    ../s60/inc
+USERINCLUDE	    ../../common/inc
 
 SYSTEMINCLUDE   /epoc32/include
 SYSTEMINCLUDE   /epoc32/include/mw
@@ -47,13 +48,15 @@ SOURCEPATH		../../src
 SOURCE			glut.cpp
 
 SOURCEPATH  	../s60/src
-SOURCE 			reglglutglbinder.cpp
-SOURCE 			reglproperties.cpp
 SOURCE 			rglutapplication.cpp
 SOURCE 			rglutappui.cpp
 SOURCE 			rglutcontrol.cpp
 SOURCE 			rglutdocument.cpp
 SOURCE 			rgluts60interface.cpp
+
+SOURCEPATH  	../../common/src
+SOURCE 			reglglutglbinder.cpp
+SOURCE 			reglproperties.cpp
 
 
 LIBRARY		   	euser.lib

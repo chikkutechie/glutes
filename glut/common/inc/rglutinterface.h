@@ -29,6 +29,8 @@
 #ifndef GLUTINTERFACE_H_
 #define GLUTINTERFACE_H_
 
+#include "rcommon.h"
+
 NONSHARABLE_CLASS(RGlutInterface)
 {
 public:
@@ -168,7 +170,15 @@ public:
 protected:
     struct GlutWindowProperty
     {
-        GlutWindowProperty() : mX(0), mY(0), mWidth(0), mHeight(0) { mTitle[0] = 0; }
+        GlutWindowProperty()
+            : mX(0),
+              mY(0),
+              mWidth(0),
+              mHeight(0)
+        { 
+            mTitle[0] = '\0';
+        }
+
         char mTitle[TitleLength];
         int mX;
         int mY;

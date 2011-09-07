@@ -25,59 +25,23 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+ 
+#ifndef GLUTEVENTHANDLER_H_
+#define GLUTEVENTHANDLER_H_
 
-#ifndef EGLPROPERTIES_H_
-#define EGLPROPERTIES_H_
+#include "rcommon.h"
 
-#include <vector>
-#include <EGL/egl.h>
-
-NONSHARABLE_CLASS(REGLProperties)
+NONSHARABLE_CLASS(RGlutEventHandler)
 {
-private:
-    class AttributePair
-    {
-    public:
-        EGLint mName;
-        EGLint mValue;
-        
-        AttributePair(EGLint n, EGLint v)
-         : mName(n),
-           mValue(v)
-        {}
-    };
-
-    typedef  std::vector<AttributePair> Attributes; 
-    typedef  Attributes::iterator AttributesIter; 
-    typedef  Attributes::const_iterator AttributesConstIter;
-
 public:
-    enum Type
-    {
-        ConfigAttribute,
-        ContextAttribute,
-        SurfaceAttribute,
-    };
+    virtual ~RGlutEventHandler(){}
 
-    REGLProperties()
-    {}
-
-    void addProperty(int name, int value);
-    void removeProperty(int name);
-
-    EGLint * getAttributes(Type type);
-
-private:
-    void addProperty(Attributes & attributes, int name, int value);
-    void removeProperty(Attributes & attributes, int name);
-
-    Attributes * getAttributesVector(Type type);
-
-private:
-    Attributes mConfigAttributes;
-    Attributes mContextAttributes;
-    Attributes mSurfaceAttributes;    
+    virtual void draw() = 0;
+    virtual void reshape(int w, int h) = 0;
+    virtual void rerect(int x, int y, int w, int h) = 0;
+    virtual void repos(int x, int y) = 0;
+    virtual void keyboard(unsigned char key, unsigned int modifier, int x, int y) = 0;
+    virtual void mouse(int button, int modifier, int x, int y) = 0;
 };
 
 #endif
-

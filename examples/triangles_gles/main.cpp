@@ -31,6 +31,7 @@
 #define GLES
 #endif
 #endif
+
 #if defined(GLES)
 #include <glut.h>
 #define GLORTHO glOrthof
@@ -163,6 +164,7 @@ void display()
 
 void reshape(int w, int h)
 {
+    printf("Reshape called\n");
     GLfloat nRange = 100.0f;
     glViewport(0, 0, w, h);
     

@@ -69,8 +69,7 @@ RGlutMaemoInterface::RGlutMaemoInterface()
     mCurrentControl(0),
     mFullScreen(false),
     mModifier(0),
-    mFinished(false),
-    mButtonPressed(false)
+    mFinished(false)
 {
     setRenderer(GLES);
 }
@@ -453,6 +452,25 @@ void RGlutMaemoInterface::checkTimers()
     }
 }
 
+int RGlutMaemoInterface::getModifiers(int state)
+{
+    int ret = 0;
+
+    if (state & (ShiftMask | LockMask)) {
+        ret |= GLUT_ACTIVE_SHIFT;
+    }
+
+    if (state & ControlMask) {
+        ret |= GLUT_ACTIVE_CTRL;
+    }
+
+    if (state & Mod1Mask) {
+        ret |= GLUT_ACTIVE_ALT;
+    }
+
+    return ret;
+}
+
 
 void RGlutMaemoInterface::exec()
 {
@@ -470,30 +488,72 @@ void RGlutMaemoInterface::exec()
             XNextEvent(mDisplay, &xev);
 
             switch (xev.type) {
+                //case KeyRelease:
                 case KeyPress: {
-                    keyboard(xev.xkey.keycode, xev.xkey.state, xev.xkey.x, xev.xkey.y);
+                    if (mCallbacks.keyboard) {
+                        char asciiTable[64];
+                        XComposeStatus cs;
+                        KeySym keySym;
+                        int length;
+
+                        length = XLookupString(&xev.xkey, asciiTable, sizeof(asciiTable), &keySym, &cs);
+                        if (length > 0) {
+                            mModifier = getModifiers(xev.xkey.state);
+                            mCallbacks.keyboard(asciiTable[0], xev.xkey.x, xev.xkey.y);
+                        }
+                        mModifier = 0xffffffff;
+                    }
+
                     break;
                 }
 
-                case ButtonPress: {
-                    mButtonPressed = true;
-                    mouse(xev.xbutton.button, xev.xbutton.state, xev.xbutton.x, xev.xbutton.y);
-                    break;
-                }
-
+                case ButtonPress:
                 case ButtonRelease: {
-                    mButtonPressed = false;
-                    mouse(xev.xbutton.button, xev.xbutton.state, xev.xbutton.x, xev.xbutton.y);
+                    int button = 0;
+                    bool pressed = false;
+
+                    if (xev.type == ButtonPress) {
+                        pressed = true;
+                    }
+
+                    switch (xev.xbutton.button) {
+                        case Button1Mask:
+                            button = GLUT_LEFT_BUTTON;
+                            break;
+
+                        case Button2Mask:
+                            button = GLUT_MIDDLE_BUTTON;
+                            break;
+
+                        case Button3Mask:
+                            button = GLUT_RIGHT_BUTTON;
+                            break;
+
+                        case Button4Mask:
+                        case Button5Mask:
+                            break;
+                    }
+
+                    mModifier = getModifiers(xev.xmotion.state);
+
+                    if (mCallbacks.mouse) {
+                        mCallbacks.mouse(button, pressed ? GLUT_DOWN : GLUT_UP, xev.xbutton.x, xev.xbutton.y);
+                    }
+
                     break;
                 }
 
                 case MotionNotify: {
-                    if (mCallbacks.motion && !mButtonPressed) {
-                        mCallbacks.motion(xev.xmotion.x, xev.xmotion.y);
-                    }
+                    mModifier = getModifiers(xev.xmotion.state);
 
-                    if (mCallbacks.passiveMotion && mButtonPressed) {
-                        mCallbacks.passiveMotion(xev.xmotion.x, xev.xmotion.y);
+                    if (xev.xmotion.state & (Button1Mask | Button2Mask | Button3Mask | Button4Mask | Button5Mask)) {
+                        if (mCallbacks.motion) {
+                            mCallbacks.motion(xev.xmotion.x, xev.xmotion.y);
+                        }
+                    } else {
+                        if (mCallbacks.passiveMotion) {
+                            mCallbacks.passiveMotion(xev.xmotion.x, xev.xmotion.y);
+                        }
                     }
                     break;
                 }
@@ -606,24 +666,3 @@ void RGlutMaemoInterface::repos(int x, int y)
         mCallbacks.repos(x, y);
     }
 }
-
-void RGlutMaemoInterface::keyboard(unsigned char key, unsigned int modifier, int x, int y)
-{
-    if (mCallbacks.keyboard) {
-        mModifier = modifier;
-        mCallbacks.keyboard(key, x, y);
-    }
-}
-
-void RGlutMaemoInterface::mouse(int button, int modifier, int x, int y)
-{
-    mModifier = modifier;
-
-    if (mCallbacks.mouse) {
-        int glutButton = -1;
-        int glutState  = -1;
-
-
-    }
-}
-

@@ -26,13 +26,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
  
-#if defined(__SYMBIAN32__) || defined(SYMBIAN)
-#if !defined(GLES)
-#define GLES
-#endif
-#endif
 
-#if defined(GLES)
+#if defined(GLUT_ES)
 #include <glut.h>
 #define GLORTHO glOrthof
 #else
@@ -164,7 +159,6 @@ void display()
 
 void reshape(int w, int h)
 {
-    printf("Reshape called\n");
     GLfloat nRange = 100.0f;
     glViewport(0, 0, w, h);
     

@@ -31,7 +31,7 @@
 
 using namespace std;
 
-#if defined(__SYMBIAN32__) || defined(SYMBIAN)
+#if defined(GLUT_VG)
 #include <glut.h>
 #else
 #include <GL/glut.h>
@@ -205,15 +205,20 @@ void timeout(int)
 #if defined(__SYMBIAN32__) || defined(SYMBIAN)
 GLDEF_C TInt E32Main()
 {
-
     char * argv[] = {"triangle", "-renderer", "vg"};
     int    argc = sizeof(argv) / sizeof(argv[0]);
-    
+    glutInit(&argc, argv);
 #else
 int main(int argc, char ** argv)
 {
-#endif
+#ifdef GLUT_VG
+    char * v[] = {"triangle", "-renderer", "vg"};
+    int    c = sizeof(v) / sizeof(v[0]);
+    glutInit(&c, v);
+#else
     glutInit(&argc, argv);
+#endif
+#endif
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutCreateWindow(argv[0]);
     glutDisplayFunc(display);

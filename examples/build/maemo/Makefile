@@ -26,7 +26,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-SUBDIRS = ../../triangles_gles/linux
+SUBDIRS = ../../triangles_gles/maemo ../../triangles_gles2/maemo ../../triangles_vg/maemo
 
 all: $(SUBDIRS)
 	for p in  $(SUBDIRS); \

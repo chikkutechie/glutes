@@ -36,6 +36,7 @@
 #include <string>
 #include <vector>
 #include <stack>
+#include <set>
 
 #include "glut.h"
 #include "rglutinterface.h"
@@ -106,11 +107,33 @@ private:
         Window mControl;
     };
 
+    class TimerEntry
+    {
+    public:
+        TimerEntry()
+            : mMilliSec(0),
+              mCallBack(0),
+              mValue(0),
+              mSetTime(0)
+        {}
+
+        bool operator<(const TimerEntry & oth) const
+        {
+            return mMilliSec < oth.mMilliSec;
+        } 
+
+        unsigned int mMilliSec;
+        void(*mCallBack)(int);
+	int mValue;
+        unsigned int mSetTime;
+    };
+
 private:
     int addControl(ControlEntry entry);
     ControlEntry removeControl(int id);
     void removeAllControl();
     ControlEntry * getControlEntry(int id);
+    void checkTimers();
 
 private:
     typedef std::vector<ControlEntry> ControlList;
@@ -118,6 +141,10 @@ private:
     typedef ControlList::const_iterator ControlListConstIter;
 
     typedef std::stack<ControlEntry> ControlStack;
+
+    typedef std::multiset<TimerEntry> TimerEntrySet;
+    typedef TimerEntrySet::iterator TimerEntrySetIter;
+    typedef TimerEntrySet::const_iterator TimerEntrySetConstIter;
 
 private:
     static const int ID_START_INDEX = 100;
@@ -150,6 +177,8 @@ private:
     ControlStack mControlStack;
     bool mFinished;
     bool mButtonPressed;
+
+    TimerEntrySet mTimers;
 };
 
 #endif

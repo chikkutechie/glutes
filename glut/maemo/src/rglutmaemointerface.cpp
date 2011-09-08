@@ -29,6 +29,9 @@
 #include "rglutmaemointerface.h"
 #include "reglglutglbinder.h"
 
+#include <time.h>
+#include <sys/time.h>
+
 static RGlutInterface * interface = 0;
 
 RGlutInterface* RGlutInterface::getInterface()
@@ -252,7 +255,7 @@ int RGlutMaemoInterface::createWindow()
                     (unsigned char*)&atom,  1);
 
     XChangeProperty(mDisplay, window,
-                    XInternAtom(mDisplay, "_HILDON_NON_COMPOSITED_WINDOW", True),
+                    XInternAtom(mDisplay, "_HILDON_NON_COMPOSITED_WINDOW", False),
                     XA_INTEGER,  32,  PropModeReplace,
                     (unsigned char*)&one,  1);
 
@@ -414,7 +417,42 @@ void RGlutMaemoInterface::pushWindow()
 
 void RGlutMaemoInterface::timerFunc(unsigned int millis, void (*func)(int), int value)
 {
+    TimerEntry entry;
+    entry.mMilliSec = millis;
+    entry.mCallBack = func;
+    entry.mValue = value;
+
+    struct timeval now;
+    gettimeofday(&now, 0);
+    entry.mSetTime = now.tv_usec/1000 + now.tv_sec*1000;
+
+    mTimers.insert(entry);
 }
+
+void RGlutMaemoInterface::checkTimers()
+{
+    if (mTimers.empty()) {
+        return;
+    }
+
+    struct timeval now;
+    gettimeofday(&now, 0);
+    unsigned int timems = now.tv_usec/1000 + now.tv_sec*1000;
+
+    TimerEntrySetIter iter;
+    for (iter = mTimers.begin(); iter != mTimers.end(); ++iter) {
+        if (timems - iter->mSetTime > iter->mMilliSec) {
+            iter->mCallBack(iter->mValue);
+        } else {
+            break;
+	}
+    }
+
+    if (iter != mTimers.begin()) {
+        mTimers.erase(mTimers.begin(), iter--);
+    }
+}
+
 
 void RGlutMaemoInterface::exec()
 {
@@ -427,58 +465,62 @@ void RGlutMaemoInterface::exec()
     }
 
     while (!mFinished) {
-    while (XPending(mDisplay)) {
-        XEvent  xev;
-        XNextEvent(mDisplay, &xev);
+        while (XPending(mDisplay)) {
+            XEvent  xev;
+            XNextEvent(mDisplay, &xev);
 
-        switch (xev.type) {
-            case KeyPress: {
-                keyboard(xev.xkey.keycode, xev.xkey.state, xev.xkey.x, xev.xkey.y);
-                break;
-            }
-
-            case ButtonPress: {
-                mButtonPressed = true;
-                mouse(xev.xbutton.button, xev.xbutton.state, xev.xbutton.x, xev.xbutton.y);
-                break;
-            }
-
-            case ButtonRelease: {
-                mButtonPressed = false;
-                mouse(xev.xbutton.button, xev.xbutton.state, xev.xbutton.x, xev.xbutton.y);
-                break;
-            }
-
-            case MotionNotify: {
-                if (mCallbacks.motion && !mButtonPressed) {
-                    mCallbacks.motion(xev.xmotion.x, xev.xmotion.y);
+            switch (xev.type) {
+                case KeyPress: {
+                    keyboard(xev.xkey.keycode, xev.xkey.state, xev.xkey.x, xev.xkey.y);
+                    break;
                 }
 
-                if (mCallbacks.passiveMotion && mButtonPressed) {
-                    mCallbacks.passiveMotion(xev.xmotion.x, xev.xmotion.y);
+                case ButtonPress: {
+                    mButtonPressed = true;
+                    mouse(xev.xbutton.button, xev.xbutton.state, xev.xbutton.x, xev.xbutton.y);
+                    break;
                 }
-                break;
-            }
 
-            case Expose:
-            case GraphicsExpose:
-            case VisibilityNotify: {
-                draw();
-                break;
-            }
+                case ButtonRelease: {
+                    mButtonPressed = false;
+                    mouse(xev.xbutton.button, xev.xbutton.state, xev.xbutton.x, xev.xbutton.y);
+                    break;
+                }
 
-            case ResizeRequest: {
-                reshape(xev.xresizerequest.width, xev.xresizerequest.height);
-                break;
+                case MotionNotify: {
+                    if (mCallbacks.motion && !mButtonPressed) {
+                        mCallbacks.motion(xev.xmotion.x, xev.xmotion.y);
+                    }
+
+                    if (mCallbacks.passiveMotion && mButtonPressed) {
+                        mCallbacks.passiveMotion(xev.xmotion.x, xev.xmotion.y);
+                    }
+                    break;
+                }
+
+                case Expose:
+                case GraphicsExpose:
+                case VisibilityNotify: {
+                    draw();
+                    break;
+                }
+
+                case ResizeRequest: {
+                    reshape(xev.xresizerequest.width, xev.xresizerequest.height);
+                    break;
+                }
             }
         }
-    }
-    usleep(1000 * 10);
+
+        checkTimers();
+
+        usleep(1000 * 10);
     }
 }
 
 void RGlutMaemoInterface::redraw(int win)
 {
+    draw();
 }
 
 void RGlutMaemoInterface::flush()

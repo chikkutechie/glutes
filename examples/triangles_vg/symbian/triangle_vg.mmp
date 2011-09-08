@@ -5,7 +5,6 @@
 TARGET         triangle_vg.exe
 TARGETTYPE     EXE
 
-MACRO GLUT_OPENVG
 
 UID            0x100039ce 0xefac053b
 SECUREID       0xefac053b
@@ -66,3 +65,4 @@ CAPABILITY       None
 
 STDCPP
 
+MACRO GLUT_VG

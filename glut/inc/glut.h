@@ -37,7 +37,9 @@
 #include <e32def.h>
 #include <e32base.h>
 #define GLUT_OS_SYMBIAN
+#ifndef GLUT_ES
 #define GLUT_ES
+#endif
 #define APIENTRY  IMPORT_C
 #endif
 
@@ -48,10 +50,10 @@
 /*
  * GL, GLES, GLES2 or VG include files
  */
-#if defined(GLUT_ES)
-#ifdef GLUT_GLES2
+#if defined(GLUT_ES) || defined(GLUT_ES2) || defined(GLUT_VG)
+#ifdef GLUT_ES2
 #include <GLES2/gl2.h>
-#elif GLUT_OPENVG
+#elif GLUT_VG
 #include <VG/openvg.h>
 #include <VG/vgu.h>
 #else

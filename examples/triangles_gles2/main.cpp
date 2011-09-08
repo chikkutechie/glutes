@@ -30,7 +30,7 @@
 #include <math.h>
 #include <string.h>
 
-#if defined(__SYMBIAN32__) || defined(SYMBIAN)
+#if defined(GLUT_ES2)
 #include <glut.h>
 #else
 #include <GL/glut.h>
@@ -45,7 +45,7 @@ GLfloat yRot = 0.0f;
 static const char *vertxShader = "   uniform mat4 u_mvp_matrix; \n"
         "attribute vec4 a_position;                             \n"
         "attribute vec4 a_color;                                \n"
-        "varying vec4 v_color;                                  \n"
+        "varying mediump vec4 v_color;                                  \n"
         "                                                       \n"
         "void main()                                            \n"
         "{                                                      \n"
@@ -54,7 +54,7 @@ static const char *vertxShader = "   uniform mat4 u_mvp_matrix; \n"
         "}                                                      \n";
 
 static const char *fragShader = "                               \n"
-        "varying vec4 v_color;                                  \n"
+        "varying mediump vec4 v_color;                                  \n"
         "                                                       \n"
         "void main()                                            \n"
         "{                                                      \n"
@@ -379,12 +379,19 @@ GLDEF_C TInt E32Main()
 {
     char * argv[] = {"triangle_2", "-renderer", "gles2"};
     int    argc = sizeof(argv) / sizeof(argv[0]);
+    glutInit(&argc, argv);
     
 #else
 int main(int argc, char ** argv)
 {
-#endif
+#ifdef GLUT_ES2
+    char * v[] = {"triangle_2", "-renderer", "gles2"};
+    int    c = sizeof(v) / sizeof(v[0]);
+    glutInit(&c, v);
+#else
     glutInit(&argc, argv);
+#endif
+#endif
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutCreateWindow(argv[0]);
     glutFullScreen();

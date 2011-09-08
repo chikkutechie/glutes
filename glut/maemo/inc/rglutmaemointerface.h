@@ -44,7 +44,7 @@
 
 class REGLGlutGLBinder;
 
-class RGlutMaemoInterface: public RGlutInterface, public RGlutEventHandler
+class RGlutMaemoInterface: public RGlutInterface
 {
 public:
     RGlutMaemoInterface();
@@ -89,8 +89,6 @@ public:
     void reshape(int w, int h);
     void rerect(int x, int y, int w, int h);
     void repos(int x, int y);
-    void keyboard(unsigned char key, unsigned int modifier, int x, int y);
-    void mouse(int button, int modifier, int x, int y);
  
 private:
     class ControlEntry
@@ -134,6 +132,7 @@ private:
     void removeAllControl();
     ControlEntry * getControlEntry(int id);
     void checkTimers();
+    int getModifiers(int state);
 
 private:
     typedef std::vector<ControlEntry> ControlList;
@@ -176,7 +175,6 @@ private:
     ControlList mControllist;
     ControlStack mControlStack;
     bool mFinished;
-    bool mButtonPressed;
 
     TimerEntrySet mTimers;
 };

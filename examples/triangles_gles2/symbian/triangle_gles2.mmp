@@ -5,7 +5,6 @@
 TARGET         triangle_gles2.exe
 TARGETTYPE     EXE
 
-MACRO GLUT_GLES2
 
 UID            0x100039ce 0xefac0530
 SECUREID       0xefac0530
@@ -67,3 +66,4 @@ CAPABILITY       None
 
 STDCPP
 
+MACRO GLUT_ES2

@@ -26,37 +26,26 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-lib_PROGRAMME = libglut.so
+bin_PROGRAMME = triangles_vg
 
-glut_SOURCES = ../../src/glut.cpp \
-	       ../../common/src/reglglutglbinder.cpp \
-	       ../../common/src/reglproperties.cpp \
-	       ../src/rglutmaemointerface.cpp
-glut_INCExports = ../../inc/glut.h
-glut_OBJS = $(patsubst ../src/%.cpp, %.o, $(glut_SOURCES))
+triangles_vg_SOURCES = ../main.cpp
+triangles_vg_OBJS = $(patsubst ../%.cpp, %.o, $(triangles_vg_SOURCES))
 
 CXX = g++
-LIBS = -lX11
-LIBDIR = 
-INCLUDES =  -I../inc -I../../inc -I../../common/inc
-DEFINES = -DGLUT_ES -DGLUTES_DEBUG
-CXXFLAGS = -g3 -Wall -fPIC  $(INCLUDES) $(DEFINES)
-VPATH = ../src
+INCLUDE = -I..
+LIBS =  -L../../../glut/maemo/lib -lglut -lOpenVG -lEGL -lX11
+CXXFLAGS = -g3 $(INCLUDE) -DGLUT_VG
+all: $(bin_PROGRAMME)
 
-all: $(lib_PROGRAMME) install
 
-$(lib_PROGRAMME): $(glut_OBJS)
-	$(CXX) -shared -Wl,-soname,$@ -o $@ $(CXXFLAGS) $(glut_OBJS)
-	cp $(lib_PROGRAMME) ../lib
+$(bin_PROGRAMME): $(triangles_vg_OBJS)
+	$(CXX) -o $@ $(CXXFLAGS) $(LIBDIR) $(LIBS) $(INCLUDE) $(triangles_vg_OBJS)
 
-.o.cpp:
-
-install:
-	cp $(lib_PROGRAMME) /usr/lib
-	cp $(glut_INCExports) /usr/include
+$(triangles_vg_OBJS): $(triangles_vg_SOURCES)
+	$(CXX) -c -o $@ $(CXXFLAGS) $<
 
 clean:
-	rm -rf *.o $(lib_PROGRAMME) ../lib/$(lib_PROGRAMME)
+	rm -rf *.o $(bin_PROGRAMME)
 
 rebuild: clean all
 

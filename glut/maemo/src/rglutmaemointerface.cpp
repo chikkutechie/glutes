@@ -223,66 +223,65 @@ int RGlutMaemoInterface::createWindow()
 
 
     XSetWindowAttributes wa;
-    wa.event_mask  =  ExposureMask | PointerMotionMask | KeyPressMask | ResizeRedirectMask;
+    wa.event_mask  =  StructureNotifyMask |
+                      SubstructureNotifyMask |
+                      ExposureMask | 
+                      PointerMotionMask |
+                      KeyPressMask |
+                      KeyReleaseMask |
+                      ResizeRedirectMask | 
+                      ButtonMotionMask |
+                      ButtonPressMask |
+                      ButtonReleaseMask;
 
+    unsigned long mask = CWEventMask;
     Window window = XCreateWindow(mDisplay, mRootWindow,
                                   x, y, width, height,
                                   0,
                                   CopyFromParent, InputOutput,
-                                  CopyFromParent, CWEventMask,
+                                  CopyFromParent, mask,
                                   &wa);
 
     XSetWindowAttributes  xattr;
-
     xattr.override_redirect = False;
-
     XChangeWindowAttributes(mDisplay, window, CWOverrideRedirect, &xattr);
-
 
     Atom  atom;
     int one = 1;
 
     if (mFullScreen) {
         atom = XInternAtom(mDisplay, "_NET_WM_STATE_FULLSCREEN", True);
-    } else {
-        atom = XInternAtom(mDisplay, "_NET_WM_STATE_FULLSCREEN", False);
-    }
 
-    XChangeProperty(mDisplay, window,
+        XChangeProperty(mDisplay, window,
                     XInternAtom(mDisplay, "_NET_WM_STATE", True),
                     XA_ATOM,  32,  PropModeReplace,
                     (unsigned char*)&atom,  1);
+    }
 
     XChangeProperty(mDisplay, window,
-                    XInternAtom(mDisplay, "_HILDON_NON_COMPOSITED_WINDOW", False),
+                    XInternAtom(mDisplay, "_HILDON_NON_COMPOSITED_WINDOW", True),
                     XA_INTEGER,  32,  PropModeReplace,
                     (unsigned char*)&one,  1);
 
-    XWMHints hints;
-    hints.input = True;
-    hints.flags = InputHint;
-
-    XSetWMHints(mDisplay, window, &hints);
-
     XMapWindow(mDisplay, window);
-
     XStoreName(mDisplay, window, mWindowProperty.mTitle);
 
-    Atom wmState = XInternAtom(mDisplay, "_NET_WM_STATE", False);
-    Atom fullscreen = XInternAtom(mDisplay, "_NET_WM_STATE_FULLSCREEN", True);
+    if (mFullScreen) {
+        Atom wmState = XInternAtom(mDisplay, "_NET_WM_STATE", False);
+        Atom fullscreen = XInternAtom(mDisplay, "_NET_WM_STATE_FULLSCREEN", False);
 
-    XEvent xev;
-    memset(&xev, 0, sizeof(xev));
+        XEvent xev;
+        memset(&xev, 0, sizeof(xev));
 
-    xev.type                 = ClientMessage;
-    xev.xclient.window       = window;
-    xev.xclient.message_type = wmState;
-    xev.xclient.format       = 32;
-    xev.xclient.data.l[0]    = 1;
-    xev.xclient.data.l[1]    = fullscreen;
-        
-    XSendEvent (mDisplay, mRootWindow,
-                False, SubstructureNotifyMask, &xev);
+        xev.type                 = ClientMessage;
+        xev.xclient.window       = window;
+        xev.xclient.message_type = wmState;
+        xev.xclient.format       = 32;
+        xev.xclient.data.l[0]    = 1;
+        xev.xclient.data.l[1]    = fullscreen;
+
+        XSendEvent(mDisplay, mRootWindow, False, SubstructureNotifyMask, &xev);
+    }
 
     REGLGlutGLBinder::EGLSurfaceInfo surfaceInfo;
     surfaceInfo.mType = REGLGlutGLBinder::EGLSurfaceInfo::TYPE_WINDOW;
@@ -392,6 +391,30 @@ void RGlutMaemoInterface::showWindow()
 
 void RGlutMaemoInterface::fullScreen()
 {
+    mFullScreen = true;
+    ControlEntry * entry = getControlEntry(mCurrentControl);
+    if (entry) {
+        Atom atom = XInternAtom(mDisplay, "_NET_WM_STATE_FULLSCREEN", True);
+
+        XChangeProperty(mDisplay, entry->mControl,
+                    XInternAtom(mDisplay, "_NET_WM_STATE", True),
+                    XA_ATOM,  32,  PropModeReplace,
+                    (unsigned char*)&atom,  1);
+        Atom wmState = XInternAtom(mDisplay, "_NET_WM_STATE", False);
+        Atom fullscreen = XInternAtom(mDisplay, "_NET_WM_STATE_FULLSCREEN", False);
+
+        XEvent xev;
+        memset(&xev, 0, sizeof(xev));
+
+        xev.type                 = ClientMessage;
+        xev.xclient.window       = entry->mControl;
+        xev.xclient.message_type = wmState;
+        xev.xclient.format       = 32;
+        xev.xclient.data.l[0]    = 1;
+        xev.xclient.data.l[1]    = fullscreen;
+
+        XSendEvent(mDisplay, mRootWindow, False, SubstructureNotifyMask, &xev);
+    }
 }
 
 void RGlutMaemoInterface::hideWindow()
@@ -486,6 +509,8 @@ void RGlutMaemoInterface::exec()
         while (XPending(mDisplay)) {
             XEvent  xev;
             XNextEvent(mDisplay, &xev);
+
+            GLUTES_DEBUGP2("Event revieved %d", xev.type);
 
             switch (xev.type) {
                 //case KeyRelease:

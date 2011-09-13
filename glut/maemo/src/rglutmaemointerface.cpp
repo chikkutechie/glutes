@@ -79,8 +79,8 @@ RGlutMaemoInterface::~RGlutMaemoInterface()
     terminate();
 }
 
-void RGlutMaemoInterface::intialize(int argc, char ** argv)
-{    
+void RGlutMaemoInterface::parseArguments(int argc, char ** argv)
+{
     for (int i=0; i < argc; ++i) {
         
         std::string name(argv[i]);
@@ -122,19 +122,10 @@ void RGlutMaemoInterface::intialize(int argc, char ** argv)
             ++i;
         }
     }
+}
 
-    mDisplay = XOpenDisplay(0);
-    if (mDisplay == 0) {
-        return;
-    }
-
-    mScreenNumber = XDefaultScreen(mDisplay);
-
-    mScreenWidth = XDisplayWidth(mDisplay, mScreenNumber);
-    mScreenHeight = XDisplayHeight(mDisplay, mScreenNumber);
-
-    mRootWindow = XDefaultRootWindow(mDisplay);
-    
+void RGlutMaemoInterface::createBinder()
+{
     /*
      * currently egl is used to bind native window system
      * with opengl/openvg/opengles 
@@ -160,6 +151,25 @@ void RGlutMaemoInterface::intialize(int argc, char ** argv)
     
     mBinder->setNativeDisplay((int)mDisplay);
     mBinder->initialize();
+}
+
+void RGlutMaemoInterface::intialize(int argc, char ** argv)
+{    
+    parseArguments(argc, argv);
+
+    mDisplay = XOpenDisplay(0);
+    if (mDisplay == 0) {
+        return;
+    }
+
+    mScreenNumber = XDefaultScreen(mDisplay);
+
+    mScreenWidth = XDisplayWidth(mDisplay, mScreenNumber);
+    mScreenHeight = XDisplayHeight(mDisplay, mScreenNumber);
+
+    mRootWindow = XDefaultRootWindow(mDisplay);
+    
+    createBinder();
 }
 
 void RGlutMaemoInterface::terminate()
@@ -233,8 +243,12 @@ int RGlutMaemoInterface::createWindow()
                       ButtonMotionMask |
                       ButtonPressMask |
                       ButtonReleaseMask;
+    wa.background_pixmap = None;
+    wa.background_pixel = 0;
+    wa.border_pixel = 0;
+    
 
-    unsigned long mask = CWEventMask;
+    unsigned long mask = CWBackPixmap | CWEventMask;
     Window window = XCreateWindow(mDisplay, mRootWindow,
                                   x, y, width, height,
                                   0,
@@ -549,7 +563,7 @@ void RGlutMaemoInterface::exec()
 
         checkTimers();
 
-        usleep(1000 * 20);
+        usleep(1000 * 5);
     }
 }
 
@@ -571,28 +585,194 @@ void RGlutMaemoInterface::flush()
 
 void RGlutMaemoInterface::setWindowTitle(const char * title)
 {
-    //TODO
+    ControlEntry * entry = getControlEntry(mCurrentControl);
+    if (entry) {
+        XStoreName(mDisplay, entry->mControl, title);
+    }
 }
 
 void RGlutMaemoInterface::showWindow()
 {
-    //TODO
+    ControlEntry * entry = getControlEntry(mCurrentControl);
+    if (entry) {
+        XMapWindow(mDisplay, entry->mControl);
+    }
 }
 
 void RGlutMaemoInterface::hideWindow()
 {
-    //TODO
+    ControlEntry * entry = getControlEntry(mCurrentControl);
+    if (entry) {
+        XUnmapWindow(mDisplay, entry->mControl);
+    }
 }
 
 void RGlutMaemoInterface::positionWindow(int x, int y)
 {
-    //TODO
+    ControlEntry * entry = getControlEntry(mCurrentControl);
+    if (entry) {
+        int mask = CWX | CWY;
+        XWindowChanges wc;
+        wc.x = x;
+        wc.y = y;
+        XConfigureWindow(mDisplay, entry->mControl, mask, &wc);
+    }
 }
 
 void RGlutMaemoInterface::reshapeWindow(int width, int height)
 {
-    //TODO
+    ControlEntry * entry = getControlEntry(mCurrentControl);
+    if (entry) {
+        int mask = CWWidth | CWHeight;
+        XWindowChanges wc;
+        wc.width = width;
+        wc.height = height;
+        XConfigureWindow(mDisplay, entry->mControl, mask, &wc);
+    }
 }
+
+void RGlutMaemoInterface::draw()
+{
+    if (mCallbacks.draw) {
+        mCallbacks.draw();
+    }
+}
+
+void RGlutMaemoInterface::reshape(int w, int h)
+{
+    GLUTES_DEBUGP3("Reshaping called with Size(%d, %d)", w, h);
+    if (mCallbacks.reshape) {
+        GLUTES_DEBUGP3("Reshaping with Size(%d, %d)", w, h);
+        mCallbacks.reshape(w, h);
+    }
+}
+
+void RGlutMaemoInterface::rerect(int x, int y, int w, int h)
+{
+    if (mCallbacks.reshape) {
+        mCallbacks.reshape(w, h);
+    }
+    if (mCallbacks.repos) {
+        mCallbacks.repos(x, y);
+    }
+}
+
+void RGlutMaemoInterface::repos(int x, int y)
+{
+    if (mCallbacks.repos) {
+        mCallbacks.repos(x, y);
+    }
+}
+
+int RGlutMaemoInterface::getModifiers()
+{
+    return mModifier;
+}
+
+int RGlutMaemoInterface::getValue(unsigned int state)
+{
+    int value = 0;
+
+    switch (state) {
+        case GLUT_WINDOW_WIDTH: {
+            ControlEntry * entry = getControlEntry(mCurrentControl);
+            if (entry) {
+                XWindowAttributes wa;
+                if (XGetWindowAttributes(mDisplay, entry->mControl, &wa)) {
+                    value = wa.width;
+                }
+            }
+            break;
+        }
+
+        case GLUT_WINDOW_HEIGHT: {
+            ControlEntry * entry = getControlEntry(mCurrentControl);
+            if (entry) {
+                XWindowAttributes wa;
+                if (XGetWindowAttributes(mDisplay, entry->mControl, &wa)) {
+                    value = wa.height;
+                }
+            }
+            break;
+        }
+
+        case GLUT_WINDOW_X: {
+            ControlEntry * entry = getControlEntry(mCurrentControl);
+            if (entry) {
+                XWindowAttributes wa;
+                if (XGetWindowAttributes(mDisplay, entry->mControl, &wa)) {
+                    value = wa.x;
+                }
+            }
+            break;
+        }
+
+        case GLUT_WINDOW_Y: {
+            ControlEntry * entry = getControlEntry(mCurrentControl);
+            if (entry) {
+                XWindowAttributes wa;
+                if (XGetWindowAttributes(mDisplay, entry->mControl, &wa)) {
+                    value = wa.y;
+                }
+            }
+            break;
+        }
+
+        case GLUT_WINDOW_BUFFER_SIZE: {
+            if (mBinder) {
+                value = mBinder->getBufferSize();
+            }
+            break;
+        }
+        case GLUT_WINDOW_STENCIL_SIZE: {
+            value = mBinder->getStencilSize();
+            break;
+        }
+        
+        case GLUT_WINDOW_DEPTH_SIZE: {
+            value = mBinder->getDepthSize();
+            break;
+        }
+        
+        case GLUT_WINDOW_RED_SIZE: {
+            value = mBinder->getRedSize();
+            break;
+        }
+        
+        case GLUT_WINDOW_GREEN_SIZE: {
+            value = mBinder->getGreenSize();
+            break;
+        }
+        
+        case GLUT_WINDOW_BLUE_SIZE: {
+            value = mBinder->getBlueSize();
+            break;
+        }
+        
+        case GLUT_WINDOW_ALPHA_SIZE: {
+            value = mBinder->getAlphaSize();
+            break;
+        }
+        
+        case GLUT_WINDOW_DOUBLEBUFFER: {
+            value = 1;
+            break;
+        }
+
+        case GLUT_SCREEN_WIDTH: {
+            value = mScreenWidth;
+            break;
+        }
+
+        case GLUT_SCREEN_HEIGHT: {
+            value = mScreenHeight;
+            break;
+        }
+    }
+
+    return value;
+}
+
 
 void RGlutMaemoInterface::popWindow()
 {
@@ -646,46 +826,3 @@ void RGlutMaemoInterface::detachMenu(int)
     //TODO
 }
 
-int RGlutMaemoInterface::getModifiers()
-{
-    return mModifier;
-}
-
-int RGlutMaemoInterface::getValue(unsigned int)
-{
-    //TODO
-    return 0;
-}
-
-void RGlutMaemoInterface::draw()
-{
-    if (mCallbacks.draw) {
-        mCallbacks.draw();
-    }
-}
-
-void RGlutMaemoInterface::reshape(int w, int h)
-{
-    GLUTES_DEBUGP3("Reshaping called with Size(%d, %d)", w, h);
-    if (mCallbacks.reshape) {
-        GLUTES_DEBUGP3("Reshaping with Size(%d, %d)", w, h);
-        mCallbacks.reshape(w, h);
-    }
-}
-
-void RGlutMaemoInterface::rerect(int x, int y, int w, int h)
-{
-    if (mCallbacks.reshape) {
-        mCallbacks.reshape(w, h);
-    }
-    if (mCallbacks.repos) {
-        mCallbacks.repos(x, y);
-    }
-}
-
-void RGlutMaemoInterface::repos(int x, int y)
-{
-    if (mCallbacks.repos) {
-        mCallbacks.repos(x, y);
-    }
-}

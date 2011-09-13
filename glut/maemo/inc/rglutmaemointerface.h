@@ -133,6 +133,8 @@ private:
     ControlEntry * getControlEntry(int id);
     void checkTimers();
     int getModifiers(int state);
+    void parseArguments(int argc, char ** argv);
+    void createBinder();
 
 private:
     typedef std::vector<ControlEntry> ControlList;

@@ -118,7 +118,7 @@ private:
         bool operator<(const TimerEntry & oth) const
         {
             return mMilliSec < oth.mMilliSec;
-        } 
+        }
 
         unsigned int mMilliSec;
         void(*mCallBack)(int);

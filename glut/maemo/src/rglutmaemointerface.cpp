@@ -274,6 +274,7 @@ int RGlutMaemoInterface::createWindow()
     XMapWindow(mDisplay, window);
     XStoreName(mDisplay, window, mWindowProperty.mTitle);
 
+
     REGLGlutGLBinder::EGLSurfaceInfo surfaceInfo;
     surfaceInfo.mType = REGLGlutGLBinder::EGLSurfaceInfo::TYPE_WINDOW;
     surfaceInfo.mData = (void *)window;
@@ -425,17 +426,23 @@ void RGlutMaemoInterface::checkTimers()
     gettimeofday(&now, 0);
     unsigned int timems = now.tv_usec/1000 + now.tv_sec*1000;
 
-    TimerEntrySetIter iter;
-    for (iter = mTimers.begin(); iter != mTimers.end(); ++iter) {
+    std::vector<TimerEntry> expiredTimers;
+
+    for (TimerEntrySetIter iter = mTimers.begin(); iter != mTimers.end(); ++iter) {
         if (timems - iter->mSetTime > iter->mMilliSec) {
-            iter->mCallBack(iter->mValue);
+            expiredTimers.push_back(*iter);
         } else {
             break;
 	}
     }
 
-    if (iter != mTimers.begin()) {
-        mTimers.erase(mTimers.begin(), iter--);
+    unsigned int expiredTimersCount = expiredTimers.size();
+    for (unsigned int i = 0; i < expiredTimersCount; ++i) {
+        mTimers.erase(expiredTimers[i]);
+    }
+
+    for (unsigned int i = 0; i < expiredTimersCount; ++i) {
+        expiredTimers[i].mCallBack(expiredTimers[i].mValue);
     }
 }
 

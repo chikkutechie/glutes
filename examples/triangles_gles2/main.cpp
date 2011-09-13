@@ -361,6 +361,17 @@ void mouseFunction(int button, int state, int, int)
             
     }
 }
+
+void keyboard(unsigned char key, int x, int y)
+{
+    switch (key) {
+        case 'q':
+        case 'Q': {
+            exit(0);
+        }
+    }
+}
+
 void timeout(int)
 {
     if (xRot >= 360.0f) {
@@ -399,6 +410,7 @@ int main(int argc, char ** argv)
     glutReshapeFunc(reshape);
     glutTimerFunc(30, timeout, 0);
     glutMouseFunc(mouseFunction);
+    glutKeyboardFunc(keyboard);
     
     if (!init()) {
         exit(1);

@@ -260,12 +260,6 @@ int RGlutMaemoInterface::createWindow()
     xattr.override_redirect = False;
     XChangeWindowAttributes(mDisplay, window, CWOverrideRedirect, &xattr);
 
-    int one = 1;
-    XChangeProperty(mDisplay, window,
-                    XInternAtom(mDisplay, "_HILDON_NON_COMPOSITED_WINDOW", True),
-                    XA_INTEGER,  32,  PropModeReplace,
-                    (unsigned char*)&one,  1);
-
     XWMHints hints;
     hints.input = True;
     hints.flags = InputHint;

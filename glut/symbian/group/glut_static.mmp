@@ -44,9 +44,6 @@ SYSTEMINCLUDE	/epoc32/include/stdapis
 SYSTEMINCLUDE	/epoc32/include/stdapis/sys
 SYSTEMINCLUDE	/epoc32/include/stdapis/stlportv5
 
-SOURCEPATH		../../src
-SOURCE			glut.cpp
-
 SOURCEPATH  	../s60/src
 SOURCE 			rglutapplication.cpp
 SOURCE 			rglutappui.cpp
@@ -55,6 +52,7 @@ SOURCE 			rglutdocument.cpp
 SOURCE 			rgluts60interface.cpp
 
 SOURCEPATH  	../../common/src
+SOURCE			glut.cpp
 SOURCE 			reglglutglbinder.cpp
 SOURCE 			reglproperties.cpp
 

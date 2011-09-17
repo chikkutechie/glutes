@@ -41,6 +41,9 @@
 #include "glut.h"
 #include "rglutinterface.h"
 #include "rgluteventhandler.h"
+#include "rglutdisplay.h"
+#include "rglutwindow.h"
+#include "rglutmenu.h"
 
 class REGLGlutGLBinder;
 
@@ -102,7 +105,7 @@ private:
         
         int mId;
         unsigned int  mSurface;
-        Window mControl;
+        RGlutWindow * mControl;
     };
 
     class TimerEntry
@@ -164,11 +167,9 @@ private:
 private:
     REGLGlutGLBinder * mBinder;
     unsigned int mDisplayMode;
-    Display * mDisplay;
     int mScreenNumber;
     int mScreenWidth;
     int mScreenHeight;
-    Window mRootWindow;
     
     int mCurrentControl;
     bool mFullScreen;
@@ -179,6 +180,9 @@ private:
     bool mFinished;
 
     TimerEntrySet mTimers;
+    std::vector<RGlutMenu *> mMenus;
+    int mCurrentMenu;
+    int mAttachedMenuButton;
 };
 
 #endif

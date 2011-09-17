@@ -61,15 +61,15 @@ RGlutMaemoInterface::RGlutMaemoInterface()
     KParamOrientationAutomatic("automatic"),
     mBinder(0),
     mDisplayMode(0),
-    mDisplay(0),
     mScreenNumber(0),
     mScreenWidth(0),
     mScreenHeight(0),
-    mRootWindow(0),
     mCurrentControl(0),
     mFullScreen(false),
     mModifier(0),
-    mFinished(false)
+    mFinished(false),
+    mCurrentMenu(0),
+    mAttachedMenuButton(-1)
 {
     setRenderer(GLES);
 }
@@ -149,7 +149,7 @@ void RGlutMaemoInterface::createBinder()
     
     mBinder = new REGLGlutGLBinder(api);
     
-    mBinder->setNativeDisplay((int)mDisplay);
+    mBinder->setNativeDisplay((int)RGlutDisplay::instance()->display());
     mBinder->initialize();
 }
 
@@ -157,18 +157,18 @@ void RGlutMaemoInterface::intialize(int argc, char ** argv)
 {    
     parseArguments(argc, argv);
 
-    mDisplay = XOpenDisplay(0);
-    if (mDisplay == 0) {
+    Display * display = RGlutDisplay::instance()->display();
+    if (display == 0) {
         return;
     }
 
-    mScreenNumber = XDefaultScreen(mDisplay);
+    GLUTES_DEBUGP2("Display %d", display);
 
-    mScreenWidth = XDisplayWidth(mDisplay, mScreenNumber);
-    mScreenHeight = XDisplayHeight(mDisplay, mScreenNumber);
+    mScreenNumber = XDefaultScreen(display);
 
-    mRootWindow = XDefaultRootWindow(mDisplay);
-    
+    mScreenWidth = XDisplayWidth(display, mScreenNumber);
+    mScreenHeight = XDisplayHeight(display, mScreenNumber);
+
     createBinder();
 }
 
@@ -181,10 +181,6 @@ void RGlutMaemoInterface::terminate()
     }
 
     removeAllControl();
-
-    if (mDisplay) {
-        XCloseDisplay(mDisplay);
-    }
 }
 
 void RGlutMaemoInterface::initDisplayMode(unsigned int mode)
@@ -231,54 +227,22 @@ int RGlutMaemoInterface::createWindow()
         y = mWindowProperty.mY;
     }
 
-
-    XSetWindowAttributes wa;
-    wa.event_mask  =  StructureNotifyMask |
-                      SubstructureNotifyMask |
-                      ExposureMask | 
-                      PointerMotionMask |
-                      KeyPressMask |
-                      KeyReleaseMask |
-                      ResizeRedirectMask | 
-                      ButtonMotionMask |
-                      ButtonPressMask |
-                      ButtonReleaseMask;
-    wa.background_pixmap = None;
-    wa.background_pixel = 0;
-    wa.border_pixel = 0;
-    
-
-    unsigned long mask = CWBackPixmap | CWEventMask;
-    Window window = XCreateWindow(mDisplay, mRootWindow,
-                                  x, y, width, height,
-                                  0,
-                                  CopyFromParent, InputOutput,
-                                  CopyFromParent, mask,
-                                  &wa);
-
-    XSetWindowAttributes  xattr;
-    xattr.override_redirect = False;
-    XChangeWindowAttributes(mDisplay, window, CWOverrideRedirect, &xattr);
-
-    XWMHints hints;
-    hints.input = True;
-    hints.flags = InputHint;
-    XSetWMHints(mDisplay, window, &hints);
- 
-    XMapWindow(mDisplay, window);
-    XStoreName(mDisplay, window, mWindowProperty.mTitle);
-
+    RGlutWindow * window = new RGlutWindow;
+    window->setGeometry(x, y, width, height);
+    window->setTitle(mWindowProperty.mTitle);
+    window->show();
 
     REGLGlutGLBinder::EGLSurfaceInfo surfaceInfo;
     surfaceInfo.mType = REGLGlutGLBinder::EGLSurfaceInfo::TYPE_WINDOW;
-    surfaceInfo.mData = (void *)window;
+    surfaceInfo.mData = (void *)window->window();
+
+    GLUTES_DEBUGP2("Window Created %d", window->window());
 
     ControlEntry entry;
     entry.mSurface = mBinder->createSurface(
                                 (RGlutGLBinder::Surface)&surfaceInfo, 0, 0);
-
     if (entry.mSurface == 0) {
-        XDestroyWindow(mDisplay, window);
+        delete window;
         return 0;
     }
 
@@ -326,7 +290,7 @@ RGlutMaemoInterface::ControlEntry RGlutMaemoInterface::removeControl(int id)
         unsigned int index = id - ID_START_INDEX;
         if (index < mControllist.size()) {
             entry = mControllist[index];
-            XDestroyWindow(mDisplay, entry.mControl);
+            delete entry.mControl;
             mControllist.erase(mControllist.begin() + index);
         }
     }
@@ -339,7 +303,7 @@ void RGlutMaemoInterface::removeAllControl()
     int count = mControllist.size();
 
     for (int i=0; i<count; ++i) {
-        XDestroyWindow(mDisplay, mControllist[i].mControl);
+        delete mControllist[i].mControl;
     }
     mControllist.clear();
 }
@@ -373,26 +337,7 @@ void RGlutMaemoInterface::fullScreen()
     mFullScreen = true;
     ControlEntry * entry = getControlEntry(mCurrentControl);
     if (entry) {
-        Atom atom = XInternAtom(mDisplay, "_NET_WM_STATE_FULLSCREEN", True);
-
-        XChangeProperty(mDisplay, entry->mControl,
-                    XInternAtom(mDisplay, "_NET_WM_STATE", True),
-                    XA_ATOM,  32,  PropModeReplace,
-                    (unsigned char*)&atom,  1);
-        Atom wmState = XInternAtom(mDisplay, "_NET_WM_STATE", False);
-        Atom fullscreen = XInternAtom(mDisplay, "_NET_WM_STATE_FULLSCREEN", False);
-
-        XEvent xev;
-        memset(&xev, 0, sizeof(xev));
-
-        xev.type                 = ClientMessage;
-        xev.xclient.window       = entry->mControl;
-        xev.xclient.message_type = wmState;
-        xev.xclient.format       = 32;
-        xev.xclient.data.l[0]    = 1;
-        xev.xclient.data.l[1]    = fullscreen;
-
-        XSendEvent(mDisplay, mRootWindow, False, SubstructureNotifyMask, &xev);
+        entry->mControl->setFullscreen();
     }
 }
 
@@ -462,18 +407,20 @@ int RGlutMaemoInterface::getModifiers(int state)
 
 void RGlutMaemoInterface::exec()
 {
+    Display * display = RGlutDisplay::instance()->display();
+
     ControlEntry * entry = getControlEntry(mCurrentControl);
     if (entry) {
         XWindowAttributes wa;
-        if (XGetWindowAttributes(mDisplay, entry->mControl, &wa)) {
+        if (XGetWindowAttributes(display, entry->mControl->window(), &wa)) {
             reshape(wa.width, wa.height);
         }
     }
 
     while (!mFinished) {
-        while (XPending(mDisplay)) {
+        while (XPending(display)) {
             XEvent  xev;
-            XNextEvent(mDisplay, &xev);
+            XNextEvent(display, &xev);
 
             GLUTES_DEBUGP2("Event revieved %d", xev.type);
 
@@ -526,7 +473,19 @@ void RGlutMaemoInterface::exec()
 
                     mModifier = getModifiers(xev.xmotion.state);
 
-                    if (mCallbacks.mouse) {
+                    if (mAttachedMenuButton == button) {
+                        RGlutMenu * menu = mMenus[mCurrentMenu-1];
+                        if (menu->isVisible() && pressed) {
+                            if (!menu->handleEvent(&xev)) {
+                                menu->hide();
+                            }
+                        } else if (!menu->isVisible() && pressed) {
+                            menu->setPos(xev.xbutton.x, xev.xbutton.y);
+                            menu->show();
+                        } else {
+                            menu->handleEvent(&xev);
+                        }
+                    } else if (mCallbacks.mouse) {
                         mCallbacks.mouse(button, pressed ? GLUT_DOWN : GLUT_UP, xev.xbutton.x, xev.xbutton.y);
                     }
 
@@ -548,15 +507,30 @@ void RGlutMaemoInterface::exec()
                     break;
                 }
 
-                case Expose:
-                case GraphicsExpose:
-                case VisibilityNotify: {
-                    draw();
+                case Expose: {
+                    if (xev.xexpose.count == 0) {
+                        draw();
+                    }
                     break;
                 }
 
+                case ConfigureNotify: {
+    		    entry = getControlEntry(mCurrentControl);
+                    if (entry) {
+                        if (entry->mControl->window() == xev.xconfigure.window) {
+                            reshape(xev.xconfigure.width, xev.xconfigure.height);
+                        }
+                    }
+                }
+                break;
+
                 case ResizeRequest: {
-                    reshape(xev.xresizerequest.width, xev.xresizerequest.height);
+    		    entry = getControlEntry(mCurrentControl);
+                    if (entry) {
+                        if (entry->mControl->window() == xev.xresizerequest.window) {
+                            reshape(xev.xresizerequest.width, xev.xresizerequest.height);
+                        }
+                    }
                     break;
                 }
             }
@@ -579,7 +553,6 @@ void RGlutMaemoInterface::flush()
         ControlEntry * entry = getControlEntry(mCurrentControl);
         if (entry) {
             mBinder->swapBuffer(entry->mSurface);
-
         }
     }
 }
@@ -588,7 +561,7 @@ void RGlutMaemoInterface::setWindowTitle(const char * title)
 {
     ControlEntry * entry = getControlEntry(mCurrentControl);
     if (entry) {
-        XStoreName(mDisplay, entry->mControl, title);
+        entry->mControl->setTitle(title);
     }
 }
 
@@ -596,7 +569,7 @@ void RGlutMaemoInterface::showWindow()
 {
     ControlEntry * entry = getControlEntry(mCurrentControl);
     if (entry) {
-        XMapWindow(mDisplay, entry->mControl);
+        entry->mControl->show();
     }
 }
 
@@ -604,7 +577,7 @@ void RGlutMaemoInterface::hideWindow()
 {
     ControlEntry * entry = getControlEntry(mCurrentControl);
     if (entry) {
-        XUnmapWindow(mDisplay, entry->mControl);
+        entry->mControl->hide();
     }
 }
 
@@ -612,11 +585,7 @@ void RGlutMaemoInterface::positionWindow(int x, int y)
 {
     ControlEntry * entry = getControlEntry(mCurrentControl);
     if (entry) {
-        int mask = CWX | CWY;
-        XWindowChanges wc;
-        wc.x = x;
-        wc.y = y;
-        XConfigureWindow(mDisplay, entry->mControl, mask, &wc);
+        entry->mControl->setPos(x, y);
     }
 }
 
@@ -624,11 +593,7 @@ void RGlutMaemoInterface::reshapeWindow(int width, int height)
 {
     ControlEntry * entry = getControlEntry(mCurrentControl);
     if (entry) {
-        int mask = CWWidth | CWHeight;
-        XWindowChanges wc;
-        wc.width = width;
-        wc.height = height;
-        XConfigureWindow(mDisplay, entry->mControl, mask, &wc);
+        entry->mControl->setSize(width, height);
     }
 }
 
@@ -636,6 +601,12 @@ void RGlutMaemoInterface::draw()
 {
     if (mCallbacks.draw) {
         mCallbacks.draw();
+    }
+    int id = mCurrentMenu-1;
+    if (id >= 0 && id < mMenus.size()) {
+        if (mMenus[id]->isVisible()) {
+            mMenus[id]->draw();
+        }
     }
 }
 
@@ -673,13 +644,14 @@ int RGlutMaemoInterface::getModifiers()
 int RGlutMaemoInterface::getValue(unsigned int state)
 {
     int value = 0;
+    Display * display = RGlutDisplay::instance()->display();
 
     switch (state) {
         case GLUT_WINDOW_WIDTH: {
             ControlEntry * entry = getControlEntry(mCurrentControl);
             if (entry) {
                 XWindowAttributes wa;
-                if (XGetWindowAttributes(mDisplay, entry->mControl, &wa)) {
+                if (XGetWindowAttributes(display, entry->mControl->window(), &wa)) {
                     value = wa.width;
                 }
             }
@@ -690,7 +662,7 @@ int RGlutMaemoInterface::getValue(unsigned int state)
             ControlEntry * entry = getControlEntry(mCurrentControl);
             if (entry) {
                 XWindowAttributes wa;
-                if (XGetWindowAttributes(mDisplay, entry->mControl, &wa)) {
+                if (XGetWindowAttributes(display, entry->mControl->window(), &wa)) {
                     value = wa.height;
                 }
             }
@@ -701,7 +673,7 @@ int RGlutMaemoInterface::getValue(unsigned int state)
             ControlEntry * entry = getControlEntry(mCurrentControl);
             if (entry) {
                 XWindowAttributes wa;
-                if (XGetWindowAttributes(mDisplay, entry->mControl, &wa)) {
+                if (XGetWindowAttributes(display, entry->mControl->window(), &wa)) {
                     value = wa.x;
                 }
             }
@@ -712,7 +684,7 @@ int RGlutMaemoInterface::getValue(unsigned int state)
             ControlEntry * entry = getControlEntry(mCurrentControl);
             if (entry) {
                 XWindowAttributes wa;
-                if (XGetWindowAttributes(mDisplay, entry->mControl, &wa)) {
+                if (XGetWindowAttributes(display, entry->mControl->window(), &wa)) {
                     value = wa.y;
                 }
             }
@@ -774,6 +746,73 @@ int RGlutMaemoInterface::getValue(unsigned int state)
     return value;
 }
 
+int RGlutMaemoInterface::createMenu(void (*cb)(int))
+{
+    int id = 0;
+    ControlEntry * entry = getControlEntry(mCurrentControl);
+    if (entry) {
+        mMenus.push_back(new RGlutMenu(cb, entry->mControl));
+        id = mMenus.size();
+        mCurrentMenu = id;
+    }
+    return id;
+}
+
+void RGlutMaemoInterface::destroyMenu(int id)
+{
+    id = id -1;
+
+    if (id < mMenus.size()) {
+        if (mCurrentMenu == id) {
+            mCurrentMenu = 0;
+        }
+        delete mMenus[id];
+        mMenus.erase(mMenus.begin() + id);
+    }
+}
+
+int RGlutMaemoInterface::getMenu()
+{
+    return mCurrentMenu;
+}
+
+void RGlutMaemoInterface::setMenu(int id)
+{
+    id = id-1;
+    if (id >= 0 && id < mMenus.size()) {
+        mCurrentMenu = id;
+    }
+}
+
+void RGlutMaemoInterface::addMenuEntry(const char *name, int eid)
+{
+    int id = mCurrentMenu-1;
+    if (id >= 0 && id < mMenus.size()) {
+        mMenus[id]->addEntry(name, eid);
+    }
+}
+
+void RGlutMaemoInterface::removeMenuItem(int eid)
+{
+    int id = mCurrentMenu-1;
+    if (id >= 0 && id < mMenus.size()) {
+        mMenus[id]->removeEntry(eid);
+    }
+}
+
+void RGlutMaemoInterface::attachMenu(int b)
+{
+    if (mCurrentMenu) {
+        mAttachedMenuButton = b;
+    }
+}
+
+void RGlutMaemoInterface::detachMenu(int b)
+{
+    if (mCurrentMenu && mAttachedMenuButton == b) {
+        mAttachedMenuButton = -1;
+    }
+}
 
 void RGlutMaemoInterface::popWindow()
 {
@@ -781,48 +820,6 @@ void RGlutMaemoInterface::popWindow()
 }
 
 void RGlutMaemoInterface::pushWindow()
-{
-    //TODO
-}
-
-int RGlutMaemoInterface::createMenu(void (*)(int menu))
-{
-    //TODO
-    return 0;
-}
-
-void RGlutMaemoInterface::destroyMenu(int)
-{
-    //TODO
-}
-
-int RGlutMaemoInterface::getMenu()
-{
-    //TODO
-    return 0;
-}
-
-void RGlutMaemoInterface::setMenu(int)
-{
-    //TODO
-}
-
-void RGlutMaemoInterface::addMenuEntry(const char *, int)
-{
-    //TODO
-}
-
-void RGlutMaemoInterface::removeMenuItem(int)
-{
-    //TODO
-}
-
-void RGlutMaemoInterface::attachMenu(int)
-{
-    //TODO
-}
-
-void RGlutMaemoInterface::detachMenu(int)
 {
     //TODO
 }

@@ -31,7 +31,12 @@ lib_PROGRAMME = libglut.so
 glut_SOURCES = ../../common/src/glut.cpp \
 	       ../../common/src/reglglutglbinder.cpp \
 	       ../../common/src/reglproperties.cpp \
-	       ../src/rglutmaemointerface.cpp
+	       ../src/rglutmaemointerface.cpp \
+	       ../src/rglutmenu.cpp \
+	       ../src/rglutwindow.cpp \
+	       ../src/rglutdisplay.cpp \
+	       ../src/rglutcolor.cpp
+
 glut_INCExports = ../../inc/glut.h
 glut_OBJS = $(patsubst ../src/%.cpp, %.o, $(glut_SOURCES))
 
@@ -39,7 +44,7 @@ CXX = g++
 LIBS = -lX11
 LIBDIR = 
 INCLUDES =  -I../inc -I../../inc -I../../common/inc
-DEFINES = -DGLUT_ES 
+DEFINES = -DGLUT_ES
 #-DGLUTES_DEBUG
 CXXFLAGS = -g3 -Wall -fPIC  $(INCLUDES) $(DEFINES)
 VPATH = ../src
@@ -52,7 +57,7 @@ $(lib_PROGRAMME): $(glut_OBJS)
 
 .o.cpp:
 
-install:
+install: $(glut_INCExports)
 	cp $(lib_PROGRAMME) /usr/lib
 	cp $(glut_INCExports) /usr/include
 

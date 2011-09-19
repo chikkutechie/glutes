@@ -26,33 +26,82 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _RGLUTCOLOR_H_
-#define _RGLUTCOLOR_H_
+#ifndef _RGLUTRECT_H_
+#define _RGLUTRECT_H_
 
-#include <X11/Xlib.h>
-
-class RGlutColor
+template <typename T>
+class RGlutRect
 {
 public:
-    RGlutColor(int r, int g, int b);
-    RGlutColor(RGlutColor const &);
-    ~RGlutColor();
+    RGlutRect()
+    {}
 
-    RGlutColor & operator=(RGlutColor const &);
+    RGlutRect(T x1, T y1, T x2, T y2)
+     : mX1(x1),
+       mY1(y1),
+       mX2(x2),
+       mY2(y2)
+    {}
 
-    unsigned long pixel() const
+    bool isEmpty() const
     {
-        return mColor.pixel;
+        return ((width() == 0) | (height() == 0));
+    }
+
+    T x1() const
+    {
+        return mX1;
+    }
+    T y1() const
+    {
+        return mY1;
+    }
+    T x2() const
+    {
+        return mX2;
+    }
+    T y2() const
+    {
+        return mY2;
+    }
+
+    void setX1(T v)
+    {
+        mX1 = v;
+    }
+    void setY1(T v)
+    {
+        mY1 = v;
+    }
+    void setX2(T v)
+    {
+        mX2 = v;
+    }
+    void setY2(T v)
+    {
+        mY2 = v;
+    }
+
+    T height() const
+    {
+        return mY2-mY1;
+    }
+    T width() const
+    {
+        return mX2-mX1;
     }
 
 private:
-    void set(int r, int g, int b);
-    void destroy();
-
-private:
-    XColor mColor;
-    Colormap mMap;
+    T mX1;
+    T mY1;
+    T mX2;
+    T mY2;
 };
+
+typedef RGlutRect<int> RGlutRectI;
+typedef RGlutRect<unsigned int> RGlutRectUI;
+typedef RGlutRect<float> RGlutRectF;
+typedef RGlutRect<double> RGlutRectD;
 
 #endif
 

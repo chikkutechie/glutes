@@ -35,7 +35,9 @@ glut_SOURCES = ../../common/src/glut.cpp \
 	       ../src/rglutmenu.cpp \
 	       ../src/rglutwindow.cpp \
 	       ../src/rglutdisplay.cpp \
-	       ../src/rglutcolor.cpp
+	       ../src/rglutcolor.cpp \
+	       ../src/rglutgc.cpp \
+	       ../src/rglutfont.cpp
 
 glut_INCExports = ../../inc/glut.h
 glut_OBJS = $(patsubst ../src/%.cpp, %.o, $(glut_SOURCES))

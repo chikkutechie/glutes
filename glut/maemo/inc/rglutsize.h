@@ -26,33 +26,57 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _RGLUTCOLOR_H_
-#define _RGLUTCOLOR_H_
+#ifndef _RGLUTSIZE_H_
+#define _RGLUTSIZE_H_
 
-#include <X11/Xlib.h>
-
-class RGlutColor
+template <typename T>
+class RGlutSize
 {
 public:
-    RGlutColor(int r, int g, int b);
-    RGlutColor(RGlutColor const &);
-    ~RGlutColor();
+    RGlutSize()
+     : mWidth(0),
+       mHeight(0)
+    {}
 
-    RGlutColor & operator=(RGlutColor const &);
-
-    unsigned long pixel() const
+    RGlutSize(const T & width, const T & height)
+     : mWidth(width),
+       mHeight(height)
+    {}
+    
+    void setWidth(const T & width)
     {
-        return mColor.pixel;
+        mWidth = width;
+    }
+
+    T width() const
+    {
+        return mWidth;
+    }
+
+    void setHeight(const T & height)
+    {
+        mHeight = height;
+    }
+
+    T height() const
+    {
+        return mHeight;
+    }
+
+    bool isNull()
+    {
+        return mWidth == 0 || mHeight = 0;
     }
 
 private:
-    void set(int r, int g, int b);
-    void destroy();
-
-private:
-    XColor mColor;
-    Colormap mMap;
+    T mWidth;
+    T mHeight;
 };
+
+typedef RGlutSize<int> RGlutSizeI;
+typedef RGlutSize<unsigned int> RGlutSizeUI;
+typedef RGlutSize<float> RGlutSizeF;
+typedef RGlutSize<double> RGlutSizeD;
 
 #endif
 

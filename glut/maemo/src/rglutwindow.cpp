@@ -131,6 +131,16 @@ void RGlutWindow::setGeometry(int x, int y, int w, int h)
     }
 }
  
+void RGlutWindow::setBackgroundColor(RGlutColor const & color)
+{
+    XSetWindowBackground(mDisplay, mWindow, color.pixel());
+}
+
+void RGlutWindow::clear()
+{
+    XClearWindow(mDisplay, mWindow);
+}
+
 void RGlutWindow::show()
 {
     if (!mVisible) {
@@ -181,8 +191,6 @@ void RGlutWindow::create()
         return;
     }
     
-    int theScreen = XDefaultScreen(mDisplay);
-
     XSetWindowAttributes theWindowAttributes;
     theWindowAttributes.override_redirect = False;
 

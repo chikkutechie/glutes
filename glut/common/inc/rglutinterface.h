@@ -167,6 +167,10 @@ public:
         mCallbacks.reshape = reshape;
     }
     
+private:
+    RGlutInterface(RGlutInterface const &);
+    RGlutInterface & operator=(RGlutInterface const &);
+
 protected:
     struct GlutWindowProperty
     {

@@ -35,28 +35,32 @@
 #include "rglutwindow.h"
 #include "rglutcolor.h"
 
+class RGlutGC;
+
 class RGlutMenu: public RGlutWindow
 {
 public:
     RGlutMenu(void (*callback)(int), RGlutWindow * parent = 0);
     ~RGlutMenu();
 
-    void addEntry(std::string name, int id)
-    {
-        mMenuEntries.push_back(MenuEntry(name, id));
-    }
+    void addEntry(std::string name, int id);
 
     void removeEntry(int id)
     {
     }
 
+    void show();
     void hide();
     void draw();
     
     bool handleEvent(XEvent * event);
 
 private:
+    RGlutMenu(RGlutMenu const &);
+    RGlutMenu & operator=(RGlutMenu const &);
+
     void create();
+    void destroy();
     void drawBackground();
     void drawItemBackgroundPressed(int x, int y, int w, int h);
     void drawItemBackgroundNormal(int x, int y, int w, int h);
@@ -80,7 +84,6 @@ private:
         int mHeight;
     };
 
-    XFontStruct * mFontInfo;
     std::vector<MenuEntry> mMenuEntries;
     void (*mCallback)(int);
     int mPressedId;
@@ -88,6 +91,7 @@ private:
     RGlutColor mItemNormalColor;
     RGlutColor mItemPressedColor;
     RGlutColor mTextColor;
+    RGlutGC * mGC;
     static const int MenuGap = 2;
     static const int MinMenuWidth = 200;
     static const int MinMenuHeight = 75;

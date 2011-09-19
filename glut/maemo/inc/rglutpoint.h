@@ -26,33 +26,52 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _RGLUTCOLOR_H_
-#define _RGLUTCOLOR_H_
+#ifndef _RGLUTPOINT_H_
+#define _RGLUTPOINT_H_
 
-#include <X11/Xlib.h>
-
-class RGlutColor
+template <typename T>
+class RGlutPoint
 {
 public:
-    RGlutColor(int r, int g, int b);
-    RGlutColor(RGlutColor const &);
-    ~RGlutColor();
+    RGlutPoint()
+     : mX(0),
+       mY(0)
+    {}
 
-    RGlutColor & operator=(RGlutColor const &);
-
-    unsigned long pixel() const
+    RGlutPoint(const T & x, const T & y)
+     : mX(x),
+       mY(y)
+    {}
+    
+    void setX(const T & x)
     {
-        return mColor.pixel;
+        mX = x;
+    }
+
+    T x() const
+    {
+        return mX;
+    }
+
+    void setY(const T & y)
+    {
+        mY = y;
+    }
+
+    T y() const
+    {
+        return mY;
     }
 
 private:
-    void set(int r, int g, int b);
-    void destroy();
-
-private:
-    XColor mColor;
-    Colormap mMap;
+    T mX;
+    T mY;
 };
+
+typedef RGlutPoint<int> RGlutPointI;
+typedef RGlutPoint<unsigned int> RGlutPointUI;
+typedef RGlutPoint<float> RGlutPointF;
+typedef RGlutPoint<double> RGlutPointD;
 
 #endif
 

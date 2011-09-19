@@ -34,18 +34,40 @@
 #include <X11/Xutil.h>
 #include <string>
 
+#include "rglutcolor.h"
+#include "rglutpoint.h"
+#include "rglutsize.h"
+#include "rglutrect.h"
+
 class RGlutWindow
 {
 public:
     RGlutWindow(RGlutWindow * parent = 0);
     virtual ~RGlutWindow();
 
+    RGlutPointI pos() const
+    {
+        return RGlutPointI(mX, mY);
+    }
     void setPos(int x, int y);
+
+    RGlutSizeI size() const
+    {
+        return RGlutSizeI(mWidth, mHeight);
+    }
     void setSize(int w, int h);
+
     void setGeometry(int x, int y, int w, int h);
+    RGlutRectI geometry() const
+    {
+        return RGlutRectI(mX, mY, mWidth, mHeight);
+    }
 
     void setTitle(std::string const & title);
     void setFullscreen();
+
+    void setBackgroundColor(RGlutColor const & color);
+    void clear();
 
     bool isVisible() const
     {
@@ -65,6 +87,10 @@ public:
 
     Window window();
 
+private:
+    RGlutWindow(RGlutWindow const &);
+    RGlutWindow & operator=(RGlutWindow const &);
+
 protected:
     virtual void create();
     virtual void destroy();
@@ -74,7 +100,6 @@ protected:
     RGlutWindow * mParent;
     Window mParentWindow;
     Window mWindow;
-    GC mGC;
     int mX;
     int mY;
     int mWidth;

@@ -27,6 +27,7 @@
  */
 
 #include "rglutmenu.h"
+#include "rglutgc.h"
 
 #include <iostream>
 
@@ -41,7 +42,9 @@ RGlutMenu::RGlutMenu(void (*callback)(int), RGlutWindow * parent)
 {}
 
 RGlutMenu::~RGlutMenu()
-{}
+{
+    delete mGC;
+}
 
 void RGlutMenu::create()
 {
@@ -49,50 +52,69 @@ void RGlutMenu::create()
         return;
     }
 
-    char * fontName = "*misc*fixed*120*";
-    mFontInfo  = XLoadQueryFont(mDisplay, fontName);
-    
-    int textHeight = mFontInfo->ascent + mFontInfo->descent;
-    if (textHeight < MinMenuHeight) {
-        textHeight = MinMenuHeight;
-    }
+    int textHeight = MinMenuHeight;
 
     mWidth = MinMenuWidth;
     mHeight = mMenuEntries.size() * textHeight;
 
     RGlutWindow::create();
 
-    XGCValues gcv;
+    mGC = new RGlutGC(this);
 
-    gcv.fill_style = FillSolid;
-    gcv.background = XWhitePixel(mDisplay, XDefaultScreen(mDisplay));
-    gcv.foreground = XBlackPixel(mDisplay, XDefaultScreen(mDisplay));
-    gcv.line_width = 5;
-    gcv.font = mFontInfo->fid;
+    setBackgroundColor(mColor);
+}
 
-    int mask = GCLineWidth | GCFillStyle | GCBackground | GCForeground | GCFont;
+void RGlutMenu::destroy()
+{
+    RGlutWindow::destroy();
+    delete mGC;
+    mGC = 0;
+}
 
-    mGC = XCreateGC(mDisplay, mWindow, mask, &gcv);
+void RGlutMenu::addEntry(std::string name, int id)
+{
+    mMenuEntries.push_back(MenuEntry(name, id));
+    if (mWindow) {
+        destroy();
+        create();
+    }
 }
 
 void RGlutMenu::drawBackground()
 {
-    //XSetForeground(mDisplay, mGC, mColor.pixel());
-    //XFillRectangle(mDisplay, mWindow, mGC, 0, 0, mWidth, mHeight);
-    XSetWindowBackground(mDisplay, mWindow, mColor.pixel());
-    XClearWindow(mDisplay, mWindow);
+    clear();
 }
 
 void RGlutMenu::drawItemBackgroundNormal(int x, int y, int w, int h)
 {
-    XSetForeground(mDisplay, mGC, mItemNormalColor.pixel());
-    XFillRectangle(mDisplay, mWindow, mGC, x+MenuGap, y+MenuGap, w-2*MenuGap, h-2*MenuGap);
+    mGC->setForegroundColor(mItemNormalColor);
+    mGC->fillRectangle(x+MenuGap, y+MenuGap, w-2*MenuGap, h-2*MenuGap);
 }
 
 void RGlutMenu::drawItemBackgroundPressed(int x, int y, int w, int h)
 {
-    XSetForeground(mDisplay, mGC, mItemPressedColor.pixel());
-    XFillRectangle(mDisplay, mWindow, mGC, x+MenuGap, y+MenuGap, w-2*MenuGap, h-2*MenuGap);
+    mGC->setForegroundColor(mItemPressedColor);
+    mGC->fillRectangle(x+MenuGap, y+MenuGap, w-2*MenuGap, h-2*MenuGap);
+}
+
+void RGlutMenu::show()
+{
+    if (mParent) {
+        bool changed = false;
+        if (mX+mWidth > mParent->size().width()) {
+            mX = mX - mWidth;
+            changed = true;
+        }
+        if (mY+mHeight > mParent->size().height()) {
+            mY = mY - mHeight;
+            changed = true;
+        }
+        if (changed) {
+            setPos(mX, mY); 
+        }
+    } 
+
+    RGlutWindow::show();
 }
 
 void RGlutMenu::hide()
@@ -117,7 +139,7 @@ void RGlutMenu::draw()
     int w = mWidth;
     int h = itemHeight;
     int hw = h/2;
-    for (int i=0; i<mMenuEntries.size(); ++i) {
+    for (unsigned int i=0; i<mMenuEntries.size(); ++i) {
         MenuEntry & me = mMenuEntries[i];
  
         if (mPressedId == me.mId) {
@@ -126,10 +148,8 @@ void RGlutMenu::draw()
             drawItemBackgroundNormal(x, y, w, h);
         }
 
-        XSetForeground(mDisplay, mGC, mTextColor.pixel());
-        XDrawString(mDisplay, mWindow, mGC, 5, itemHeight-hw,
-                    me.mName.c_str(),
-                    me.mName.length());
+        mGC->setForegroundColor(mTextColor);
+        mGC->drawString(5, itemHeight-hw, me.mName); 
         me.mX = x;
         me.mY = y;
         me.mWidth = w;
@@ -150,7 +170,6 @@ bool RGlutMenu::handleEvent(XEvent * xev)
                 break;
             }
             handled = true;
-            int button = 0;
             bool pressed = false;
             if (xev->type == ButtonPress) {
                 pressed = true;
@@ -158,7 +177,7 @@ bool RGlutMenu::handleEvent(XEvent * xev)
             int x = xev->xbutton.x;
             int y = xev->xbutton.y;
 
-            for (int i=0; i<mMenuEntries.size(); ++i) {
+            for (unsigned int i=0; i<mMenuEntries.size(); ++i) {
                 MenuEntry & me = mMenuEntries[i];
                 bool outOfMenu = x < me.mX || x > me.mX + me.mWidth ||
                                  y < me.mY || y > me.mY + me.mHeight;

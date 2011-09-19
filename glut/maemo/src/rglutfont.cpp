@@ -26,33 +26,62 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _RGLUTCOLOR_H_
-#define _RGLUTCOLOR_H_
+#include "rglutfont.h"
+#include "rglutdisplay.h"
 
-#include <X11/Xlib.h>
-
-class RGlutColor
+RGlutFont::RGlutFont(std::string const & pattern)
+    : mPattern(pattern),
+      mFontInfo(0) 
 {
-public:
-    RGlutColor(int r, int g, int b);
-    RGlutColor(RGlutColor const &);
-    ~RGlutColor();
+    create();
+}
 
-    RGlutColor & operator=(RGlutColor const &);
+RGlutFont::RGlutFont(RGlutFont const & oth)
+{
+    mPattern = oth.mPattern;
+    create();
+}
 
-    unsigned long pixel() const
-    {
-        return mColor.pixel;
+RGlutFont & RGlutFont::operator=(RGlutFont const & oth)
+{
+    if (this != &oth) {
+        destroy();
+        mPattern = oth.mPattern;
+        create();
     }
 
-private:
-    void set(int r, int g, int b);
-    void destroy();
+    return *this;
+}
 
-private:
-    XColor mColor;
-    Colormap mMap;
-};
+RGlutFont::~RGlutFont()
+{
+    destroy();
+}
 
-#endif
+XFontStruct * RGlutFont::fontStruct()
+{
+    return mFontInfo;
+}
+
+Font RGlutFont::id()
+{
+    return mFontInfo->fid;
+}
+
+int RGlutFont::textHeight()
+{
+    return mFontInfo->ascent + mFontInfo->descent;
+}
+
+void RGlutFont::create()
+{
+    mFontInfo  = XLoadQueryFont(RGlutDisplay::instance()->display(), mPattern.c_str());
+}
+
+void RGlutFont::destroy()
+{
+    if (mFontInfo) {
+        XFreeFont(RGlutDisplay::instance()->display(), mFontInfo);
+    }
+}
 

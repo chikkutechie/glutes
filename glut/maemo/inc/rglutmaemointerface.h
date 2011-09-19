@@ -130,6 +130,10 @@ private:
     };
 
 private:
+    RGlutMaemoInterface(RGlutMaemoInterface const &);
+    RGlutMaemoInterface & operator=(RGlutMaemoInterface const &);
+
+private:
     int addControl(ControlEntry entry);
     ControlEntry removeControl(int id);
     void removeAllControl();

@@ -523,16 +523,6 @@ void RGlutMaemoInterface::exec()
                     }
                 }
                 break;
-
-                case ResizeRequest: {
-    		    entry = getControlEntry(mCurrentControl);
-                    if (entry) {
-                        if (entry->mControl->window() == xev.xresizerequest.window) {
-                            reshape(xev.xresizerequest.width, xev.xresizerequest.height);
-                        }
-                    }
-                    break;
-                }
             }
         }
 
@@ -603,7 +593,7 @@ void RGlutMaemoInterface::draw()
         mCallbacks.draw();
     }
     int id = mCurrentMenu-1;
-    if (id >= 0 && id < mMenus.size()) {
+    if (id >= 0 && id < (int)mMenus.size()) {
         if (mMenus[id]->isVisible()) {
             mMenus[id]->draw();
         }
@@ -762,7 +752,7 @@ void RGlutMaemoInterface::destroyMenu(int id)
 {
     id = id -1;
 
-    if (id < mMenus.size()) {
+    if (id > 0 && id < (int)mMenus.size()) {
         if (mCurrentMenu == id) {
             mCurrentMenu = 0;
         }
@@ -779,7 +769,7 @@ int RGlutMaemoInterface::getMenu()
 void RGlutMaemoInterface::setMenu(int id)
 {
     id = id-1;
-    if (id >= 0 && id < mMenus.size()) {
+    if (id >= 0 && id < (int)mMenus.size()) {
         mCurrentMenu = id;
     }
 }
@@ -787,7 +777,7 @@ void RGlutMaemoInterface::setMenu(int id)
 void RGlutMaemoInterface::addMenuEntry(const char *name, int eid)
 {
     int id = mCurrentMenu-1;
-    if (id >= 0 && id < mMenus.size()) {
+    if (id >= 0 && id < (int)mMenus.size()) {
         mMenus[id]->addEntry(name, eid);
     }
 }
@@ -795,7 +785,7 @@ void RGlutMaemoInterface::addMenuEntry(const char *name, int eid)
 void RGlutMaemoInterface::removeMenuItem(int eid)
 {
     int id = mCurrentMenu-1;
-    if (id >= 0 && id < mMenus.size()) {
+    if (id >= 0 && id < (int)mMenus.size()) {
         mMenus[id]->removeEntry(eid);
     }
 }

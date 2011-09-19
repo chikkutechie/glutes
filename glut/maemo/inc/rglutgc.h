@@ -26,32 +26,44 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _RGLUTCOLOR_H_
-#define _RGLUTCOLOR_H_
+#ifndef _RGLUTGC_H_
+#define _RGLUTGC_H_
 
-#include <X11/Xlib.h>
+#include <string>
 
-class RGlutColor
+#include "rglutfont.h"
+#include "rglutcolor.h"
+
+class RGlutWindow;
+
+class RGlutGC
 {
 public:
-    RGlutColor(int r, int g, int b);
-    RGlutColor(RGlutColor const &);
-    ~RGlutColor();
+    RGlutGC(RGlutWindow * window);
+    ~RGlutGC();
 
-    RGlutColor & operator=(RGlutColor const &);
+    void setForegroundColor(RGlutColor const & color);
+    void setBackgroundColor(RGlutColor const & color);
+    
+    void fillRectangle(int x, int y, int w, int h);
 
-    unsigned long pixel() const
+    void setFont(RGlutFont const & font);
+    RGlutFont font() const
     {
-        return mColor.pixel;
+        return mFont;
     }
 
-private:
-    void set(int r, int g, int b);
-    void destroy();
+    void drawString(int x, int y, std::string const & str);
 
 private:
-    XColor mColor;
-    Colormap mMap;
+    RGlutGC(RGlutGC const &);
+    RGlutGC & operator=(RGlutGC const &);
+
+private:
+    GC mGC;
+    RGlutFont mFont;
+    Window mWindow;
+    Display * mDisplay;
 };
 
 #endif

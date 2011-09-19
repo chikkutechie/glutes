@@ -40,11 +40,25 @@ RGlutColor::~RGlutColor()
     destroy();
 }
 
+RGlutColor::RGlutColor(RGlutColor const & oth)
+{
+    set(oth.mColor.red/257, oth.mColor.green /257, oth.mColor.blue/257);
+}
+
+RGlutColor & RGlutColor::operator=(RGlutColor const & oth)
+{
+    if (this != &oth) {
+        destroy();
+        set(oth.mColor.red/257, oth.mColor.green /257, oth.mColor.blue/257);
+    }
+    return *this;
+}
+
 void RGlutColor::set(int r, int g, int b)
 {
-    mColor.red = r * 65535 / 255;
-    mColor.green = g * 65535 / 255;
-    mColor.blue = b * 65535 / 255;
+    mColor.red = r * 257;
+    mColor.green = g * 257;
+    mColor.blue = b * 257;
     mColor.flags = DoRed | DoGreen | DoBlue;
     XAllocColor(RGlutDisplay::instance()->display(), mMap, &mColor);
 }

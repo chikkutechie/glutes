@@ -26,33 +26,60 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _RGLUTCOLOR_H_
-#define _RGLUTCOLOR_H_
+#include "rglutgc.h"
+#include "rglutwindow.h"
+#include "rglutdisplay.h"
 
-#include <X11/Xlib.h>
-
-class RGlutColor
+RGlutGC::RGlutGC(RGlutWindow * window)
+    : mFont("*misc*fixed*120*")
 {
-public:
-    RGlutColor(int r, int g, int b);
-    RGlutColor(RGlutColor const &);
-    ~RGlutColor();
+    mDisplay = window->display();
+    mWindow = window->window();
 
-    RGlutColor & operator=(RGlutColor const &);
+    XGCValues gcv;
 
-    unsigned long pixel() const
-    {
-        return mColor.pixel;
+    gcv.fill_style = FillSolid;
+    gcv.background = XWhitePixel(mDisplay, XDefaultScreen(mDisplay));
+    gcv.foreground = XBlackPixel(mDisplay, XDefaultScreen(mDisplay));
+    gcv.line_width = 5;
+    gcv.font = mFont.id();
+
+    int mask = GCLineWidth | GCFillStyle | GCBackground | GCForeground | GCFont;
+
+    mGC = XCreateGC(mDisplay, mWindow, mask, &gcv);
+}
+
+RGlutGC::~RGlutGC()
+{
+    if (mGC) {
+        XFreeGC(mDisplay, mGC);
     }
+}
 
-private:
-    void set(int r, int g, int b);
-    void destroy();
+void RGlutGC::setForegroundColor(RGlutColor const & color)
+{
+    XSetForeground(mDisplay, mGC, color.pixel());
+}
 
-private:
-    XColor mColor;
-    Colormap mMap;
-};
+void RGlutGC::setBackgroundColor(RGlutColor const & color)
+{
+    XSetBackground(mDisplay, mGC, color.pixel());
+}
+    
+void RGlutGC::fillRectangle(int x, int y, int w, int h)
+{
+    XFillRectangle(mDisplay, mWindow, mGC, x, y, w, h);
+}
 
-#endif
+void RGlutGC::drawString(int x, int y, std::string const & str)
+{
+    XDrawString(mDisplay, mWindow, mGC, x, y,
+                str.c_str(), str.length());
+}
+
+void RGlutGC::setFont(RGlutFont const & font)
+{
+    mFont = font;
+    XSetFont(mDisplay, mGC, mFont.id());
+}
 

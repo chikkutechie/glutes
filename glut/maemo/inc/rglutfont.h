@@ -26,32 +26,31 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _RGLUTCOLOR_H_
-#define _RGLUTCOLOR_H_
+#ifndef _RGLUTFONT_H_
+#define _RGLUTFONT_H_
 
 #include <X11/Xlib.h>
+#include <string>
 
-class RGlutColor
+class RGlutFont
 {
 public:
-    RGlutColor(int r, int g, int b);
-    RGlutColor(RGlutColor const &);
-    ~RGlutColor();
+    RGlutFont(std::string const & pattern);
+    RGlutFont(RGlutFont const &);
+    RGlutFont & operator=(RGlutFont const &);
+    ~RGlutFont();
 
-    RGlutColor & operator=(RGlutColor const &);
-
-    unsigned long pixel() const
-    {
-        return mColor.pixel;
-    }
+    Font id();
+    XFontStruct * fontStruct();
+    int textHeight();
 
 private:
-    void set(int r, int g, int b);
+    void create();
     void destroy();
 
 private:
-    XColor mColor;
-    Colormap mMap;
+    std::string mPattern;
+    XFontStruct * mFontInfo;
 };
 
 #endif

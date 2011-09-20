@@ -43,6 +43,7 @@ RGlutWindow::RGlutWindow(RGlutWindow * parent)
     if (mParent) {
         mDisplay = mParent->mDisplay;
         mParentWindow = mParent->mWindow;
+        mParent->addChild(this);
     } else {
         mDisplay = RGlutDisplay::instance()->display();
         mParentWindow = XDefaultRootWindow(mDisplay);
@@ -133,23 +134,25 @@ void RGlutWindow::setGeometry(int x, int y, int w, int h)
  
 void RGlutWindow::setBackgroundColor(RGlutColor const & color)
 {
-    XSetWindowBackground(mDisplay, mWindow, color.pixel());
+    if (mWindow) {
+        XSetWindowBackground(mDisplay, mWindow, color.pixel());
+    }
 }
 
 void RGlutWindow::clear()
 {
-    XClearWindow(mDisplay, mWindow);
+    if (mWindow) {
+        XClearWindow(mDisplay, mWindow);
+    }
 }
 
 void RGlutWindow::show()
 {
     if (!mVisible) {
         create();
-        if (!mVisible) {
-            XMapWindow(mDisplay, mWindow);
-            XFlush(mDisplay);
-            mVisible = true;
-        }
+        XMapWindow(mDisplay, mWindow);
+        XFlush(mDisplay);
+        mVisible = true;
     }
 }
 
@@ -167,16 +170,34 @@ void RGlutWindow::hide()
     }
 }
 
-bool RGlutWindow::handleEvent(XEvent * event)
+bool RGlutWindow::handleEvent(XEvent & event)
 {
-    return false;
+    bool handled = false;
+    if (isVisible()) {    
+        for (WindowSetIter iter = mChilds.begin(); iter != mChilds.end() && !handled; ++iter) {
+            if ((*iter)->isVisible()) {
+                handled = (*iter)->handleEvent(event);
+            }
+        }
+    }
+
+    return handled;
+}
+
+void RGlutWindow::redraw()
+{
+    draw();
 }
 
 void RGlutWindow::draw()
 {
-    create();
-    XClearWindow(mDisplay, mWindow);
-    XFlush(mDisplay);
+    if (isVisible()) {
+        for (WindowSetIter iter = mChilds.begin(); iter != mChilds.end(); ++iter) {
+            if ((*iter)->isVisible()) {
+                (*iter)->draw();
+            }
+        }
+    }
 }
 
 void RGlutWindow::destroy()
@@ -224,3 +245,17 @@ void RGlutWindow::create()
     XStoreName(mDisplay, mWindow, mTitle.c_str());
 }
 
+void RGlutWindow::removeChild(RGlutWindow * window)
+{
+    WindowSetIter iter = mChilds.find(window);
+    if (iter != mChilds.end()) {
+        mChilds.erase(iter);
+    }
+}
+
+void RGlutWindow::removeFromParent()
+{
+    if (mParent) {
+        mParent->removeChild(this);
+    }
+}

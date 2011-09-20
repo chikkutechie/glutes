@@ -41,7 +41,8 @@ public:
     virtual void rerect(int x, int y, int w, int h) = 0;
     virtual void repos(int x, int y) = 0;
     virtual void keyboard(unsigned char key, unsigned int modifier, int x, int y) = 0;
-    virtual void mouse(int button, int modifier, int x, int y) = 0;
+    virtual void mouse(int button, int modifier, int x, int y, bool pressed = true) = 0;
+    virtual void motion(int button, int modifier, int x, int y) = 0;
 };
 
 #endif

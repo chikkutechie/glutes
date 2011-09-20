@@ -362,7 +362,7 @@ void mouseFunction(int button, int state, int, int)
     }
 }
 
-void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int, int)
 {
     switch (key) {
         case 'q':

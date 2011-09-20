@@ -85,7 +85,6 @@ RGlutS60Interface::RGlutS60Interface()
     mEikonEnv(0),
     mCurrentControl(0),
     mBinder(0),
-    mTimer(0),
     mFullScreen(false),
     mModifier(0),
     mCurrentMenu(0),
@@ -204,6 +203,8 @@ void RGlutS60Interface::intialize(int argc, char ** argv)
 
 void RGlutS60Interface::terminate()
 {
+    mExpiredTimer.ResetAndDestroy();
+    
     if (mBinder) {
         mBinder->terminate();
         delete mBinder;
@@ -219,8 +220,6 @@ void RGlutS60Interface::terminate()
     }
 
     mEikonEnv = 0;
-    delete mTimer;
-    mTimer = 0;
 }
 
 void RGlutS60Interface::initDisplayMode(unsigned int mode)
@@ -588,7 +587,7 @@ void RGlutS60Interface::keyboard(unsigned char key, unsigned int modifier, int x
     }
 }
 
-void RGlutS60Interface::mouse(int button, int modifier, int x, int y)
+void RGlutS60Interface::mouse(int button, int modifier, int x, int y, bool)
 {
     mModifier = modifier;
     
@@ -689,33 +688,31 @@ int RGlutS60Interface::getModifiers()
     return modifier;
 }
 
-struct CallbackArg
+TInt RGlutS60Interface::timerCallbackFunction(TAny * a)
 {
-    void (*func)(int);
-    int value;
-};
-
-TInt callbackFunction(TAny * a)
-{
-    CallbackArg * arg = (CallbackArg*)a;
-    arg->func(arg->value);
-    delete arg;
+    TimerEntry * arg = (TimerEntry*)a;
+    arg->mCallback(arg->mValue);
+    arg->mGlutInterface->mExpiredTimer.Append(arg);
     return 0;
 }
 
 void RGlutS60Interface::timerFunc(unsigned int millis,
-                                 void (*func)(int), int value)
+                                  void (*func)(int), int value)
 {
-    delete mTimer;
-    mTimer = 0;
-    mTimer = CPeriodic::New(CActive::EPriorityStandard);
-    
-    CallbackArg * arg = new CallbackArg;
-    arg->func = func;
-    arg->value = value;
-    TCallBack callback(callbackFunction, arg);
-    
-    mTimer->Start(millis * 1000, 0, callback);
+    mExpiredTimer.ResetAndDestroy();
+    CPeriodic * timer = CPeriodic::New(CActive::EPriorityStandard);
+    if (timer) {
+        TimerEntry * arg = new TimerEntry;
+        if (arg) {
+            arg->mCallback = func;
+            arg->mValue = value;
+            arg->mTimer = timer;
+            arg->mGlutInterface = this;
+            TCallBack callback(timerCallbackFunction, arg);
+            
+            timer->Start(millis * 1000, 0, callback);
+        }
+    }
 }
 
 RGlutS60Interface::MenuEntry * RGlutS60Interface::getMenuEntry(int id)

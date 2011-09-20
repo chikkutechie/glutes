@@ -44,10 +44,14 @@
 #include "rglutdisplay.h"
 #include "rglutwindow.h"
 #include "rglutmenu.h"
+#include "rgluteventhandler.h"
+#include "rglutapplication.h"
+#include "rglutmaemowindow.h"
 
 class REGLGlutGLBinder;
+class RGlutTimer;
 
-class RGlutMaemoInterface: public RGlutInterface
+class RGlutMaemoInterface: public RGlutInterface, public RGlutEventHandler
 {
 public:
     RGlutMaemoInterface();
@@ -91,8 +95,12 @@ public:
     void draw();
     void reshape(int w, int h);
     void rerect(int x, int y, int w, int h);
-    void repos(int x, int y);
- 
+    void repos(int x, int y); 
+    void keyboard(unsigned char key, unsigned int modifier, int x, int y);
+    void mouse(int button, int modifier, int x, int y, bool pressed = true);
+    void motion(int button, int modifier, int x, int y);
+    void removeTimer(RGlutTimer * timer);
+
 private:
     class ControlEntry
     {
@@ -108,27 +116,6 @@ private:
         RGlutWindow * mControl;
     };
 
-    class TimerEntry
-    {
-    public:
-        TimerEntry()
-            : mMilliSec(0),
-              mCallBack(0),
-              mValue(0),
-              mSetTime(0)
-        {}
-
-        bool operator<(const TimerEntry & oth) const
-        {
-            return mMilliSec < oth.mMilliSec;
-        }
-
-        unsigned int mMilliSec;
-        void(*mCallBack)(int);
-	int mValue;
-        unsigned int mSetTime;
-    };
-
 private:
     RGlutMaemoInterface(RGlutMaemoInterface const &);
     RGlutMaemoInterface & operator=(RGlutMaemoInterface const &);
@@ -142,7 +129,8 @@ private:
     int getModifiers(int state);
     void parseArguments(int argc, char ** argv);
     void createBinder();
-
+    void removeAllTimers();
+    
 private:
     typedef std::vector<ControlEntry> ControlList;
     typedef ControlList::iterator ControlListIter;
@@ -150,7 +138,7 @@ private:
 
     typedef std::stack<ControlEntry> ControlStack;
 
-    typedef std::multiset<TimerEntry> TimerEntrySet;
+    typedef std::vector<RGlutTimer *> TimerEntrySet;
     typedef TimerEntrySet::iterator TimerEntrySetIter;
     typedef TimerEntrySet::const_iterator TimerEntrySetConstIter;
 
@@ -171,9 +159,6 @@ private:
 private:
     REGLGlutGLBinder * mBinder;
     unsigned int mDisplayMode;
-    int mScreenNumber;
-    int mScreenWidth;
-    int mScreenHeight;
     
     int mCurrentControl;
     bool mFullScreen;
@@ -182,6 +167,9 @@ private:
     ControlList mControllist;
     ControlStack mControlStack;
     bool mFinished;
+    
+    RGlutMaemoWindow * mMainWindow;
+    RGlutApplication * mApplication;
 
     TimerEntrySet mTimers;
     std::vector<RGlutMenu *> mMenus;

@@ -37,7 +37,10 @@ glut_SOURCES = ../../common/src/glut.cpp \
 	       ../src/rglutdisplay.cpp \
 	       ../src/rglutcolor.cpp \
 	       ../src/rglutgc.cpp \
-	       ../src/rglutfont.cpp
+	       ../src/rglutfont.cpp \
+               ../src/rglutapplication.cpp \
+               ../src/rglutmaemowindow.cpp \
+               ../src/rgluttimer.cpp
 
 glut_INCExports = ../../inc/glut.h
 glut_OBJS = $(patsubst ../src/%.cpp, %.o, $(glut_SOURCES))
@@ -46,8 +49,7 @@ CXX = g++
 LIBS = -lX11
 LIBDIR = 
 INCLUDES =  -I../inc -I../../inc -I../../common/inc
-DEFINES = -DGLUT_ES
-#-DGLUTES_DEBUG
+DEFINES = -DGLUT_ES -DGLUTES_DEBUG
 CXXFLAGS = -g3 -Wall -fPIC  $(INCLUDES) $(DEFINES)
 VPATH = ../src
 

@@ -28,8 +28,7 @@
 
 #include "rglutmenu.h"
 #include "rglutgc.h"
-
-#include <iostream>
+#include "rcommon.h"
 
 RGlutMenu::RGlutMenu(void (*callback)(int), RGlutWindow * parent)
  : RGlutWindow(parent),
@@ -159,23 +158,23 @@ void RGlutMenu::draw()
     }
 }
 
-bool RGlutMenu::handleEvent(XEvent * xev)
+bool RGlutMenu::handleEvent(XEvent & xev)
 {
     bool handled = false;
 
-    switch (xev->type) {
+    switch (xev.type) {
         case ButtonPress:
         case ButtonRelease: {
-            if (mWindow != xev->xbutton.window) {
+            if (mWindow != xev.xbutton.window) {
                 break;
             }
             handled = true;
             bool pressed = false;
-            if (xev->type == ButtonPress) {
+            if (xev.type == ButtonPress) {
                 pressed = true;
             }
-            int x = xev->xbutton.x;
-            int y = xev->xbutton.y;
+            int x = xev.xbutton.x;
+            int y = xev.xbutton.y;
 
             for (unsigned int i=0; i<mMenuEntries.size(); ++i) {
                 MenuEntry & me = mMenuEntries[i];
@@ -183,6 +182,7 @@ bool RGlutMenu::handleEvent(XEvent * xev)
                                  y < me.mY || y > me.mY + me.mHeight;
                 if (!outOfMenu) {
                     if (pressed) {
+                        GLUTES_DEBUGP2("Pressed %s", me.mName.c_str());
                         mPressedId = me.mId;
                     } else {
                         hide();
@@ -190,6 +190,9 @@ bool RGlutMenu::handleEvent(XEvent * xev)
                     }
                     break;
                 }
+            }
+            if (pressed) {
+                redraw();
             }
         }
     }

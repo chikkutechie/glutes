@@ -26,76 +26,35 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _GLUTMENU_H_
-#define _GLUTMENU_H_
+#include "rgluttimer.h"
+#include "rglutapplication.h"
 
-#include <string>
-#include <vector>
+RGlutTimer::RGlutTimer()
+ : mInterval(0)
+{}
 
-#include "rglutwindow.h"
-#include "rglutcolor.h"
-
-class RGlutGC;
-
-class RGlutMenu: public RGlutWindow
+RGlutTimer::~RGlutTimer()
 {
-public:
-    RGlutMenu(void (*callback)(int), RGlutWindow * parent = 0);
-    ~RGlutMenu();
+    RGlutApplication::activeApplication()->unregisterTimer(this);
+}
 
-    void addEntry(std::string name, int id);
+int RGlutTimer::interval()
+{
+    return mInterval;
+}
 
-    void removeEntry(int id)
-    {
-    }
+void RGlutTimer::setInterval(int interval)
+{
+    mInterval = interval;
+}
 
-    void show();
-    void hide();
-    void draw();
-    
-    bool handleEvent(XEvent & event);
+void RGlutTimer::start()
+{
+    RGlutApplication::activeApplication()->registerTimer(this);
+}
 
-private:
-    RGlutMenu(RGlutMenu const &);
-    RGlutMenu & operator=(RGlutMenu const &);
-
-    void create();
-    void destroy();
-    void drawBackground();
-    void drawItemBackgroundPressed(int x, int y, int w, int h);
-    void drawItemBackgroundNormal(int x, int y, int w, int h);
-
-private:
-    class MenuEntry
-    {
-    public:
-        MenuEntry()
-        {}
-        MenuEntry(std::string name, int id)
-            : mName(name),
-              mId(id)
-        {}
-
-        std::string mName;
-        int mId;
-        int mX;
-        int mY;
-        int mWidth;
-        int mHeight;
-    };
-
-    std::vector<MenuEntry> mMenuEntries;
-    void (*mCallback)(int);
-    int mPressedId;
-    RGlutColor mColor;
-    RGlutColor mItemNormalColor;
-    RGlutColor mItemPressedColor;
-    RGlutColor mTextColor;
-    RGlutGC * mGC;
-    static const int MenuGap = 2;
-    static const int MinMenuWidth = 200;
-    static const int MinMenuHeight = 75;
-};
-
-#endif
+void RGlutTimer::stop()
+{
+    RGlutApplication::activeApplication()->unregisterTimer(this);
+}
 

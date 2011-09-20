@@ -79,8 +79,9 @@ public:
     virtual void rerect(int x, int y, int w, int h);
     virtual void repos(int x, int y);
     virtual void keyboard(unsigned char key, unsigned int modifier, int x, int y);
-    virtual void mouse(int button, int modifier, int x, int y);
-
+    virtual void mouse(int button, int modifier, int x, int y, bool pressed = true);
+    virtual void motion(int, int, int, int) {}
+    
     virtual int createMenu(void (*)(int menu));
     virtual void destroyMenu(int menu);
     virtual int getMenu();
@@ -140,6 +141,30 @@ private:
         RArray<int> mMenuItems;
     };
 
+    class TimerEntry
+    {
+    public:
+        TimerEntry()
+         : mCallback(0),
+           mTimer(0),
+           mValue(0),
+           mGlutInterface(0)
+        {}
+        
+        ~TimerEntry()
+        {
+            delete mTimer;
+        }
+        
+        void (*mCallback)(int);
+        CTimer * mTimer;
+        int mValue;
+        RGlutS60Interface * mGlutInterface;
+    };
+    
+    static TInt timerCallbackFunction(TAny * a);
+
+
     int addControl(ControlEntry entry);
     ControlEntry removeControl(int id);
     void removeAllControl();
@@ -155,10 +180,9 @@ private:
     CEikonEnv* mEikonEnv;
     int mCurrentControl;
     RGlutGLBinder * mBinder;
-    CPeriodic * mTimer;
     RArray<ControlEntry> mControllist;
     RArray<ControlEntry> mControlStack;
-
+    
     bool mFullScreen;
     int mModifier;
 
@@ -166,6 +190,8 @@ private:
     int mCurrentMenu;
     int mAttachedMenuButton;
 
+    RPointerArray<TimerEntry> mExpiredTimer;
+    
     const TPtr8 KParamRenderer;
     const TPtr8 KParamRendererVG;
     const TPtr8 KParamRendererGL;

@@ -32,7 +32,9 @@
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #include <X11/Xutil.h>
+
 #include <string>
+#include <set>
 
 #include "rglutcolor.h"
 #include "rglutpoint.h"
@@ -76,9 +78,10 @@ public:
     virtual void show();
     virtual void hide();
 
+    virtual void redraw();
     virtual void draw();
 
-    virtual bool handleEvent(XEvent * event);
+    virtual bool handleEvent(XEvent & event);
 
     Display * display() const
     {
@@ -87,6 +90,22 @@ public:
 
     Window window();
 
+    RGlutWindow * parent()
+    {
+        return mParent;
+    }
+    
+    void addChild(RGlutWindow * window)
+    {
+        if (window) {
+            mChilds.insert(window);
+        }
+    }
+    
+    void removeChild(RGlutWindow * window);
+
+    void removeFromParent();
+    
 private:
     RGlutWindow(RGlutWindow const &);
     RGlutWindow & operator=(RGlutWindow const &);
@@ -106,6 +125,12 @@ protected:
     int mHeight;
     bool mVisible;
     std::string mTitle;
+    
+    typedef std::set<RGlutWindow *> WindowSet;
+    typedef WindowSet::iterator WindowSetIter;
+    typedef WindowSet::const_iterator WindowSetConstIter;
+    
+    WindowSet  mChilds;
 };
 
 #endif

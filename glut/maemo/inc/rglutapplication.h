@@ -26,76 +26,81 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _GLUTMENU_H_
-#define _GLUTMENU_H_
+#ifndef _RGLUTAPPLICATION_H_
+#define _RGLUTAPPLICATION_H_
 
-#include <string>
 #include <vector>
 
-#include "rglutwindow.h"
-#include "rglutcolor.h"
+class RGlutWindow;
+class RGlutTimer;
 
-class RGlutGC;
-
-class RGlutMenu: public RGlutWindow
+class RGlutApplication
 {
 public:
-    RGlutMenu(void (*callback)(int), RGlutWindow * parent = 0);
-    ~RGlutMenu();
-
-    void addEntry(std::string name, int id);
-
-    void removeEntry(int id)
+    RGlutApplication(RGlutWindow * window = 0);
+    virtual ~RGlutApplication();
+    
+    void setMainWindow(RGlutWindow * window)
     {
+        mMainWindow = window;
     }
 
-    void show();
-    void hide();
-    void draw();
+    RGlutWindow * mainWindow()
+    {
+        return mMainWindow;
+    }
     
-    bool handleEvent(XEvent & event);
-
+    int screenWidth() const
+    {
+        return mScreenWidth;
+    }
+    int screenHeight() const
+    {
+        return mScreenHeight;
+    }
+    int screen() const
+    {
+        return mScreenNumber;
+    }
+    
+    void exec();
+    
+    static RGlutApplication * activeApplication()
+    {
+        return mActiveApplication;
+    }
+    
+    void registerTimer(RGlutTimer * timer);
+    void unregisterTimer(RGlutTimer * timer);
+    
 private:
-    RGlutMenu(RGlutMenu const &);
-    RGlutMenu & operator=(RGlutMenu const &);
+    void checkTimers();
+    
+protected:
+    static const int EventLoopInterval = 5;
+    static RGlutApplication * mActiveApplication;
+    RGlutWindow * mMainWindow;
+    bool mFinished;
 
-    void create();
-    void destroy();
-    void drawBackground();
-    void drawItemBackgroundPressed(int x, int y, int w, int h);
-    void drawItemBackgroundNormal(int x, int y, int w, int h);
-
-private:
-    class MenuEntry
+    int mScreenNumber;
+    int mScreenWidth;
+    int mScreenHeight;
+    
+    class TimerEntry
     {
     public:
-        MenuEntry()
-        {}
-        MenuEntry(std::string name, int id)
-            : mName(name),
-              mId(id)
-        {}
-
-        std::string mName;
-        int mId;
-        int mX;
-        int mY;
-        int mWidth;
-        int mHeight;
+        void reduceTime(int ms)
+        {
+            mTimeLeft -= ms;
+        }
+        int mTimeLeft;    
+        RGlutTimer * mTimer;
     };
-
-    std::vector<MenuEntry> mMenuEntries;
-    void (*mCallback)(int);
-    int mPressedId;
-    RGlutColor mColor;
-    RGlutColor mItemNormalColor;
-    RGlutColor mItemPressedColor;
-    RGlutColor mTextColor;
-    RGlutGC * mGC;
-    static const int MenuGap = 2;
-    static const int MinMenuWidth = 200;
-    static const int MinMenuHeight = 75;
+    
+    typedef std::vector<TimerEntry> TimerSet;
+    typedef TimerSet::iterator TimerSetIter;
+    
+    TimerSet mTimers;
 };
 
 #endif
-

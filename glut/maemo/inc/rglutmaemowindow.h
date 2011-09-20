@@ -26,76 +26,29 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _GLUTMENU_H_
-#define _GLUTMENU_H_
-
-#include <string>
-#include <vector>
+#ifndef _RGLUTMAEMOWINDOW_H_
+#define _RGLUTMAEMOWINDOW_H_
 
 #include "rglutwindow.h"
-#include "rglutcolor.h"
+#include "rgluteventhandler.h"
 
-class RGlutGC;
-
-class RGlutMenu: public RGlutWindow
+class RGlutMaemoWindow: public RGlutWindow
 {
 public:
-    RGlutMenu(void (*callback)(int), RGlutWindow * parent = 0);
-    ~RGlutMenu();
-
-    void addEntry(std::string name, int id);
-
-    void removeEntry(int id)
-    {
-    }
-
-    void show();
-    void hide();
-    void draw();
+    RGlutMaemoWindow(RGlutEventHandler * eh);
+    ~RGlutMaemoWindow();
     
+    void draw();
+
     bool handleEvent(XEvent & event);
-
-private:
-    RGlutMenu(RGlutMenu const &);
-    RGlutMenu & operator=(RGlutMenu const &);
-
-    void create();
-    void destroy();
-    void drawBackground();
-    void drawItemBackgroundPressed(int x, int y, int w, int h);
-    void drawItemBackgroundNormal(int x, int y, int w, int h);
-
-private:
-    class MenuEntry
+    XEvent * currentXEvent()
     {
-    public:
-        MenuEntry()
-        {}
-        MenuEntry(std::string name, int id)
-            : mName(name),
-              mId(id)
-        {}
-
-        std::string mName;
-        int mId;
-        int mX;
-        int mY;
-        int mWidth;
-        int mHeight;
-    };
-
-    std::vector<MenuEntry> mMenuEntries;
-    void (*mCallback)(int);
-    int mPressedId;
-    RGlutColor mColor;
-    RGlutColor mItemNormalColor;
-    RGlutColor mItemPressedColor;
-    RGlutColor mTextColor;
-    RGlutGC * mGC;
-    static const int MenuGap = 2;
-    static const int MinMenuWidth = 200;
-    static const int MinMenuHeight = 75;
+        return mCurrentEvent;
+    }
+    
+private:
+    RGlutEventHandler * mEH;
+    XEvent * mCurrentEvent;
 };
 
 #endif
-

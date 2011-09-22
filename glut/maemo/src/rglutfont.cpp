@@ -63,19 +63,52 @@ XFontStruct * RGlutFont::fontStruct()
     return mFontInfo;
 }
 
-Font RGlutFont::id()
+Font RGlutFont::id() const
 {
     return mFontInfo->fid;
 }
 
-int RGlutFont::textHeight()
+int RGlutFont::textHeight() const
 {
     return mFontInfo->ascent + mFontInfo->descent;
 }
 
+void RGlutFont::fontInfoPrint() const
+{
+#ifdef GLUTES_DEBUG
+    Display * display = RGlutDisplay::instance()->display();
+
+    int no = 0;
+    
+    char ** fontPaths = XGetFontPath(display, &no);
+    GLUTES_DEBUGP2("Available Font Paths Count %d", no);
+    if (fontPaths) {
+        for (int i=0; i<no; ++i) {
+            GLUTES_DEBUGP2("%s", fontPaths[i]);
+        }
+        XFreeFontPath(fontPaths);
+    }
+
+    char ** fonts = XListFonts(display, "*", 1000, &no);
+    GLUTES_DEBUGP2("Available Fonts Count %d", no);
+    if (fonts) {
+        for (int i=0; i<no; ++i) {
+            GLUTES_DEBUGP2("%s", fonts[i]);
+        }
+        XFreeFontNames(fonts);
+    }
+    //char *dirs[] = {"built-ins", "/usr/share/fonts"};
+    //XSetFontPath(display, dirs, sizeof(dirs)/sizeof(dirs[0]));
+#endif
+}
+
 void RGlutFont::create()
 {
-    mFontInfo  = XLoadQueryFont(RGlutDisplay::instance()->display(), mPattern.c_str());
+    Display * display = RGlutDisplay::instance()->display();
+    mFontInfo  = XLoadQueryFont(display, mPattern.c_str());
+    if (!mFontInfo) {
+        mFontInfo = XLoadQueryFont(display, "*");
+    }
 }
 
 void RGlutFont::destroy()

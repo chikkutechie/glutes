@@ -49,7 +49,8 @@ CXX = g++
 LIBS = -lX11
 LIBDIR = 
 INCLUDES =  -I../inc -I../../inc -I../../common/inc
-DEFINES = -DGLUT_ES -DGLUTES_DEBUG
+DEFINES = -DGLUT_ES
+#-DGLUTES_DEBUG
 CXXFLAGS = -g3 -Wall -fPIC  $(INCLUDES) $(DEFINES)
 VPATH = ../src
 

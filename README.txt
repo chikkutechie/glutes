@@ -19,6 +19,7 @@ Linux
 
 *****
 
+    Only example application will be getting build in linux, no glut implementation is provided.
     1)	Go to build/linux
 
     2)	Rum make

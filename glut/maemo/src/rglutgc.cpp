@@ -31,7 +31,7 @@
 #include "rglutdisplay.h"
 
 RGlutGC::RGlutGC(RGlutWindow * window)
-    : mFont("*misc*fixed*120*")
+    : mFont("*nokia*")
 {
     mDisplay = window->display();
     mWindow = window->window();

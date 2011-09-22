@@ -40,9 +40,10 @@ public:
     RGlutFont & operator=(RGlutFont const &);
     ~RGlutFont();
 
-    Font id();
+    Font id() const;
     XFontStruct * fontStruct();
-    int textHeight();
+    int textHeight() const;
+    void fontInfoPrint() const;
 
 private:
     void create();

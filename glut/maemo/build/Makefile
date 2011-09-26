@@ -29,6 +29,7 @@
 lib_PROGRAMME = libglut.so
 
 glut_SOURCES = ../../common/src/glut.cpp \
+	       ../../common/src/rgluttime.cpp \
 	       ../../common/src/reglglutglbinder.cpp \
 	       ../../common/src/reglproperties.cpp \
 	       ../src/rglutmaemointerface.cpp \

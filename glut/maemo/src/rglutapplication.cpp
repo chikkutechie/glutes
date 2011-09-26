@@ -61,7 +61,7 @@ RGlutApplication::~RGlutApplication()
 void RGlutApplication::exec()
 {
     mActiveApplication = this;
-    
+
     Display * display = mMainWindow->display();
     
     while (!mFinished) {
@@ -97,7 +97,7 @@ void RGlutApplication::exec()
 void RGlutApplication::registerTimer(RGlutTimer * timer)
 {
     TimerEntry entry;
-    entry.mTimeLeft = timer->interval();
+    entry.mTime.start();
     entry.mTimer = timer;
     mTimers.push_back(entry);
 }
@@ -119,20 +119,17 @@ void RGlutApplication::checkTimers()
     }
 
     std::vector<TimerEntry> expiredTimers;
-    for (TimerSetIter iter = mTimers.begin(); iter != mTimers.end(); ++iter) {
-        iter->reduceTime(EventLoopInterval);
-        if (iter->mTimeLeft <= 0) {
-            expiredTimers.push_back(*iter);
+
+    for (unsigned int i = 0; i < mTimers.size();) {
+        TimerEntry & te = mTimers[i];
+        if (te.mTimer->interval() < te.mTime.elapsed()) {
+            expiredTimers.push_back(te);
+            mTimers.erase(mTimers.begin() + i);
+        } else {
+            ++i;
         }
     }    
     
-    for (unsigned int i = 0; i < mTimers.size(); ++i) {
-        if (mTimers[i].mTimeLeft <= 0) {
-            mTimers.erase(mTimers.begin() + i);
-            --i;
-        }
-    }
-
     int expiredTimersCount = expiredTimers.size();
     for (int i = 0; i < expiredTimersCount; ++i) {
         expiredTimers[i].mTimer->run();

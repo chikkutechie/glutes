@@ -26,80 +26,27 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _RGLUTAPPLICATION_H_
-#define _RGLUTAPPLICATION_H_
+#ifndef _RGLUTTIME_H_
+#define _RGLUTTIME_H_
 
-#include <vector>
-
-#include "rgluttime.h"
-
-class RGlutWindow;
-class RGlutTimer;
-
-class RGlutApplication
+class RGlutTime
 {
 public:
-    RGlutApplication(RGlutWindow * window = 0);
-    virtual ~RGlutApplication();
+    RGlutTime();
     
-    void setMainWindow(RGlutWindow * window)
-    {
-        mMainWindow = window;
-    }
+    void start();
+    int elapsed() const;
+    
+    static RGlutTime currentTime();
 
-    RGlutWindow * mainWindow()
-    {
-        return mMainWindow;
-    }
-    
-    int screenWidth() const
-    {
-        return mScreenWidth;
-    }
-    int screenHeight() const
-    {
-        return mScreenHeight;
-    }
-    int screen() const
-    {
-        return mScreenNumber;
-    }
-    
-    void exec();
-    
-    static RGlutApplication * activeApplication()
-    {
-        return mActiveApplication;
-    }
-    
-    void registerTimer(RGlutTimer * timer);
-    void unregisterTimer(RGlutTimer * timer);
-    
 private:
-    void checkTimers();
-    
-protected:
-    static const int EventLoopInterval = 1;
-    static RGlutApplication * mActiveApplication;
-
-    RGlutWindow * mMainWindow;
-    bool mFinished;
-
-    int mScreenNumber;
-    int mScreenWidth;
-    int mScreenHeight;
-    
-    class TimerEntry
-    {
-    public:
-        RGlutTime mTime;    
-        RGlutTimer * mTimer;
-    };
-    
-    typedef std::vector<TimerEntry> TimerSet;
-    typedef TimerSet::iterator TimerSetIter;
-    
-    TimerSet mTimers;
+    static unsigned long fromTimeComponentToMS(unsigned long hour, 
+                              unsigned long minute,
+                              unsigned long sec,
+                              unsigned long msec = 0);
+private:
+    unsigned long mMS;
 };
 
 #endif
+

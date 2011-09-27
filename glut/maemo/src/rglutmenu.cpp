@@ -27,16 +27,17 @@
  */
 
 #include "rglutmenu.h"
+#include "rglutdisplay.h"
 #include "rglutgc.h"
 #include "rcommon.h"
+#include "rglutlineargradient.h"
 
 RGlutMenu::RGlutMenu(void (*callback)(int), RGlutWindow * parent)
  : RGlutWindow(parent),
    mCallback(callback),
    mPressedId(-1),
    mColor(100, 100, 100),
-   mItemNormalColor(200, 200, 200),
-   mItemPressedColor(100, 100, 200),
+   mPixmapCreated(false),
    mTextColor(10, 10, 10)
 {}
 
@@ -63,11 +64,70 @@ void RGlutMenu::create()
     setBackgroundColor(mColor);
 }
 
+void RGlutMenu::createPixmaps(int w, int h)
+{
+    if (mPixmapCreated) {
+        return;
+    }
+
+    RGlutLinearGradient normalGrad(this);
+
+    RGlutGradient::color c;
+
+    c.mR = 0xa8;
+    c.mG = 0xa8;
+    c.mB = 0xFF;
+    normalGrad.addStop(0.0f, c);
+    c.mR = 0xe6;
+    c.mG = 0xe6;
+    c.mB = 0xFF;
+    normalGrad.addStop(0.2f, c);
+    c.mR = 0xe6;
+    c.mG = 0xe6;
+    c.mB = 0xFF;
+    normalGrad.addStop(0.8f, c);
+    c.mR = 0xa8;
+    c.mG = 0xa8;
+    c.mB = 0xFF;
+    normalGrad.addStop(1.0f, c);
+
+    RGlutLinearGradient pressedGrad(this);
+
+    c.mR = 0xe6;
+    c.mG = 0xe6;
+    c.mB = 0xFF;
+    pressedGrad.addStop(0.0f, c);
+    c.mR = 0xa8;
+    c.mG = 0xa8;
+    c.mB = 0xFF;
+    pressedGrad.addStop(0.2f, c);
+    c.mR = 0xa8;
+    c.mG = 0xa8;
+    c.mB = 0xFF;
+    pressedGrad.addStop(0.8f, c);
+    c.mR = 0xe6;
+    c.mG = 0xe6;
+    c.mB = 0xFF;
+    pressedGrad.addStop(1.0f, c);
+
+    mItemNormalPixmap = normalGrad.createPixmap(w, h);
+    mItemPressedPixmap = pressedGrad.createPixmap(w, h);
+
+    mPixmapCreated = true;
+}
+
 void RGlutMenu::destroy()
 {
-    RGlutWindow::destroy();
+    if (mPixmapCreated) {
+        XFreePixmap(RGlutDisplay::instance()->display(), mItemNormalPixmap);
+        XFreePixmap(RGlutDisplay::instance()->display(), mItemPressedPixmap);
+        mPixmapCreated = false;
+    }
+
     delete mGC;
     mGC = 0;
+
+    RGlutWindow::destroy();
 }
 
 void RGlutMenu::addEntry(std::string name, int id)
@@ -86,14 +146,13 @@ void RGlutMenu::drawBackground()
 
 void RGlutMenu::drawItemBackgroundNormal(int x, int y, int w, int h)
 {
-    mGC->setForegroundColor(mItemNormalColor);
-    mGC->fillRectangle(x+MenuGap, y+MenuGap, w-2*MenuGap, h-2*MenuGap);
+    createPixmaps(w-2*MenuGap, h-2*MenuGap);
+    mGC->drawPixmap(mItemNormalPixmap, 0, 0, w-2*MenuGap, h-2*MenuGap, x+MenuGap, y+MenuGap);
 }
 
 void RGlutMenu::drawItemBackgroundPressed(int x, int y, int w, int h)
 {
-    mGC->setForegroundColor(mItemPressedColor);
-    mGC->fillRectangle(x+MenuGap, y+MenuGap, w-2*MenuGap, h-2*MenuGap);
+    mGC->drawPixmap(mItemPressedPixmap, 0, 0, w-2*MenuGap, h-2*MenuGap, x+MenuGap, y+MenuGap);
 }
 
 void RGlutMenu::show()

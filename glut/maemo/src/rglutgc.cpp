@@ -38,13 +38,14 @@ RGlutGC::RGlutGC(RGlutWindow * window)
 
     XGCValues gcv;
 
+    gcv.function = GXcopy;
     gcv.fill_style = FillSolid;
     gcv.background = XWhitePixel(mDisplay, XDefaultScreen(mDisplay));
     gcv.foreground = XBlackPixel(mDisplay, XDefaultScreen(mDisplay));
     gcv.line_width = 5;
     gcv.font = mFont.id();
 
-    int mask = GCLineWidth | GCFillStyle | GCBackground | GCForeground | GCFont;
+    int mask = GCFunction | GCLineWidth | GCFillStyle | GCBackground | GCForeground | GCFont;
 
     mGC = XCreateGC(mDisplay, mWindow, mask, &gcv);
 }
@@ -75,6 +76,11 @@ void RGlutGC::drawString(int x, int y, std::string const & str)
 {
     XDrawString(mDisplay, mWindow, mGC, x, y,
                 str.c_str(), str.length());
+}
+
+void RGlutGC::drawPixmap(Pixmap pmap, int sx, int sy, int width, int height, int dx, int dy)
+{
+    XCopyArea(mDisplay, pmap, mWindow, mGC, sx, sy, width, height, dx, dy);
 }
 
 void RGlutGC::setFont(RGlutFont const & font)

@@ -64,6 +64,7 @@ private:
     void drawBackground();
     void drawItemBackgroundPressed(int x, int y, int w, int h);
     void drawItemBackgroundNormal(int x, int y, int w, int h);
+    void createPixmaps(int w, int h);
 
 private:
     class MenuEntry
@@ -88,8 +89,9 @@ private:
     void (*mCallback)(int);
     int mPressedId;
     RGlutColor mColor;
-    RGlutColor mItemNormalColor;
-    RGlutColor mItemPressedColor;
+    Pixmap mItemNormalPixmap;
+    Pixmap mItemPressedPixmap;
+    bool mPixmapCreated;
     RGlutColor mTextColor;
     RGlutGC * mGC;
     static const int MenuGap = 2;

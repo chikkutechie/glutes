@@ -41,7 +41,8 @@ glut_SOURCES = ../../common/src/glut.cpp \
 	       ../src/rglutfont.cpp \
                ../src/rglutapplication.cpp \
                ../src/rglutmaemowindow.cpp \
-               ../src/rgluttimer.cpp
+               ../src/rgluttimer.cpp \
+               ../src/rglutlineargradient.cpp
 
 glut_INCExports = ../../inc/glut.h
 glut_OBJS = $(patsubst ../src/%.cpp, %.o, $(glut_SOURCES))

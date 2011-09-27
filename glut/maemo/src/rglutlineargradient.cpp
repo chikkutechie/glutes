@@ -26,47 +26,55 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _RGLUTGC_H_
-#define _RGLUTGC_H_
+#include "rglutlineargradient.h"
 
-#include <string>
-
-#include "rglutfont.h"
-#include "rglutcolor.h"
-
-class RGlutWindow;
-
-class RGlutGC
+Pixmap RGlutLinearGradient::createPixmap(int width, int height)
 {
-public:
-    RGlutGC(RGlutWindow * window);
-    ~RGlutGC();
+    Display * dpy = mWin->display();
 
-    void setForegroundColor(RGlutColor const & color);
-    void setBackgroundColor(RGlutColor const & color);
-    
-    void fillRectangle(int x, int y, int w, int h);
+    GC gc = XDefaultGC(dpy, XDefaultScreen(dpy));
 
-    void setFont(RGlutFont const & font);
-    RGlutFont font() const
-    {
-        return mFont;
+    Pixmap pmap = XCreatePixmap(dpy, mWin->window(), width, height, XDefaultDepth(dpy, XDefaultScreen(dpy)));
+
+    color * clrs = getColors(height);
+
+    for (int y=0; y<height; ++y) {
+        RGlutColor c(clrs[y].mR, clrs[y].mG, clrs[y].mB);
+	
+        XSetForeground(dpy, gc, c.pixel());
+
+        for (int x=0; x<width; ++x) {
+            XDrawPoint(dpy, pmap, gc, x, y);
+
+        }
+    }
+    delete [] clrs;
+    return pmap;
+}
+
+RGlutLinearGradient::color * RGlutLinearGradient::getColors(int h)
+{
+    color * c = new color[h];
+
+    StopsIter iter2 = mStops.begin();
+    StopsIter iter1 = iter2++;
+
+    for (int i=0; i<h; ++i) {
+        float co = float(i)/float(h);
+        if (co > iter2->first) {
+            ++iter1;
+            ++iter2;
+        }
+        float dy = iter2->first * h - iter1->first * h;
+        float gxy = (float(i) - iter1->first * float(h)) / dy;
+
+        color c1 = iter1->second;
+        color c2 = iter2->second;
+
+        c[i].mR = (1.0f - gxy) * c1.mR + c2.mR * gxy;
+        c[i].mG = (1.0f - gxy) * c1.mG + c2.mG * gxy;
+        c[i].mB = (1.0f - gxy) * c1.mB + c2.mB * gxy;
     }
 
-    void drawString(int x, int y, std::string const & str);
-
-    void drawPixmap(Pixmap pmap, int sx, int sy, int width, int height, int dx, int dy);
-
-private:
-    RGlutGC(RGlutGC const &);
-    RGlutGC & operator=(RGlutGC const &);
-
-private:
-    GC mGC;
-    RGlutFont mFont;
-    Window mWindow;
-    Display * mDisplay;
-};
-
-#endif
-
+    return c;
+}

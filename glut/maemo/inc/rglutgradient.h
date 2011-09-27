@@ -26,47 +26,42 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _RGLUTGC_H_
-#define _RGLUTGC_H_
+#ifndef _RGLUTGRADIENT_H_
+#define _RGLUTGRADIENT_H_
 
-#include <string>
-
-#include "rglutfont.h"
-#include "rglutcolor.h"
+#include <map>
 
 class RGlutWindow;
 
-class RGlutGC
+class RGlutGradient
 {
 public:
-    RGlutGC(RGlutWindow * window);
-    ~RGlutGC();
-
-    void setForegroundColor(RGlutColor const & color);
-    void setBackgroundColor(RGlutColor const & color);
-    
-    void fillRectangle(int x, int y, int w, int h);
-
-    void setFont(RGlutFont const & font);
-    RGlutFont font() const
+    class color
     {
-        return mFont;
+    public:
+        int mR;
+        int mG;
+        int mB;
+    };
+
+    RGlutGradient(RGlutWindow * win)
+      : mWin(win)
+    {}
+    virtual ~RGlutGradient()
+    {}
+
+    void addStop(float offset, color c)
+    {
+        mStops.insert(std::pair<float, color>(offset, c));
     }
 
-    void drawString(int x, int y, std::string const & str);
+protected:
+    typedef std::map<float, color> Stops;
+    typedef Stops::iterator StopsIter;
+    typedef Stops::const_iterator StopsConstIter;
 
-    void drawPixmap(Pixmap pmap, int sx, int sy, int width, int height, int dx, int dy);
-
-private:
-    RGlutGC(RGlutGC const &);
-    RGlutGC & operator=(RGlutGC const &);
-
-private:
-    GC mGC;
-    RGlutFont mFont;
-    Window mWindow;
-    Display * mDisplay;
+    RGlutWindow * mWin;
+    Stops mStops;
 };
 
 #endif
-

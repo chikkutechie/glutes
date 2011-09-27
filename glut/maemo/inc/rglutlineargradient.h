@@ -26,47 +26,25 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _RGLUTGC_H_
-#define _RGLUTGC_H_
+#ifndef _RGLUTLINEARGRADIENT_H_
+#define _RGLUTLINEARGRADIENT_H_
 
-#include <string>
+#include <map>
 
-#include "rglutfont.h"
-#include "rglutcolor.h"
+#include "rglutwindow.h"
+#include "rglutgradient.h"
 
-class RGlutWindow;
-
-class RGlutGC
+class RGlutLinearGradient: public RGlutGradient
 {
 public:
-    RGlutGC(RGlutWindow * window);
-    ~RGlutGC();
+    RGlutLinearGradient(RGlutWindow * win)
+      : RGlutGradient(win)
+    {}
 
-    void setForegroundColor(RGlutColor const & color);
-    void setBackgroundColor(RGlutColor const & color);
-    
-    void fillRectangle(int x, int y, int w, int h);
-
-    void setFont(RGlutFont const & font);
-    RGlutFont font() const
-    {
-        return mFont;
-    }
-
-    void drawString(int x, int y, std::string const & str);
-
-    void drawPixmap(Pixmap pmap, int sx, int sy, int width, int height, int dx, int dy);
+    Pixmap createPixmap(int w, int h);
 
 private:
-    RGlutGC(RGlutGC const &);
-    RGlutGC & operator=(RGlutGC const &);
-
-private:
-    GC mGC;
-    RGlutFont mFont;
-    Window mWindow;
-    Display * mDisplay;
+    color * getColors(int h);
 };
 
 #endif
-

@@ -74,40 +74,40 @@ void RGlutMenu::createPixmaps(int w, int h)
 
     RGlutGradient::color c;
 
-    c.mR = 0xa8;
-    c.mG = 0xa8;
-    c.mB = 0xFF;
+    c.mR = 167;
+    c.mG = 211;
+    c.mB = 162;
     normalGrad.addStop(0.0f, c);
-    c.mR = 0xe6;
-    c.mG = 0xe6;
-    c.mB = 0xFF;
-    normalGrad.addStop(0.2f, c);
-    c.mR = 0xe6;
-    c.mG = 0xe6;
-    c.mB = 0xFF;
-    normalGrad.addStop(0.8f, c);
-    c.mR = 0xa8;
-    c.mG = 0xa8;
-    c.mB = 0xFF;
+    c.mR = 0;
+    c.mG = 180;
+    c.mB = 0;
+    normalGrad.addStop(0.4f, c);
+    c.mR = 0;
+    c.mG = 180;
+    c.mB = 0;
+    normalGrad.addStop(0.6f, c);
+    c.mR = 0;
+    c.mG = 250;
+    c.mB = 0;
     normalGrad.addStop(1.0f, c);
 
     RGlutLinearGradient pressedGrad(this);
 
-    c.mR = 0xe6;
-    c.mG = 0xe6;
-    c.mB = 0xFF;
+    c.mR = 67;
+    c.mG = 111;
+    c.mB = 62;
     pressedGrad.addStop(0.0f, c);
-    c.mR = 0xa8;
-    c.mG = 0xa8;
-    c.mB = 0xFF;
-    pressedGrad.addStop(0.2f, c);
-    c.mR = 0xa8;
-    c.mG = 0xa8;
-    c.mB = 0xFF;
-    pressedGrad.addStop(0.8f, c);
-    c.mR = 0xe6;
-    c.mG = 0xe6;
-    c.mB = 0xFF;
+    c.mR = 0;
+    c.mG = 80;
+    c.mB = 0;
+    pressedGrad.addStop(0.4f, c);
+    c.mR = 0;
+    c.mG = 80;
+    c.mB = 0;
+    pressedGrad.addStop(0.6f, c);
+    c.mR = 0;
+    c.mG = 150;
+    c.mB = 0;
     pressedGrad.addStop(1.0f, c);
 
     mItemNormalPixmap = normalGrad.createPixmap(w, h);

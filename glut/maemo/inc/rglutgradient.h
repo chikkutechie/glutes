@@ -44,8 +44,7 @@ public:
         int mB;
     };
 
-    RGlutGradient(RGlutWindow * win)
-      : mWin(win)
+    RGlutGradient()
     {}
     virtual ~RGlutGradient()
     {}
@@ -60,7 +59,6 @@ protected:
     typedef Stops::iterator StopsIter;
     typedef Stops::const_iterator StopsConstIter;
 
-    RGlutWindow * mWin;
     Stops mStops;
 };
 

@@ -184,6 +184,9 @@ bool RGlutWindow::handleEvent(XEvent & event)
     return handled;
 }
 
+// redraw just calls draw directly
+// might need to send an event to X server
+// and the server should send the expose event back
 void RGlutWindow::redraw()
 {
     draw();

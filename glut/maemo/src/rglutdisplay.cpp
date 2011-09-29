@@ -33,6 +33,7 @@ RGlutDisplay::RGlutDisplay()
     mDisplay = XOpenDisplay(0);
 }
 
+// time being, only one connection to the X server is allowd
 RGlutDisplay * RGlutDisplay::instance()
 {
     static RGlutDisplay display;

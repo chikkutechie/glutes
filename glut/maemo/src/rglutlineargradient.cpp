@@ -27,14 +27,20 @@
  */
 
 #include "rglutlineargradient.h"
+#include "rglutdisplay.h"
+#include "rglutcolor.h"
+
+#include <X11/Xlib.h>
 
 Pixmap RGlutLinearGradient::createPixmap(int width, int height)
 {
-    Display * dpy = mWin->display();
+    Display * dpy = RGlutDisplay::instance()->display();
 
     GC gc = XDefaultGC(dpy, XDefaultScreen(dpy));
 
-    Pixmap pmap = XCreatePixmap(dpy, mWin->window(), width, height, XDefaultDepth(dpy, XDefaultScreen(dpy)));
+    Pixmap pmap = XCreatePixmap(dpy, XDefaultRootWindow(dpy),
+                                width, height,
+                                XDefaultDepth(dpy, XDefaultScreen(dpy)));
 
     color * clrs = getColors(height);
 
@@ -52,6 +58,8 @@ Pixmap RGlutLinearGradient::createPixmap(int width, int height)
     return pmap;
 }
 
+// this function returns the vertical linear gradient
+// the first coloumn, to be precise
 RGlutLinearGradient::color * RGlutLinearGradient::getColors(int h)
 {
     color * c = new color[h];
@@ -78,3 +86,4 @@ RGlutLinearGradient::color * RGlutLinearGradient::getColors(int h)
 
     return c;
 }
+

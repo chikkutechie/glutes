@@ -35,6 +35,7 @@
 
 class RGlutWindow;
 class RGlutTimer;
+class RGlutLAF;
 
 class RGlutApplication
 {
@@ -52,6 +53,13 @@ public:
         return mMainWindow;
     }
     
+    RGlutLAF * LAF()
+    {
+        return mLAF;
+    }
+
+    RGlutLAF * setLAF(std::string const & name);
+
     int screenWidth() const
     {
         return mScreenWidth;
@@ -84,6 +92,8 @@ protected:
 
     RGlutWindow * mMainWindow;
     bool mFinished;
+
+    RGlutLAF * mLAF;
 
     int mScreenNumber;
     int mScreenWidth;

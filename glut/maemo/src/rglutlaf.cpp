@@ -26,82 +26,97 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _GLUTMENU_H_
-#define _GLUTMENU_H_
+#include "rglutlaf.h"
+#include "rglutlineargradient.h"
 
-#include <string>
-#include <vector>
+RGlutLAF::RGlutLAF()
+{} 
 
-#include "rglutwindow.h"
-#include "rglutcolor.h"
+RGlutLAF::~RGlutLAF()
+{} 
 
-class RGlutGC;
-
-class RGlutMenu: public RGlutWindow
+int RGlutLAF::maximumMenuWidth()
 {
-public:
-    RGlutMenu(void (*callback)(int), RGlutWindow * parent = 0);
-    ~RGlutMenu();
+    return 400;
+}
 
-    void addEntry(std::string name, int id);
+int RGlutLAF::maximumMenuItemHeight()
+{
+    return 200;
+}
 
-    void removeEntry(int id)
-    {
-    }
+int RGlutLAF::minimumMenuWidth()
+{
+    return 200;
+}
 
-    void show();
-    void hide();
-    void draw();
-    
-    bool handleEvent(XEvent & event);
+int RGlutLAF::minimumMenuItemHeight()
+{
+    return 75;
+}
 
-private:
-    class MenuEntry
-    {
-    public:
-        MenuEntry()
-        {}
-        MenuEntry(std::string name, int id)
-            : mName(name),
-              mId(id)
-        {}
+int RGlutLAF::menuItemGap()
+{
+    return 2;
+}
 
-        std::string mName;
-        int mId;
-        int mX;
-        int mY;
-        int mWidth;
-        int mHeight;
-    };
+RGlutColor RGlutLAF::getMenuBackgroundColor()
+{
+    return RGlutColor(167, 211, 162);
+} 
 
-private:
-    RGlutMenu(RGlutMenu const &);
-    RGlutMenu & operator=(RGlutMenu const &);
+RGlutColor RGlutLAF::getMenuTextColor()
+{
+    return RGlutColor(10, 10, 10);
+}
 
-    void create();
-    void destroy();
-    void drawBackground();
-    void drawItemBackgroundPressed(int x, int y, int w, int h);
-    void drawItemBackgroundNormal(int x, int y, int w, int h);
-    void createPixmaps(int w, int h);
-    MenuEntry * getMenuEntry(int x, int y);
+Pixmap RGlutLAF::createMenuItemBackgroundNormal(int w, int h)
+{
+    RGlutLinearGradient normalGrad;
+    RGlutGradient::color c;
 
-private:
-    std::vector<MenuEntry> mMenuEntries;
-    void (*mCallback)(int);
-    int mPressedId;
-    RGlutColor mColor;
-    Pixmap mItemNormalPixmap;
-    Pixmap mItemPressedPixmap;
-    bool mPixmapCreated;
-    RGlutColor mTextColor;
-    RGlutGC * mGC;
-    int mMenuGap;
-    int mMinMenuWidth;
-    int mMinMenuItemHeight;
-    int mMaxMenuWidth;
-    int mMaxMenuItemHeight;
-};
+    c.mR = 167;
+    c.mG = 211;
+    c.mB = 162;
+    normalGrad.addStop(0.0f, c);
+    c.mR = 0;
+    c.mG = 180;
+    c.mB = 0;
+    normalGrad.addStop(0.4f, c);
+    c.mR = 0;
+    c.mG = 180;
+    c.mB = 0;
+    normalGrad.addStop(0.6f, c);
+    c.mR = 0;
+    c.mG = 250;
+    c.mB = 0;
+    normalGrad.addStop(1.0f, c);
 
-#endif
+    return normalGrad.createPixmap(w, h);
+} 
+
+Pixmap RGlutLAF::createMenuItemBackgroundPressed(int w, int h)
+{
+    RGlutGradient::color c;
+    RGlutLinearGradient pressedGrad;
+
+    c.mR = 67;
+    c.mG = 111;
+    c.mB = 62;
+    pressedGrad.addStop(0.0f, c);
+    c.mR = 0;
+    c.mG = 80;
+    c.mB = 0;
+    pressedGrad.addStop(0.4f, c);
+    c.mR = 0;
+    c.mG = 80;
+    c.mB = 0;
+    pressedGrad.addStop(0.6f, c);
+    c.mR = 0;
+    c.mG = 150;
+    c.mB = 0;
+    pressedGrad.addStop(1.0f, c);
+
+    return pressedGrad.createPixmap(w, h);
+} 
 

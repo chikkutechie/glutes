@@ -31,15 +31,24 @@
 #include "rglutgc.h"
 #include "rcommon.h"
 #include "rglutlineargradient.h"
+#include "rglutlaf.h"
+#include "rglutapplication.h"
 
 RGlutMenu::RGlutMenu(void (*callback)(int), RGlutWindow * parent)
  : RGlutWindow(parent),
    mCallback(callback),
    mPressedId(-1),
-   mColor(100, 100, 100),
-   mPixmapCreated(false),
-   mTextColor(10, 10, 10)
-{}
+   mPixmapCreated(false)
+{
+    RGlutLAF * laf = RGlutApplication::activeApplication()->LAF();
+    mColor = laf->getMenuBackgroundColor();
+    mTextColor = laf->getMenuTextColor();
+    mMenuGap = laf->menuItemGap();
+    mMinMenuItemHeight = laf->minimumMenuItemHeight();
+    mMinMenuWidth = laf->minimumMenuWidth();
+    mMaxMenuItemHeight = laf->maximumMenuItemHeight();
+    mMaxMenuWidth = laf->maximumMenuWidth();
+}
 
 RGlutMenu::~RGlutMenu()
 {
@@ -52,9 +61,9 @@ void RGlutMenu::create()
         return;
     }
 
-    int textHeight = MinMenuHeight;
+    int textHeight = mMinMenuItemHeight;
 
-    mWidth = MinMenuWidth;
+    mWidth = mMinMenuWidth;
     mHeight = mMenuEntries.size() * textHeight;
 
     RGlutWindow::create();
@@ -70,48 +79,10 @@ void RGlutMenu::createPixmaps(int w, int h)
         return;
     }
 
-    RGlutLinearGradient normalGrad(this);
-
-    RGlutGradient::color c;
-
-    c.mR = 167;
-    c.mG = 211;
-    c.mB = 162;
-    normalGrad.addStop(0.0f, c);
-    c.mR = 0;
-    c.mG = 180;
-    c.mB = 0;
-    normalGrad.addStop(0.4f, c);
-    c.mR = 0;
-    c.mG = 180;
-    c.mB = 0;
-    normalGrad.addStop(0.6f, c);
-    c.mR = 0;
-    c.mG = 250;
-    c.mB = 0;
-    normalGrad.addStop(1.0f, c);
-
-    RGlutLinearGradient pressedGrad(this);
-
-    c.mR = 67;
-    c.mG = 111;
-    c.mB = 62;
-    pressedGrad.addStop(0.0f, c);
-    c.mR = 0;
-    c.mG = 80;
-    c.mB = 0;
-    pressedGrad.addStop(0.4f, c);
-    c.mR = 0;
-    c.mG = 80;
-    c.mB = 0;
-    pressedGrad.addStop(0.6f, c);
-    c.mR = 0;
-    c.mG = 150;
-    c.mB = 0;
-    pressedGrad.addStop(1.0f, c);
-
-    mItemNormalPixmap = normalGrad.createPixmap(w, h);
-    mItemPressedPixmap = pressedGrad.createPixmap(w, h);
+    RGlutLAF * laf = RGlutApplication::activeApplication()->LAF();
+    
+    mItemNormalPixmap = laf->createMenuItemBackgroundNormal(w, h);
+    mItemPressedPixmap = laf->createMenuItemBackgroundPressed(w, h);
 
     mPixmapCreated = true;
 }
@@ -146,18 +117,19 @@ void RGlutMenu::drawBackground()
 
 void RGlutMenu::drawItemBackgroundNormal(int x, int y, int w, int h)
 {
-    createPixmaps(w-2*MenuGap, h-2*MenuGap);
-    mGC->drawPixmap(mItemNormalPixmap, 0, 0, w-2*MenuGap, h-2*MenuGap, x+MenuGap, y+MenuGap);
+    createPixmaps(w-2*mMenuGap, h-2*mMenuGap);
+    mGC->drawPixmap(mItemNormalPixmap, 0, 0, w-2*mMenuGap, h-2*mMenuGap, x+mMenuGap, y+mMenuGap);
 }
 
 void RGlutMenu::drawItemBackgroundPressed(int x, int y, int w, int h)
 {
-    mGC->drawPixmap(mItemPressedPixmap, 0, 0, w-2*MenuGap, h-2*MenuGap, x+MenuGap, y+MenuGap);
+    mGC->drawPixmap(mItemPressedPixmap, 0, 0, w-2*mMenuGap, h-2*mMenuGap, x+mMenuGap, y+mMenuGap);
 }
 
 void RGlutMenu::show()
 {
     if (mParent) {
+        // change the origin of the menu, if not properly fit into the current window
         bool changed = false;
         if (mX+mWidth > mParent->size().width()) {
             mX = mX - mWidth;
@@ -200,14 +172,24 @@ void RGlutMenu::draw()
     for (unsigned int i=0; i<mMenuEntries.size(); ++i) {
         MenuEntry & me = mMenuEntries[i];
  
+        // set the background according to the pressed state
         if (mPressedId == me.mId) {
             drawItemBackgroundPressed(x, y, w, h);
         } else {
             drawItemBackgroundNormal(x, y, w, h);
         }
 
+        // draw the text aligned to center
+        int tx = (w - mGC->textWidth(me.mName)) / 2;
+        int ty = itemHeight-hw;
+
+        if (tx < 0) {
+            tx = 0;
+        }
+
         mGC->setForegroundColor(mTextColor);
-        mGC->drawString(5, itemHeight-hw, me.mName); 
+        mGC->drawString(tx, ty, me.mName); 
+
         me.mX = x;
         me.mY = y;
         me.mWidth = w;
@@ -217,42 +199,85 @@ void RGlutMenu::draw()
     }
 }
 
+RGlutMenu::MenuEntry * RGlutMenu::getMenuEntry(int x, int y)
+{
+    MenuEntry * mentry = 0;
+
+    for (unsigned int i=0; i<mMenuEntries.size(); ++i) {
+        MenuEntry & me = mMenuEntries[i];
+        bool outOfMenu = x < me.mX || x > me.mX + me.mWidth ||
+                         y < me.mY || y > me.mY + me.mHeight;
+        if (!outOfMenu) {
+                mentry = &me;
+        }
+    }
+    return mentry;
+}
+
 bool RGlutMenu::handleEvent(XEvent & xev)
 {
     bool handled = false;
 
+    if (xev.xany.window != mWindow) {
+        return handled;
+    }
+
     switch (xev.type) {
         case ButtonPress:
         case ButtonRelease: {
-            if (mWindow != xev.xbutton.window) {
-                break;
-            }
             handled = true;
             bool pressed = false;
+            bool toRedraw = false;
             if (xev.type == ButtonPress) {
                 pressed = true;
             }
             int x = xev.xbutton.x;
             int y = xev.xbutton.y;
 
-            for (unsigned int i=0; i<mMenuEntries.size(); ++i) {
-                MenuEntry & me = mMenuEntries[i];
-                bool outOfMenu = x < me.mX || x > me.mX + me.mWidth ||
-                                 y < me.mY || y > me.mY + me.mHeight;
-                if (!outOfMenu) {
-                    if (pressed) {
-                        GLUTES_DEBUGP2("Pressed %s", me.mName.c_str());
-                        mPressedId = me.mId;
-                    } else {
+            MenuEntry * mentry = getMenuEntry(x, y);
+            if (mentry) {
+                MenuEntry & me = *mentry;
+                if (pressed) {
+                    GLUTES_DEBUGP2("Pressed %s", me.mName.c_str());
+                    mPressedId = me.mId;
+                    toRedraw = true;
+                } else {
+                    if (mPressedId == me.mId) {
                         hide();
-             	        mCallback(me.mId);
+                        mCallback(me.mId);
+                    } else {
+                        // pressed and released item is not the same
+                        // go back to the begining
+                        toRedraw = true;
+                        mPressedId = -1;
                     }
-                    break;
                 }
             }
-            if (pressed) {
+            if (toRedraw) {
                 redraw();
             }
+            break;
+        }
+        case MotionNotify: {
+            handled = true;
+            int x = xev.xmotion.x;
+            int y = xev.xmotion.y;
+            if (mPressedId != -1) {
+                MenuEntry * mentry = getMenuEntry(x, y);
+                if (!mentry) {
+                    // released the mouse button outside the menu 
+                    // hide the menu
+                    GLUTES_DEBUGP3("Moved out of Menu (%d, %d)", xev.xmotion.x, xev.xmotion.y);
+                    mPressedId = -1;
+                    redraw();
+                } else {
+                    if (mPressedId != mentry->mId) {
+                        mPressedId = mentry->mId;
+                        redraw();
+                    }
+                }
+            }
+            break;
         }
     }
 

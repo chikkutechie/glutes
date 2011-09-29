@@ -30,15 +30,14 @@
 #define _RGLUTLINEARGRADIENT_H_
 
 #include <map>
+#include <X11/X.h>
 
-#include "rglutwindow.h"
 #include "rglutgradient.h"
 
 class RGlutLinearGradient: public RGlutGradient
 {
 public:
-    RGlutLinearGradient(RGlutWindow * win)
-      : RGlutGradient(win)
+    RGlutLinearGradient()
     {}
 
     Pixmap createPixmap(int w, int h);

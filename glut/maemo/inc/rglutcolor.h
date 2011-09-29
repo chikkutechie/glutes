@@ -34,7 +34,7 @@
 class RGlutColor
 {
 public:
-    RGlutColor(int r, int g, int b);
+    RGlutColor(int r=0, int g=0, int b=0);
     RGlutColor(RGlutColor const &);
     ~RGlutColor();
 

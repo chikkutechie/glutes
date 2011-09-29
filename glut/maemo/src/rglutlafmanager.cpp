@@ -26,82 +26,61 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _GLUTMENU_H_
-#define _GLUTMENU_H_
+#include "rglutlafmanager.h"
+#include "rglutlaf.h"
 
-#include <string>
-#include <vector>
-
-#include "rglutwindow.h"
-#include "rglutcolor.h"
-
-class RGlutGC;
-
-class RGlutMenu: public RGlutWindow
+RGlutLAFManager::RGlutLAFManager()
 {
-public:
-    RGlutMenu(void (*callback)(int), RGlutWindow * parent = 0);
-    ~RGlutMenu();
+    // default look and feel for glut
+    std::string glutlaf("rglut");
+    doRegisterLAF(glutlaf, new RGlutLAF);
+}
 
-    void addEntry(std::string name, int id);
+RGlutLAFManager::~RGlutLAFManager()
+{
+    for (LAFsIter iter = mLAFs.begin(); iter != mLAFs.end(); ++iter) {
+        delete iter->second;
+    }
+}
 
-    void removeEntry(int id)
-    {
+void RGlutLAFManager::doRegisterLAF(std::string const & name, RGlutLAF * laf)
+{
+    mLAFs.insert(std::pair<std::string, RGlutLAF *>(name, laf));
+}
+
+void RGlutLAFManager::doUnregisterLAF(std::string const & name)
+{
+    LAFsIter iter = mLAFs.find(name);
+    if (iter != mLAFs.end()) {
+        delete iter->second;
+        mLAFs.erase(iter);
+    }
+}
+
+void RGlutLAFManager::registerLAF(std::string const & name, RGlutLAF * laf)
+{
+    instance()->doRegisterLAF(name, laf);
+}
+
+void RGlutLAFManager::unregisterLAF(std::string const & name)
+{
+    instance()->doUnregisterLAF(name);
+}
+
+RGlutLAF * RGlutLAFManager::getLAF(std::string name)
+{
+    RGlutLAF * laf = 0;
+    LAFsIter iter = instance()->mLAFs.find(name);
+    if (iter != instance()->mLAFs.end()) {
+        laf = iter->second;
     }
 
-    void show();
-    void hide();
-    void draw();
-    
-    bool handleEvent(XEvent & event);
+    return laf;
+}
 
-private:
-    class MenuEntry
-    {
-    public:
-        MenuEntry()
-        {}
-        MenuEntry(std::string name, int id)
-            : mName(name),
-              mId(id)
-        {}
-
-        std::string mName;
-        int mId;
-        int mX;
-        int mY;
-        int mWidth;
-        int mHeight;
-    };
-
-private:
-    RGlutMenu(RGlutMenu const &);
-    RGlutMenu & operator=(RGlutMenu const &);
-
-    void create();
-    void destroy();
-    void drawBackground();
-    void drawItemBackgroundPressed(int x, int y, int w, int h);
-    void drawItemBackgroundNormal(int x, int y, int w, int h);
-    void createPixmaps(int w, int h);
-    MenuEntry * getMenuEntry(int x, int y);
-
-private:
-    std::vector<MenuEntry> mMenuEntries;
-    void (*mCallback)(int);
-    int mPressedId;
-    RGlutColor mColor;
-    Pixmap mItemNormalPixmap;
-    Pixmap mItemPressedPixmap;
-    bool mPixmapCreated;
-    RGlutColor mTextColor;
-    RGlutGC * mGC;
-    int mMenuGap;
-    int mMinMenuWidth;
-    int mMinMenuItemHeight;
-    int mMaxMenuWidth;
-    int mMaxMenuItemHeight;
-};
-
-#endif
+RGlutLAFManager * RGlutLAFManager::instance()
+{
+    static RGlutLAFManager manager;
+    return &manager;
+}
 

@@ -26,81 +26,36 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _GLUTMENU_H_
-#define _GLUTMENU_H_
+#ifndef _RGLUTSTYLE_H_
+#define _RGLUTSTYLE_H_
 
-#include <string>
-#include <vector>
+#include <X11/Xlib.h>
+#include <X11/Xatom.h>
+#include <X11/Xutil.h>
 
-#include "rglutwindow.h"
 #include "rglutcolor.h"
 
-class RGlutGC;
-
-class RGlutMenu: public RGlutWindow
+class RGlutLAF
 {
 public:
-    RGlutMenu(void (*callback)(int), RGlutWindow * parent = 0);
-    ~RGlutMenu();
+    RGlutLAF();
+    virtual ~RGlutLAF();
 
-    void addEntry(std::string name, int id);
+    virtual int maximumMenuWidth();
+    virtual int maximumMenuItemHeight();
+    virtual int minimumMenuWidth();
+    virtual int minimumMenuItemHeight();
 
-    void removeEntry(int id)
-    {
-    }
+    virtual int menuItemGap();
 
-    void show();
-    void hide();
-    void draw();
-    
-    bool handleEvent(XEvent & event);
+    virtual RGlutColor getMenuBackgroundColor();
+    virtual RGlutColor getMenuTextColor();
 
-private:
-    class MenuEntry
-    {
-    public:
-        MenuEntry()
-        {}
-        MenuEntry(std::string name, int id)
-            : mName(name),
-              mId(id)
-        {}
-
-        std::string mName;
-        int mId;
-        int mX;
-        int mY;
-        int mWidth;
-        int mHeight;
-    };
+    virtual Pixmap createMenuItemBackgroundNormal(int w, int h);
+    virtual Pixmap createMenuItemBackgroundPressed(int w, int h);
 
 private:
-    RGlutMenu(RGlutMenu const &);
-    RGlutMenu & operator=(RGlutMenu const &);
 
-    void create();
-    void destroy();
-    void drawBackground();
-    void drawItemBackgroundPressed(int x, int y, int w, int h);
-    void drawItemBackgroundNormal(int x, int y, int w, int h);
-    void createPixmaps(int w, int h);
-    MenuEntry * getMenuEntry(int x, int y);
-
-private:
-    std::vector<MenuEntry> mMenuEntries;
-    void (*mCallback)(int);
-    int mPressedId;
-    RGlutColor mColor;
-    Pixmap mItemNormalPixmap;
-    Pixmap mItemPressedPixmap;
-    bool mPixmapCreated;
-    RGlutColor mTextColor;
-    RGlutGC * mGC;
-    int mMenuGap;
-    int mMinMenuWidth;
-    int mMinMenuItemHeight;
-    int mMaxMenuWidth;
-    int mMaxMenuItemHeight;
 };
 
 #endif

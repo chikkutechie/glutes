@@ -53,6 +53,7 @@ public:
         return mFont;
     }
 
+    int textWidth(std::string const & str);
     void drawString(int x, int y, std::string const & str);
 
     void drawPixmap(Pixmap pmap, int sx, int sy, int width, int height, int dx, int dy);

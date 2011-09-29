@@ -72,6 +72,11 @@ void RGlutGC::fillRectangle(int x, int y, int w, int h)
     XFillRectangle(mDisplay, mWindow, mGC, x, y, w, h);
 }
 
+int RGlutGC::textWidth(std::string const & str)
+{
+    return XTextWidth(mFont.fontStruct(), str.c_str(), str.length());
+}
+
 void RGlutGC::drawString(int x, int y, std::string const & str)
 {
     XDrawString(mDisplay, mWindow, mGC, x, y,

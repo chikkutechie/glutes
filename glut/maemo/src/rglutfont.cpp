@@ -107,6 +107,8 @@ void RGlutFont::create()
     Display * display = RGlutDisplay::instance()->display();
     mFontInfo  = XLoadQueryFont(display, mPattern.c_str());
     if (!mFontInfo) {
+        // trying to get any font, if the requested one is not available
+        // this step might not be needed
         mFontInfo = XLoadQueryFont(display, "*");
     }
 }

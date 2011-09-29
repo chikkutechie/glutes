@@ -26,81 +26,40 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _GLUTMENU_H_
-#define _GLUTMENU_H_
+#ifndef _RGLUTSTYLEMANAGER_H_
+#define _RGLUTSTYLEMANAGER_H_
 
+#include <map>
 #include <string>
-#include <vector>
 
-#include "rglutwindow.h"
-#include "rglutcolor.h"
+#include "rglutlaf.h"
 
-class RGlutGC;
-
-class RGlutMenu: public RGlutWindow
+class RGlutLAFManager
 {
 public:
-    RGlutMenu(void (*callback)(int), RGlutWindow * parent = 0);
-    ~RGlutMenu();
+    static void registerLAF(std::string const & name, RGlutLAF * laf);
+    static void unregisterLAF(std::string const & name);
 
-    void addEntry(std::string name, int id);
-
-    void removeEntry(int id)
-    {
-    }
-
-    void show();
-    void hide();
-    void draw();
-    
-    bool handleEvent(XEvent & event);
+    static RGlutLAF * getLAF(std::string name);
 
 private:
-    class MenuEntry
-    {
-    public:
-        MenuEntry()
-        {}
-        MenuEntry(std::string name, int id)
-            : mName(name),
-              mId(id)
-        {}
+    RGlutLAFManager();
+    ~RGlutLAFManager();
 
-        std::string mName;
-        int mId;
-        int mX;
-        int mY;
-        int mWidth;
-        int mHeight;
-    };
+    RGlutLAFManager(RGlutLAFManager const &);
+    RGlutLAFManager & operator=(RGlutLAFManager const &);
+
+    static RGlutLAFManager * instance();
+
+    void doRegisterLAF(std::string const & name, RGlutLAF * laf);
+    void doUnregisterLAF(std::string const & name);
 
 private:
-    RGlutMenu(RGlutMenu const &);
-    RGlutMenu & operator=(RGlutMenu const &);
+    typedef std::map<std::string, RGlutLAF *> LAFs;
+    typedef LAFs::iterator LAFsIter;
+    typedef LAFs::const_iterator LAFsConstIter;
 
-    void create();
-    void destroy();
-    void drawBackground();
-    void drawItemBackgroundPressed(int x, int y, int w, int h);
-    void drawItemBackgroundNormal(int x, int y, int w, int h);
-    void createPixmaps(int w, int h);
-    MenuEntry * getMenuEntry(int x, int y);
-
-private:
-    std::vector<MenuEntry> mMenuEntries;
-    void (*mCallback)(int);
-    int mPressedId;
-    RGlutColor mColor;
-    Pixmap mItemNormalPixmap;
-    Pixmap mItemPressedPixmap;
-    bool mPixmapCreated;
-    RGlutColor mTextColor;
-    RGlutGC * mGC;
-    int mMenuGap;
-    int mMinMenuWidth;
-    int mMinMenuItemHeight;
-    int mMaxMenuWidth;
-    int mMaxMenuItemHeight;
+    LAFs mLAFs;
 };
 
 #endif

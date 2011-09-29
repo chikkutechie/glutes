@@ -28,17 +28,19 @@
 
 #include <vector>
 
+#include "rcommon.h"
 #include "rglutapplication.h"
 #include "rglutwindow.h"
 #include "rglutdisplay.h"
 #include "rgluttimer.h"
-#include "rcommon.h"
+#include "rglutlafmanager.h"
 
 RGlutApplication * RGlutApplication::mActiveApplication = 0;
 
 RGlutApplication::RGlutApplication(RGlutWindow * window)
  : mMainWindow(window),
-   mFinished(false)
+   mFinished(false),
+   mLAF(0)
 {
     mActiveApplication = this;
     
@@ -48,6 +50,8 @@ RGlutApplication::RGlutApplication(RGlutWindow * window)
         mScreenWidth = XDisplayWidth(display, mScreenNumber);
         mScreenHeight = XDisplayHeight(display, mScreenNumber);
     }
+    std::string laf("rglut");
+    mLAF = RGlutLAFManager::getLAF(laf);
 }
 
 RGlutApplication::~RGlutApplication()
@@ -56,6 +60,16 @@ RGlutApplication::~RGlutApplication()
         mActiveApplication = 0;
     }
     delete mMainWindow;
+}
+
+RGlutLAF * RGlutApplication::setLAF(std::string const & name)
+{
+    mLAF = RGlutLAFManager::getLAF(name);
+    if (!mLAF) {
+        std::string laf("rglut");
+        mLAF = RGlutLAFManager::getLAF(laf);
+    }
+    return mLAF;
 }
 
 void RGlutApplication::exec()
@@ -89,7 +103,13 @@ void RGlutApplication::exec()
                 }
             }
         }
+
+        // check for timers to execution
+        // this may not be the perfect way to implement
+        // but this is good enough
         checkTimers();
+
+        // wait for some time, this might help the CPU
         usleep(1000 * EventLoopInterval);
     }
 }

@@ -35,7 +35,11 @@
 #include "rgluttimer.h"
 #include "rglutlafmanager.h"
 
-RGlutApplication * RGlutApplication::mActiveApplication = 0;
+namespace
+{
+RGlutApplication nullApp;
+}
+RGlutApplication * RGlutApplication::mActiveApplication = &nullApp;
 
 RGlutApplication::RGlutApplication(RGlutWindow * window)
  : mMainWindow(window),
@@ -57,7 +61,7 @@ RGlutApplication::RGlutApplication(RGlutWindow * window)
 RGlutApplication::~RGlutApplication()
 {
     if (mActiveApplication == this) {
-        mActiveApplication = 0;
+        mActiveApplication = &nullApp;
     }
     delete mMainWindow;
 }

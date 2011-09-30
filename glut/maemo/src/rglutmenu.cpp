@@ -69,6 +69,7 @@ void RGlutMenu::create()
     RGlutWindow::create();
 
     mGC = new RGlutGC(this);
+    mGC->setFont(RGlutApplication::activeApplication()->LAF()->menuItemFont());
 
     setBackgroundColor(mColor);
 }

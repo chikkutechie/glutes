@@ -29,9 +29,11 @@
 #include "rglutgc.h"
 #include "rglutwindow.h"
 #include "rglutdisplay.h"
+#include "rglutlaf.h"
+#include "rglutapplication.h"
 
 RGlutGC::RGlutGC(RGlutWindow * window)
-    : mFont("*nokia*")
+    : mFont(RGlutApplication::activeApplication()->LAF()->defaultFont())
 {
     mDisplay = window->display();
     mWindow = window->window();

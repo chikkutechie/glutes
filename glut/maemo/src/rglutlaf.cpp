@@ -35,6 +35,16 @@ RGlutLAF::RGlutLAF()
 RGlutLAF::~RGlutLAF()
 {} 
 
+RGlutFont RGlutLAF::defaultFont()
+{
+    return RGlutFont("*Nokia*Sans*");
+}
+
+RGlutFont RGlutLAF::menuItemFont()
+{
+    return RGlutFont("*Nokia*Sans*");
+}
+
 int RGlutLAF::maximumMenuWidth()
 {
     return 400;

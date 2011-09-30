@@ -34,12 +34,16 @@
 #include <X11/Xutil.h>
 
 #include "rglutcolor.h"
+#include "rglutfont.h"
 
 class RGlutLAF
 {
 public:
     RGlutLAF();
     virtual ~RGlutLAF();
+
+    virtual RGlutFont defaultFont();
+    virtual RGlutFont menuItemFont();
 
     virtual int maximumMenuWidth();
     virtual int maximumMenuItemHeight();

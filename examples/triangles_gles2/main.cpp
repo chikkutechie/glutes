@@ -405,7 +405,6 @@ int main(int argc, char ** argv)
 #endif
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutCreateWindow(argv[0]);
-    glutFullScreen();
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
     glutTimerFunc(30, timeout, 0);

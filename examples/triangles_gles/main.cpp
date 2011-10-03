@@ -35,6 +35,7 @@
 #define GLORTHO glOrtho
 #endif
 
+#include <string>
 #include <vector>
 #include <math.h>
 
@@ -46,11 +47,10 @@ enum MenuIds
     ExitMenu = 20
 };
 
-char * ZoomInText  = "Zoom In";
-char * ZoomOutText = "Zoom Out";
-char * PauseText   = "Pause";
-char * ResumeText  = "Resume";
-char * ExitText    = "Exit";
+static const char * ZoomInText  = "Zoom In";
+static const char * ZoomOutText = "Zoom Out";
+static const char * PauseText   = "Pause";
+static const char * ExitText    = "Exit";
 
 class TrianglesState
 {
@@ -63,8 +63,8 @@ public:
     int doRotations;
     int changeAnimState;
     int menuId;
-    char * zoomMenuText;
-    char * animMenuText;
+    std::string zoomMenuText;
+    std::string animMenuText;
 };
 
 TrianglesState * state = 0;
@@ -248,7 +248,7 @@ void createMenu()
         
     state->menuId = glutCreateMenu(menu);
     
-    glutAddMenuEntry(state->zoomMenuText, ZoomMenu);
+    glutAddMenuEntry(state->zoomMenuText.c_str(), ZoomMenu);
     glutAddMenuEntry(ExitText, ExitMenu);
 
     glutAttachMenu(GLUT_LEFT_BUTTON);
@@ -268,7 +268,8 @@ int main(int argc, char ** argv)
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH | GLUT_STENCIL);
     glutCreateWindow(argv[0]);
-    
+    glutFullScreen();
+
     init();
         
     glutDisplayFunc(display);

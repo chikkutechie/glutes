@@ -61,10 +61,7 @@ void RGlutMenu::create()
         return;
     }
 
-    int textHeight = mMinMenuItemHeight;
-
-    mWidth = mMinMenuWidth;
-    mHeight = mMenuEntries.size() * textHeight;
+    updateSize();
 
     RGlutWindow::create();
 
@@ -72,6 +69,14 @@ void RGlutMenu::create()
     mGC->setFont(RGlutApplication::activeApplication()->LAF()->menuItemFont());
 
     setBackgroundColor(mColor);
+}
+
+void RGlutMenu::updateSize()
+{
+    int textHeight = mMinMenuItemHeight;
+
+    mWidth = mMinMenuWidth;
+    mHeight = mMenuEntries.size() * textHeight;
 }
 
 void RGlutMenu::createPixmaps(int w, int h)
@@ -118,7 +123,6 @@ void RGlutMenu::drawBackground()
 
 void RGlutMenu::drawItemBackgroundNormal(int x, int y, int w, int h)
 {
-    createPixmaps(w-2*mMenuGap, h-2*mMenuGap);
     mGC->drawPixmap(mItemNormalPixmap, 0, 0, w-2*mMenuGap, h-2*mMenuGap, x+mMenuGap, y+mMenuGap);
 }
 
@@ -131,6 +135,12 @@ void RGlutMenu::show()
 {
     if (mParent) {
         // change the origin of the menu, if not properly fit into the current window
+        GLUTES_DEBUGP3("Original (x, y) = (%d, %d)", mX, mY);
+        
+        if (!mWindow) {
+            updateSize();
+        }
+
         bool changed = false;
         if (mX+mWidth > mParent->size().width()) {
             mX = mX - mWidth;
@@ -143,7 +153,8 @@ void RGlutMenu::show()
         if (changed) {
             setPos(mX, mY); 
         }
-    } 
+        GLUTES_DEBUGP3("Modified (x, y) = (%d, %d)", mX, mY);
+    }
 
     RGlutWindow::show();
 }
@@ -160,16 +171,17 @@ void RGlutMenu::draw()
         return;
     }
 
-    create();
-
-    drawBackground();
-
     int itemHeight = mHeight / mMenuEntries.size();
     int x = 0;
     int y = 0;
     int w = mWidth;
     int h = itemHeight;
     int hw = h/2;
+
+    create();
+    createPixmaps(w-2*mMenuGap, h-2*mMenuGap);
+    drawBackground();
+
     for (unsigned int i=0; i<mMenuEntries.size(); ++i) {
         MenuEntry & me = mMenuEntries[i];
  

@@ -84,6 +84,7 @@ private:
     void drawItemBackgroundPressed(int x, int y, int w, int h);
     void drawItemBackgroundNormal(int x, int y, int w, int h);
     void createPixmaps(int w, int h);
+    void updateSize();
     MenuEntry * getMenuEntry(int x, int y);
 
 private:

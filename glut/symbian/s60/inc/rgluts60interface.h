@@ -187,8 +187,6 @@ private:
     RPointerArray<MenuEntry> mMenuList;
     int mCurrentMenu;
     int mAttachedMenuButton;
-
-    RMutex mMutex;
     
     const TPtr8 KParamRenderer;
     const TPtr8 KParamRendererVG;

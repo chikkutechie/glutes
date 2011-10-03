@@ -34,6 +34,7 @@
 #include "rgluteventhandler.h"
 
 #include <e32cmn.h>
+#include <e32std.h>
 #include <eikmobs.h>
 #include <aknstyluspopupmenu.h>
 
@@ -163,7 +164,7 @@ private:
     };
     
     static TInt timerCallbackFunction(TAny * a);
-
+    void addExpiredTimer(TimerEntry * entry);
 
     int addControl(ControlEntry entry);
     ControlEntry removeControl(int id);
@@ -191,6 +192,7 @@ private:
     int mAttachedMenuButton;
 
     RPointerArray<TimerEntry> mExpiredTimer;
+    RMutex mTimerMutex;
     
     const TPtr8 KParamRenderer;
     const TPtr8 KParamRendererVG;

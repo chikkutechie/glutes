@@ -199,6 +199,7 @@ void RGlutS60Interface::intialize(int argc, char ** argv)
     
     mBinder = new REGLGlutGLBinder(api);
     mBinder->initialize();
+    mTimerMutex.CreateLocal();
 }
 
 void RGlutS60Interface::terminate()
@@ -220,6 +221,7 @@ void RGlutS60Interface::terminate()
     }
 
     mEikonEnv = 0;
+    mTimerMutex.Close();
 }
 
 void RGlutS60Interface::initDisplayMode(unsigned int mode)
@@ -692,14 +694,21 @@ TInt RGlutS60Interface::timerCallbackFunction(TAny * a)
 {
     TimerEntry * arg = (TimerEntry*)a;
     arg->mCallback(arg->mValue);
-    arg->mGlutInterface->mExpiredTimer.Append(arg);
+    arg->mGlutInterface->addExpiredTimer(arg);
     return 0;
+}
+
+void RGlutS60Interface::addExpiredTimer(TimerEntry * entry)
+{
+    mTimerMutex.Wait();
+    mExpiredTimer.ResetAndDestroy();
+    mExpiredTimer.Append(entry);
+    mTimerMutex.Signal();
 }
 
 void RGlutS60Interface::timerFunc(unsigned int millis,
                                   void (*func)(int), int value)
 {
-    mExpiredTimer.ResetAndDestroy();
     CPeriodic * timer = CPeriodic::New(CActive::EPriorityStandard);
     if (timer) {
         TimerEntry * arg = new TimerEntry;

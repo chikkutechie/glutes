@@ -204,8 +204,6 @@ void RGlutS60Interface::intialize(int argc, char ** argv)
 
 void RGlutS60Interface::terminate()
 {
-    mExpiredTimer.ResetAndDestroy();
-    
     if (mBinder) {
         mBinder->terminate();
         delete mBinder;
@@ -694,18 +692,9 @@ TInt RGlutS60Interface::timerCallbackFunction(TAny * a)
 {
     TimerEntry * arg = (TimerEntry*)a;
     arg->mCallback(arg->mValue);
-    arg->mGlutInterface->addExpiredTimer(arg);
+    arg->mTimer->Cancel();
+    delete arg;
     return 0;
-}
-
-void RGlutS60Interface::addExpiredTimer(TimerEntry * entry)
-{
-    mMutex.Wait();
-    if (mExpiredTimer.Count() > 0) {
-        mExpiredTimer.ResetAndDestroy();
-    }
-    mExpiredTimer.Append(entry);
-    mMutex.Signal();
 }
 
 void RGlutS60Interface::timerFunc(unsigned int millis,
@@ -721,7 +710,7 @@ void RGlutS60Interface::timerFunc(unsigned int millis,
             arg->mGlutInterface = this;
             TCallBack callback(timerCallbackFunction, arg);
             
-            timer->Start(millis * 1000, 0, callback);
+            timer->Start(millis * 1000, 214748364, callback);
         }
     }
 }

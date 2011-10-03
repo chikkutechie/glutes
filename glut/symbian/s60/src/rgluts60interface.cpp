@@ -199,7 +199,7 @@ void RGlutS60Interface::intialize(int argc, char ** argv)
     
     mBinder = new REGLGlutGLBinder(api);
     mBinder->initialize();
-    mTimerMutex.CreateLocal();
+    mMutex.CreateLocal();
 }
 
 void RGlutS60Interface::terminate()
@@ -221,7 +221,7 @@ void RGlutS60Interface::terminate()
     }
 
     mEikonEnv = 0;
-    mTimerMutex.Close();
+    mMutex.Close();
 }
 
 void RGlutS60Interface::initDisplayMode(unsigned int mode)
@@ -700,10 +700,12 @@ TInt RGlutS60Interface::timerCallbackFunction(TAny * a)
 
 void RGlutS60Interface::addExpiredTimer(TimerEntry * entry)
 {
-    mTimerMutex.Wait();
-    mExpiredTimer.ResetAndDestroy();
+    mMutex.Wait();
+    if (mExpiredTimer.Count() > 0) {
+        mExpiredTimer.ResetAndDestroy();
+    }
     mExpiredTimer.Append(entry);
-    mTimerMutex.Signal();
+    mMutex.Signal();
 }
 
 void RGlutS60Interface::timerFunc(unsigned int millis,
@@ -764,11 +766,14 @@ int RGlutS60Interface::createMenu(void (*callback)(int))
         return 0;
     }
 
+    mMutex.Wait();
     if (mMenuList.Append(entry) != KErrNone) {
         delete entry;
+        mMutex.Signal();
         return 0;
     }
-
+    mMutex.Signal();
+    
     entry->mId = MENU_START_INDEX + mMenuList.Count();
     entry->mCallback = callback;
     
@@ -784,6 +789,7 @@ void RGlutS60Interface::destroyMenu(int menu)
         mAttachedMenuButton = -1;
     }
     
+    mMutex.Wait();
     const int count = mMenuList.Count();
     for (int i=0; i<count; ++i) {
         if (mMenuList[i]->mId == menu) {
@@ -792,6 +798,7 @@ void RGlutS60Interface::destroyMenu(int menu)
             break;
         }
     }
+    mMutex.Signal();
 }
 
 int RGlutS60Interface::getMenu()

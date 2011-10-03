@@ -148,8 +148,7 @@ private:
         TimerEntry()
          : mCallback(0),
            mTimer(0),
-           mValue(0),
-           mGlutInterface(0)
+           mValue(0)
         {}
         
         ~TimerEntry()

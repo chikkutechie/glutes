@@ -164,7 +164,6 @@ private:
     };
     
     static TInt timerCallbackFunction(TAny * a);
-    void addExpiredTimer(TimerEntry * entry);
 
     int addControl(ControlEntry entry);
     ControlEntry removeControl(int id);
@@ -191,7 +190,6 @@ private:
     int mCurrentMenu;
     int mAttachedMenuButton;
 
-    RPointerArray<TimerEntry> mExpiredTimer;
     RMutex mMutex;
     
     const TPtr8 KParamRenderer;

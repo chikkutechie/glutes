@@ -160,7 +160,6 @@ private:
         void (*mCallback)(int);
         CTimer * mTimer;
         int mValue;
-        RGlutS60Interface * mGlutInterface;
     };
     
     static TInt timerCallbackFunction(TAny * a);

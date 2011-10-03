@@ -192,7 +192,7 @@ private:
     int mAttachedMenuButton;
 
     RPointerArray<TimerEntry> mExpiredTimer;
-    RMutex mTimerMutex;
+    RMutex mMutex;
     
     const TPtr8 KParamRenderer;
     const TPtr8 KParamRendererVG;

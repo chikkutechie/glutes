@@ -689,8 +689,8 @@ int RGlutS60Interface::getModifiers()
 TInt RGlutS60Interface::timerCallbackFunction(TAny * a)
 {
     TimerEntry * arg = (TimerEntry*)a;
-    arg->mCallback(arg->mValue);
     arg->mTimer->Cancel();
+    arg->mCallback(arg->mValue);
     delete arg;
     return 0;
 }

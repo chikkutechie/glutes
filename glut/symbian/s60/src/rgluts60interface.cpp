@@ -707,7 +707,6 @@ void RGlutS60Interface::timerFunc(unsigned int millis,
             arg->mCallback = func;
             arg->mValue = value;
             arg->mTimer = timer;
-            arg->mGlutInterface = this;
             TCallBack callback(timerCallbackFunction, arg);
             
             timer->Start(millis * 1000, 214748364, callback);

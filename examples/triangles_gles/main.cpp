@@ -175,6 +175,16 @@ void reshape(int w, int h)
     glLoadIdentity();
 }
 
+void keyboard(unsigned char key, int, int)
+{
+    switch (key) {
+        case 'q':
+        case 'Q': {
+            exit(0);
+        }
+    }
+}
+
 void menu(int id)
 {
     switch (id) {
@@ -275,7 +285,8 @@ int main(int argc, char ** argv)
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
     glutTimerFunc(20, timeout, 0);
-        
+    glutKeyboardFunc(keyboard);
+
     glutMainLoop();
 
     return 0;

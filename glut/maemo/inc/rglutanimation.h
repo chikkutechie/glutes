@@ -55,6 +55,14 @@ public:
     {
         mDuration = d;
     }
+    int interval() const
+    {
+        return mInterval;
+    }
+    void setInterval(int interval)
+    {
+        mInterval = interval;
+    }
 
     virtual void start();
     virtual void stop();
@@ -66,12 +74,11 @@ protected:
 protected:
     friend class RGlutAnimationTimer;
 
-    static const int Interval = 20;
-
     State mState;
     RGlutTimer * mTimer;
     int mDuration;
     RGlutTime mTime;
+    int mInterval;
 };
 
 #endif

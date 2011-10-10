@@ -1,0 +1,5 @@
+
+#include "../../triangles_gles/symbian/bld.inf"
+#include "../../triangles_gles2/symbian/bld.inf"
+#include "../../triangles_vg/symbian/bld.inf"
+

@@ -1,0 +1,12 @@
+
+#define BLD_INF_triangle_vg
+
+prj_platforms
+WINSCW GCCE ARMV5 ARMV6
+
+prj_mmpfiles
+triangle_vg.mmp
+
+#if defined(WINSCW)
+#endif
+

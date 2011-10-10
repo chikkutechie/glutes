@@ -26,85 +26,71 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _GLUTMENU_H_
-#define _GLUTMENU_H_
+#ifndef _RGLUTWINDOWSTATEANIMATION_H_
+#define _RGLUTWINDOWSTATEANIMATION_H_
 
-#include <string>
-#include <vector>
-
+#include "rglutanimation.h"
 #include "rglutwindow.h"
-#include "rglutcolor.h"
 
-class RGlutGC;
-
-class RGlutMenu: public RGlutWindow
+class RGlutWindowStateAnimation: public RGlutAnimation
 {
 public:
-    RGlutMenu(void (*callback)(int), RGlutWindow * parent = 0);
-    ~RGlutMenu();
-
-    void addEntry(std::string name, int id);
-
-    void removeEntry(int id)
+    enum WindowState
     {
-    }
-
-    RGlutPointI preferedPos(int x, int y);
-    void setPos(int x, int y);
-
-    void hide();
-    void draw();
-    
-    bool handleEvent(XEvent & event);
-
-private:
-    class MenuEntry
-    {
-    public:
-        MenuEntry()
-        {}
-        MenuEntry(std::string name, int id)
-            : mName(name),
-              mId(id)
-        {}
-
-        std::string mName;
-        int mId;
-        int mX;
-        int mY;
-        int mWidth;
-        int mHeight;
+        Position,
+        Size,
+        PositionAndSize
     };
 
-private:
-    RGlutMenu(RGlutMenu const &);
-    RGlutMenu & operator=(RGlutMenu const &);
+    RGlutWindowStateAnimation(RGlutWindow * window);
 
-    void create();
-    void destroy();
-    void drawBackground();
-    void drawItemBackgroundPressed(int x, int y, int w, int h);
-    void drawItemBackgroundNormal(int x, int y, int w, int h);
-    void createPixmaps(int w, int h);
-    void updateSize();
-    MenuEntry * getMenuEntry(int x, int y);
+    void setWindowState(WindowState state)
+    {
+        mWindowState = state;
+    }
+
+    void setStartPos(RGlutPointI point)
+    {
+        mWindowRectStart.setX1(point.x());
+        mWindowRectStart.setY1(point.y());
+    }
+    void setEndPos(RGlutPointI point)
+    {
+        mWindowRectEnd.setX1(point.x());
+        mWindowRectEnd.setY1(point.y());
+    }
+
+    void setStartSize(RGlutSizeI size)
+    {
+        mWindowRectStart.setWidth(size.width());
+        mWindowRectStart.setHeight(size.height());
+    }
+    void setEndSize(RGlutSizeI size)
+    {
+        mWindowRectEnd.setWidth(size.width());
+        mWindowRectEnd.setHeight(size.height());
+    }
+
+    void setStartRect(RGlutRectI rect)
+    {
+        mWindowRectStart = rect;
+    }
+    void setEndRect(RGlutRectI rect)
+    {
+        mWindowRectEnd = rect;
+    }
 
 private:
-    std::vector<MenuEntry> mMenuEntries;
-    void (*mCallback)(int);
-    int mPressedId;
-    RGlutColor mColor;
-    Pixmap mItemNormalPixmap;
-    Pixmap mItemPressedPixmap;
-    bool mPixmapCreated;
-    RGlutColor mTextColor;
-    RGlutGC * mGC;
-    int mMenuGap;
-    int mMinMenuWidth;
-    int mMinMenuItemHeight;
-    int mMaxMenuWidth;
-    int mMaxMenuItemHeight;
+    void update(int time);
+    int linearEval(int start, int end, float t);
+
+private:
+    RGlutWindow * mWindow;
+    WindowState mWindowState;
+    RGlutRectI mWindowRectStart;
+    RGlutRectI mWindowRectEnd;
 };
 
 #endif
+
 

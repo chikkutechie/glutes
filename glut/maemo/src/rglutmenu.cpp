@@ -131,7 +131,7 @@ void RGlutMenu::drawItemBackgroundPressed(int x, int y, int w, int h)
     mGC->drawPixmap(mItemPressedPixmap, 0, 0, w-2*mMenuGap, h-2*mMenuGap, x+mMenuGap, y+mMenuGap);
 }
 
-void RGlutMenu::show()
+RGlutPointI RGlutMenu::preferedPos(int x, int y)
 {
     if (mParent) {
         // change the origin of the menu, if not properly fit into the current window
@@ -141,22 +141,22 @@ void RGlutMenu::show()
             updateSize();
         }
 
-        bool changed = false;
-        if (mX+mWidth > mParent->size().width()) {
-            mX = mX - mWidth;
-            changed = true;
+        if (x+mWidth > mParent->size().width()) {
+            x = x - mWidth;
         }
-        if (mY+mHeight > mParent->size().height()) {
-            mY = mY - mHeight;
-            changed = true;
+        if (y+mHeight > mParent->size().height()) {
+            y = y - mHeight;
         }
-        if (changed) {
-            setPos(mX, mY); 
-        }
-        GLUTES_DEBUGP3("Modified (x, y) = (%d, %d)", mX, mY);
+        GLUTES_DEBUGP3("Modified (x, y) = (%d, %d)", x, y);
     }
 
-    RGlutWindow::show();
+    return RGlutPointI(x, y);
+}
+
+void RGlutMenu::setPos(int x, int y)
+{
+    RGlutPointI ppos = preferedPos(x, y);
+    RGlutWindow::setPos(ppos.x(), ppos.y());
 }
 
 void RGlutMenu::hide()

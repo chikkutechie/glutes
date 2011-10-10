@@ -43,6 +43,8 @@ glut_SOURCES = ../../common/src/glut.cpp \
 	       ../src/rglutcolor.cpp \
                ../src/rglutlineargradient.cpp \
                ../src/rgluttimer.cpp \
+               ../src/rglutanimation.cpp \
+               ../src/rglutwindowstateanimation.cpp \
 	       ../src/rglutmaemointerface.cpp \
                ../src/rglutmaemowindow.cpp
 

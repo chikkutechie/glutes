@@ -51,15 +51,15 @@ public:
     {
         return RGlutPointI(mX, mY);
     }
-    void setPos(int x, int y);
+    virtual void setPos(int x, int y);
 
     RGlutSizeI size() const
     {
         return RGlutSizeI(mWidth, mHeight);
     }
-    void setSize(int w, int h);
+    virtual void setSize(int w, int h);
 
-    void setGeometry(int x, int y, int w, int h);
+    virtual void setGeometry(int x, int y, int w, int h);
     RGlutRectI geometry() const
     {
         return RGlutRectI(mX, mY, mWidth, mHeight);

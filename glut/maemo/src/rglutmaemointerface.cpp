@@ -29,6 +29,7 @@
 #include "rglutmaemointerface.h"
 #include "reglglutglbinder.h"
 #include "rgluttimer.h"
+#include "rglutwindowstateanimation.h"
 
 #include <time.h>
 #include <sys/time.h>
@@ -530,8 +531,19 @@ void RGlutMaemoInterface::mouse(int xbutton, int state, int x, int y, bool press
         if (menu->isVisible() && pressed) {
             menu->hide();
         } else if (pressed) {
-            menu->setPos(x, y);
+            RGlutWindowStateAnimation * wsa = new RGlutWindowStateAnimation(menu);
+            RGlutWindow * mp = menu->parent();
+            int sx = mp->size().width()/2 - menu->size().width()/2;
+            int sy = mp->size().height()/2 - menu->size().height()/2;
+
+            RGlutPointI ppos = menu->preferedPos(x, y);
+            menu->setPos(sx, sy);
             menu->show();
+            wsa->setWindowState(RGlutWindowStateAnimation::Position);
+            wsa->setStartPos(RGlutPointI(sx, sy));
+            wsa->setEndPos(RGlutPointI(ppos.x(), ppos.y()));
+            wsa->setDuration(200);
+            wsa->start();
         } 
     } else if (mCallbacks.mouse) {
         mCallbacks.mouse(button, pressed ? GLUT_DOWN : GLUT_UP, x, y);

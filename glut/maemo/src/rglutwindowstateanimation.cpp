@@ -26,91 +26,50 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _RGLUTRECT_H_
-#define _RGLUTRECT_H_
+#include "rglutwindowstateanimation.h"
 
-template <typename T>
-class RGlutRect
+RGlutWindowStateAnimation::RGlutWindowStateAnimation(RGlutWindow * window)
+    : mWindow(window),
+      mWindowState(Position),
+      mWindowRectStart(0, 0, 0, 0),
+      mWindowRectEnd(0, 0, 0, 0)
+{}
+
+inline int RGlutWindowStateAnimation::linearEval(int start, int end, float t)
 {
-public:
-    RGlutRect()
-    {}
+    if (t > 1.0f) {
+        t = 1.0f;
+    }
+    return (int)((float)start * (1.0f - t) + (float)end * t); 
+}
 
-    RGlutRect(T x1, T y1, T x2, T y2)
-     : mX1(x1),
-       mY1(y1),
-       mX2(x2),
-       mY2(y2)
-    {}
+void RGlutWindowStateAnimation::update(int time)
+{
+    float t = (float)time / (float)duration();
 
-    bool isEmpty() const
-    {
-        return ((width() == 0) | (height() == 0));
-    }
+    switch (mWindowState) {
+        case Position: {
+            int x = linearEval(mWindowRectStart.x1(), mWindowRectEnd.x1(), t);
+            int y = linearEval(mWindowRectStart.y1(), mWindowRectEnd.y1(), t);
+            mWindow->setPos(x, y);
+            break;
+        }
 
-    T x1() const
-    {
-        return mX1;
-    }
-    T y1() const
-    {
-        return mY1;
-    }
-    T x2() const
-    {
-        return mX2;
-    }
-    T y2() const
-    {
-        return mY2;
-    }
+        case Size: {
+            int w = linearEval(mWindowRectStart.width(), mWindowRectEnd.width(), t);
+            int h = linearEval(mWindowRectStart.height(), mWindowRectEnd.height(), t);
+            mWindow->setSize(w, h);
+            break;
+        }
 
-    void setX1(T v)
-    {
-        mX1 = v;
+        case PositionAndSize: {
+            int x = linearEval(mWindowRectStart.x1(), mWindowRectEnd.x1(), t);
+            int y = linearEval(mWindowRectStart.y1(), mWindowRectEnd.y1(), t);
+            int w = linearEval(mWindowRectStart.width(), mWindowRectEnd.width(), t);
+            int h = linearEval(mWindowRectStart.height(), mWindowRectEnd.height(), t);
+            mWindow->setGeometry(x, y, w, h);
+            break;
+        }
     }
-    void setY1(T v)
-    {
-        mY1 = v;
-    }
-    void setX2(T v)
-    {
-        mX2 = v;
-    }
-    void setY2(T v)
-    {
-        mY2 = v;
-    }
-
-    void setHeight(T v)
-    {
-        setY2(y1() + v);
-    }
-    T height() const
-    {
-        return mY2-mY1;
-    }
-    
-    void setWidth(T v)
-    {
-        setX2(x1() + v);
-    }
-    T width() const
-    {
-        return mX2-mX1;
-    }
-
-private:
-    T mX1;
-    T mY1;
-    T mX2;
-    T mY2;
-};
-
-typedef RGlutRect<int> RGlutRectI;
-typedef RGlutRect<unsigned int> RGlutRectUI;
-typedef RGlutRect<float> RGlutRectF;
-typedef RGlutRect<double> RGlutRectD;
-
-#endif
+}
 

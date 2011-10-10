@@ -26,85 +26,73 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _GLUTMENU_H_
-#define _GLUTMENU_H_
+#include "rglutanimation.h"
+#include "rgluttimer.h"
+#include "rgluttimer.h"
 
-#include <string>
-#include <vector>
-
-#include "rglutwindow.h"
-#include "rglutcolor.h"
-
-class RGlutGC;
-
-class RGlutMenu: public RGlutWindow
+class RGlutAnimationTimer: public RGlutTimer
 {
 public:
-    RGlutMenu(void (*callback)(int), RGlutWindow * parent = 0);
-    ~RGlutMenu();
+    RGlutAnimationTimer(RGlutAnimation * animation)
+        : mAnimation(animation)
+    {}
 
-    void addEntry(std::string name, int id);
-
-    void removeEntry(int id)
+    void run()
     {
+        mAnimation->timeExpired();
     }
 
-    RGlutPointI preferedPos(int x, int y);
-    void setPos(int x, int y);
-
-    void hide();
-    void draw();
-    
-    bool handleEvent(XEvent & event);
-
 private:
-    class MenuEntry
-    {
-    public:
-        MenuEntry()
-        {}
-        MenuEntry(std::string name, int id)
-            : mName(name),
-              mId(id)
-        {}
-
-        std::string mName;
-        int mId;
-        int mX;
-        int mY;
-        int mWidth;
-        int mHeight;
-    };
-
-private:
-    RGlutMenu(RGlutMenu const &);
-    RGlutMenu & operator=(RGlutMenu const &);
-
-    void create();
-    void destroy();
-    void drawBackground();
-    void drawItemBackgroundPressed(int x, int y, int w, int h);
-    void drawItemBackgroundNormal(int x, int y, int w, int h);
-    void createPixmaps(int w, int h);
-    void updateSize();
-    MenuEntry * getMenuEntry(int x, int y);
-
-private:
-    std::vector<MenuEntry> mMenuEntries;
-    void (*mCallback)(int);
-    int mPressedId;
-    RGlutColor mColor;
-    Pixmap mItemNormalPixmap;
-    Pixmap mItemPressedPixmap;
-    bool mPixmapCreated;
-    RGlutColor mTextColor;
-    RGlutGC * mGC;
-    int mMenuGap;
-    int mMinMenuWidth;
-    int mMinMenuItemHeight;
-    int mMaxMenuWidth;
-    int mMaxMenuItemHeight;
+    RGlutAnimation * mAnimation;
 };
 
-#endif
+RGlutAnimation::RGlutAnimation()
+    : mState(Stopped),
+      mTimer(0),
+      mDuration(0)
+{
+    mTimer = new RGlutAnimationTimer(this);
+    mTimer->setInterval(Interval);
+}
+
+RGlutAnimation::~RGlutAnimation()
+{
+    delete mTimer;
+}
+
+void RGlutAnimation::timeExpired()
+{
+    int elapsed = mTime.elapsed();
+    update(elapsed);
+    if (elapsed > mDuration) {
+        stop();
+    } else {
+        mTimer->start();
+    }
+}
+
+void RGlutAnimation::start()
+{
+    if (mState == Running) {
+        return;
+    }
+
+    mTime.start();
+    mTimer->start();
+
+    mState = Running;
+}
+
+void RGlutAnimation::stop()
+{
+    if (mState == Stopped) {
+        return;
+    }
+
+    mTimer->stop();
+
+    mState = Stopped;
+
+    delete this;
+}
 

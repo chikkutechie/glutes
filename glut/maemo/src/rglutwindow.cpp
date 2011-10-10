@@ -91,8 +91,13 @@ void RGlutWindow::setFullscreen()
 
 void RGlutWindow::setPos(int x, int y)
 {
+    if (x == mX && y == mY) {
+        return;
+    }
+
     mX = x;
     mY = y;
+
     if (mWindow) {
         int mask = CWX | CWY;
         XWindowChanges wc;

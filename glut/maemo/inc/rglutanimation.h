@@ -26,84 +26,52 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _GLUTMENU_H_
-#define _GLUTMENU_H_
+#ifndef _RGLUTANIMATION_H_
+#define _RGLUTANIMATION_H_
 
-#include <string>
-#include <vector>
+#include "rgluttime.h"
 
-#include "rglutwindow.h"
-#include "rglutcolor.h"
+class RGlutTimer;
+class RGlutAnimationTimer;
 
-class RGlutGC;
-
-class RGlutMenu: public RGlutWindow
+class RGlutAnimation
 {
-public:
-    RGlutMenu(void (*callback)(int), RGlutWindow * parent = 0);
-    ~RGlutMenu();
-
-    void addEntry(std::string name, int id);
-
-    void removeEntry(int id)
-    {
-    }
-
-    RGlutPointI preferedPos(int x, int y);
-    void setPos(int x, int y);
-
-    void hide();
-    void draw();
-    
-    bool handleEvent(XEvent & event);
-
 private:
-    class MenuEntry
+    enum State
     {
-    public:
-        MenuEntry()
-        {}
-        MenuEntry(std::string name, int id)
-            : mName(name),
-              mId(id)
-        {}
-
-        std::string mName;
-        int mId;
-        int mX;
-        int mY;
-        int mWidth;
-        int mHeight;
+        Running,
+        Stopped
     };
 
-private:
-    RGlutMenu(RGlutMenu const &);
-    RGlutMenu & operator=(RGlutMenu const &);
+public:
+    RGlutAnimation();
+    virtual ~RGlutAnimation();
+    
+    int duration() const
+    {
+        return mDuration;
+    }
+    void setDuration(int d)
+    {
+        mDuration = d;
+    }
 
-    void create();
-    void destroy();
-    void drawBackground();
-    void drawItemBackgroundPressed(int x, int y, int w, int h);
-    void drawItemBackgroundNormal(int x, int y, int w, int h);
-    void createPixmaps(int w, int h);
-    void updateSize();
-    MenuEntry * getMenuEntry(int x, int y);
+    virtual void start();
+    virtual void stop();
 
-private:
-    std::vector<MenuEntry> mMenuEntries;
-    void (*mCallback)(int);
-    int mPressedId;
-    RGlutColor mColor;
-    Pixmap mItemNormalPixmap;
-    Pixmap mItemPressedPixmap;
-    bool mPixmapCreated;
-    RGlutColor mTextColor;
-    RGlutGC * mGC;
-    int mMenuGap;
-    int mMinMenuWidth;
-    int mMinMenuItemHeight;
-    int mMaxMenuWidth;
-    int mMaxMenuItemHeight;
+protected:
+    virtual void update(int time) = 0;
+    virtual void timeExpired();
+
+protected:
+    friend class RGlutAnimationTimer;
+
+    static const int Interval = 20;
+
+    State mState;
+    RGlutTimer * mTimer;
+    int mDuration;
+    RGlutTime mTime;
 };
 
 #endif

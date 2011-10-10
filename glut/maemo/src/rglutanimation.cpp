@@ -49,10 +49,10 @@ private:
 RGlutAnimation::RGlutAnimation()
     : mState(Stopped),
       mTimer(0),
-      mDuration(0)
+      mDuration(0),
+      mInterval(20)
 {
     mTimer = new RGlutAnimationTimer(this);
-    mTimer->setInterval(Interval);
 }
 
 RGlutAnimation::~RGlutAnimation()
@@ -78,6 +78,7 @@ void RGlutAnimation::start()
     }
 
     mTime.start();
+    mTimer->setInterval(mInterval);
     mTimer->start();
 
     mState = Running;

@@ -543,6 +543,7 @@ void RGlutMaemoInterface::mouse(int xbutton, int state, int x, int y, bool press
             wsa->setStartPos(RGlutPointI(sx, sy));
             wsa->setEndPos(RGlutPointI(ppos.x(), ppos.y()));
             wsa->setDuration(200);
+            wsa->setEasingCurve(RGlutEasingCurve::CubicIn);
             wsa->start();
         } 
     } else if (mCallbacks.mouse) {

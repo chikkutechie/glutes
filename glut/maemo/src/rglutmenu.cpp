@@ -153,12 +153,6 @@ RGlutPointI RGlutMenu::preferedPos(int x, int y)
     return RGlutPointI(x, y);
 }
 
-void RGlutMenu::setPos(int x, int y)
-{
-    RGlutPointI ppos = preferedPos(x, y);
-    RGlutWindow::setPos(ppos.x(), ppos.y());
-}
-
 void RGlutMenu::hide()
 {
    RGlutWindow::hide();

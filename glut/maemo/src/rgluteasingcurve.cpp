@@ -26,78 +26,26 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _RGLUTWINDOWSTATEANIMATION_H_
-#define _RGLUTWINDOWSTATEANIMATION_H_
-
-#include "rglutanimation.h"
-#include "rglutwindow.h"
 #include "rgluteasingcurve.h"
 
-class RGlutWindowStateAnimation: public RGlutAnimation
+float RGlutEasingCurve::eval(float t)
 {
-public:
-    enum WindowState
-    {
-        Position,
-        Size,
-        PositionAndSize
-    };
+    switch (mType) {
+        case Linear: {
+            break;
+        }
+ 
+        case QuadIn: {
+            t = t * t;
+            break;
+        }
 
-    RGlutWindowStateAnimation(RGlutWindow * window);
-
-    void setWindowState(WindowState state)
-    {
-        mWindowState = state;
+        case CubicIn: {
+            t = t * t * t;
+            break;
+        }
     }
 
-    void setStartPos(RGlutPointI point)
-    {
-        mWindowRectStart.setX1(point.x());
-        mWindowRectStart.setY1(point.y());
-    }
-    void setEndPos(RGlutPointI point)
-    {
-        mWindowRectEnd.setX1(point.x());
-        mWindowRectEnd.setY1(point.y());
-    }
-
-    void setStartSize(RGlutSizeI size)
-    {
-        mWindowRectStart.setWidth(size.width());
-        mWindowRectStart.setHeight(size.height());
-    }
-    void setEndSize(RGlutSizeI size)
-    {
-        mWindowRectEnd.setWidth(size.width());
-        mWindowRectEnd.setHeight(size.height());
-    }
-
-    void setStartRect(RGlutRectI rect)
-    {
-        mWindowRectStart = rect;
-    }
-    void setEndRect(RGlutRectI rect)
-    {
-        mWindowRectEnd = rect;
-    }
-
-    void setEasingCurve(RGlutEasingCurve::Type type)
-    {
-        mEasingCurve.setType(type);
-    }
-
-private:
-    void update(int time);
-    int interpolate(int start, int end, float t);
-
-private:
-    RGlutWindow * mWindow;
-    WindowState mWindowState;
-    RGlutRectI mWindowRectStart;
-    RGlutRectI mWindowRectEnd;
-    RGlutEasingCurve mEasingCurve;
-};
-
-#endif
-
+    return t;
+}
 

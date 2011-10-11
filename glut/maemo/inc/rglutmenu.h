@@ -50,7 +50,6 @@ public:
     }
 
     RGlutPointI preferedPos(int x, int y);
-    void setPos(int x, int y);
 
     void hide();
     void draw();

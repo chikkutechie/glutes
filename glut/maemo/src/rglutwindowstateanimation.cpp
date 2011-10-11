@@ -35,12 +35,16 @@ RGlutWindowStateAnimation::RGlutWindowStateAnimation(RGlutWindow * window)
       mWindowRectEnd(0, 0, 0, 0)
 {}
 
-inline int RGlutWindowStateAnimation::linearEval(int start, int end, float t)
+inline int RGlutWindowStateAnimation::interpolate(int start, int end, float t)
 {
+    if (t < 0.0f) {
+        t = 0.0f;
+    }
     if (t > 1.0f) {
         t = 1.0f;
     }
-    return (int)((float)start * (1.0f - t) + (float)end * t); 
+    float et = mEasingCurve.eval(t);
+    return end * et - start * et + start;
 }
 
 void RGlutWindowStateAnimation::update(int time)
@@ -49,24 +53,24 @@ void RGlutWindowStateAnimation::update(int time)
 
     switch (mWindowState) {
         case Position: {
-            int x = linearEval(mWindowRectStart.x1(), mWindowRectEnd.x1(), t);
-            int y = linearEval(mWindowRectStart.y1(), mWindowRectEnd.y1(), t);
+            int x = interpolate(mWindowRectStart.x1(), mWindowRectEnd.x1(), t);
+            int y = interpolate(mWindowRectStart.y1(), mWindowRectEnd.y1(), t);
             mWindow->setPos(x, y);
             break;
         }
 
         case Size: {
-            int w = linearEval(mWindowRectStart.width(), mWindowRectEnd.width(), t);
-            int h = linearEval(mWindowRectStart.height(), mWindowRectEnd.height(), t);
+            int w = interpolate(mWindowRectStart.width(), mWindowRectEnd.width(), t);
+            int h = interpolate(mWindowRectStart.height(), mWindowRectEnd.height(), t);
             mWindow->setSize(w, h);
             break;
         }
 
         case PositionAndSize: {
-            int x = linearEval(mWindowRectStart.x1(), mWindowRectEnd.x1(), t);
-            int y = linearEval(mWindowRectStart.y1(), mWindowRectEnd.y1(), t);
-            int w = linearEval(mWindowRectStart.width(), mWindowRectEnd.width(), t);
-            int h = linearEval(mWindowRectStart.height(), mWindowRectEnd.height(), t);
+            int x = interpolate(mWindowRectStart.x1(), mWindowRectEnd.x1(), t);
+            int y = interpolate(mWindowRectStart.y1(), mWindowRectEnd.y1(), t);
+            int w = interpolate(mWindowRectStart.width(), mWindowRectEnd.width(), t);
+            int h = interpolate(mWindowRectStart.height(), mWindowRectEnd.height(), t);
             mWindow->setGeometry(x, y, w, h);
             break;
         }

@@ -26,78 +26,37 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _RGLUTWINDOWSTATEANIMATION_H_
-#define _RGLUTWINDOWSTATEANIMATION_H_
+#ifndef _RGLUTEASINGCURVE_H_
+#define _RGLUTEASINGCURVE_H_
 
-#include "rglutanimation.h"
-#include "rglutwindow.h"
-#include "rgluteasingcurve.h"
-
-class RGlutWindowStateAnimation: public RGlutAnimation
+class RGlutEasingCurve
 {
 public:
-    enum WindowState
+    enum Type
     {
-        Position,
-        Size,
-        PositionAndSize
+        Linear,
+        QuadIn,
+        CubicIn
     };
 
-    RGlutWindowStateAnimation(RGlutWindow * window);
+    RGlutEasingCurve(Type type = Linear)
+     : mType(type)
+    {}
 
-    void setWindowState(WindowState state)
+    Type type() const
     {
-        mWindowState = state;
+        return mType;
     }
-
-    void setStartPos(RGlutPointI point)
+    void setType(Type type)
     {
-        mWindowRectStart.setX1(point.x());
-        mWindowRectStart.setY1(point.y());
-    }
-    void setEndPos(RGlutPointI point)
-    {
-        mWindowRectEnd.setX1(point.x());
-        mWindowRectEnd.setY1(point.y());
+        mType = type;
     }
 
-    void setStartSize(RGlutSizeI size)
-    {
-        mWindowRectStart.setWidth(size.width());
-        mWindowRectStart.setHeight(size.height());
-    }
-    void setEndSize(RGlutSizeI size)
-    {
-        mWindowRectEnd.setWidth(size.width());
-        mWindowRectEnd.setHeight(size.height());
-    }
-
-    void setStartRect(RGlutRectI rect)
-    {
-        mWindowRectStart = rect;
-    }
-    void setEndRect(RGlutRectI rect)
-    {
-        mWindowRectEnd = rect;
-    }
-
-    void setEasingCurve(RGlutEasingCurve::Type type)
-    {
-        mEasingCurve.setType(type);
-    }
+    float eval(float t);
 
 private:
-    void update(int time);
-    int interpolate(int start, int end, float t);
-
-private:
-    RGlutWindow * mWindow;
-    WindowState mWindowState;
-    RGlutRectI mWindowRectStart;
-    RGlutRectI mWindowRectEnd;
-    RGlutEasingCurve mEasingCurve;
+    Type mType;
 };
 
 #endif
-
 

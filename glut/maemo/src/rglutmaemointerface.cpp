@@ -532,18 +532,21 @@ void RGlutMaemoInterface::mouse(int xbutton, int state, int x, int y, bool press
             menu->hide();
         } else if (pressed) {
             RGlutWindowStateAnimation * wsa = new RGlutWindowStateAnimation(menu);
-            RGlutWindow * mp = menu->parent();
-            int sx = mp->size().width()/2 - menu->size().width()/2;
-            int sy = mp->size().height()/2 - menu->size().height()/2;
 
             RGlutPointI ppos = menu->preferedPos(x, y);
-            menu->setPos(sx, sy);
+            RGlutSizeI size = menu->size();
+
+            menu->setPos(ppos.x(), ppos.y());
+            menu->setSize(size.width(), 1);
+
             menu->show();
-            wsa->setWindowState(RGlutWindowStateAnimation::Position);
-            wsa->setStartPos(RGlutPointI(sx, sy));
-            wsa->setEndPos(RGlutPointI(ppos.x(), ppos.y()));
+
+            wsa->setWindowState(RGlutWindowStateAnimation::Size);
+            wsa->setStartSize(RGlutSizeI(size.width(), 1));
+            wsa->setEndSize(size);
             wsa->setDuration(200);
             wsa->setEasingCurve(RGlutEasingCurve::CubicIn);
+
             wsa->start();
         } 
     } else if (mCallbacks.mouse) {

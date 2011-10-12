@@ -34,6 +34,15 @@
 class RGlutTimer;
 class RGlutAnimationTimer;
 
+class RGlutAnimationListner
+{
+public:
+    virtual ~RGlutAnimationListner()
+    {}
+    virtual void started() = 0;
+    virtual void stopped() = 0;
+};
+
 class RGlutAnimation
 {
 private:
@@ -67,6 +76,11 @@ public:
     virtual void start();
     virtual void stop();
 
+    void setListner(RGlutAnimationListner * l)
+    {
+        mListner = l;
+    }
+
 protected:
     virtual void update(int time) = 0;
     virtual void timeExpired();
@@ -79,6 +93,7 @@ protected:
     int mDuration;
     RGlutTime mTime;
     int mInterval;
+    RGlutAnimationListner * mListner;
 };
 
 #endif

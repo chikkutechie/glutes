@@ -50,7 +50,8 @@ RGlutAnimation::RGlutAnimation()
     : mState(Stopped),
       mTimer(0),
       mDuration(0),
-      mInterval(20)
+      mInterval(20),
+      mListner(0)
 {
     mTimer = new RGlutAnimationTimer(this);
 }
@@ -82,6 +83,10 @@ void RGlutAnimation::start()
     mTimer->start();
 
     mState = Running;
+    
+    if (mListner) {
+        mListner->started();
+    }
 }
 
 void RGlutAnimation::stop()
@@ -94,6 +99,9 @@ void RGlutAnimation::stop()
 
     mState = Stopped;
 
+    if (mListner) {
+        mListner->stopped();
+    }
     delete this;
 }
 

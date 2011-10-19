@@ -31,6 +31,10 @@
 
 #include "rcommon.h"
 
+/**
+ * @class RGlutEventHandler
+ *        Listner for events
+ */
 NONSHARABLE_CLASS(RGlutEventHandler)
 {
 public:

@@ -43,6 +43,10 @@ public:
     virtual void stopped() = 0;
 };
 
+/**
+ * @class RGlutAnimation
+ *        Base class for animation(or effects) framework
+ */
 class RGlutAnimation
 {
 private:

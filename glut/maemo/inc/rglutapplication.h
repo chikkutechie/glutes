@@ -37,6 +37,10 @@ class RGlutWindow;
 class RGlutTimer;
 class RGlutLAF;
 
+/**
+ * @class RGlutApplication
+ *        Application class
+ */
 class RGlutApplication
 {
 public:

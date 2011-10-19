@@ -36,6 +36,10 @@
 
 class RGlutWindow;
 
+/**
+ * @class RGlutGC
+ *        Basic GC implementation
+ */
 class RGlutGC
 {
 public:

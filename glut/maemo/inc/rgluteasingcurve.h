@@ -29,6 +29,10 @@
 #ifndef _RGLUTEASINGCURVE_H_
 #define _RGLUTEASINGCURVE_H_
 
+/**
+ * @class RGlutEasingCurve
+ *        Easing curve implementation
+ */
 class RGlutEasingCurve
 {
 public:

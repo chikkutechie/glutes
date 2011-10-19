@@ -41,6 +41,10 @@
 #include "rglutsize.h"
 #include "rglutrect.h"
 
+/**
+ * @class RGlutWindow
+ *        Window class implementation, wrapper for X11 window
+ */
 class RGlutWindow
 {
 public:

@@ -34,6 +34,10 @@
 
 #include "rglutgradient.h"
 
+/**
+ * @class RGlutLinearGradient
+ *        Linear gradient implementation
+ */
 class RGlutLinearGradient: public RGlutGradient
 {
 public:

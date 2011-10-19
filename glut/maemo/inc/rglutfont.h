@@ -32,6 +32,10 @@
 #include <X11/Xlib.h>
 #include <string>
 
+/**
+ * @class RGlutFont
+ *        Wrapper for X11 font
+ */
 class RGlutFont
 {
 public:

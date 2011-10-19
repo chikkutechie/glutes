@@ -35,6 +35,10 @@
 
 #include "rcommon.h"
 
+/**
+ * @class RGlutDisplay
+ *        Holds display instance(Singleton class)
+ */
 class RGlutDisplay
 {
 public:

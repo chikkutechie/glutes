@@ -29,6 +29,10 @@
 #ifndef _RGLUTTIME_H_
 #define _RGLUTTIME_H_
 
+/**
+ * @class RGlutTime
+ *        Time class implementation for different platform
+ */
 class RGlutTime
 {
 public:

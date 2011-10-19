@@ -29,6 +29,10 @@
 #ifndef _RGLUTSIZE_H_
 #define _RGLUTSIZE_H_
 
+/**
+ * @class RGlutSize
+ *        Size class implementation
+ */
 template <typename T>
 class RGlutSize
 {

@@ -36,6 +36,10 @@
 #include "rglutcolor.h"
 #include "rglutfont.h"
 
+/**
+ * @class RGlutLAF
+ *        Look and feel class
+ */
 class RGlutLAF
 {
 public:

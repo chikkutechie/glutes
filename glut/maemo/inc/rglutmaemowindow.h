@@ -32,6 +32,10 @@
 #include "rglutwindow.h"
 #include "rgluteventhandler.h"
 
+/**
+ * @class RGlutMaemoWindow
+ *        Window implementation for glut
+ */
 class RGlutMaemoWindow: public RGlutWindow
 {
 public:

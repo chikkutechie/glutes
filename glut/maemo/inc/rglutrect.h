@@ -29,6 +29,10 @@
 #ifndef _RGLUTRECT_H_
 #define _RGLUTRECT_H_
 
+/**
+ * @class RGlutRect
+ *        Rectangle class implementation
+ */
 template <typename T>
 class RGlutRect
 {

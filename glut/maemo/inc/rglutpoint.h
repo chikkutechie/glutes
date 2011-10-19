@@ -29,6 +29,10 @@
 #ifndef _RGLUTPOINT_H_
 #define _RGLUTPOINT_H_
 
+/**
+ * @class RGlutPoint
+ *        Template for point class
+ */
 template <typename T>
 class RGlutPoint
 {

@@ -33,6 +33,10 @@
 #include "rglutwindow.h"
 #include "rgluteasingcurve.h"
 
+/**
+ * @class RGlutWindowStateAnimation
+ *        Animation implementation for window properties
+ */
 class RGlutWindowStateAnimation: public RGlutAnimation
 {
 public:

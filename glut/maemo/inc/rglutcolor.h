@@ -31,6 +31,10 @@
 
 #include <X11/Xlib.h>
 
+/**
+ * @class RGlutColor
+ *        Easy to use class to represent color(R, G, B)
+ */
 class RGlutColor
 {
 public:

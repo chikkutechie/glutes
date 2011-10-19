@@ -35,6 +35,10 @@
 #include "rglutglbinder.h"
 #include "reglproperties.h"
 
+/**
+ * @class REGLGlutGLBinder
+ * @brief EGL functionality wrapper, and an implementation for RGlutGLBinder
+ */
 NONSHARABLE_CLASS(REGLGlutGLBinder): public RGlutGLBinder
 {
 public:

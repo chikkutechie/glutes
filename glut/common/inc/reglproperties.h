@@ -34,6 +34,10 @@
 
 #include "rcommon.h"
 
+/**
+ * @class REGLProperties
+ *        Manages properties of EGL for
+ */
 NONSHARABLE_CLASS(REGLProperties)
 {
 private:

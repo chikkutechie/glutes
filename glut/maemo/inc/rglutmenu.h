@@ -37,6 +37,10 @@
 
 class RGlutGC;
 
+/**
+ * @class RGlutMenu
+ *        Menu implementation
+ */
 class RGlutMenu: public RGlutWindow
 {
 public:

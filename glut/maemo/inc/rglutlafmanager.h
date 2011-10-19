@@ -34,6 +34,10 @@
 
 #include "rglutlaf.h"
 
+/**
+ * @class RGlutLAFManager
+ *        Look and feel container
+ */
 class RGlutLAFManager
 {
 public:

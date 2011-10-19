@@ -33,6 +33,10 @@
 
 class RGlutWindow;
 
+/**
+ * @class RGlutGradient
+ *        Gradient class
+ */
 class RGlutGradient
 {
 public:

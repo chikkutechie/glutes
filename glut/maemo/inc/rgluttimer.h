@@ -29,6 +29,10 @@
 #ifndef _RGLUTTIMER_H_
 #define _RGLUTTIMER_H_
 
+/**
+ * @class RGlutTimer
+ *        Timer class implementation
+ */
 class RGlutTimer
 {
 public:    

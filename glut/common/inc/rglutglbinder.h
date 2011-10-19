@@ -31,6 +31,11 @@
 
 #include "rcommon.h"
 
+/**
+ * @class RGlutGLBinder
+ *        Base class for binding OpenGL/OpenVG to underlining windowing system
+ *        and managing resources
+ */
 NONSHARABLE_CLASS(RGlutGLBinder)
 {
 public:

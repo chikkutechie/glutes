@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2010-2015, Ranjith TV
  * All rights reserved.
  *
@@ -33,7 +33,7 @@
 
 class RGlutEventHandler;
 
-NONSHARABLE_CLASS(RGlutAppUi) : public CAknAppUi
+class RGlutAppUi: public CAknAppUi
 {
 public:
     RGlutAppUi();

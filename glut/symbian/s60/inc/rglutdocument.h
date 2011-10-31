@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2010-2015, Ranjith TV
  * All rights reserved.
  *
@@ -31,7 +31,7 @@
 
 #include <AknDoc.h>
 
-NONSHARABLE_CLASS(RGlutDocument): public CAknDocument
+class RGlutDocument: public CAknDocument
 {
 public:
     RGlutDocument(CEikApplication &mainApplication);

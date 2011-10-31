@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2010-2015, Ranjith TV
  * All rights reserved.
  *
@@ -36,7 +36,7 @@
 
 class RGlutEventHandler;
 
-NONSHARABLE_CLASS(RGlutControl): public CCoeControl
+class RGlutControl: public CCoeControl
 {
 public:
     RGlutControl();

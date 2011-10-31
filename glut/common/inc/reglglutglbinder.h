@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2010-2015, Ranjith TV
  * All rights reserved.
  *
@@ -39,7 +39,7 @@
  * @class REGLGlutGLBinder
  * @brief EGL functionality wrapper, and an implementation for RGlutGLBinder
  */
-NONSHARABLE_CLASS(REGLGlutGLBinder): public RGlutGLBinder
+class REGLGlutGLBinder: public RGlutGLBinder
 {
 public:
     struct EGLSurfaceInfo

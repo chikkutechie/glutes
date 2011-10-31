@@ -1,0 +1,3 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$class_r_glut_window.html" title="{RGlutWindow\n|# mDisplay\l# mParent\l# mParentWindow\l# mWindow\l# mX\l# mY\l# mWidth\l# mHeight\l# mVisible\l# mTitle\l# mChilds\l|+ RGlutWindow()\l+ ~RGlutWindow()\l+ pos()\l+ setPos()\l+ size()\l+ setSize()\l+ setGeometry()\l+ geometry()\l+ setTitle()\l+ setFullscreen()\l+ setBackgroundColor()\l+ clear()\l+ isVisible()\l+ show()\l+ hide()\l+ redraw()\l+ draw()\l+ handleEvent()\l+ display()\l+ window()\l+ parent()\l+ addChild()\l+ removeChild()\l+ removeFromParent()\l# create()\l# destroy()\l}" alt="" coords="5,6,163,647"/>
+</map>

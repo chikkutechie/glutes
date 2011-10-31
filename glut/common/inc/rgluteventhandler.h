@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2010-2015, Ranjith TV
  * All rights reserved.
  *
@@ -35,7 +35,7 @@
  * @class RGlutEventHandler
  *        Listner for events
  */
-NONSHARABLE_CLASS(RGlutEventHandler)
+class RGlutEventHandler
 {
 public:
     virtual ~RGlutEventHandler(){}

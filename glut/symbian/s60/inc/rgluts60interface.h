@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2010-2015, Ranjith TV
  * All rights reserved.
  *
@@ -43,7 +43,7 @@ class CEikonEnv;
 class RGlutControl;
 class RGlutGLBinder;
 
-NONSHARABLE_CLASS(RGlutS60Interface): public RGlutInterface, public RGlutEventHandler
+class RGlutS60Interface: public RGlutInterface, public RGlutEventHandler
 {
 private:
     static const int ID_START_INDEX = 100;

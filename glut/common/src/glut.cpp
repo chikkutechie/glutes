@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2010-2015, Ranjith TV
  * All rights reserved.
  *
@@ -24,6 +24,18 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/*! \mainpage glutes
+ *
+ * \section intro_sec Introduction
+ *
+ * glut(es) is a opengles/openvg utility toolkit implementation for mobile
+ * platform.<br>
+ * It is a striped down version of glut, so it is only providing basic
+ * functionality.<br>
+ * Currently glutes implementation is provided for Symbian3 and Maemo.<br>
+ * Visit http://code.google.com/p/glutes/ for more information.
  */
 
 #include "glut.h"

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2010-2015, Ranjith TV
  * All rights reserved.
  *
@@ -36,7 +36,7 @@
  *        Base class for binding OpenGL/OpenVG to underlining windowing system
  *        and managing resources
  */
-NONSHARABLE_CLASS(RGlutGLBinder)
+class RGlutGLBinder
 {
 public:
     enum API

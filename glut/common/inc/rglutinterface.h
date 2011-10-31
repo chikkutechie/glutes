@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2010-2015, Ranjith TV
  * All rights reserved.
  *
@@ -37,7 +37,7 @@
  *        If glut should be ported on to a new platform derive from this -
  *        class.
  */
-NONSHARABLE_CLASS(RGlutInterface)
+class RGlutInterface
 {
 public:
     static const int TitleLength = 255;

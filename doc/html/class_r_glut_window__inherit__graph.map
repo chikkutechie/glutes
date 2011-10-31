@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_r_glut_maemo_window.html" title="{RGlutMaemoWindow\n||+ RGlutMaemoWindow()\l+ ~RGlutMaemoWindow()\l+ draw()\l+ handleEvent()\l+ currentXEvent()\l}" alt="" coords="5,721,176,866"/>
+<area shape="rect" id="node5" href="$class_r_glut_menu.html" title="{RGlutMenu\n||+ RGlutMenu()\l+ ~RGlutMenu()\l+ addEntry()\l+ removeEntry()\l+ preferedPos()\l+ hide()\l+ draw()\l+ handleEvent()\l}" alt="" coords="200,697,315,890"/>
+</map>

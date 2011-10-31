@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$struct_r_glut_interface_1_1_glut_callbacks.html" title="{RGlutInterface::GlutCallbacks\n|+ draw\l+ reshape\l+ repos\l+ keyboard\l+ mouse\l+ motion\l+ passiveMotion\l|+ GlutCallbacks()\l}" alt="" coords="5,6,197,183"/>
+<area shape="rect" id="node4" href="$struct_r_glut_interface_1_1_glut_window_property.html" title="{RGlutInterface::GlutWindowProperty\n|+ mTitle\l+ mX\l+ mY\l+ mWidth\l+ mHeight\l|+ GlutWindowProperty()\l}" alt="" coords="221,22,451,167"/>
+</map>

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2010-2015, Ranjith TV
  * All rights reserved.
  *
@@ -36,9 +36,9 @@
 
 /**
  * @class REGLProperties
- *        Manages properties of EGL for
+ *        Manages properties of EGL
  */
-NONSHARABLE_CLASS(REGLProperties)
+class REGLProperties
 {
 private:
     class AttributePair

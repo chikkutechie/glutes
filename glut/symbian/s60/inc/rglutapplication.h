@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2010-2015, Ranjith TV
  * All rights reserved.
  *
@@ -31,7 +31,7 @@
 
 #include <aknapp.h>
 
-NONSHARABLE_CLASS(RGlutApplication) : public CAknApplication
+class RGlutApplication: public CAknApplication
 {
 public:
     RGlutApplication();

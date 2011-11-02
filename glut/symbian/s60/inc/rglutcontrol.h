@@ -21,11 +21,11 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
- 
+
 #ifndef GLUTCONTROL_H_
 #define GLUTCONTROL_H_
 
@@ -40,20 +40,20 @@ class RGlutControl: public CCoeControl
 {
 public:
     RGlutControl();
-    void ConstructL(const TRect& aRect);
+    void ConstructL(const TRect &aRect);
     ~RGlutControl();
-    void setEventHandler(RGlutEventHandler * eh);
-    RWindow& nativeWindow();
+    void setEventHandler(RGlutEventHandler *eh);
+    RWindow &nativeWindow();
 
 protected:
-    void Draw(const TRect& aRect) const;
+    void Draw(const TRect &aRect) const;
     void SizeChanged();
     void PositionChanged();
-    void HandlePointerEventL(const TPointerEvent& aPointerEvent);
-    TKeyResponse OfferKeyEventL(const TKeyEvent& aKeyEvent,TEventCode aType);
-    
+    void HandlePointerEventL(const TPointerEvent &aPointerEvent);
+    TKeyResponse OfferKeyEventL(const TKeyEvent &aKeyEvent, TEventCode aType);
+
 private:
-    RGlutEventHandler * mEH;
+    RGlutEventHandler *mEH;
 };
 
 #endif

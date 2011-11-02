@@ -21,7 +21,7 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
@@ -30,15 +30,15 @@
 #include "rglutdisplay.h"
 #include "rcommon.h"
 
-RGlutWindow::RGlutWindow(RGlutWindow * parent)
-  : mDisplay(0),
-    mParent(parent),
-    mWindow(0),
-    mX(0),
-    mY(0),
-    mWidth(100),
-    mHeight(100),
-    mVisible(false)
+RGlutWindow::RGlutWindow(RGlutWindow *parent)
+    : mDisplay(0),
+      mParent(parent),
+      mWindow(0),
+      mX(0),
+      mY(0),
+      mWidth(100),
+      mHeight(100),
+      mVisible(false)
 {
     if (mParent) {
         mDisplay = mParent->mDisplay;
@@ -55,7 +55,7 @@ RGlutWindow::~RGlutWindow()
     destroy();
 }
 
-void RGlutWindow::setTitle(std::string const & title)
+void RGlutWindow::setTitle(std::string const &title)
 {
     mTitle = title;
     if (mWindow) {
@@ -71,7 +71,7 @@ void RGlutWindow::setFullscreen()
         XChangeProperty(mDisplay, mWindow,
                         XInternAtom(mDisplay, "_NET_WM_STATE", True),
                         XA_ATOM,  32,  PropModeReplace,
-                        (unsigned char*)&atom,  1);
+                        (unsigned char *)&atom,  1);
         Atom wmState = XInternAtom(mDisplay, "_NET_WM_STATE", False);
         Atom fullscreen = XInternAtom(mDisplay, "_NET_WM_STATE_FULLSCREEN", False);
 
@@ -119,7 +119,7 @@ void RGlutWindow::setSize(int w, int h)
         XConfigureWindow(mDisplay, mWindow, mask, &wc);
     }
 }
- 
+
 void RGlutWindow::setGeometry(int x, int y, int w, int h)
 {
     mX = x;
@@ -136,8 +136,8 @@ void RGlutWindow::setGeometry(int x, int y, int w, int h)
         XConfigureWindow(mDisplay, mWindow, mask, &wc);
     }
 }
- 
-void RGlutWindow::setBackgroundColor(RGlutColor const & color)
+
+void RGlutWindow::setBackgroundColor(RGlutColor const &color)
 {
     if (mWindow) {
         XSetWindowBackground(mDisplay, mWindow, color.pixel());
@@ -175,10 +175,10 @@ void RGlutWindow::hide()
     }
 }
 
-bool RGlutWindow::handleEvent(XEvent & event)
+bool RGlutWindow::handleEvent(XEvent &event)
 {
     bool handled = false;
-    if (isVisible()) {    
+    if (isVisible()) {
         for (WindowSetIter iter = mChilds.begin(); iter != mChilds.end() && !handled; ++iter) {
             if ((*iter)->isVisible()) {
                 handled = (*iter)->handleEvent(event);
@@ -219,7 +219,7 @@ void RGlutWindow::create()
     if (mWindow) {
         return;
     }
-    
+
     XSetWindowAttributes theWindowAttributes;
     theWindowAttributes.override_redirect = False;
 
@@ -253,7 +253,7 @@ void RGlutWindow::create()
     XStoreName(mDisplay, mWindow, mTitle.c_str());
 }
 
-void RGlutWindow::removeChild(RGlutWindow * window)
+void RGlutWindow::removeChild(RGlutWindow *window)
 {
     WindowSetIter iter = mChilds.find(window);
     if (iter != mChilds.end()) {

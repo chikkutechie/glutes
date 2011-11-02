@@ -21,7 +21,7 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
@@ -40,53 +40,44 @@
 class RGlutWindowStateAnimation: public RGlutAnimation
 {
 public:
-    enum WindowState
-    {
+    enum WindowState {
         Position,
         Size,
         PositionAndSize
     };
 
-    RGlutWindowStateAnimation(RGlutWindow * window);
+    RGlutWindowStateAnimation(RGlutWindow *window);
 
-    void setWindowState(WindowState state)
-    {
+    void setWindowState(WindowState state) {
         mWindowState = state;
     }
 
-    void setStartPos(RGlutPointI point)
-    {
+    void setStartPos(RGlutPointI point) {
         mWindowRectStart.setX1(point.x());
         mWindowRectStart.setY1(point.y());
     }
-    void setEndPos(RGlutPointI point)
-    {
+    void setEndPos(RGlutPointI point) {
         mWindowRectEnd.setX1(point.x());
         mWindowRectEnd.setY1(point.y());
     }
 
-    void setStartSize(RGlutSizeI size)
-    {
+    void setStartSize(RGlutSizeI size) {
         mWindowRectStart.setWidth(size.width());
         mWindowRectStart.setHeight(size.height());
     }
-    void setEndSize(RGlutSizeI size)
-    {
+    void setEndSize(RGlutSizeI size) {
         mWindowRectEnd.setWidth(size.width());
         mWindowRectEnd.setHeight(size.height());
     }
 
-    void setStartRect(RGlutRectI rect)
-    {
+    void setStartRect(RGlutRectI rect) {
         mWindowRectStart = rect;
     }
-    void setEndRect(RGlutRectI rect)
-    {
+    void setEndRect(RGlutRectI rect) {
         mWindowRectEnd = rect;
     }
 
-    void setEasingCurve(RGlutEasingCurve::Type type)
-    {
+    void setEasingCurve(RGlutEasingCurve::Type type) {
         mEasingCurve.setType(type);
     }
 
@@ -95,7 +86,7 @@ private:
     int interpolate(int start, int end, float t);
 
 private:
-    RGlutWindow * mWindow;
+    RGlutWindow *mWindow;
     WindowState mWindowState;
     RGlutRectI mWindowRectStart;
     RGlutRectI mWindowRectEnd;

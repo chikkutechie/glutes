@@ -21,11 +21,11 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
- 
+
 
 #if defined(GLUT_ES)
 #include <glut.h>
@@ -41,23 +41,22 @@
 
 using namespace std;
 
-enum MenuIds
-{
+enum MenuIds {
     ZoomMenu = 10,
     ExitMenu = 20
 };
 
-static const char * ZoomInText  = "Zoom In";
-static const char * ZoomOutText = "Zoom Out";
-static const char * PauseText   = "Pause";
-static const char * ExitText    = "Exit";
+static const char *ZoomInText  = "Zoom In";
+static const char *ZoomOutText = "Zoom Out";
+static const char *PauseText   = "Pause";
+static const char *ExitText    = "Exit";
 
 class TrianglesState
 {
 public:
     GLfloat xRot;
     GLfloat yRot;
-    
+
     int scaleCount;
     int scaleDir;
     int doRotations;
@@ -67,7 +66,7 @@ public:
     std::string animMenuText;
 };
 
-TrianglesState * state = 0;
+TrianglesState *state = 0;
 
 void init();
 void scale();
@@ -81,10 +80,10 @@ void createMenu();
 void init()
 {
     state = new TrianglesState;
-    
+
     state->xRot        = 0.0f;
     state->yRot        = 0.0f;
-    
+
     state->scaleCount      = 0;
     state->scaleDir        = 1;
     state->doRotations     = 1;
@@ -92,7 +91,7 @@ void init()
     state->menuId          = 0;
     state->zoomMenuText  = ZoomOutText;
     state->animMenuText  = PauseText;
-    
+
     createMenu();
 }
 
@@ -105,25 +104,25 @@ void display()
     glPushMatrix();
     glRotatef(state->xRot, 1.0f, 0.0f, 0.0f);
     glRotatef(state->yRot, 0.0f, 1.0f, 0.0f);
-    
+
     int pivot = 1;
-    
+
     std::vector<GLfloat> triangleColors;
     std::vector<GLfloat> trianglePaths;
-    
+
     trianglePaths.push_back(0.0f);
     trianglePaths.push_back(0.0f);
     trianglePaths.push_back(75.0f);
-    
+
     triangleColors.push_back(0.0f);
     triangleColors.push_back(1.0f);
     triangleColors.push_back(0.0f);
     triangleColors.push_back(1.0f);
-    
+
     for (GLfloat angle = 0.0f;
-            angle <= (2.0f * M_PI) + 1.0f;
-            angle += M_PI/38.0f) {
-        
+         angle <= (2.0f * M_PI) + 1.0f;
+         angle += M_PI / 38.0f) {
+
         GLfloat x = 50.0f * sin(angle);
         GLfloat y = 50.0f * cos(angle);
 
@@ -138,22 +137,22 @@ void display()
             triangleColors.push_back(0.0f);
             triangleColors.push_back(1.0f);
         }
-        
+
         pivot++;
         trianglePaths.push_back(x);
         trianglePaths.push_back(y);
         trianglePaths.push_back(0.0f);
     }
-    
+
     glVertexPointer(3, GL_FLOAT, 0, &trianglePaths[0]);
     glColorPointer(4, GL_FLOAT, 0, &triangleColors[0]);
-    
+
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_COLOR_ARRAY);
     glDrawArrays(GL_TRIANGLE_FAN, 0, trianglePaths.size() / 3);
     glDisableClientState(GL_VERTEX_ARRAY);
     glPopMatrix();
-    
+
     glutSwapBuffers();
 }
 
@@ -161,14 +160,14 @@ void reshape(int w, int h)
 {
     GLfloat nRange = 100.0f;
     glViewport(0, 0, w, h);
-    
+
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    
+
     if (w <= h) {
-        GLORTHO(-nRange, nRange, -nRange*h/w, nRange*h/w, -nRange, nRange);
+        GLORTHO(-nRange, nRange, -nRange * h / w, nRange * h / w, -nRange, nRange);
     } else {
-        GLORTHO(-nRange*w/h, nRange*w/h, -nRange, nRange, -nRange, nRange);
+        GLORTHO(-nRange * w / h, nRange * w / h, -nRange, nRange, -nRange, nRange);
     }
 
     glMatrixMode(GL_MODELVIEW);
@@ -178,25 +177,25 @@ void reshape(int w, int h)
 void keyboard(unsigned char key, int, int)
 {
     switch (key) {
-        case 'q':
-        case 'Q': {
-            exit(0);
-        }
+    case 'q':
+    case 'Q': {
+        exit(0);
+    }
     }
 }
 
 void menu(int id)
 {
     switch (id) {
-        case ZoomMenu: {
-            scale();
-            break;
-        }
-                
-        case ExitMenu: {
-            exit(0);
-            break;
-        }
+    case ZoomMenu: {
+        scale();
+        break;
+    }
+
+    case ExitMenu: {
+        exit(0);
+        break;
+    }
     }
 }
 
@@ -208,12 +207,12 @@ void scale()
         if (state->scaleCount <= 0) {
             state->scaleCount = 0;
             state->scaleDir = state->scaleDir * -1;
-            
+
             state->zoomMenuText = ZoomOutText;
 
             createMenu();
 
-        } else {                    
+        } else {
             scaleUnit = 1.0f / 0.8f;
             state->scaleCount--;
         }
@@ -221,12 +220,12 @@ void scale()
         if (state->scaleCount >= 10) {
             state->scaleCount = 10;
             state->scaleDir = state->scaleDir * -1;
-            
+
             state->zoomMenuText = ZoomInText;
-            
+
             createMenu();
 
-        } else {                    
+        } else {
             scaleUnit = 0.8f;
             state->scaleCount++;
         }
@@ -235,15 +234,15 @@ void scale()
 }
 
 void timeout(int)
-{    
+{
     if (state->doRotations) {
         if (state->xRot >= 360.0f) {
             state->xRot = 0.0f;
         }
-        
+
         state->xRot += 5.0f;
         state->yRot = state->xRot;
-        
+
         glutPostRedisplay();
         glutTimerFunc(20, timeout, 0);
     }
@@ -255,9 +254,9 @@ void createMenu()
         glutDestroyMenu(state->menuId);
         state->menuId = 0;
     }
-        
+
     state->menuId = glutCreateMenu(menu);
-    
+
     glutAddMenuEntry(state->zoomMenuText.c_str(), ZoomMenu);
     glutAddMenuEntry(ExitText, ExitMenu);
 
@@ -268,11 +267,11 @@ void createMenu()
 GLDEF_C TInt E32Main()
 {
 
-    char * argv[] = {"triangle", "-renderer", "gles"};
+    char *argv[] = {"triangle", "-renderer", "gles"};
     int    argc = sizeof(argv) / sizeof(argv[0]);
-    
+
 #else
-int main(int argc, char ** argv)
+int main(int argc, char **argv)
 {
 #endif
     glutInit(&argc, argv);
@@ -281,7 +280,7 @@ int main(int argc, char ** argv)
     glutFullScreen();
 
     init();
-        
+
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
     glutTimerFunc(20, timeout, 0);

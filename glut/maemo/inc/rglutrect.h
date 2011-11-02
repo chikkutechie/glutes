@@ -21,7 +21,7 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
@@ -41,67 +41,54 @@ public:
     {}
 
     RGlutRect(T x1, T y1, T x2, T y2)
-     : mX1(x1),
-       mY1(y1),
-       mX2(x2),
-       mY2(y2)
+        : mX1(x1),
+          mY1(y1),
+          mX2(x2),
+          mY2(y2)
     {}
 
-    bool isEmpty() const
-    {
+    bool isEmpty() const {
         return ((width() == 0) | (height() == 0));
     }
 
-    T x1() const
-    {
+    T x1() const {
         return mX1;
     }
-    T y1() const
-    {
+    T y1() const {
         return mY1;
     }
-    T x2() const
-    {
+    T x2() const {
         return mX2;
     }
-    T y2() const
-    {
+    T y2() const {
         return mY2;
     }
 
-    void setX1(T v)
-    {
+    void setX1(T v) {
         mX1 = v;
     }
-    void setY1(T v)
-    {
+    void setY1(T v) {
         mY1 = v;
     }
-    void setX2(T v)
-    {
+    void setX2(T v) {
         mX2 = v;
     }
-    void setY2(T v)
-    {
+    void setY2(T v) {
         mY2 = v;
     }
 
-    void setHeight(T v)
-    {
+    void setHeight(T v) {
         setY2(y1() + v);
     }
-    T height() const
-    {
-        return mY2-mY1;
+    T height() const {
+        return mY2 - mY1;
     }
-    
-    void setWidth(T v)
-    {
+
+    void setWidth(T v) {
         setX2(x1() + v);
     }
-    T width() const
-    {
-        return mX2-mX1;
+    T width() const {
+        return mX2 - mX1;
     }
 
 private:

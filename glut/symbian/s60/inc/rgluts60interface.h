@@ -21,11 +21,11 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
- 
+
 #ifndef GLUTS60INTERFACE_H_
 #define GLUTS60INTERFACE_H_
 
@@ -53,7 +53,7 @@ private:
 public:
     RGlutS60Interface();
     ~RGlutS60Interface();
-    
+
     void intialize(int argc, char **argv);
     void terminate();
     void initDisplayMode(unsigned int mode);
@@ -63,7 +63,7 @@ public:
     void destroyWindow(int win);
     int getWindow();
     void setWindow(int win);
-    void setWindowTitle(const char * title);
+    void setWindowTitle(const char *title);
     void showWindow();
     void fullScreen();
     void hideWindow();
@@ -74,7 +74,7 @@ public:
     void exec();
     void redraw(int win = 0);
     void flush();
-    
+
     virtual void draw();
     virtual void reshape(int w, int h);
     virtual void rerect(int x, int y, int w, int h);
@@ -82,63 +82,61 @@ public:
     virtual void keyboard(unsigned char key, unsigned int modifier, int x, int y);
     virtual void mouse(int button, int modifier, int x, int y, bool pressed = true);
     virtual void motion(int, int, int, int) {}
-    
-    virtual int createMenu(void (*)(int menu));
+
+    virtual int createMenu(void ( *)(int menu));
     virtual void destroyMenu(int menu);
     virtual int getMenu();
     virtual void setMenu(int menu);
-    virtual void addMenuEntry(const char* label, int value);
+    virtual void addMenuEntry(const char *label, int value);
     virtual void removeMenuItem(int item);
     virtual void attachMenu(int button);
     virtual void detachMenu(int button);
-    
+
     int getModifiers();
     virtual int getValue(unsigned int state);
-    
+
 private:
     class ControlEntry
     {
     public:
         ControlEntry()
-         : mId(0),
-           mSurface(0),
-           mControl(0)
+            : mId(0),
+              mSurface(0),
+              mControl(0)
         {}
-        
+
         int mId;
         unsigned int  mSurface;
-        RGlutControl * mControl;
+        RGlutControl *mControl;
     };
-    
+
     class MenuEntry: public MEikMenuObserver
     {
     public:
         MenuEntry()
-         : mId(0),
-           mCallback(0),
-           mPopupMenu(0),
-           mMenuItems(6)
+            : mId(0),
+              mCallback(0),
+              mPopupMenu(0),
+              mMenuItems(6)
         {}
 
-        ~MenuEntry()
-        {
+        ~MenuEntry() {
             mMenuItems.Close();
             delete mPopupMenu;
         }
-    
-        void ProcessCommandL(TInt id)
-        {
+
+        void ProcessCommandL(TInt id) {
             if (id != KErrCancel) {
                 mCallback(id - MENU_ITEM_BIAS);
             }
         }
-        
+
         void SetEmphasis(CCoeControl *, TBool)
         {}
-        
+
         int mId;
         void (*mCallback)(int);
-        CAknStylusPopUpMenu * mPopupMenu;
+        CAknStylusPopUpMenu *mPopupMenu;
         RArray<int> mMenuItems;
     };
 
@@ -146,48 +144,47 @@ private:
     {
     public:
         TimerEntry()
-         : mCallback(0),
-           mTimer(0),
-           mValue(0)
+            : mCallback(0),
+              mTimer(0),
+              mValue(0)
         {}
-        
-        ~TimerEntry()
-        {
+
+        ~TimerEntry() {
             delete mTimer;
         }
-        
+
         void (*mCallback)(int);
-        CTimer * mTimer;
+        CTimer *mTimer;
         int mValue;
     };
-    
-    static TInt timerCallbackFunction(TAny * a);
+
+    static TInt timerCallbackFunction(TAny *a);
 
     int addControl(ControlEntry entry);
     ControlEntry removeControl(int id);
     void removeAllControl();
-    ControlEntry * getControlEntry(int id);
+    ControlEntry *getControlEntry(int id);
 
-    MenuEntry * getMenuEntry(int id);
+    MenuEntry *getMenuEntry(int id);
     void removeMenuEntries();
-    
+
     void recreateSurface(int win);
 
 private:
     unsigned int mDisplayMode;
-    CEikonEnv* mEikonEnv;
+    CEikonEnv *mEikonEnv;
     int mCurrentControl;
-    RGlutGLBinder * mBinder;
+    RGlutGLBinder *mBinder;
     RArray<ControlEntry> mControllist;
     RArray<ControlEntry> mControlStack;
-    
+
     bool mFullScreen;
     int mModifier;
 
     RPointerArray<MenuEntry> mMenuList;
     int mCurrentMenu;
     int mAttachedMenuButton;
-    
+
     const TPtr8 KParamRenderer;
     const TPtr8 KParamRendererVG;
     const TPtr8 KParamRendererGL;

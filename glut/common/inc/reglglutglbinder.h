@@ -21,11 +21,11 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
- 
+
 #ifndef EGLGLUTGLBINDER_H_
 #define EGLGLUTGLBINDER_H_
 
@@ -42,25 +42,22 @@
 class REGLGlutGLBinder: public RGlutGLBinder
 {
 public:
-    struct EGLSurfaceInfo
-    {
-        enum Type
-        {
+    struct EGLSurfaceInfo {
+        enum Type {
             TYPE_WINDOW,
             TYPE_PIXMAP,
             TYPE_PBUFFER
         };
 
         Type   mType;
-        void * mData;
+        void *mData;
     };
-    
+
 public:
     REGLGlutGLBinder(API api);
     ~REGLGlutGLBinder();
 
-    void setNativeDisplay(int display)
-    {
+    void setNativeDisplay(int display) {
         mNativeDisplay = display;
     }
 
@@ -71,44 +68,38 @@ public:
     void swapBuffer(unsigned int surface);
     void terminate();
 
-    void addProperty(int name, int value)
-    {
+    void addProperty(int name, int value) {
         mProperties.addProperty(name, value);
     }
-    void removeProperty(int name)
-    {
+    void removeProperty(int name) {
         mProperties.removeProperty(name);
     }
 
-    void setStencil(bool enable, int size = 8)
-    {
+    void setStencil(bool enable, int size = 8) {
         if (enable) {
             addProperty(EGL_STENCIL_SIZE, size);
         } else {
             removeProperty(EGL_STENCIL_SIZE);
         }
     }
-    
-    void setDepth(bool enable, int size = 8)
-    {
+
+    void setDepth(bool enable, int size = 8) {
         if (enable) {
             addProperty(EGL_DEPTH_SIZE, size);
         } else {
             removeProperty(EGL_DEPTH_SIZE);
         }
     }
-    
-    void setSingleBuffer(bool enable)
-    {
+
+    void setSingleBuffer(bool enable) {
         if (enable) {
             addProperty(EGL_RENDER_BUFFER, EGL_SINGLE_BUFFER);
         } else {
             removeProperty(EGL_RENDER_BUFFER);
         }
     }
-    
-    void setDoubleBuffer(bool enable)
-    {
+
+    void setDoubleBuffer(bool enable) {
         if (enable) {
             addProperty(EGL_RENDER_BUFFER, EGL_BACK_BUFFER);
         } else {
@@ -116,75 +107,59 @@ public:
         }
     }
 
-    int getBufferSize()
-    {
+    int getBufferSize() {
         return getValue(EGL_BUFFER_SIZE);
     }
-    void setBufferSize(int size)
-    {
+    void setBufferSize(int size) {
         addProperty(EGL_BUFFER_SIZE, size);
     }
 
-    int getRedSize()
-    {
+    int getRedSize() {
         return getValue(EGL_RED_SIZE);
     }
-    void setRedSize(int size)
-    {
+    void setRedSize(int size) {
         addProperty(EGL_RED_SIZE, size);
     }
 
-    int getGreenSize()
-    {
+    int getGreenSize() {
         return getValue(EGL_GREEN_SIZE);
     }
-    void setGreenSize(int size)
-    {
+    void setGreenSize(int size) {
         addProperty(EGL_GREEN_SIZE, size);
     }
 
-    int getBlueSize()
-    {
+    int getBlueSize() {
         return getValue(EGL_BLUE_SIZE);
     }
-    void setBlueSize(int size)
-    {
+    void setBlueSize(int size) {
         addProperty(EGL_BLUE_SIZE, size);
     }
 
-    int getAlphaSize()
-    {
+    int getAlphaSize() {
         return getValue(EGL_ALPHA_SIZE);
     }
-    void setAlphaSize(int size)
-    {
+    void setAlphaSize(int size) {
         addProperty(EGL_ALPHA_SIZE, size);
     }
 
-    int getDepthSize()
-    {
+    int getDepthSize() {
         return getValue(EGL_DEPTH_SIZE);
     }
-    void setDepthSize(int size)
-    {
+    void setDepthSize(int size) {
         addProperty(EGL_DEPTH_SIZE, size);
     }
 
-    int getStencilSize()
-    {
+    int getStencilSize() {
         return getValue(EGL_STENCIL_SIZE);
     }
-    void setStencilSize(int size)
-    {
+    void setStencilSize(int size) {
         addProperty(EGL_STENCIL_SIZE, size);
     }
 
-    int getLuminanceSize()
-    {
+    int getLuminanceSize() {
         return getValue(EGL_LUMINANCE_SIZE);;
     }
-    void setLuminanceSize(int size)
-    {
+    void setLuminanceSize(int size) {
         addProperty(EGL_LUMINANCE_SIZE, size);
     }
 

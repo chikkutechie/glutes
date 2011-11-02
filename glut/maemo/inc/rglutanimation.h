@@ -21,7 +21,7 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
@@ -50,8 +50,7 @@ public:
 class RGlutAnimation
 {
 private:
-    enum State
-    {
+    enum State {
         Running,
         Stopped
     };
@@ -59,29 +58,24 @@ private:
 public:
     RGlutAnimation();
     virtual ~RGlutAnimation();
-    
-    int duration() const
-    {
+
+    int duration() const {
         return mDuration;
     }
-    void setDuration(int d)
-    {
+    void setDuration(int d) {
         mDuration = d;
     }
-    int interval() const
-    {
+    int interval() const {
         return mInterval;
     }
-    void setInterval(int interval)
-    {
+    void setInterval(int interval) {
         mInterval = interval;
     }
 
     virtual void start();
     virtual void stop();
 
-    void setListner(RGlutAnimationListner * l)
-    {
+    void setListner(RGlutAnimationListner *l) {
         mListner = l;
     }
 
@@ -93,11 +87,11 @@ protected:
     friend class RGlutAnimationTimer;
 
     State mState;
-    RGlutTimer * mTimer;
+    RGlutTimer *mTimer;
     int mDuration;
     RGlutTime mTime;
     int mInterval;
-    RGlutAnimationListner * mListner;
+    RGlutAnimationListner *mListner;
 };
 
 #endif

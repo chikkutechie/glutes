@@ -21,7 +21,7 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
@@ -44,75 +44,68 @@ class RGlutLAF;
 class RGlutApplication
 {
 public:
-    RGlutApplication(RGlutWindow * window = 0);
+    RGlutApplication(RGlutWindow *window = 0);
     virtual ~RGlutApplication();
-    
-    void setMainWindow(RGlutWindow * window)
-    {
+
+    void setMainWindow(RGlutWindow *window) {
         mMainWindow = window;
     }
 
-    RGlutWindow * mainWindow()
-    {
+    RGlutWindow *mainWindow() {
         return mMainWindow;
     }
-    
-    RGlutLAF * LAF()
-    {
+
+    RGlutLAF *LAF() {
         return mLAF;
     }
 
-    RGlutLAF * setLAF(std::string const & name);
+    RGlutLAF *setLAF(std::string const &name);
 
-    int screenWidth() const
-    {
+    int screenWidth() const {
         return mScreenWidth;
     }
-    int screenHeight() const
-    {
+    int screenHeight() const {
         return mScreenHeight;
     }
-    int screen() const
-    {
+    int screen() const {
         return mScreenNumber;
     }
-    
+
     void exec();
-    
-    static RGlutApplication * activeApplication()
-    {
+
+    static RGlutApplication *activeApplication() {
         return mActiveApplication;
     }
-    
-    void registerTimer(RGlutTimer * timer);
-    void unregisterTimer(RGlutTimer * timer);
-    
+
+    void registerTimer(RGlutTimer *timer);
+    void unregisterTimer(RGlutTimer *timer);
+
 private:
     void checkTimers();
-    
+
 protected:
     static const int EventLoopInterval = 1;
-    static RGlutApplication * mActiveApplication;
+    static RGlutApplication *mActiveApplication;
 
-    RGlutWindow * mMainWindow;
+    RGlutWindow *mMainWindow;
     bool mFinished;
 
-    RGlutLAF * mLAF;
+    RGlutLAF *mLAF;
 
     int mScreenNumber;
     int mScreenWidth;
     int mScreenHeight;
-    
+
     class TimerEntry
     {
     public:
-        RGlutTime mTime;    
-        RGlutTimer * mTimer;
+        RGlutTime mTime;
+        RGlutTimer *mTimer;
     };
-    
+
     typedef std::vector<TimerEntry> TimerSet;
     typedef TimerSet::iterator TimerSetIter;
-    
+
     TimerSet mTimers;
 };
 

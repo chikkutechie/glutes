@@ -21,7 +21,7 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
@@ -40,16 +40,16 @@ RGlutColor::~RGlutColor()
     destroy();
 }
 
-RGlutColor::RGlutColor(RGlutColor const & oth)
+RGlutColor::RGlutColor(RGlutColor const &oth)
 {
-    set(oth.mColor.red/257, oth.mColor.green /257, oth.mColor.blue/257);
+    set(oth.mColor.red / 257, oth.mColor.green / 257, oth.mColor.blue / 257);
 }
 
-RGlutColor & RGlutColor::operator=(RGlutColor const & oth)
+RGlutColor &RGlutColor::operator=(RGlutColor const &oth)
 {
     if (this != &oth) {
         destroy();
-        set(oth.mColor.red/257, oth.mColor.green /257, oth.mColor.blue/257);
+        set(oth.mColor.red / 257, oth.mColor.green / 257, oth.mColor.blue / 257);
     }
     return *this;
 }

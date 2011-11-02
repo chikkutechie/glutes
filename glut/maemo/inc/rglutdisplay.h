@@ -21,7 +21,7 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
@@ -42,25 +42,23 @@
 class RGlutDisplay
 {
 public:
-    static RGlutDisplay * instance();
+    static RGlutDisplay *instance();
 
-    Display * display()
-    {
+    Display *display() {
         return mDisplay;
     }
 
-    void flush()
-    {
+    void flush() {
         XFlush(mDisplay);
     }
 
 private:
     RGlutDisplay();
     RGlutDisplay(RGlutDisplay const &);
-    RGlutDisplay & operator=(RGlutDisplay const &);
+    RGlutDisplay &operator=(RGlutDisplay const &);
 
 private:
-    Display * mDisplay;
+    Display *mDisplay;
 };
 
 #endif

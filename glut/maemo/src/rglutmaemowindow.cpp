@@ -21,7 +21,7 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
@@ -29,7 +29,7 @@
 #include "rglutmaemowindow.h"
 #include "rcommon.h"
 
-RGlutMaemoWindow::RGlutMaemoWindow(RGlutEventHandler * eh)
+RGlutMaemoWindow::RGlutMaemoWindow(RGlutEventHandler *eh)
     : mEH(eh)
 {}
 
@@ -44,7 +44,7 @@ void RGlutMaemoWindow::draw()
     RGlutWindow::draw();
 }
 
-bool RGlutMaemoWindow::handleEvent(XEvent & xev)
+bool RGlutMaemoWindow::handleEvent(XEvent &xev)
 {
     if (RGlutWindow::handleEvent(xev) || xev.xany.window != mWindow) {
         return false;
@@ -53,50 +53,50 @@ bool RGlutMaemoWindow::handleEvent(XEvent & xev)
     mCurrentEvent = &xev;
     switch (xev.type) {
         //case KeyRelease:
-        case KeyPress: {
-            if (mEH) {
-                char asciiTable[64];
-                XComposeStatus cs;
-                KeySym keySym;
-                int length;
+    case KeyPress: {
+        if (mEH) {
+            char asciiTable[64];
+            XComposeStatus cs;
+            KeySym keySym;
+            int length;
 
-                length = XLookupString(&xev.xkey, asciiTable, sizeof(asciiTable), &keySym, &cs);
-                if (length > 0) {
-                    mEH->keyboard(asciiTable[0], xev.xkey.state, xev.xkey.x, xev.xkey.y);
-                }
-            }
-            break;
-        }
-
-        case ButtonPress:
-        case ButtonRelease: {
-            if (mEH) {
-                bool pressed = false;
-
-                if (xev.type == ButtonPress) {
-                    pressed = true;
-                }
-
-                mEH->mouse(xev.xbutton.button, xev.xbutton.state, xev.xbutton.x, xev.xbutton.y, pressed);
-            }
-            break;
-        }
-
-        case MotionNotify: {
-            if (mEH) {
-                mEH->motion(0, xev.xmotion.state, xev.xmotion.x, xev.xmotion.y);
-            }
-            break;
-        }
-
-        case ConfigureNotify: {
-            if (mEH) {
-                if (mWindow == xev.xconfigure.window) {
-                    mEH->reshape(xev.xconfigure.width, xev.xconfigure.height);
-                }
+            length = XLookupString(&xev.xkey, asciiTable, sizeof(asciiTable), &keySym, &cs);
+            if (length > 0) {
+                mEH->keyboard(asciiTable[0], xev.xkey.state, xev.xkey.x, xev.xkey.y);
             }
         }
         break;
+    }
+
+    case ButtonPress:
+    case ButtonRelease: {
+        if (mEH) {
+            bool pressed = false;
+
+            if (xev.type == ButtonPress) {
+                pressed = true;
+            }
+
+            mEH->mouse(xev.xbutton.button, xev.xbutton.state, xev.xbutton.x, xev.xbutton.y, pressed);
+        }
+        break;
+    }
+
+    case MotionNotify: {
+        if (mEH) {
+            mEH->motion(0, xev.xmotion.state, xev.xmotion.x, xev.xmotion.y);
+        }
+        break;
+    }
+
+    case ConfigureNotify: {
+        if (mEH) {
+            if (mWindow == xev.xconfigure.window) {
+                mEH->reshape(xev.xconfigure.width, xev.xconfigure.height);
+            }
+        }
+    }
+    break;
     }
     mCurrentEvent = 0;
     return true;

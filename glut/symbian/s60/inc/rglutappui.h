@@ -21,11 +21,11 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
- 
+
 #ifndef GLUTAPPUI_H_
 #define GLUTAPPUI_H_
 
@@ -40,19 +40,19 @@ public:
     virtual ~RGlutAppUi();
     virtual void ConstructL();
     void HandleCommandL(TInt command);
-    void setEventHandler(RGlutEventHandler * eh);
+    void setEventHandler(RGlutEventHandler *eh);
     void Exit();
     void SetFullScreen(bool v);
-    
+
 protected:
     void HandleResourceChangeL(TInt type);
     void HandleWsEventL(const TWsEvent &event, CCoeControl *destination);
     virtual void ProcessCommandL(TInt aCommand);
     virtual void HandleScreenDeviceChangedL();
     void HandleStatusPaneSizeChange();
-    
+
 private:
-    RGlutEventHandler * mEH;
+    RGlutEventHandler *mEH;
 };
 
 #endif

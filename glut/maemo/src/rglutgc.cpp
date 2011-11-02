@@ -21,7 +21,7 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
@@ -32,7 +32,7 @@
 #include "rglutlaf.h"
 #include "rglutapplication.h"
 
-RGlutGC::RGlutGC(RGlutWindow * window)
+RGlutGC::RGlutGC(RGlutWindow *window)
     : mFont(RGlutApplication::activeApplication()->LAF()->defaultFont())
 {
     mDisplay = window->display();
@@ -59,27 +59,27 @@ RGlutGC::~RGlutGC()
     }
 }
 
-void RGlutGC::setForegroundColor(RGlutColor const & color)
+void RGlutGC::setForegroundColor(RGlutColor const &color)
 {
     XSetForeground(mDisplay, mGC, color.pixel());
 }
 
-void RGlutGC::setBackgroundColor(RGlutColor const & color)
+void RGlutGC::setBackgroundColor(RGlutColor const &color)
 {
     XSetBackground(mDisplay, mGC, color.pixel());
 }
-    
+
 void RGlutGC::fillRectangle(int x, int y, int w, int h)
 {
     XFillRectangle(mDisplay, mWindow, mGC, x, y, w, h);
 }
 
-int RGlutGC::textWidth(std::string const & str)
+int RGlutGC::textWidth(std::string const &str)
 {
     return XTextWidth(mFont.fontStruct(), str.c_str(), str.length());
 }
 
-void RGlutGC::drawString(int x, int y, std::string const & str)
+void RGlutGC::drawString(int x, int y, std::string const &str)
 {
     XDrawString(mDisplay, mWindow, mGC, x, y,
                 str.c_str(), str.length());
@@ -90,7 +90,7 @@ void RGlutGC::drawPixmap(Pixmap pmap, int sx, int sy, int width, int height, int
     XCopyArea(mDisplay, pmap, mWindow, mGC, sx, sy, width, height, dx, dy);
 }
 
-void RGlutGC::setFont(RGlutFont const & font)
+void RGlutGC::setFont(RGlutFont const &font)
 {
     mFont = font;
     XSetFont(mDisplay, mGC, mFont.id());

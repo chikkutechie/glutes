@@ -21,7 +21,7 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
@@ -45,7 +45,7 @@ static const int MSecPerMinute  = 60 * MSecPerSec;
 static const int MSecPerHour    = 60 * MSecPerMinute;
 
 RGlutTime::RGlutTime()
- : mMS(0)
+    : mMS(0)
 {
 }
 
@@ -57,7 +57,7 @@ int RGlutTime::elapsed() const
 {
     RGlutTime ct = RGlutTime::currentTime();
     return (ct.mMS - mMS);           // there is a possiblity of the result to be negative
-                                     // need to handle it.
+    // need to handle it.
 }
 
 #if defined(WIN32)
@@ -79,38 +79,38 @@ RGlutTime RGlutTime::currentTime()
     localTime.HomeTime();
     TDateTime localDateTime = localTime.DateTime();
     ct.mMS = fromTimeComponentToMS((unsigned long)localDateTime.Hour(),
-                  (unsigned long)localDateTime.Minute(),
-                  (unsigned long)localDateTime.Second(),
-                  (unsigned long)(localDateTime.MicroSecond() / 1000));
+                                   (unsigned long)localDateTime.Minute(),
+                                   (unsigned long)localDateTime.Second(),
+                                   (unsigned long)(localDateTime.MicroSecond() / 1000));
     return ct;
 }
 #else
 RGlutTime RGlutTime::currentTime()
 {
     RGlutTime ct;
-    
+
     struct timeval tv;
     gettimeofday(&tv, 0);
     time_t ltime = tv.tv_sec;
     struct tm *t = 0;
-    
+
     tzset();
     struct tm res;
     t = localtime_r(&ltime, &res);
-    
+
     if (t) {
         ct.mMS = fromTimeComponentToMS(t->tm_hour, t->tm_min, t->tm_sec, tv.tv_usec / 1000);
     }
-    
+
     return ct;
 }
 #endif
 #endif
 
-unsigned long RGlutTime::fromTimeComponentToMS(unsigned long hour, 
-                         unsigned long minute,
-                         unsigned long sec,
-                         unsigned long msec)
+unsigned long RGlutTime::fromTimeComponentToMS(unsigned long hour,
+        unsigned long minute,
+        unsigned long sec,
+        unsigned long msec)
 {
     return MSecPerHour * hour +
            MSecPerMinute * minute +

@@ -21,7 +21,7 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
@@ -48,35 +48,31 @@
 class RGlutWindow
 {
 public:
-    RGlutWindow(RGlutWindow * parent = 0);
+    RGlutWindow(RGlutWindow *parent = 0);
     virtual ~RGlutWindow();
 
-    RGlutPointI pos() const
-    {
+    RGlutPointI pos() const {
         return RGlutPointI(mX, mY);
     }
     virtual void setPos(int x, int y);
 
-    RGlutSizeI size() const
-    {
+    RGlutSizeI size() const {
         return RGlutSizeI(mWidth, mHeight);
     }
     virtual void setSize(int w, int h);
 
     virtual void setGeometry(int x, int y, int w, int h);
-    RGlutRectI geometry() const
-    {
+    RGlutRectI geometry() const {
         return RGlutRectI(mX, mY, mWidth, mHeight);
     }
 
-    void setTitle(std::string const & title);
+    void setTitle(std::string const &title);
     void setFullscreen();
 
-    void setBackgroundColor(RGlutColor const & color);
+    void setBackgroundColor(RGlutColor const &color);
     void clear();
 
-    bool isVisible() const
-    {
+    bool isVisible() const {
         return mVisible;
     }
     virtual void show();
@@ -85,42 +81,39 @@ public:
     virtual void redraw();
     virtual void draw();
 
-    virtual bool handleEvent(XEvent & event);
+    virtual bool handleEvent(XEvent &event);
 
-    Display * display() const
-    {
+    Display *display() const {
         return mDisplay;
     }
 
     Window window();
 
-    RGlutWindow * parent()
-    {
+    RGlutWindow *parent() {
         return mParent;
     }
-    
-    void addChild(RGlutWindow * window)
-    {
+
+    void addChild(RGlutWindow *window) {
         if (window) {
             mChilds.insert(window);
         }
     }
-    
-    void removeChild(RGlutWindow * window);
+
+    void removeChild(RGlutWindow *window);
 
     void removeFromParent();
-    
+
 private:
     RGlutWindow(RGlutWindow const &);
-    RGlutWindow & operator=(RGlutWindow const &);
+    RGlutWindow &operator=(RGlutWindow const &);
 
 protected:
     virtual void create();
     virtual void destroy();
 
 protected:
-    Display * mDisplay;
-    RGlutWindow * mParent;
+    Display *mDisplay;
+    RGlutWindow *mParent;
     Window mParentWindow;
     Window mWindow;
     int mX;
@@ -129,11 +122,11 @@ protected:
     int mHeight;
     bool mVisible;
     std::string mTitle;
-    
+
     typedef std::set<RGlutWindow *> WindowSet;
     typedef WindowSet::iterator WindowSetIter;
     typedef WindowSet::const_iterator WindowSetConstIter;
-    
+
     WindowSet  mChilds;
 };
 

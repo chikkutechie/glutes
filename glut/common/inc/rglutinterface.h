@@ -21,7 +21,7 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
@@ -41,18 +41,16 @@ class RGlutInterface
 {
 public:
     static const int TitleLength = 255;
-    
+
 public:
-    enum Renderer 
-    {
+    enum Renderer {
         GL,
         GLES,
         GLES2,
         VG
     };
-    
-    enum Orientation
-    {
+
+    enum Orientation {
         Portrait,
         Landscape,
         Automatic
@@ -60,10 +58,10 @@ public:
 
     RGlutInterface() {}
     virtual ~RGlutInterface() {}
-    
-    static RGlutInterface* getInterface();
+
+    static RGlutInterface *getInterface();
     static bool destroyInterface();
-    
+
     virtual void intialize(int argc, char **argv) = 0;
     virtual void terminate() = 0;
     virtual void initDisplayMode(unsigned int mode) = 0;
@@ -72,7 +70,7 @@ public:
     virtual void destroyWindow(int win) = 0;
     virtual int getWindow() = 0;
     virtual void setWindow(int win) = 0;
-    virtual void setWindowTitle(const char * title) = 0;
+    virtual void setWindowTitle(const char *title) = 0;
     virtual void showWindow() = 0;
     virtual void fullScreen() = 0;
     virtual void hideWindow() = 0;
@@ -80,112 +78,97 @@ public:
     virtual void reshapeWindow(int width, int height) = 0;
     virtual void popWindow() = 0;
     virtual void pushWindow() = 0;
-    
+
     virtual void timerFunc(unsigned int millis, void (*func)(int), int value) = 0;
-    
+
     virtual void exec() = 0;
     virtual void redraw(int win = 0) = 0;
     virtual void flush() = 0;
-    
-    virtual int createMenu(void (*)(int menu)) = 0;
+
+    virtual int createMenu(void ( *)(int menu)) = 0;
     virtual void destroyMenu(int menu) = 0;
     virtual int getMenu() = 0;
     virtual void setMenu(int menu) = 0;
-    virtual void addMenuEntry(const char* label, int value) = 0;
+    virtual void addMenuEntry(const char *label, int value) = 0;
     virtual void removeMenuItem(int item) = 0;
     virtual void attachMenu(int button) = 0;
     virtual void detachMenu(int button) = 0;
-    
+
     virtual int getModifiers() = 0;
     virtual int getValue(unsigned int state) = 0;
-    
+
 public:
-    void setKeyboardFunc(void (*func)(unsigned char key, int x, int y))
-    {
+    void setKeyboardFunc(void (*func)(unsigned char key, int x, int y)) {
         mCallbacks.keyboard = func;
     }
 
-    void setMouseFunc(void (*func)(int button, int state, int x, int y))
-    {
+    void setMouseFunc(void (*func)(int button, int state, int x, int y)) {
         mCallbacks.mouse = func;
     }
 
-    int setMotionFunc(void (*func)(int x, int y))
-    {
+    int setMotionFunc(void (*func)(int x, int y)) {
         mCallbacks.motion = func;
         return 0;
     }
-    
-    int setPassiveMotionFunc(void (*func)(int x, int y))
-    {
+
+    int setPassiveMotionFunc(void (*func)(int x, int y)) {
         mCallbacks.passiveMotion = func;
         return 0;
     }
-    
-    void setRenderer(Renderer v)
-    {
+
+    void setRenderer(Renderer v) {
         this->mRenderer = v;
     }
 
-    Renderer getRenderer() const
-    {
+    Renderer getRenderer() const {
         return mRenderer;
     }
 
-    void setOrientation(Orientation v)
-    {
+    void setOrientation(Orientation v) {
         this->mOrientation = v;
     }
 
-    Orientation getOrientation() const
-    {
+    Orientation getOrientation() const {
         return mOrientation;
     }
 
-    void setPos(int x, int y)
-    {
+    void setPos(int x, int y) {
         mWindowProperty.mX = x;
         mWindowProperty.mY = y;
     }
-    
-    void setSize(int w, int h)
-    {
+
+    void setSize(int w, int h) {
         mWindowProperty.mWidth  = w;
         mWindowProperty.mHeight = h;
     }
 
-    void setTitle(const char *title)
-    {
+    void setTitle(const char *title) {
         int i = 0;
-        for (i=0; title[i] != '\0'; ++i) {
+        for (i = 0; title[i] != '\0'; ++i) {
             mWindowProperty.mTitle[i] = title[i];
         }
         mWindowProperty.mTitle[i] = '\0';
     }
-    
-    void setDrawFnc(void (*draw)())
-    {
+
+    void setDrawFnc(void (*draw)()) {
         mCallbacks.draw = draw;
     }
 
-    void setReshapeFunc(void (*reshape)(int, int))
-    {
+    void setReshapeFunc(void (*reshape)(int, int)) {
         mCallbacks.reshape = reshape;
     }
-    
+
 private:
     RGlutInterface(RGlutInterface const &);
-    RGlutInterface & operator=(RGlutInterface const &);
+    RGlutInterface &operator=(RGlutInterface const &);
 
 protected:
-    struct GlutWindowProperty
-    {
+    struct GlutWindowProperty {
         GlutWindowProperty()
             : mX(0),
               mY(0),
               mWidth(0),
-              mHeight(0)
-        { 
+              mHeight(0) {
             mTitle[0] = '\0';
         }
 
@@ -196,18 +179,17 @@ protected:
         int mHeight;
     };
 
-    struct GlutCallbacks
-    {
+    struct GlutCallbacks {
         GlutCallbacks()
-         : draw(0),
-           reshape(0),
-           repos(0),
-           keyboard(0),
-           mouse(0),
-           motion(0),
-           passiveMotion(0)
+            : draw(0),
+              reshape(0),
+              repos(0),
+              keyboard(0),
+              mouse(0),
+              motion(0),
+              passiveMotion(0)
         {}
-        
+
         void (*draw)();
         void (*reshape)(int, int);
         void (*repos)(int, int);

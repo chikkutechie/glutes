@@ -21,14 +21,14 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 #include "rglutwindowstateanimation.h"
 
-RGlutWindowStateAnimation::RGlutWindowStateAnimation(RGlutWindow * window)
+RGlutWindowStateAnimation::RGlutWindowStateAnimation(RGlutWindow *window)
     : mWindow(window),
       mWindowState(Position),
       mWindowRectStart(0, 0, 0, 0),
@@ -52,28 +52,28 @@ void RGlutWindowStateAnimation::update(int time)
     float t = (float)time / (float)duration();
 
     switch (mWindowState) {
-        case Position: {
-            int x = interpolate(mWindowRectStart.x1(), mWindowRectEnd.x1(), t);
-            int y = interpolate(mWindowRectStart.y1(), mWindowRectEnd.y1(), t);
-            mWindow->setPos(x, y);
-            break;
-        }
+    case Position: {
+        int x = interpolate(mWindowRectStart.x1(), mWindowRectEnd.x1(), t);
+        int y = interpolate(mWindowRectStart.y1(), mWindowRectEnd.y1(), t);
+        mWindow->setPos(x, y);
+        break;
+    }
 
-        case Size: {
-            int w = interpolate(mWindowRectStart.width(), mWindowRectEnd.width(), t);
-            int h = interpolate(mWindowRectStart.height(), mWindowRectEnd.height(), t);
-            mWindow->setSize(w, h);
-            break;
-        }
+    case Size: {
+        int w = interpolate(mWindowRectStart.width(), mWindowRectEnd.width(), t);
+        int h = interpolate(mWindowRectStart.height(), mWindowRectEnd.height(), t);
+        mWindow->setSize(w, h);
+        break;
+    }
 
-        case PositionAndSize: {
-            int x = interpolate(mWindowRectStart.x1(), mWindowRectEnd.x1(), t);
-            int y = interpolate(mWindowRectStart.y1(), mWindowRectEnd.y1(), t);
-            int w = interpolate(mWindowRectStart.width(), mWindowRectEnd.width(), t);
-            int h = interpolate(mWindowRectStart.height(), mWindowRectEnd.height(), t);
-            mWindow->setGeometry(x, y, w, h);
-            break;
-        }
+    case PositionAndSize: {
+        int x = interpolate(mWindowRectStart.x1(), mWindowRectEnd.x1(), t);
+        int y = interpolate(mWindowRectStart.y1(), mWindowRectEnd.y1(), t);
+        int w = interpolate(mWindowRectStart.width(), mWindowRectEnd.width(), t);
+        int h = interpolate(mWindowRectStart.height(), mWindowRectEnd.height(), t);
+        mWindow->setGeometry(x, y, w, h);
+        break;
+    }
     }
 }
 

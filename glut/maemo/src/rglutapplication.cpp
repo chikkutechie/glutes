@@ -21,7 +21,7 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
@@ -39,18 +39,18 @@ namespace
 {
 RGlutApplication nullApp;
 }
-RGlutApplication * RGlutApplication::mActiveApplication = &nullApp;
+RGlutApplication *RGlutApplication::mActiveApplication = &nullApp;
 
-RGlutApplication::RGlutApplication(RGlutWindow * window)
- : mMainWindow(window),
-   mFinished(false),
-   mLAF(0)
+RGlutApplication::RGlutApplication(RGlutWindow *window)
+    : mMainWindow(window),
+      mFinished(false),
+      mLAF(0)
 {
     mActiveApplication = this;
-    
-    Display * display = RGlutDisplay::instance()->display();
+
+    Display *display = RGlutDisplay::instance()->display();
     if (display) {
-        mScreenNumber = XDefaultScreen(display);    
+        mScreenNumber = XDefaultScreen(display);
         mScreenWidth = XDisplayWidth(display, mScreenNumber);
         mScreenHeight = XDisplayHeight(display, mScreenNumber);
     }
@@ -66,7 +66,7 @@ RGlutApplication::~RGlutApplication()
     delete mMainWindow;
 }
 
-RGlutLAF * RGlutApplication::setLAF(std::string const & name)
+RGlutLAF *RGlutApplication::setLAF(std::string const &name)
 {
     mLAF = RGlutLAFManager::getLAF(name);
     if (!mLAF) {
@@ -80,8 +80,8 @@ void RGlutApplication::exec()
 {
     mActiveApplication = this;
 
-    Display * display = mMainWindow->display();
-    
+    Display *display = mMainWindow->display();
+
     while (!mFinished) {
         while (XPending(display)) {
             XEvent  xev;
@@ -90,21 +90,21 @@ void RGlutApplication::exec()
             GLUTES_DEBUGP2("Event Recieved %d", xev.type);
 
             switch (xev.type) {
-                case KeyRelease:
-                case KeyPress:
-                case ButtonPress:
-                case ButtonRelease:
-                case MotionNotify: {
+            case KeyRelease:
+            case KeyPress:
+            case ButtonPress:
+            case ButtonRelease:
+            case MotionNotify: {
                 case ConfigureNotify:
                     mMainWindow->handleEvent(xev);
                     break;
                 }
-                case Expose: {
-                    if (xev.xexpose.count == 0) {
-                        mMainWindow->draw();
-                    }
-                    break;
+            case Expose: {
+                if (xev.xexpose.count == 0) {
+                    mMainWindow->draw();
                 }
+                break;
+            }
             }
         }
 
@@ -118,7 +118,7 @@ void RGlutApplication::exec()
     }
 }
 
-void RGlutApplication::registerTimer(RGlutTimer * timer)
+void RGlutApplication::registerTimer(RGlutTimer *timer)
 {
     TimerEntry entry;
     entry.mTime.start();
@@ -126,7 +126,7 @@ void RGlutApplication::registerTimer(RGlutTimer * timer)
     mTimers.push_back(entry);
 }
 
-void RGlutApplication::unregisterTimer(RGlutTimer * timer)
+void RGlutApplication::unregisterTimer(RGlutTimer *timer)
 {
     for (TimerSetIter iter = mTimers.begin(); iter != mTimers.end(); ++iter) {
         if (iter->mTimer == timer) {
@@ -145,15 +145,15 @@ void RGlutApplication::checkTimers()
     std::vector<TimerEntry> expiredTimers;
 
     for (unsigned int i = 0; i < mTimers.size();) {
-        TimerEntry & te = mTimers[i];
+        TimerEntry &te = mTimers[i];
         if (te.mTimer->interval() < te.mTime.elapsed()) {
             expiredTimers.push_back(te);
             mTimers.erase(mTimers.begin() + i);
         } else {
             ++i;
         }
-    }    
-    
+    }
+
     int expiredTimersCount = expiredTimers.size();
     for (int i = 0; i < expiredTimersCount; ++i) {
         expiredTimers[i].mTimer->run();

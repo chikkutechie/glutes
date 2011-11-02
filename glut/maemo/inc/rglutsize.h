@@ -21,7 +21,7 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
@@ -38,37 +38,32 @@ class RGlutSize
 {
 public:
     RGlutSize()
-     : mWidth(0),
-       mHeight(0)
+        : mWidth(0),
+          mHeight(0)
     {}
 
-    RGlutSize(const T & width, const T & height)
-     : mWidth(width),
-       mHeight(height)
+    RGlutSize(const T &width, const T &height)
+        : mWidth(width),
+          mHeight(height)
     {}
-    
-    void setWidth(const T & width)
-    {
+
+    void setWidth(const T &width) {
         mWidth = width;
     }
 
-    T width() const
-    {
+    T width() const {
         return mWidth;
     }
 
-    void setHeight(const T & height)
-    {
+    void setHeight(const T &height) {
         mHeight = height;
     }
 
-    T height() const
-    {
+    T height() const {
         return mHeight;
     }
 
-    bool isNull()
-    {
+    bool isNull() {
         return mWidth == 0 || mHeight = 0;
     }
 

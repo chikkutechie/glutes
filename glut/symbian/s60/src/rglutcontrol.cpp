@@ -21,21 +21,21 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
- 
+
 #include "rglutcontrol.h"
 #include "rgluteventhandler.h"
 
 RGlutControl::RGlutControl()
-  : CCoeControl(),
-    mEH(0)
+    : CCoeControl(),
+      mEH(0)
 {
 }
 
-void RGlutControl::ConstructL(const TRect& aRect)
+void RGlutControl::ConstructL(const TRect &aRect)
 {
     CreateWindowL();
     SetRect(aRect);
@@ -46,13 +46,13 @@ RGlutControl::~RGlutControl()
 {
 }
 
-void RGlutControl::setEventHandler(RGlutEventHandler * eh)
+void RGlutControl::setEventHandler(RGlutEventHandler *eh)
 {
     this->mEH = eh;
 }
 
 void RGlutControl::Draw(const TRect &) const
-{        
+{
     if (mEH) {
         mEH->draw();
     }
@@ -68,31 +68,31 @@ void RGlutControl::PositionChanged()
     CCoeControl::PositionChanged();
 }
 
-void RGlutControl::HandlePointerEventL(const TPointerEvent & aPointerEvent)
+void RGlutControl::HandlePointerEventL(const TPointerEvent &aPointerEvent)
 {
     if (Rect().Contains(aPointerEvent.iPosition)) {
         if (mEH) {
             mEH->mouse(aPointerEvent.iType,
-                aPointerEvent.iModifiers,
-                aPointerEvent.iPosition.iX, aPointerEvent.iPosition.iY);
+                       aPointerEvent.iModifiers,
+                       aPointerEvent.iPosition.iX, aPointerEvent.iPosition.iY);
         }
         CCoeControl::HandlePointerEventL(aPointerEvent);
     }
-    
+
 }
 
-TKeyResponse RGlutControl::OfferKeyEventL(const TKeyEvent& aKeyEvent, TEventCode aType)
+TKeyResponse RGlutControl::OfferKeyEventL(const TKeyEvent &aKeyEvent, TEventCode aType)
 {
     if (mEH) {
         if (aType == EEventKeyUp) {
             mEH->keyboard(aKeyEvent.iScanCode, aKeyEvent.iModifiers, 0, 0);
         }
     }
-    
+
     return EKeyWasNotConsumed;
 }
 
-RWindow& RGlutControl::nativeWindow()
+RWindow &RGlutControl::nativeWindow()
 {
     return Window();
 }

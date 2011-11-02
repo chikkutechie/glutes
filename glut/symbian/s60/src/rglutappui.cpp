@@ -21,11 +21,11 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
- 
+
 #include "rglutappui.h"
 #include "rgluteventhandler.h"
 #include "rglutinterface.h"
@@ -39,7 +39,7 @@
 #include <avkon.rsg>
 
 RGlutAppUi::RGlutAppUi()
-  : mEH(0)
+    : mEH(0)
 {
 }
 
@@ -50,43 +50,43 @@ RGlutAppUi::~RGlutAppUi()
 void RGlutAppUi::ConstructL()
 {
     iEikonEnv->DisableExitChecks(ETrue);
-    
+
     TInt flags = CEikAppUi::ENoScreenFurniture |
                  CEikAppUi::ENonStandardResourceFile |
                  CAknAppUi::EAknEnableSkin;
-    
+
     switch (RGlutInterface::getInterface()->getOrientation()) {
-        case RGlutInterface::Portrait:
-            flags |= EAppOrientationPortrait;
-            break;
-        case RGlutInterface::Landscape:
-            flags |= EAppOrientationLandscape;
-            break;
-        case RGlutInterface::Automatic:
-            flags |= EAppOrientationAutomatic;
-            break;
+    case RGlutInterface::Portrait:
+        flags |= EAppOrientationPortrait;
+        break;
+    case RGlutInterface::Landscape:
+        flags |= EAppOrientationLandscape;
+        break;
+    case RGlutInterface::Automatic:
+        flags |= EAppOrientationAutomatic;
+        break;
     }
-    
+
     BaseConstructL(flags);
-    
+
     iEikonEnv->AppUiFactory()->CreateResourceIndependentFurnitureL(this);
     CEikButtonGroupContainer *cba = CEikButtonGroupContainer::NewL(
-                                      CEikButtonGroupContainer::ECba,
-                                      CEikButtonGroupContainer::EHorizontal,
-                                      this,
-                                      R_AVKON_SOFTKEYS_OPTIONS_EXIT);
+                                        CEikButtonGroupContainer::ECba,
+                                        CEikButtonGroupContainer::EHorizontal,
+                                        this,
+                                        R_AVKON_SOFTKEYS_OPTIONS_EXIT);
     CEikonEnv::Static()->AppUiFactory()->SwapButtonGroup(cba);
 
-    CEikMenuBar * menuBar = new(ELeave) CEikMenuBar;
+    CEikMenuBar *menuBar = new(ELeave) CEikMenuBar;
     menuBar->ConstructL(this, 0, R_AVKON_MENUPANE_EMPTY);
     menuBar->SetMenuType(CEikMenuBar::EMenuOptions);
     AddToStackL(menuBar, ECoeStackPriorityMenu, ECoeStackFlagRefusesFocus);
     CEikonEnv::Static()->AppUiFactory()->SwapMenuBar(menuBar);
     cba->ActivateL();
-    
+
 }
 
-void RGlutAppUi::setEventHandler(RGlutEventHandler * eh)
+void RGlutAppUi::setEventHandler(RGlutEventHandler *eh)
 {
     this->mEH = eh;
 }
@@ -108,11 +108,11 @@ void RGlutAppUi::Exit()
 void RGlutAppUi::HandleCommandL(TInt command)
 {
     switch (command) {
-        case EEikCmdExit:
-        case EAknSoftkeyExit: {
-            Exit();
-        }
-        break;
+    case EEikCmdExit:
+    case EAknSoftkeyExit: {
+        Exit();
+    }
+    break;
     }
 }
 

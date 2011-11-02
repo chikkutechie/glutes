@@ -21,7 +21,7 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
@@ -34,7 +34,7 @@
 
 Pixmap RGlutLinearGradient::createPixmap(int width, int height)
 {
-    Display * dpy = RGlutDisplay::instance()->display();
+    Display *dpy = RGlutDisplay::instance()->display();
 
     GC gc = XDefaultGC(dpy, XDefaultScreen(dpy));
 
@@ -42,14 +42,14 @@ Pixmap RGlutLinearGradient::createPixmap(int width, int height)
                                 width, height,
                                 XDefaultDepth(dpy, XDefaultScreen(dpy)));
 
-    color * clrs = getColors(height);
+    color *clrs = getColors(height);
 
-    for (int y=0; y<height; ++y) {
+    for (int y = 0; y < height; ++y) {
         RGlutColor c(clrs[y].mR, clrs[y].mG, clrs[y].mB);
-	
+
         XSetForeground(dpy, gc, c.pixel());
 
-        for (int x=0; x<width; ++x) {
+        for (int x = 0; x < width; ++x) {
             XDrawPoint(dpy, pmap, gc, x, y);
 
         }
@@ -60,15 +60,15 @@ Pixmap RGlutLinearGradient::createPixmap(int width, int height)
 
 // this function returns the vertical linear gradient
 // the first coloumn, to be precise
-RGlutLinearGradient::color * RGlutLinearGradient::getColors(int h)
+RGlutLinearGradient::color *RGlutLinearGradient::getColors(int h)
 {
-    color * c = new color[h];
+    color *c = new color[h];
 
     StopsIter iter2 = mStops.begin();
     StopsIter iter1 = iter2++;
 
-    for (int i=0; i<h; ++i) {
-        float co = float(i)/float(h);
+    for (int i = 0; i < h; ++i) {
+        float co = float(i) / float(h);
         if (co > iter2->first) {
             ++iter1;
             ++iter2;

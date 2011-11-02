@@ -21,7 +21,7 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
@@ -56,9 +56,9 @@ int height;
 void init()
 {
     path = vgCreatePath(VG_PATH_FORMAT_STANDARD,
-                           VG_PATH_DATATYPE_F, 1, 0, 4, 6,
-                           VG_PATH_CAPABILITY_APPEND_TO);
-        
+                        VG_PATH_DATATYPE_F, 1, 0, 4, 6,
+                        VG_PATH_CAPABILITY_APPEND_TO);
+
     const VGubyte pathSegments[] = {
         VG_MOVE_TO_ABS,
         VG_LINE_TO_ABS,
@@ -67,41 +67,41 @@ void init()
     };
 
     const VGfloat pathCoords[] = {
-         0.0f, 1.0f,
+        0.0f, 1.0f,
         -1.0f, 0.0f,
-         1.0f, 0.0f
+        1.0f, 0.0f
     };
 
     vgAppendPathData(path, 4,
-                        pathSegments, pathCoords);
+                     pathSegments, pathCoords);
 
     vgSeti(VG_STROKE_CAP_STYLE, VG_CAP_ROUND);
     vgSeti(VG_STROKE_JOIN_STYLE, VG_JOIN_MITER);
-    
+
     paintFill = vgCreatePaint();
     paintStroke = vgCreatePaint();
-    
+
     vgSetPaint(paintFill, VG_FILL_PATH);
     vgSetParameteri(paintFill, VG_PAINT_TYPE, VG_PAINT_TYPE_LINEAR_GRADIENT);
-    
-    const VGfloat gradientParam[] = {-1.0, 0.0f, 1.0f, 1.0f};
+
+    const VGfloat gradientParam[] = { -1.0, 0.0f, 1.0f, 1.0f};
     vgSetParameterfv(paintFill, VG_PAINT_LINEAR_GRADIENT, 4, gradientParam);
-    
+
     vgSetParameteri(paintFill, VG_PAINT_COLOR_RAMP_SPREAD_MODE,
-                              VG_COLOR_RAMP_SPREAD_REPEAT);
+                    VG_COLOR_RAMP_SPREAD_REPEAT);
 
     const VGfloat fillStops[] = {
-        0.0f/6.0f, 1.0f, 0.0f, 0.0f, 1.0f,
-        1.0f/6.0f, 0.0f, 1.0f, 0.0f, 1.0f,
-        2.0f/6.0f, 1.0f, 0.0f, 0.0f, 1.0f,
-        3.0f/6.0f, 0.0f, 1.0f, 0.0f, 1.0f,
-        4.0f/6.0f, 1.0f, 0.0f, 0.0f, 1.0f,
-        5.0f/6.0f, 0.0f, 1.0f, 0.0f, 1.0f,
-        6.0f/6.0f, 1.0f, 0.0f, 0.0f, 1.0f
+        0.0f / 6.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+        1.0f / 6.0f, 0.0f, 1.0f, 0.0f, 1.0f,
+        2.0f / 6.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+        3.0f / 6.0f, 0.0f, 1.0f, 0.0f, 1.0f,
+        4.0f / 6.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+        5.0f / 6.0f, 0.0f, 1.0f, 0.0f, 1.0f,
+        6.0f / 6.0f, 1.0f, 0.0f, 0.0f, 1.0f
     };
-    
-    vgSetParameterfv(paintFill, VG_PAINT_COLOR_RAMP_STOPS,   
-                                      5*7, fillStops);
+
+    vgSetParameterfv(paintFill, VG_PAINT_COLOR_RAMP_STOPS,
+                     5 * 7, fillStops);
 
     vgSetPaint(paintStroke, VG_STROKE_PATH);
     vgSetf(VG_STROKE_LINE_WIDTH, 1.0f);
@@ -109,7 +109,7 @@ void init()
     vgSeti(VG_STROKE_JOIN_STYLE, VG_JOIN_ROUND);
     vgSetf(VG_STROKE_MITER_LIMIT, 3.0f);
     vgSetParameteri(paintStroke, VG_PAINT_TYPE, VG_PAINT_TYPE_COLOR);
-    
+
     VGfloat  strokeColor[] = { 0.5f, 1.0f, 0.5f, 0.7f };
     vgSetParameterfv(paintStroke, VG_PAINT_COLOR, 4, strokeColor);
 
@@ -120,25 +120,25 @@ void init()
 void display()
 {
     vgClear(0, 0, width, height);
-    
+
     VGfloat tx = (VGfloat)width  / 2.0f;
     VGfloat ty = (VGfloat)height / 2.0f;
-    
+
     VGfloat sx = (VGfloat)width  / 4.0f;
     VGfloat sy = (VGfloat)height / 4.0f;
-    
+
     vgTranslate(tx, ty);
     vgRotate(rotation);
     vgScale(sx, sy);
     vgScale(gsx, gsy);
-    
-    vgDrawPath(path, VG_FILL_PATH|VG_STROKE_PATH);
-    
-    vgScale(1.0f/gsx, 1.0f/gsy);
-    vgScale(1.0f/sx, 1.0f/sy);
+
+    vgDrawPath(path, VG_FILL_PATH | VG_STROKE_PATH);
+
+    vgScale(1.0f / gsx, 1.0f / gsy);
+    vgScale(1.0f / sx, 1.0f / sy);
     vgRotate(-rotation);
     vgTranslate(-tx, -ty);
-    
+
     glutSwapBuffers();
 }
 
@@ -154,40 +154,40 @@ void reshape(int w, int h)
 void mouseFunction(int button, int state, int, int)
 {
     switch (button) {
-        case GLUT_LEFT_BUTTON: {
-            if (state == GLUT_DOWN) {
-                float scaleUnit = 1.0f;
-                
-                if (scaleDir < 0) {
-                    if (scaleCount <= 0) {
-                        scaleCount = 0;
-                        scaleDir = scaleDir * -1;
-                    } else {                    
-                        scaleUnit = 1.0f / 0.8f;
-                        scaleCount--;
-                    }
+    case GLUT_LEFT_BUTTON: {
+        if (state == GLUT_DOWN) {
+            float scaleUnit = 1.0f;
+
+            if (scaleDir < 0) {
+                if (scaleCount <= 0) {
+                    scaleCount = 0;
+                    scaleDir = scaleDir * -1;
                 } else {
-                    if (scaleCount >= 10) {
-                        scaleCount = 10;
-                        scaleDir = scaleDir * -1;
-                    } else {                    
-                        scaleUnit = 0.8f;
-                        scaleCount++;
-                    }
+                    scaleUnit = 1.0f / 0.8f;
+                    scaleCount--;
                 }
-    
-                gsx *= scaleUnit;
-                gsy *= scaleUnit;
+            } else {
+                if (scaleCount >= 10) {
+                    scaleCount = 10;
+                    scaleDir = scaleDir * -1;
+                } else {
+                    scaleUnit = 0.8f;
+                    scaleCount++;
+                }
             }
-            break;
+
+            gsx *= scaleUnit;
+            gsy *= scaleUnit;
         }
-        case GLUT_MIDDLE_BUTTON: {
-            break;
-        }
-        case GLUT_RIGHT_BUTTON: {
-            break;
-        }
-            
+        break;
+    }
+    case GLUT_MIDDLE_BUTTON: {
+        break;
+    }
+    case GLUT_RIGHT_BUTTON: {
+        break;
+    }
+
     }
 }
 void timeout(int)
@@ -195,9 +195,9 @@ void timeout(int)
     if (rotation >= 360.0f) {
         rotation = 0.0f;
     }
-    
+
     rotation += 5.0f;
-    
+
     glutPostRedisplay();
     glutTimerFunc(20, timeout, 0);
 }
@@ -205,14 +205,14 @@ void timeout(int)
 #if defined(__SYMBIAN32__) || defined(SYMBIAN)
 GLDEF_C TInt E32Main()
 {
-    char * argv[] = {"triangle", "-renderer", "vg"};
+    char *argv[] = {"triangle", "-renderer", "vg"};
     int    argc = sizeof(argv) / sizeof(argv[0]);
     glutInit(&argc, argv);
 #else
-int main(int argc, char ** argv)
+int main(int argc, char **argv)
 {
 #ifdef GLUT_VG
-    char * v[] = {"triangle", "-renderer", "vg"};
+    char *v[] = {"triangle", "-renderer", "vg"};
     int    c = sizeof(v) / sizeof(v[0]);
     glutInit(&c, v);
 #else
@@ -225,9 +225,9 @@ int main(int argc, char ** argv)
     glutReshapeFunc(reshape);
     glutTimerFunc(20, timeout, 0);
     glutMouseFunc(mouseFunction);
-    
+
     init();
-    
+
     glutMainLoop();
 
     return 0;

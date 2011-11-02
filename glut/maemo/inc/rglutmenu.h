@@ -21,7 +21,7 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
@@ -44,21 +44,20 @@ class RGlutGC;
 class RGlutMenu: public RGlutWindow
 {
 public:
-    RGlutMenu(void (*callback)(int), RGlutWindow * parent = 0);
+    RGlutMenu(void (*callback)(int), RGlutWindow *parent = 0);
     ~RGlutMenu();
 
     void addEntry(std::string name, int id);
 
-    void removeEntry(int id)
-    {
+    void removeEntry(int id) {
     }
 
     RGlutPointI preferedPos(int x, int y);
 
     void hide();
     void draw();
-    
-    bool handleEvent(XEvent & event);
+
+    bool handleEvent(XEvent &event);
 
 private:
     class MenuEntry
@@ -81,7 +80,7 @@ private:
 
 private:
     RGlutMenu(RGlutMenu const &);
-    RGlutMenu & operator=(RGlutMenu const &);
+    RGlutMenu &operator=(RGlutMenu const &);
 
     void create();
     void destroy();
@@ -90,7 +89,7 @@ private:
     void drawItemBackgroundNormal(int x, int y, int w, int h);
     void createPixmaps(int w, int h);
     void updateSize();
-    MenuEntry * getMenuEntry(int x, int y);
+    MenuEntry *getMenuEntry(int x, int y);
 
 private:
     std::vector<MenuEntry> mMenuEntries;
@@ -101,7 +100,7 @@ private:
     Pixmap mItemPressedPixmap;
     bool mPixmapCreated;
     RGlutColor mTextColor;
-    RGlutGC * mGC;
+    RGlutGC *mGC;
     int mMenuGap;
     int mMinMenuWidth;
     int mMinMenuItemHeight;

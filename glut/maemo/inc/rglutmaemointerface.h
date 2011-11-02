@@ -21,7 +21,7 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
@@ -69,7 +69,7 @@ public:
     void destroyWindow(int win);
     int getWindow();
     void setWindow(int win);
-    void setWindowTitle(const char * title);
+    void setWindowTitle(const char *title);
     void showWindow();
     void fullScreen();
     void hideWindow();
@@ -77,64 +77,64 @@ public:
     void reshapeWindow(int width, int height);
     void popWindow();
     void pushWindow();
-    
+
     void timerFunc(unsigned int millis, void (*func)(int), int value);
-    
+
     void exec();
     void redraw(int win);
     void flush();
-    
-    int createMenu(void (*)(int menu));
+
+    int createMenu(void ( *)(int menu));
     void destroyMenu(int menu);
     int getMenu();
     void setMenu(int menu);
-    void addMenuEntry(const char* label, int value);
+    void addMenuEntry(const char *label, int value);
     void removeMenuItem(int item);
     void attachMenu(int button);
     void detachMenu(int button);
-    
+
     int getModifiers();
     int getValue(unsigned int state);
 
     void draw();
     void reshape(int w, int h);
     void rerect(int x, int y, int w, int h);
-    void repos(int x, int y); 
+    void repos(int x, int y);
     void keyboard(unsigned char key, unsigned int modifier, int x, int y);
     void mouse(int button, int modifier, int x, int y, bool pressed = true);
     void motion(int button, int modifier, int x, int y);
-    void removeTimer(RGlutTimer * timer);
+    void removeTimer(RGlutTimer *timer);
 
 private:
     class ControlEntry
     {
     public:
         ControlEntry()
-         : mId(0),
-           mSurface(0),
-           mControl(0)
+            : mId(0),
+              mSurface(0),
+              mControl(0)
         {}
-        
+
         int mId;
         unsigned int  mSurface;
-        RGlutWindow * mControl;
+        RGlutWindow *mControl;
     };
 
 private:
     RGlutMaemoInterface(RGlutMaemoInterface const &);
-    RGlutMaemoInterface & operator=(RGlutMaemoInterface const &);
+    RGlutMaemoInterface &operator=(RGlutMaemoInterface const &);
 
 private:
     int addControl(ControlEntry entry);
     ControlEntry removeControl(int id);
     void removeAllControl();
-    ControlEntry * getControlEntry(int id);
+    ControlEntry *getControlEntry(int id);
     void checkTimers();
     int getModifiers(int state);
-    void parseArguments(int argc, char ** argv);
+    void parseArguments(int argc, char **argv);
     void createBinder();
     void removeAllTimers();
-    
+
 private:
     typedef std::vector<ControlEntry> ControlList;
     typedef ControlList::iterator ControlListIter;
@@ -161,9 +161,9 @@ private:
     const std::string KParamOrientationAutomatic;
 
 private:
-    REGLGlutGLBinder * mBinder;
+    REGLGlutGLBinder *mBinder;
     unsigned int mDisplayMode;
-    
+
     int mCurrentControl;
     bool mFullScreen;
     int mModifier;
@@ -171,9 +171,9 @@ private:
     ControlList mControllist;
     ControlStack mControlStack;
     bool mFinished;
-    
-    RGlutMaemoWindow * mMainWindow;
-    RGlutApplication * mApplication;
+
+    RGlutMaemoWindow *mMainWindow;
+    RGlutApplication *mApplication;
 
     TimerEntrySet mTimers;
     std::vector<RGlutMenu *> mMenus;

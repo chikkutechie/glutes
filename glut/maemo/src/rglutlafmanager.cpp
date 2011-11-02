@@ -21,7 +21,7 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
@@ -43,12 +43,12 @@ RGlutLAFManager::~RGlutLAFManager()
     }
 }
 
-void RGlutLAFManager::doRegisterLAF(std::string const & name, RGlutLAF * laf)
+void RGlutLAFManager::doRegisterLAF(std::string const &name, RGlutLAF *laf)
 {
     mLAFs.insert(std::pair<std::string, RGlutLAF *>(name, laf));
 }
 
-void RGlutLAFManager::doUnregisterLAF(std::string const & name)
+void RGlutLAFManager::doUnregisterLAF(std::string const &name)
 {
     LAFsIter iter = mLAFs.find(name);
     if (iter != mLAFs.end()) {
@@ -57,19 +57,19 @@ void RGlutLAFManager::doUnregisterLAF(std::string const & name)
     }
 }
 
-void RGlutLAFManager::registerLAF(std::string const & name, RGlutLAF * laf)
+void RGlutLAFManager::registerLAF(std::string const &name, RGlutLAF *laf)
 {
     instance()->doRegisterLAF(name, laf);
 }
 
-void RGlutLAFManager::unregisterLAF(std::string const & name)
+void RGlutLAFManager::unregisterLAF(std::string const &name)
 {
     instance()->doUnregisterLAF(name);
 }
 
-RGlutLAF * RGlutLAFManager::getLAF(std::string name)
+RGlutLAF *RGlutLAFManager::getLAF(std::string name)
 {
-    RGlutLAF * laf = 0;
+    RGlutLAF *laf = 0;
     LAFsIter iter = instance()->mLAFs.find(name);
     if (iter != instance()->mLAFs.end()) {
         laf = iter->second;
@@ -78,7 +78,7 @@ RGlutLAF * RGlutLAFManager::getLAF(std::string name)
     return laf;
 }
 
-RGlutLAFManager * RGlutLAFManager::instance()
+RGlutLAFManager *RGlutLAFManager::instance()
 {
     static RGlutLAFManager manager;
     return &manager;

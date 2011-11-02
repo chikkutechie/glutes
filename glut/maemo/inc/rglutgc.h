@@ -21,7 +21,7 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
@@ -43,34 +43,33 @@ class RGlutWindow;
 class RGlutGC
 {
 public:
-    RGlutGC(RGlutWindow * window);
+    RGlutGC(RGlutWindow *window);
     ~RGlutGC();
 
-    void setForegroundColor(RGlutColor const & color);
-    void setBackgroundColor(RGlutColor const & color);
-    
+    void setForegroundColor(RGlutColor const &color);
+    void setBackgroundColor(RGlutColor const &color);
+
     void fillRectangle(int x, int y, int w, int h);
 
-    void setFont(RGlutFont const & font);
-    RGlutFont font() const
-    {
+    void setFont(RGlutFont const &font);
+    RGlutFont font() const {
         return mFont;
     }
 
-    int textWidth(std::string const & str);
-    void drawString(int x, int y, std::string const & str);
+    int textWidth(std::string const &str);
+    void drawString(int x, int y, std::string const &str);
 
     void drawPixmap(Pixmap pmap, int sx, int sy, int width, int height, int dx, int dy);
 
 private:
     RGlutGC(RGlutGC const &);
-    RGlutGC & operator=(RGlutGC const &);
+    RGlutGC &operator=(RGlutGC const &);
 
 private:
     GC mGC;
     RGlutFont mFont;
     Window mWindow;
-    Display * mDisplay;
+    Display *mDisplay;
 };
 
 #endif

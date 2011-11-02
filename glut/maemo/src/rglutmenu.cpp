@@ -21,7 +21,7 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
@@ -34,13 +34,13 @@
 #include "rglutlaf.h"
 #include "rglutapplication.h"
 
-RGlutMenu::RGlutMenu(void (*callback)(int), RGlutWindow * parent)
- : RGlutWindow(parent),
-   mCallback(callback),
-   mPressedId(-1),
-   mPixmapCreated(false)
+RGlutMenu::RGlutMenu(void (*callback)(int), RGlutWindow *parent)
+    : RGlutWindow(parent),
+      mCallback(callback),
+      mPressedId(-1),
+      mPixmapCreated(false)
 {
-    RGlutLAF * laf = RGlutApplication::activeApplication()->LAF();
+    RGlutLAF *laf = RGlutApplication::activeApplication()->LAF();
     mColor = laf->getMenuBackgroundColor();
     mTextColor = laf->getMenuTextColor();
     mMenuGap = laf->menuItemGap();
@@ -85,8 +85,8 @@ void RGlutMenu::createPixmaps(int w, int h)
         return;
     }
 
-    RGlutLAF * laf = RGlutApplication::activeApplication()->LAF();
-    
+    RGlutLAF *laf = RGlutApplication::activeApplication()->LAF();
+
     mItemNormalPixmap = laf->createMenuItemBackgroundNormal(w, h);
     mItemPressedPixmap = laf->createMenuItemBackgroundPressed(w, h);
 
@@ -123,12 +123,12 @@ void RGlutMenu::drawBackground()
 
 void RGlutMenu::drawItemBackgroundNormal(int x, int y, int w, int h)
 {
-    mGC->drawPixmap(mItemNormalPixmap, 0, 0, w-2*mMenuGap, h-2*mMenuGap, x+mMenuGap, y+mMenuGap);
+    mGC->drawPixmap(mItemNormalPixmap, 0, 0, w - 2 * mMenuGap, h - 2 * mMenuGap, x + mMenuGap, y + mMenuGap);
 }
 
 void RGlutMenu::drawItemBackgroundPressed(int x, int y, int w, int h)
 {
-    mGC->drawPixmap(mItemPressedPixmap, 0, 0, w-2*mMenuGap, h-2*mMenuGap, x+mMenuGap, y+mMenuGap);
+    mGC->drawPixmap(mItemPressedPixmap, 0, 0, w - 2 * mMenuGap, h - 2 * mMenuGap, x + mMenuGap, y + mMenuGap);
 }
 
 RGlutPointI RGlutMenu::preferedPos(int x, int y)
@@ -136,15 +136,15 @@ RGlutPointI RGlutMenu::preferedPos(int x, int y)
     if (mParent) {
         // change the origin of the menu, if not properly fit into the current window
         GLUTES_DEBUGP3("Original (x, y) = (%d, %d)", mX, mY);
-        
+
         if (!mWindow) {
             updateSize();
         }
 
-        if (x+mWidth > mParent->size().width()) {
+        if (x + mWidth > mParent->size().width()) {
             x = x - mWidth;
         }
-        if (y+mHeight > mParent->size().height()) {
+        if (y + mHeight > mParent->size().height()) {
             y = y - mHeight;
         }
         GLUTES_DEBUGP3("Modified (x, y) = (%d, %d)", x, y);
@@ -155,8 +155,8 @@ RGlutPointI RGlutMenu::preferedPos(int x, int y)
 
 void RGlutMenu::hide()
 {
-   RGlutWindow::hide();
-   mPressedId = -1;
+    RGlutWindow::hide();
+    mPressedId = -1;
 }
 
 void RGlutMenu::draw()
@@ -170,15 +170,15 @@ void RGlutMenu::draw()
     int y = 0;
     int w = mWidth;
     int h = itemHeight;
-    int hw = h/2;
+    int hw = h / 2;
 
     create();
-    createPixmaps(w-2*mMenuGap, h-2*mMenuGap);
+    createPixmaps(w - 2 * mMenuGap, h - 2 * mMenuGap);
     drawBackground();
 
-    for (unsigned int i=0; i<mMenuEntries.size(); ++i) {
-        MenuEntry & me = mMenuEntries[i];
- 
+    for (unsigned int i = 0; i < mMenuEntries.size(); ++i) {
+        MenuEntry &me = mMenuEntries[i];
+
         // set the background according to the pressed state
         if (mPressedId == me.mId) {
             drawItemBackgroundPressed(x, y, w, h);
@@ -188,14 +188,14 @@ void RGlutMenu::draw()
 
         // draw the text aligned to center
         int tx = (w - mGC->textWidth(me.mName)) / 2;
-        int ty = itemHeight-hw;
+        int ty = itemHeight - hw;
 
         if (tx < 0) {
             tx = 0;
         }
 
         mGC->setForegroundColor(mTextColor);
-        mGC->drawString(tx, ty, me.mName); 
+        mGC->drawString(tx, ty, me.mName);
 
         me.mX = x;
         me.mY = y;
@@ -206,22 +206,22 @@ void RGlutMenu::draw()
     }
 }
 
-RGlutMenu::MenuEntry * RGlutMenu::getMenuEntry(int x, int y)
+RGlutMenu::MenuEntry *RGlutMenu::getMenuEntry(int x, int y)
 {
-    MenuEntry * mentry = 0;
+    MenuEntry *mentry = 0;
 
-    for (unsigned int i=0; i<mMenuEntries.size(); ++i) {
-        MenuEntry & me = mMenuEntries[i];
+    for (unsigned int i = 0; i < mMenuEntries.size(); ++i) {
+        MenuEntry &me = mMenuEntries[i];
         bool outOfMenu = x < me.mX || x > me.mX + me.mWidth ||
                          y < me.mY || y > me.mY + me.mHeight;
         if (!outOfMenu) {
-                mentry = &me;
+            mentry = &me;
         }
     }
     return mentry;
 }
 
-bool RGlutMenu::handleEvent(XEvent & xev)
+bool RGlutMenu::handleEvent(XEvent &xev)
 {
     bool handled = false;
 
@@ -230,62 +230,62 @@ bool RGlutMenu::handleEvent(XEvent & xev)
     }
 
     switch (xev.type) {
-        case ButtonPress:
-        case ButtonRelease: {
-            handled = true;
-            bool pressed = false;
-            bool toRedraw = false;
-            if (xev.type == ButtonPress) {
-                pressed = true;
-            }
-            int x = xev.xbutton.x;
-            int y = xev.xbutton.y;
+    case ButtonPress:
+    case ButtonRelease: {
+        handled = true;
+        bool pressed = false;
+        bool toRedraw = false;
+        if (xev.type == ButtonPress) {
+            pressed = true;
+        }
+        int x = xev.xbutton.x;
+        int y = xev.xbutton.y;
 
-            MenuEntry * mentry = getMenuEntry(x, y);
-            if (mentry) {
-                MenuEntry & me = *mentry;
-                if (pressed) {
-                    GLUTES_DEBUGP2("Pressed %s", me.mName.c_str());
-                    mPressedId = me.mId;
+        MenuEntry *mentry = getMenuEntry(x, y);
+        if (mentry) {
+            MenuEntry &me = *mentry;
+            if (pressed) {
+                GLUTES_DEBUGP2("Pressed %s", me.mName.c_str());
+                mPressedId = me.mId;
+                toRedraw = true;
+            } else {
+                if (mPressedId == me.mId) {
+                    hide();
+                    mCallback(me.mId);
+                } else {
+                    // pressed and released item is not the same
+                    // go back to the begining
                     toRedraw = true;
-                } else {
-                    if (mPressedId == me.mId) {
-                        hide();
-                        mCallback(me.mId);
-                    } else {
-                        // pressed and released item is not the same
-                        // go back to the begining
-                        toRedraw = true;
-                        mPressedId = -1;
-                    }
-                }
-            }
-            if (toRedraw) {
-                redraw();
-            }
-            break;
-        }
-        case MotionNotify: {
-            handled = true;
-            int x = xev.xmotion.x;
-            int y = xev.xmotion.y;
-            if (mPressedId != -1) {
-                MenuEntry * mentry = getMenuEntry(x, y);
-                if (!mentry) {
-                    // released the mouse button outside the menu 
-                    // hide the menu
-                    GLUTES_DEBUGP3("Moved out of Menu (%d, %d)", xev.xmotion.x, xev.xmotion.y);
                     mPressedId = -1;
-                    redraw();
-                } else {
-                    if (mPressedId != mentry->mId) {
-                        mPressedId = mentry->mId;
-                        redraw();
-                    }
                 }
             }
-            break;
         }
+        if (toRedraw) {
+            redraw();
+        }
+        break;
+    }
+    case MotionNotify: {
+        handled = true;
+        int x = xev.xmotion.x;
+        int y = xev.xmotion.y;
+        if (mPressedId != -1) {
+            MenuEntry *mentry = getMenuEntry(x, y);
+            if (!mentry) {
+                // released the mouse button outside the menu
+                // hide the menu
+                GLUTES_DEBUGP3("Moved out of Menu (%d, %d)", xev.xmotion.x, xev.xmotion.y);
+                mPressedId = -1;
+                redraw();
+            } else {
+                if (mPressedId != mentry->mId) {
+                    mPressedId = mentry->mId;
+                    redraw();
+                }
+            }
+        }
+        break;
+    }
     }
 
     return handled;

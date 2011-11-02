@@ -21,7 +21,7 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
@@ -53,325 +53,325 @@
 extern "C" {
 #endif
 
-inline RGlutInterface * getInterface()
-{
-    return RGlutInterface::getInterface() ;
-}
-
-
-APIDEF void glutInit(int *argp, char **argv)
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->intialize(*argp, argv);    
-    }
-}
-
-APIDEF void glutInitDisplayMode(unsigned int mode)
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->initDisplayMode(mode);
-    }
-} 
-
-APIDEF void glutInitWindowPosition(int x, int y)
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->setPos(x, y);
-    }
-}
-
-APIDEF void glutInitWindowSize(int width, int height)
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->setSize(width, height);
-    }
-}
-
-APIDEF int glutCreateWindow(const char *title)
-{
-    int window = 0;
-    
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->setTitle(title);
-        window = interface->createWindow();
-    }
-    
-    return window;
-}
-
-APIDEF void glutDestroyWindow(int win)
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->destroyWindow(win);
-    }
-}
-
-APIDEF void glutPostRedisplay()
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->redraw();
-    }
-}
-
-APIDEF int glutGetWindow()
-{
-    int win = 0;
-    
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        win = interface->getWindow();
-    }
-    
-    return win;
-}
-
-APIDEF void glutSetWindow(int win)
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->setWindow(win);
-    }
-}
-
-APIDEF void glutPostWindowRedisplay(int win)
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->redraw(win);
-    }
-}
-
-APIDEF void glutSetWindowTitle(const char *title)
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->setWindowTitle(title);
-    }
-}
-
-APIDEF void glutShowWindow()
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->showWindow();
-    }
-}
-
-APIDEF void glutFullScreen()
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->fullScreen();
-    }
-}
-
-APIDEF void glutHideWindow()
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->hideWindow();
-    }
-}
-
-APIDEF void glutPositionWindow(int x, int y)
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->positionWindow(x, y);
-    }
-}
-
-APIDEF void glutReshapeWindow(int width, int height)
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->reshapeWindow(width, height);
-    }
-}
-
-APIDEF void glutPopWindow()
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->popWindow();
-    }
-}
-
-APIDEF void glutPushWindow()
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->pushWindow();
-    }
-}
-
-APIDEF void glutSwapBuffers()
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->flush();
-    }
-}
-
-APIDEF void glutMainLoop()
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->exec();
-    }
-    RGlutInterface::destroyInterface();
-}
-
-APIDEF void glutTimerFunc(unsigned int millis, void (*func)(int), int value)
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->timerFunc(millis, func, value);
-    }
-}
-
-APIDEF void glutDisplayFunc(void (*func)())
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->setDrawFnc(func);
-    }
-}
-
-APIDEF void glutReshapeFunc(void (*func)(int, int))
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->setReshapeFunc(func);
-    }
-}
-
-APIDEF void glutKeyboardFunc(void (*func)(unsigned char key, int x, int y))
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->setKeyboardFunc(func);
-    }
-}
-
-APIDEF void glutMouseFunc(void (*func)(int button, int state, int x, int y))
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->setMouseFunc(func);
-    }
-}
-
-APIDEF void glutMotionFunc(void (*func)(int x, int y))
-{   
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->setMotionFunc(func);
-    }
-}
-
-APIDEF void glutPassiveMotionFunc(void (*func)(int x, int y))
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->setPassiveMotionFunc(func);
-    }
-}
-
-APIDEF int glutGetModifiers()
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        return interface->getModifiers();
-    }    
-
-    return 0;
-}
-
-APIDEF int glutGet(unsigned int state)
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        return interface->getValue(state);
+    inline RGlutInterface *getInterface()
+    {
+        return RGlutInterface::getInterface() ;
     }
 
-    return 0;
-}
 
-APIDEF int glutCreateMenu(void (*menu)(int))
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        return interface->createMenu(menu);
+    APIDEF void glutInit(int *argp, char **argv)
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->intialize(*argp, argv);
+        }
     }
-    
-    return 0;
-}
 
-APIDEF void glutDestroyMenu(int menu)
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->destroyMenu(menu);
+    APIDEF void glutInitDisplayMode(unsigned int mode)
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->initDisplayMode(mode);
+        }
     }
-}
 
-APIDEF int glutGetMenu()
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        return interface->getMenu();
+    APIDEF void glutInitWindowPosition(int x, int y)
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->setPos(x, y);
+        }
     }
-    
-    return 0;
-}
 
-APIDEF void glutSetMenu(int menu)
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->setMenu(menu);
+    APIDEF void glutInitWindowSize(int width, int height)
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->setSize(width, height);
+        }
     }
-}
 
-APIDEF void glutAddMenuEntry(const char* label, int value)
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->addMenuEntry(label, value);
-    }
-}
+    APIDEF int glutCreateWindow(const char *title)
+    {
+        int window = 0;
 
-APIDEF void glutRemoveMenuItem(int item)
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->removeMenuItem(item);
-    }
-}
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->setTitle(title);
+            window = interface->createWindow();
+        }
 
-APIDEF void glutAttachMenu(int button)
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->attachMenu(button);
+        return window;
     }
-}
 
-APIDEF void glutDetachMenu(int button)
-{
-    RGlutInterface * interface = getInterface(); 
-    if (interface) {
-        interface->detachMenu(button);
+    APIDEF void glutDestroyWindow(int win)
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->destroyWindow(win);
+        }
     }
-}
+
+    APIDEF void glutPostRedisplay()
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->redraw();
+        }
+    }
+
+    APIDEF int glutGetWindow()
+    {
+        int win = 0;
+
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            win = interface->getWindow();
+        }
+
+        return win;
+    }
+
+    APIDEF void glutSetWindow(int win)
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->setWindow(win);
+        }
+    }
+
+    APIDEF void glutPostWindowRedisplay(int win)
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->redraw(win);
+        }
+    }
+
+    APIDEF void glutSetWindowTitle(const char *title)
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->setWindowTitle(title);
+        }
+    }
+
+    APIDEF void glutShowWindow()
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->showWindow();
+        }
+    }
+
+    APIDEF void glutFullScreen()
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->fullScreen();
+        }
+    }
+
+    APIDEF void glutHideWindow()
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->hideWindow();
+        }
+    }
+
+    APIDEF void glutPositionWindow(int x, int y)
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->positionWindow(x, y);
+        }
+    }
+
+    APIDEF void glutReshapeWindow(int width, int height)
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->reshapeWindow(width, height);
+        }
+    }
+
+    APIDEF void glutPopWindow()
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->popWindow();
+        }
+    }
+
+    APIDEF void glutPushWindow()
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->pushWindow();
+        }
+    }
+
+    APIDEF void glutSwapBuffers()
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->flush();
+        }
+    }
+
+    APIDEF void glutMainLoop()
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->exec();
+        }
+        RGlutInterface::destroyInterface();
+    }
+
+    APIDEF void glutTimerFunc(unsigned int millis, void (*func)(int), int value)
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->timerFunc(millis, func, value);
+        }
+    }
+
+    APIDEF void glutDisplayFunc(void (*func)())
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->setDrawFnc(func);
+        }
+    }
+
+    APIDEF void glutReshapeFunc(void (*func)(int, int))
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->setReshapeFunc(func);
+        }
+    }
+
+    APIDEF void glutKeyboardFunc(void (*func)(unsigned char key, int x, int y))
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->setKeyboardFunc(func);
+        }
+    }
+
+    APIDEF void glutMouseFunc(void (*func)(int button, int state, int x, int y))
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->setMouseFunc(func);
+        }
+    }
+
+    APIDEF void glutMotionFunc(void (*func)(int x, int y))
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->setMotionFunc(func);
+        }
+    }
+
+    APIDEF void glutPassiveMotionFunc(void (*func)(int x, int y))
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->setPassiveMotionFunc(func);
+        }
+    }
+
+    APIDEF int glutGetModifiers()
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            return interface->getModifiers();
+        }
+
+        return 0;
+    }
+
+    APIDEF int glutGet(unsigned int state)
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            return interface->getValue(state);
+        }
+
+        return 0;
+    }
+
+    APIDEF int glutCreateMenu(void (*menu)(int))
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            return interface->createMenu(menu);
+        }
+
+        return 0;
+    }
+
+    APIDEF void glutDestroyMenu(int menu)
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->destroyMenu(menu);
+        }
+    }
+
+    APIDEF int glutGetMenu()
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            return interface->getMenu();
+        }
+
+        return 0;
+    }
+
+    APIDEF void glutSetMenu(int menu)
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->setMenu(menu);
+        }
+    }
+
+    APIDEF void glutAddMenuEntry(const char *label, int value)
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->addMenuEntry(label, value);
+        }
+    }
+
+    APIDEF void glutRemoveMenuItem(int item)
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->removeMenuItem(item);
+        }
+    }
+
+    APIDEF void glutAttachMenu(int button)
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->attachMenu(button);
+        }
+    }
+
+    APIDEF void glutDetachMenu(int button)
+    {
+        RGlutInterface *interface = getInterface();
+        if (interface) {
+            interface->detachMenu(button);
+        }
+    }
 
 #ifdef __cplusplus
 }

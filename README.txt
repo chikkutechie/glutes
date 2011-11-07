@@ -34,7 +34,8 @@ Maemo
 
     If libX11.so it not available a soft link might need to be created which points to appropriate library(say libX11.so.6)
 
-
+    If OpenVG/OpenGLES/EGL/KHR header files are not available get them from Khronos(http://www.khronos.org).
+     
     1) go to build/maemo
 
     2) Run make

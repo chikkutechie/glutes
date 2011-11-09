@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>glutes: W:/OpenGL/glut/glut/maemo/inc/rglutmaemointerface.h Source File</title>
+<title>glutes: O:/OpenGL/glut/glut/maemo/inc/rglutmaemointerface.h Source File</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -92,11 +92,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div id="doc-content">
 <div class="header">
   <div class="headertitle">
-<div class="title">W:/OpenGL/glut/glut/maemo/inc/rglutmaemointerface.h</div>  </div>
+<div class="title">O:/OpenGL/glut/glut/maemo/inc/rglutmaemointerface.h</div>  </div>
 </div>
 <div class="contents">
 <div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
-<a name="l00002"></a>00002 <span class="comment"> * Copyright (c) 2010-2015, Ranjith TV</span>
+<a name="l00002"></a>00002 <span class="comment"> * Copyright (c) 2011, Ranjith TV</span>
 <a name="l00003"></a>00003 <span class="comment"> * All rights reserved.</span>
 <a name="l00004"></a>00004 <span class="comment"> *</span>
 <a name="l00005"></a>00005 <span class="comment"> * Redistribution and use in source and binary forms, with or without</span>
@@ -118,7 +118,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00021"></a>00021 <span class="comment"> * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES</span>
 <a name="l00022"></a>00022 <span class="comment"> * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;</span>
 <a name="l00023"></a>00023 <span class="comment"> * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY</span>
-<a name="l00024"></a>00024 <span class="comment"> * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT </span>
+<a name="l00024"></a>00024 <span class="comment"> * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</span>
 <a name="l00025"></a>00025 <span class="comment"> * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span>
 <a name="l00026"></a>00026 <span class="comment"> * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
 <a name="l00027"></a>00027 <span class="comment"> */</span>
@@ -166,7 +166,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00069"></a>00069     <span class="keywordtype">void</span> destroyWindow(<span class="keywordtype">int</span> win);
 <a name="l00070"></a>00070     <span class="keywordtype">int</span> getWindow();
 <a name="l00071"></a>00071     <span class="keywordtype">void</span> setWindow(<span class="keywordtype">int</span> win);
-<a name="l00072"></a>00072     <span class="keywordtype">void</span> setWindowTitle(<span class="keyword">const</span> <span class="keywordtype">char</span> * title);
+<a name="l00072"></a>00072     <span class="keywordtype">void</span> setWindowTitle(<span class="keyword">const</span> <span class="keywordtype">char</span> *title);
 <a name="l00073"></a>00073     <span class="keywordtype">void</span> showWindow();
 <a name="l00074"></a>00074     <span class="keywordtype">void</span> fullScreen();
 <a name="l00075"></a>00075     <span class="keywordtype">void</span> hideWindow();
@@ -174,64 +174,64 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00077"></a>00077     <span class="keywordtype">void</span> reshapeWindow(<span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height);
 <a name="l00078"></a>00078     <span class="keywordtype">void</span> popWindow();
 <a name="l00079"></a>00079     <span class="keywordtype">void</span> pushWindow();
-<a name="l00080"></a>00080     
+<a name="l00080"></a>00080 
 <a name="l00081"></a>00081     <span class="keywordtype">void</span> timerFunc(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> millis, <span class="keywordtype">void</span> (*func)(<span class="keywordtype">int</span>), <span class="keywordtype">int</span> value);
-<a name="l00082"></a>00082     
+<a name="l00082"></a>00082 
 <a name="l00083"></a>00083     <span class="keywordtype">void</span> exec();
 <a name="l00084"></a>00084     <span class="keywordtype">void</span> redraw(<span class="keywordtype">int</span> win);
 <a name="l00085"></a>00085     <span class="keywordtype">void</span> flush();
-<a name="l00086"></a>00086     
-<a name="l00087"></a>00087     <span class="keywordtype">int</span> createMenu(<span class="keywordtype">void</span> (*)(<span class="keywordtype">int</span> menu));
+<a name="l00086"></a>00086 
+<a name="l00087"></a>00087     <span class="keywordtype">int</span> createMenu(<span class="keywordtype">void</span> ( *)(<span class="keywordtype">int</span> menu));
 <a name="l00088"></a>00088     <span class="keywordtype">void</span> destroyMenu(<span class="keywordtype">int</span> menu);
 <a name="l00089"></a>00089     <span class="keywordtype">int</span> getMenu();
 <a name="l00090"></a>00090     <span class="keywordtype">void</span> setMenu(<span class="keywordtype">int</span> menu);
-<a name="l00091"></a>00091     <span class="keywordtype">void</span> addMenuEntry(<span class="keyword">const</span> <span class="keywordtype">char</span>* label, <span class="keywordtype">int</span> value);
+<a name="l00091"></a>00091     <span class="keywordtype">void</span> addMenuEntry(<span class="keyword">const</span> <span class="keywordtype">char</span> *label, <span class="keywordtype">int</span> value);
 <a name="l00092"></a>00092     <span class="keywordtype">void</span> removeMenuItem(<span class="keywordtype">int</span> item);
 <a name="l00093"></a>00093     <span class="keywordtype">void</span> attachMenu(<span class="keywordtype">int</span> button);
 <a name="l00094"></a>00094     <span class="keywordtype">void</span> detachMenu(<span class="keywordtype">int</span> button);
-<a name="l00095"></a>00095     
+<a name="l00095"></a>00095 
 <a name="l00096"></a>00096     <span class="keywordtype">int</span> getModifiers();
 <a name="l00097"></a>00097     <span class="keywordtype">int</span> getValue(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> state);
 <a name="l00098"></a>00098 
 <a name="l00099"></a>00099     <span class="keywordtype">void</span> draw();
 <a name="l00100"></a>00100     <span class="keywordtype">void</span> reshape(<span class="keywordtype">int</span> w, <span class="keywordtype">int</span> h);
 <a name="l00101"></a>00101     <span class="keywordtype">void</span> rerect(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">int</span> w, <span class="keywordtype">int</span> h);
-<a name="l00102"></a>00102     <span class="keywordtype">void</span> repos(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y); 
+<a name="l00102"></a>00102     <span class="keywordtype">void</span> repos(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);
 <a name="l00103"></a>00103     <span class="keywordtype">void</span> keyboard(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> key, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> modifier, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);
 <a name="l00104"></a>00104     <span class="keywordtype">void</span> mouse(<span class="keywordtype">int</span> button, <span class="keywordtype">int</span> modifier, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">bool</span> pressed = <span class="keyword">true</span>);
 <a name="l00105"></a>00105     <span class="keywordtype">void</span> motion(<span class="keywordtype">int</span> button, <span class="keywordtype">int</span> modifier, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);
-<a name="l00106"></a>00106     <span class="keywordtype">void</span> removeTimer(<a class="code" href="class_r_glut_timer.html">RGlutTimer</a> * timer);
+<a name="l00106"></a>00106     <span class="keywordtype">void</span> removeTimer(<a class="code" href="class_r_glut_timer.html">RGlutTimer</a> *timer);
 <a name="l00107"></a>00107 
 <a name="l00108"></a>00108 <span class="keyword">private</span>:
 <a name="l00109"></a>00109     <span class="keyword">class </span>ControlEntry
 <a name="l00110"></a>00110     {
 <a name="l00111"></a>00111     <span class="keyword">public</span>:
 <a name="l00112"></a>00112         ControlEntry()
-<a name="l00113"></a>00113          : mId(0),
-<a name="l00114"></a>00114            mSurface(0),
-<a name="l00115"></a>00115            mControl(0)
+<a name="l00113"></a>00113             : mId(0),
+<a name="l00114"></a>00114               mSurface(0),
+<a name="l00115"></a>00115               mControl(0)
 <a name="l00116"></a>00116         {}
-<a name="l00117"></a>00117         
+<a name="l00117"></a>00117 
 <a name="l00118"></a>00118         <span class="keywordtype">int</span> mId;
 <a name="l00119"></a>00119         <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>  mSurface;
-<a name="l00120"></a>00120         <a class="code" href="class_r_glut_window.html">RGlutWindow</a> * mControl;
+<a name="l00120"></a>00120         <a class="code" href="class_r_glut_window.html">RGlutWindow</a> *mControl;
 <a name="l00121"></a>00121     };
 <a name="l00122"></a>00122 
 <a name="l00123"></a>00123 <span class="keyword">private</span>:
 <a name="l00124"></a>00124     <a class="code" href="class_r_glut_maemo_interface.html">RGlutMaemoInterface</a>(<a class="code" href="class_r_glut_maemo_interface.html">RGlutMaemoInterface</a> <span class="keyword">const</span> &amp;);
-<a name="l00125"></a>00125     <a class="code" href="class_r_glut_maemo_interface.html">RGlutMaemoInterface</a> &amp; operator=(<a class="code" href="class_r_glut_maemo_interface.html">RGlutMaemoInterface</a> <span class="keyword">const</span> &amp;);
+<a name="l00125"></a>00125     <a class="code" href="class_r_glut_maemo_interface.html">RGlutMaemoInterface</a> &amp;operator=(<a class="code" href="class_r_glut_maemo_interface.html">RGlutMaemoInterface</a> <span class="keyword">const</span> &amp;);
 <a name="l00126"></a>00126 
 <a name="l00127"></a>00127 <span class="keyword">private</span>:
 <a name="l00128"></a>00128     <span class="keywordtype">int</span> addControl(ControlEntry entry);
 <a name="l00129"></a>00129     ControlEntry removeControl(<span class="keywordtype">int</span> <span class="keywordtype">id</span>);
 <a name="l00130"></a>00130     <span class="keywordtype">void</span> removeAllControl();
-<a name="l00131"></a>00131     ControlEntry * getControlEntry(<span class="keywordtype">int</span> <span class="keywordtype">id</span>);
+<a name="l00131"></a>00131     ControlEntry *getControlEntry(<span class="keywordtype">int</span> <span class="keywordtype">id</span>);
 <a name="l00132"></a>00132     <span class="keywordtype">void</span> checkTimers();
 <a name="l00133"></a>00133     <span class="keywordtype">int</span> getModifiers(<span class="keywordtype">int</span> state);
-<a name="l00134"></a>00134     <span class="keywordtype">void</span> parseArguments(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> ** argv);
+<a name="l00134"></a>00134     <span class="keywordtype">void</span> parseArguments(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv);
 <a name="l00135"></a>00135     <span class="keywordtype">void</span> createBinder();
 <a name="l00136"></a>00136     <span class="keywordtype">void</span> removeAllTimers();
-<a name="l00137"></a>00137     
+<a name="l00137"></a>00137 
 <a name="l00138"></a>00138 <span class="keyword">private</span>:
 <a name="l00139"></a>00139     <span class="keyword">typedef</span> std::vector&lt;ControlEntry&gt; ControlList;
 <a name="l00140"></a>00140     <span class="keyword">typedef</span> ControlList::iterator ControlListIter;
@@ -258,9 +258,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00161"></a>00161     <span class="keyword">const</span> std::string KParamOrientationAutomatic;
 <a name="l00162"></a>00162 
 <a name="l00163"></a>00163 <span class="keyword">private</span>:
-<a name="l00164"></a>00164     <a class="code" href="class_r_e_g_l_glut_g_l_binder.html" title="EGL functionality wrapper, and an implementation for RGlutGLBinder.">REGLGlutGLBinder</a> * mBinder;
+<a name="l00164"></a>00164     <a class="code" href="class_r_e_g_l_glut_g_l_binder.html" title="EGL functionality wrapper, and an implementation for RGlutGLBinder.">REGLGlutGLBinder</a> *mBinder;
 <a name="l00165"></a>00165     <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> mDisplayMode;
-<a name="l00166"></a>00166     
+<a name="l00166"></a>00166 
 <a name="l00167"></a>00167     <span class="keywordtype">int</span> mCurrentControl;
 <a name="l00168"></a>00168     <span class="keywordtype">bool</span> mFullScreen;
 <a name="l00169"></a>00169     <span class="keywordtype">int</span> mModifier;
@@ -268,9 +268,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00171"></a>00171     ControlList mControllist;
 <a name="l00172"></a>00172     ControlStack mControlStack;
 <a name="l00173"></a>00173     <span class="keywordtype">bool</span> mFinished;
-<a name="l00174"></a>00174     
-<a name="l00175"></a>00175     <a class="code" href="class_r_glut_maemo_window.html">RGlutMaemoWindow</a> * mMainWindow;
-<a name="l00176"></a>00176     <a class="code" href="class_r_glut_application.html">RGlutApplication</a> * mApplication;
+<a name="l00174"></a>00174 
+<a name="l00175"></a>00175     <a class="code" href="class_r_glut_maemo_window.html">RGlutMaemoWindow</a> *mMainWindow;
+<a name="l00176"></a>00176     <a class="code" href="class_r_glut_application.html">RGlutApplication</a> *mApplication;
 <a name="l00177"></a>00177 
 <a name="l00178"></a>00178     TimerEntrySet mTimers;
 <a name="l00179"></a>00179     std::vector&lt;RGlutMenu *&gt; mMenus;
@@ -299,7 +299,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 
-    <li class="footer">Generated on Mon Oct 31 2011 11:44:29 for glutes by
+    <li class="footer">Generated on Wed Nov 9 2011 10:47:19 for glutes by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.5.1 </li>
    </ul>

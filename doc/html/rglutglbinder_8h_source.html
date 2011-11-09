@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>glutes: W:/OpenGL/glut/glut/common/inc/rglutglbinder.h Source File</title>
+<title>glutes: O:/OpenGL/glut/glut/common/inc/rglutglbinder.h Source File</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -92,11 +92,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div id="doc-content">
 <div class="header">
   <div class="headertitle">
-<div class="title">W:/OpenGL/glut/glut/common/inc/rglutglbinder.h</div>  </div>
+<div class="title">O:/OpenGL/glut/glut/common/inc/rglutglbinder.h</div>  </div>
 </div>
 <div class="contents">
 <div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
-<a name="l00002"></a>00002 <span class="comment"> * Copyright (c) 2010-2015, Ranjith TV</span>
+<a name="l00002"></a>00002 <span class="comment"> * Copyright (c) 2011, Ranjith TV</span>
 <a name="l00003"></a>00003 <span class="comment"> * All rights reserved.</span>
 <a name="l00004"></a>00004 <span class="comment"> *</span>
 <a name="l00005"></a>00005 <span class="comment"> * Redistribution and use in source and binary forms, with or without</span>
@@ -118,7 +118,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00021"></a>00021 <span class="comment"> * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES</span>
 <a name="l00022"></a>00022 <span class="comment"> * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;</span>
 <a name="l00023"></a>00023 <span class="comment"> * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY</span>
-<a name="l00024"></a>00024 <span class="comment"> * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT </span>
+<a name="l00024"></a>00024 <span class="comment"> * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</span>
 <a name="l00025"></a>00025 <span class="comment"> * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span>
 <a name="l00026"></a>00026 <span class="comment"> * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
 <a name="l00027"></a>00027 <span class="comment"> */</span>
@@ -136,106 +136,95 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00039"></a><a class="code" href="class_r_glut_g_l_binder.html">00039</a> <span class="keyword">class </span><a class="code" href="class_r_glut_g_l_binder.html">RGlutGLBinder</a>
 <a name="l00040"></a>00040 {
 <a name="l00041"></a>00041 <span class="keyword">public</span>:
-<a name="l00042"></a>00042     <span class="keyword">enum</span> API
-<a name="l00043"></a>00043     {
-<a name="l00044"></a>00044         OPENGL_ES_API,
-<a name="l00045"></a>00045         OPENGL_ES2_API,
-<a name="l00046"></a>00046         OPENVG_API,
-<a name="l00047"></a>00047         OPENGL_API
-<a name="l00048"></a>00048     };
-<a name="l00049"></a>00049     
-<a name="l00050"></a>00050     <span class="keyword">typedef</span> <span class="keywordtype">int</span> * Surface;
-<a name="l00051"></a>00051     
-<a name="l00052"></a>00052 <span class="keyword">public</span>:
-<a name="l00053"></a>00053     <a class="code" href="class_r_glut_g_l_binder.html">RGlutGLBinder</a>(API a = OPENGL_ES_API) : mAPI(a) {}
-<a name="l00054"></a>00054     <span class="keyword">virtual</span> ~<a class="code" href="class_r_glut_g_l_binder.html">RGlutGLBinder</a>() {}
-<a name="l00055"></a>00055     
-<a name="l00056"></a>00056     <span class="keyword">virtual</span> <span class="keywordtype">bool</span> initialize() = 0;
-<a name="l00057"></a>00057     <span class="keyword">virtual</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> createSurface(Surface surface, <span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height) = 0;
-<a name="l00058"></a>00058     <span class="keyword">virtual</span> <span class="keywordtype">bool</span> makeCurrent(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> surface) = 0;
-<a name="l00059"></a>00059     <span class="keyword">virtual</span> <span class="keywordtype">void</span> destroySurface(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> surface) = 0;
-<a name="l00060"></a>00060     <span class="keyword">virtual</span> <span class="keywordtype">void</span> swapBuffer(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> surface) = 0;
-<a name="l00061"></a>00061     <span class="keyword">virtual</span> <span class="keywordtype">void</span> terminate() = 0;
-<a name="l00062"></a>00062     
-<a name="l00063"></a>00063     <span class="keyword">virtual</span> <span class="keywordtype">void</span> addProperty(<span class="keywordtype">int</span>, <span class="keywordtype">int</span>) {}
-<a name="l00064"></a>00064     <span class="keyword">virtual</span> <span class="keywordtype">void</span> removeProperty(<span class="keywordtype">int</span>) {}
-<a name="l00065"></a>00065     
-<a name="l00066"></a>00066     <span class="keyword">virtual</span> <span class="keywordtype">void</span> setStencil(<span class="keywordtype">bool</span> enable, <span class="keywordtype">int</span> size = 8) = 0;
-<a name="l00067"></a>00067     <span class="keyword">virtual</span> <span class="keywordtype">void</span> setDepth(<span class="keywordtype">bool</span> enable, <span class="keywordtype">int</span> size = 8) = 0;
-<a name="l00068"></a>00068     <span class="keyword">virtual</span> <span class="keywordtype">void</span> setSingleBuffer(<span class="keywordtype">bool</span> enable) = 0;
-<a name="l00069"></a>00069     <span class="keyword">virtual</span> <span class="keywordtype">void</span> setDoubleBuffer(<span class="keywordtype">bool</span> enable) = 0;
-<a name="l00070"></a>00070     
-<a name="l00071"></a>00071     <span class="keywordtype">void</span> setBindApi(API api)
-<a name="l00072"></a>00072     {
-<a name="l00073"></a>00073         this-&gt;mAPI = api;
-<a name="l00074"></a>00074     }
-<a name="l00075"></a>00075     
-<a name="l00076"></a>00076     API getBindApi()<span class="keyword"> const</span>
-<a name="l00077"></a>00077 <span class="keyword">    </span>{
-<a name="l00078"></a>00078         <span class="keywordflow">return</span> mAPI;
-<a name="l00079"></a>00079     }
-<a name="l00080"></a>00080 
-<a name="l00081"></a>00081     <span class="keyword">virtual</span> <span class="keywordtype">int</span> getBufferSize()
-<a name="l00082"></a>00082     {
-<a name="l00083"></a>00083         <span class="keywordflow">return</span> 0;
-<a name="l00084"></a>00084     }
-<a name="l00085"></a>00085     <span class="keyword">virtual</span> <span class="keywordtype">void</span> setBufferSize(<span class="keywordtype">int</span>)
-<a name="l00086"></a>00086     {}    
-<a name="l00087"></a>00087 
-<a name="l00088"></a>00088     <span class="keyword">virtual</span> <span class="keywordtype">int</span> getRedSize()
-<a name="l00089"></a>00089     {
-<a name="l00090"></a>00090         <span class="keywordflow">return</span> 0;
-<a name="l00091"></a>00091     }
-<a name="l00092"></a>00092     <span class="keyword">virtual</span> <span class="keywordtype">void</span> setRedSize(<span class="keywordtype">int</span>)
-<a name="l00093"></a>00093     {}
-<a name="l00094"></a>00094 
-<a name="l00095"></a>00095     <span class="keyword">virtual</span> <span class="keywordtype">int</span> getGreenSize()
-<a name="l00096"></a>00096     {
+<a name="l00042"></a>00042     <span class="keyword">enum</span> API {
+<a name="l00043"></a>00043         OPENGL_ES_API,
+<a name="l00044"></a>00044         OPENGL_ES2_API,
+<a name="l00045"></a>00045         OPENVG_API,
+<a name="l00046"></a>00046         OPENGL_API
+<a name="l00047"></a>00047     };
+<a name="l00048"></a>00048 
+<a name="l00049"></a>00049     <span class="keyword">typedef</span> <span class="keywordtype">int</span> *Surface;
+<a name="l00050"></a>00050 
+<a name="l00051"></a>00051 <span class="keyword">public</span>:
+<a name="l00052"></a>00052     <a class="code" href="class_r_glut_g_l_binder.html">RGlutGLBinder</a>(API a = OPENGL_ES_API) : mAPI(a) {}
+<a name="l00053"></a>00053     <span class="keyword">virtual</span> ~<a class="code" href="class_r_glut_g_l_binder.html">RGlutGLBinder</a>() {}
+<a name="l00054"></a>00054 
+<a name="l00055"></a>00055     <span class="keyword">virtual</span> <span class="keywordtype">bool</span> initialize() = 0;
+<a name="l00056"></a>00056     <span class="keyword">virtual</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> createSurface(Surface surface, <span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height) = 0;
+<a name="l00057"></a>00057     <span class="keyword">virtual</span> <span class="keywordtype">bool</span> makeCurrent(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> surface) = 0;
+<a name="l00058"></a>00058     <span class="keyword">virtual</span> <span class="keywordtype">void</span> destroySurface(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> surface) = 0;
+<a name="l00059"></a>00059     <span class="keyword">virtual</span> <span class="keywordtype">void</span> swapBuffer(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> surface) = 0;
+<a name="l00060"></a>00060     <span class="keyword">virtual</span> <span class="keywordtype">void</span> terminate() = 0;
+<a name="l00061"></a>00061 
+<a name="l00062"></a>00062     <span class="keyword">virtual</span> <span class="keywordtype">void</span> addProperty(<span class="keywordtype">int</span>, <span class="keywordtype">int</span>) {}
+<a name="l00063"></a>00063     <span class="keyword">virtual</span> <span class="keywordtype">void</span> removeProperty(<span class="keywordtype">int</span>) {}
+<a name="l00064"></a>00064 
+<a name="l00065"></a>00065     <span class="keyword">virtual</span> <span class="keywordtype">void</span> setStencil(<span class="keywordtype">bool</span> enable, <span class="keywordtype">int</span> size = 8) = 0;
+<a name="l00066"></a>00066     <span class="keyword">virtual</span> <span class="keywordtype">void</span> setDepth(<span class="keywordtype">bool</span> enable, <span class="keywordtype">int</span> size = 8) = 0;
+<a name="l00067"></a>00067     <span class="keyword">virtual</span> <span class="keywordtype">void</span> setSingleBuffer(<span class="keywordtype">bool</span> enable) = 0;
+<a name="l00068"></a>00068     <span class="keyword">virtual</span> <span class="keywordtype">void</span> setDoubleBuffer(<span class="keywordtype">bool</span> enable) = 0;
+<a name="l00069"></a>00069 
+<a name="l00070"></a>00070     <span class="keywordtype">void</span> setBindApi(API api) {
+<a name="l00071"></a>00071         this-&gt;mAPI = api;
+<a name="l00072"></a>00072     }
+<a name="l00073"></a>00073 
+<a name="l00074"></a>00074     API getBindApi()<span class="keyword"> const </span>{
+<a name="l00075"></a>00075         <span class="keywordflow">return</span> mAPI;
+<a name="l00076"></a>00076     }
+<a name="l00077"></a>00077 
+<a name="l00078"></a>00078     <span class="keyword">virtual</span> <span class="keywordtype">int</span> getBufferSize() {
+<a name="l00079"></a>00079         <span class="keywordflow">return</span> 0;
+<a name="l00080"></a>00080     }
+<a name="l00081"></a>00081     <span class="keyword">virtual</span> <span class="keywordtype">void</span> setBufferSize(<span class="keywordtype">int</span>)
+<a name="l00082"></a>00082     {}
+<a name="l00083"></a>00083 
+<a name="l00084"></a>00084     <span class="keyword">virtual</span> <span class="keywordtype">int</span> getRedSize() {
+<a name="l00085"></a>00085         <span class="keywordflow">return</span> 0;
+<a name="l00086"></a>00086     }
+<a name="l00087"></a>00087     <span class="keyword">virtual</span> <span class="keywordtype">void</span> setRedSize(<span class="keywordtype">int</span>)
+<a name="l00088"></a>00088     {}
+<a name="l00089"></a>00089 
+<a name="l00090"></a>00090     <span class="keyword">virtual</span> <span class="keywordtype">int</span> getGreenSize() {
+<a name="l00091"></a>00091         <span class="keywordflow">return</span> 0;
+<a name="l00092"></a>00092     }
+<a name="l00093"></a>00093     <span class="keyword">virtual</span> <span class="keywordtype">void</span> setGreenSize(<span class="keywordtype">int</span>)
+<a name="l00094"></a>00094     {}
+<a name="l00095"></a>00095 
+<a name="l00096"></a>00096     <span class="keyword">virtual</span> <span class="keywordtype">int</span> getBlueSize() {
 <a name="l00097"></a>00097         <span class="keywordflow">return</span> 0;
 <a name="l00098"></a>00098     }
-<a name="l00099"></a>00099     <span class="keyword">virtual</span> <span class="keywordtype">void</span> setGreenSize(<span class="keywordtype">int</span>)
+<a name="l00099"></a>00099     <span class="keyword">virtual</span> <span class="keywordtype">void</span> setBlueSize(<span class="keywordtype">int</span>)
 <a name="l00100"></a>00100     {}
 <a name="l00101"></a>00101 
-<a name="l00102"></a>00102     <span class="keyword">virtual</span> <span class="keywordtype">int</span> getBlueSize()
-<a name="l00103"></a>00103     {
-<a name="l00104"></a>00104         <span class="keywordflow">return</span> 0;
-<a name="l00105"></a>00105     }
-<a name="l00106"></a>00106     <span class="keyword">virtual</span> <span class="keywordtype">void</span> setBlueSize(<span class="keywordtype">int</span>)
-<a name="l00107"></a>00107     {}
-<a name="l00108"></a>00108 
-<a name="l00109"></a>00109     <span class="keyword">virtual</span> <span class="keywordtype">int</span> getAlphaSize()
-<a name="l00110"></a>00110     {
-<a name="l00111"></a>00111         <span class="keywordflow">return</span> 0;
-<a name="l00112"></a>00112     }
-<a name="l00113"></a>00113     <span class="keyword">virtual</span> <span class="keywordtype">void</span> setAlphaSize(<span class="keywordtype">int</span>)
-<a name="l00114"></a>00114     {}
-<a name="l00115"></a>00115 
-<a name="l00116"></a>00116     <span class="keyword">virtual</span> <span class="keywordtype">int</span> getDepthSize()
-<a name="l00117"></a>00117     {
-<a name="l00118"></a>00118         <span class="keywordflow">return</span> 0;
-<a name="l00119"></a>00119     }
-<a name="l00120"></a>00120     <span class="keyword">virtual</span> <span class="keywordtype">void</span> setDepthSize(<span class="keywordtype">int</span>)
-<a name="l00121"></a>00121     {}
-<a name="l00122"></a>00122 
-<a name="l00123"></a>00123     <span class="keyword">virtual</span> <span class="keywordtype">int</span> getStencilSize()
-<a name="l00124"></a>00124     {
-<a name="l00125"></a>00125         <span class="keywordflow">return</span> 0;
-<a name="l00126"></a>00126     }
-<a name="l00127"></a>00127     <span class="keyword">virtual</span> <span class="keywordtype">void</span> setStencilSize(<span class="keywordtype">int</span>)
-<a name="l00128"></a>00128     {}
+<a name="l00102"></a>00102     <span class="keyword">virtual</span> <span class="keywordtype">int</span> getAlphaSize() {
+<a name="l00103"></a>00103         <span class="keywordflow">return</span> 0;
+<a name="l00104"></a>00104     }
+<a name="l00105"></a>00105     <span class="keyword">virtual</span> <span class="keywordtype">void</span> setAlphaSize(<span class="keywordtype">int</span>)
+<a name="l00106"></a>00106     {}
+<a name="l00107"></a>00107 
+<a name="l00108"></a>00108     <span class="keyword">virtual</span> <span class="keywordtype">int</span> getDepthSize() {
+<a name="l00109"></a>00109         <span class="keywordflow">return</span> 0;
+<a name="l00110"></a>00110     }
+<a name="l00111"></a>00111     <span class="keyword">virtual</span> <span class="keywordtype">void</span> setDepthSize(<span class="keywordtype">int</span>)
+<a name="l00112"></a>00112     {}
+<a name="l00113"></a>00113 
+<a name="l00114"></a>00114     <span class="keyword">virtual</span> <span class="keywordtype">int</span> getStencilSize() {
+<a name="l00115"></a>00115         <span class="keywordflow">return</span> 0;
+<a name="l00116"></a>00116     }
+<a name="l00117"></a>00117     <span class="keyword">virtual</span> <span class="keywordtype">void</span> setStencilSize(<span class="keywordtype">int</span>)
+<a name="l00118"></a>00118     {}
+<a name="l00119"></a>00119 
+<a name="l00120"></a>00120     <span class="keyword">virtual</span> <span class="keywordtype">int</span> getLuminanceSize() {
+<a name="l00121"></a>00121         <span class="keywordflow">return</span> 0;
+<a name="l00122"></a>00122     }
+<a name="l00123"></a>00123     <span class="keyword">virtual</span> <span class="keywordtype">void</span> setLuminanceSize(<span class="keywordtype">int</span>)
+<a name="l00124"></a>00124     {}
+<a name="l00125"></a>00125 
+<a name="l00126"></a>00126 <span class="keyword">protected</span>:
+<a name="l00127"></a>00127     API mAPI;
+<a name="l00128"></a>00128 };
 <a name="l00129"></a>00129 
-<a name="l00130"></a>00130     <span class="keyword">virtual</span> <span class="keywordtype">int</span> getLuminanceSize()
-<a name="l00131"></a>00131     {
-<a name="l00132"></a>00132         <span class="keywordflow">return</span> 0;
-<a name="l00133"></a>00133     }
-<a name="l00134"></a>00134     <span class="keyword">virtual</span> <span class="keywordtype">void</span> setLuminanceSize(<span class="keywordtype">int</span>)
-<a name="l00135"></a>00135     {}
-<a name="l00136"></a>00136     
-<a name="l00137"></a>00137 <span class="keyword">protected</span>:
-<a name="l00138"></a>00138     API mAPI;
-<a name="l00139"></a>00139 };
-<a name="l00140"></a>00140 
-<a name="l00141"></a>00141 <span class="preprocessor">#endif</span>
+<a name="l00130"></a>00130 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
@@ -256,7 +245,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 
-    <li class="footer">Generated on Mon Oct 31 2011 11:44:29 for glutes by
+    <li class="footer">Generated on Wed Nov 9 2011 10:47:19 for glutes by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.5.1 </li>
    </ul>

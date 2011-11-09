@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>glutes: W:/OpenGL/glut/glut/maemo/inc/rglutapplication.h Source File</title>
+<title>glutes: O:/OpenGL/glut/glut/maemo/inc/rglutapplication.h Source File</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -92,11 +92,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div id="doc-content">
 <div class="header">
   <div class="headertitle">
-<div class="title">W:/OpenGL/glut/glut/maemo/inc/rglutapplication.h</div>  </div>
+<div class="title">O:/OpenGL/glut/glut/maemo/inc/rglutapplication.h</div>  </div>
 </div>
 <div class="contents">
 <div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
-<a name="l00002"></a>00002 <span class="comment"> * Copyright (c) 2010-2015, Ranjith TV</span>
+<a name="l00002"></a>00002 <span class="comment"> * Copyright (c) 2011, Ranjith TV</span>
 <a name="l00003"></a>00003 <span class="comment"> * All rights reserved.</span>
 <a name="l00004"></a>00004 <span class="comment"> *</span>
 <a name="l00005"></a>00005 <span class="comment"> * Redistribution and use in source and binary forms, with or without</span>
@@ -118,7 +118,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00021"></a>00021 <span class="comment"> * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES</span>
 <a name="l00022"></a>00022 <span class="comment"> * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;</span>
 <a name="l00023"></a>00023 <span class="comment"> * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY</span>
-<a name="l00024"></a>00024 <span class="comment"> * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT </span>
+<a name="l00024"></a>00024 <span class="comment"> * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</span>
 <a name="l00025"></a>00025 <span class="comment"> * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span>
 <a name="l00026"></a>00026 <span class="comment"> * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
 <a name="l00027"></a>00027 <span class="comment"> */</span>
@@ -141,79 +141,72 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00044"></a><a class="code" href="class_r_glut_application.html">00044</a> <span class="keyword">class </span><a class="code" href="class_r_glut_application.html">RGlutApplication</a>
 <a name="l00045"></a>00045 {
 <a name="l00046"></a>00046 <span class="keyword">public</span>:
-<a name="l00047"></a>00047     <a class="code" href="class_r_glut_application.html">RGlutApplication</a>(<a class="code" href="class_r_glut_window.html">RGlutWindow</a> * window = 0);
+<a name="l00047"></a>00047     <a class="code" href="class_r_glut_application.html">RGlutApplication</a>(<a class="code" href="class_r_glut_window.html">RGlutWindow</a> *window = 0);
 <a name="l00048"></a>00048     <span class="keyword">virtual</span> ~<a class="code" href="class_r_glut_application.html">RGlutApplication</a>();
-<a name="l00049"></a>00049     
-<a name="l00050"></a>00050     <span class="keywordtype">void</span> setMainWindow(<a class="code" href="class_r_glut_window.html">RGlutWindow</a> * window)
-<a name="l00051"></a>00051     {
-<a name="l00052"></a>00052         mMainWindow = window;
-<a name="l00053"></a>00053     }
-<a name="l00054"></a>00054 
-<a name="l00055"></a>00055     <a class="code" href="class_r_glut_window.html">RGlutWindow</a> * mainWindow()
-<a name="l00056"></a>00056     {
-<a name="l00057"></a>00057         <span class="keywordflow">return</span> mMainWindow;
-<a name="l00058"></a>00058     }
-<a name="l00059"></a>00059     
-<a name="l00060"></a>00060     <a class="code" href="class_r_glut_l_a_f.html">RGlutLAF</a> * LAF()
-<a name="l00061"></a>00061     {
-<a name="l00062"></a>00062         <span class="keywordflow">return</span> mLAF;
-<a name="l00063"></a>00063     }
-<a name="l00064"></a>00064 
-<a name="l00065"></a>00065     <a class="code" href="class_r_glut_l_a_f.html">RGlutLAF</a> * setLAF(std::string <span class="keyword">const</span> &amp; name);
-<a name="l00066"></a>00066 
-<a name="l00067"></a>00067     <span class="keywordtype">int</span> screenWidth()<span class="keyword"> const</span>
-<a name="l00068"></a>00068 <span class="keyword">    </span>{
-<a name="l00069"></a>00069         <span class="keywordflow">return</span> mScreenWidth;
-<a name="l00070"></a>00070     }
-<a name="l00071"></a>00071     <span class="keywordtype">int</span> screenHeight()<span class="keyword"> const</span>
-<a name="l00072"></a>00072 <span class="keyword">    </span>{
-<a name="l00073"></a>00073         <span class="keywordflow">return</span> mScreenHeight;
-<a name="l00074"></a>00074     }
-<a name="l00075"></a>00075     <span class="keywordtype">int</span> screen()<span class="keyword"> const</span>
-<a name="l00076"></a>00076 <span class="keyword">    </span>{
-<a name="l00077"></a>00077         <span class="keywordflow">return</span> mScreenNumber;
+<a name="l00049"></a>00049 
+<a name="l00050"></a>00050     <span class="keywordtype">void</span> setMainWindow(<a class="code" href="class_r_glut_window.html">RGlutWindow</a> *window) {
+<a name="l00051"></a>00051         mMainWindow = window;
+<a name="l00052"></a>00052     }
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054     <a class="code" href="class_r_glut_window.html">RGlutWindow</a> *mainWindow() {
+<a name="l00055"></a>00055         <span class="keywordflow">return</span> mMainWindow;
+<a name="l00056"></a>00056     }
+<a name="l00057"></a>00057 
+<a name="l00058"></a>00058     <a class="code" href="class_r_glut_l_a_f.html">RGlutLAF</a> *LAF() {
+<a name="l00059"></a>00059         <span class="keywordflow">return</span> mLAF;
+<a name="l00060"></a>00060     }
+<a name="l00061"></a>00061 
+<a name="l00062"></a>00062     <a class="code" href="class_r_glut_l_a_f.html">RGlutLAF</a> *setLAF(std::string <span class="keyword">const</span> &amp;name);
+<a name="l00063"></a>00063 
+<a name="l00064"></a>00064     <span class="keywordtype">int</span> screenWidth()<span class="keyword"> const </span>{
+<a name="l00065"></a>00065         <span class="keywordflow">return</span> mScreenWidth;
+<a name="l00066"></a>00066     }
+<a name="l00067"></a>00067     <span class="keywordtype">int</span> screenHeight()<span class="keyword"> const </span>{
+<a name="l00068"></a>00068         <span class="keywordflow">return</span> mScreenHeight;
+<a name="l00069"></a>00069     }
+<a name="l00070"></a>00070     <span class="keywordtype">int</span> screen()<span class="keyword"> const </span>{
+<a name="l00071"></a>00071         <span class="keywordflow">return</span> mScreenNumber;
+<a name="l00072"></a>00072     }
+<a name="l00073"></a>00073 
+<a name="l00074"></a>00074     <span class="keywordtype">void</span> exec();
+<a name="l00075"></a>00075 
+<a name="l00076"></a>00076     <span class="keyword">static</span> <a class="code" href="class_r_glut_application.html">RGlutApplication</a> *activeApplication() {
+<a name="l00077"></a>00077         <span class="keywordflow">return</span> mActiveApplication;
 <a name="l00078"></a>00078     }
-<a name="l00079"></a>00079     
-<a name="l00080"></a>00080     <span class="keywordtype">void</span> exec();
-<a name="l00081"></a>00081     
-<a name="l00082"></a>00082     <span class="keyword">static</span> <a class="code" href="class_r_glut_application.html">RGlutApplication</a> * activeApplication()
-<a name="l00083"></a>00083     {
-<a name="l00084"></a>00084         <span class="keywordflow">return</span> mActiveApplication;
-<a name="l00085"></a>00085     }
-<a name="l00086"></a>00086     
-<a name="l00087"></a>00087     <span class="keywordtype">void</span> registerTimer(<a class="code" href="class_r_glut_timer.html">RGlutTimer</a> * timer);
-<a name="l00088"></a>00088     <span class="keywordtype">void</span> unregisterTimer(<a class="code" href="class_r_glut_timer.html">RGlutTimer</a> * timer);
-<a name="l00089"></a>00089     
-<a name="l00090"></a>00090 <span class="keyword">private</span>:
-<a name="l00091"></a>00091     <span class="keywordtype">void</span> checkTimers();
-<a name="l00092"></a>00092     
-<a name="l00093"></a>00093 <span class="keyword">protected</span>:
-<a name="l00094"></a>00094     <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> EventLoopInterval = 1;
-<a name="l00095"></a>00095     <span class="keyword">static</span> <a class="code" href="class_r_glut_application.html">RGlutApplication</a> * mActiveApplication;
-<a name="l00096"></a>00096 
-<a name="l00097"></a>00097     <a class="code" href="class_r_glut_window.html">RGlutWindow</a> * mMainWindow;
-<a name="l00098"></a>00098     <span class="keywordtype">bool</span> mFinished;
-<a name="l00099"></a>00099 
-<a name="l00100"></a>00100     <a class="code" href="class_r_glut_l_a_f.html">RGlutLAF</a> * mLAF;
-<a name="l00101"></a>00101 
-<a name="l00102"></a>00102     <span class="keywordtype">int</span> mScreenNumber;
-<a name="l00103"></a>00103     <span class="keywordtype">int</span> mScreenWidth;
-<a name="l00104"></a>00104     <span class="keywordtype">int</span> mScreenHeight;
-<a name="l00105"></a>00105     
-<a name="l00106"></a><a class="code" href="class_r_glut_application_1_1_timer_entry.html">00106</a>     <span class="keyword">class </span><a class="code" href="class_r_glut_application_1_1_timer_entry.html">TimerEntry</a>
-<a name="l00107"></a>00107     {
-<a name="l00108"></a>00108     <span class="keyword">public</span>:
-<a name="l00109"></a>00109         <a class="code" href="class_r_glut_time.html">RGlutTime</a> mTime;    
-<a name="l00110"></a>00110         <a class="code" href="class_r_glut_timer.html">RGlutTimer</a> * mTimer;
-<a name="l00111"></a>00111     };
-<a name="l00112"></a>00112     
-<a name="l00113"></a>00113     <span class="keyword">typedef</span> std::vector&lt;TimerEntry&gt; TimerSet;
-<a name="l00114"></a>00114     <span class="keyword">typedef</span> TimerSet::iterator TimerSetIter;
-<a name="l00115"></a>00115     
-<a name="l00116"></a>00116     TimerSet mTimers;
-<a name="l00117"></a>00117 };
-<a name="l00118"></a>00118 
-<a name="l00119"></a>00119 <span class="preprocessor">#endif</span>
+<a name="l00079"></a>00079 
+<a name="l00080"></a>00080     <span class="keywordtype">void</span> registerTimer(<a class="code" href="class_r_glut_timer.html">RGlutTimer</a> *timer);
+<a name="l00081"></a>00081     <span class="keywordtype">void</span> unregisterTimer(<a class="code" href="class_r_glut_timer.html">RGlutTimer</a> *timer);
+<a name="l00082"></a>00082 
+<a name="l00083"></a>00083 <span class="keyword">private</span>:
+<a name="l00084"></a>00084     <span class="keywordtype">void</span> checkTimers();
+<a name="l00085"></a>00085 
+<a name="l00086"></a>00086 <span class="keyword">protected</span>:
+<a name="l00087"></a>00087     <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> EventLoopInterval = 1;
+<a name="l00088"></a>00088     <span class="keyword">static</span> <a class="code" href="class_r_glut_application.html">RGlutApplication</a> *mActiveApplication;
+<a name="l00089"></a>00089 
+<a name="l00090"></a>00090     <a class="code" href="class_r_glut_window.html">RGlutWindow</a> *mMainWindow;
+<a name="l00091"></a>00091     <span class="keywordtype">bool</span> mFinished;
+<a name="l00092"></a>00092 
+<a name="l00093"></a>00093     <a class="code" href="class_r_glut_l_a_f.html">RGlutLAF</a> *mLAF;
+<a name="l00094"></a>00094 
+<a name="l00095"></a>00095     <span class="keywordtype">int</span> mScreenNumber;
+<a name="l00096"></a>00096     <span class="keywordtype">int</span> mScreenWidth;
+<a name="l00097"></a>00097     <span class="keywordtype">int</span> mScreenHeight;
+<a name="l00098"></a>00098 
+<a name="l00099"></a><a class="code" href="class_r_glut_application_1_1_timer_entry.html">00099</a>     <span class="keyword">class </span><a class="code" href="class_r_glut_application_1_1_timer_entry.html">TimerEntry</a>
+<a name="l00100"></a>00100     {
+<a name="l00101"></a>00101     <span class="keyword">public</span>:
+<a name="l00102"></a>00102         <a class="code" href="class_r_glut_time.html">RGlutTime</a> mTime;
+<a name="l00103"></a>00103         <a class="code" href="class_r_glut_timer.html">RGlutTimer</a> *mTimer;
+<a name="l00104"></a>00104     };
+<a name="l00105"></a>00105 
+<a name="l00106"></a>00106     <span class="keyword">typedef</span> std::vector&lt;TimerEntry&gt; TimerSet;
+<a name="l00107"></a>00107     <span class="keyword">typedef</span> TimerSet::iterator TimerSetIter;
+<a name="l00108"></a>00108 
+<a name="l00109"></a>00109     TimerSet mTimers;
+<a name="l00110"></a>00110 };
+<a name="l00111"></a>00111 
+<a name="l00112"></a>00112 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
@@ -234,7 +227,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 
-    <li class="footer">Generated on Mon Oct 31 2011 11:44:29 for glutes by
+    <li class="footer">Generated on Wed Nov 9 2011 10:47:19 for glutes by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.5.1 </li>
    </ul>

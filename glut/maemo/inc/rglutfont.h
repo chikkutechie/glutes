@@ -44,8 +44,17 @@ public:
     RGlutFont &operator=(RGlutFont const &);
     ~RGlutFont();
 
+    /**
+     * Retrieves the X11 Font.
+     */
     Font id() const;
+    /**
+     * Retrieves the X11 XFontStruct.
+     */
     XFontStruct *fontStruct();
+    /**
+     * Retrieves height of the text for the font.
+     */
     int textHeight() const;
     void fontInfoPrint() const;
 

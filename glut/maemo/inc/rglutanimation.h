@@ -45,7 +45,20 @@ public:
 
 /**
  * @class RGlutAnimation
- *        Base class for animation(or effects) framework
+ *        Base class for animation(or effects) framework.<br>
+ *        To implement an Animation class derive from this class and implement
+ *        void update(int) method.<br>
+ *        For Example:
+ *        @code
+ *        class MyAnimation: public RGlutAnimation
+ *        {
+ *        public:
+ *            void update(int)
+ *            {
+ *            // do the updation of the state here
+ *            }
+ *        };
+ *        @endcode
  */
 class RGlutAnimation
 {
@@ -59,22 +72,50 @@ public:
     RGlutAnimation();
     virtual ~RGlutAnimation();
 
+    /**
+     * Retrieves the duration
+     * @return The animation duration
+     */
     int duration() const {
         return mDuration;
     }
+    /**
+     * Sets the duration
+     * @param d The animation duration to set.
+     */
     void setDuration(int d) {
         mDuration = d;
     }
+    
+    
+    /**
+     * Retrieves the interval
+     * @return The animation interval
+     */
     int interval() const {
         return mInterval;
     }
+    /**
+     * Sets the interval
+     * @param interval The animation interval to set.
+     */
     void setInterval(int interval) {
         mInterval = interval;
     }
 
+    /**
+     * This method will be called to start the animation
+     */
     virtual void start();
+    /**
+     * This method will be called to stop the animation
+     */
     virtual void stop();
 
+    /**
+     * Sets the animation listner
+     * @param l This listner object. Ownership is with the caller.
+     */
     void setListner(RGlutAnimationListner *l) {
         mListner = l;
     }
@@ -95,4 +136,3 @@ protected:
 };
 
 #endif
-

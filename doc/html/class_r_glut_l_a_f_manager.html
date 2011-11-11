@@ -76,6 +76,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
       <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
 </div>
@@ -106,16 +107,78 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9817db61bd2f377e0217f85a59266f9a"></a><!-- doxytag: member="RGlutLAFManager::registerLAF" ref="a9817db61bd2f377e0217f85a59266f9a" args="(std::string const &amp;name, RGlutLAF *laf)" -->
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>registerLAF</b> (std::string const &amp;name, <a class="el" href="class_r_glut_l_a_f.html">RGlutLAF</a> *laf)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4eca4cc74003050851112f584668c058"></a><!-- doxytag: member="RGlutLAFManager::unregisterLAF" ref="a4eca4cc74003050851112f584668c058" args="(std::string const &amp;name)" -->
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>unregisterLAF</b> (std::string const &amp;name)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab2acb63b384102ca8cef532600536d2f"></a><!-- doxytag: member="RGlutLAFManager::getLAF" ref="ab2acb63b384102ca8cef532600536d2f" args="(std::string name)" -->
-static <a class="el" href="class_r_glut_l_a_f.html">RGlutLAF</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getLAF</b> (std::string name)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_l_a_f_manager.html#a9817db61bd2f377e0217f85a59266f9a">registerLAF</a> (std::string const &amp;name, <a class="el" href="class_r_glut_l_a_f.html">RGlutLAF</a> *laf)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_l_a_f_manager.html#a4eca4cc74003050851112f584668c058">unregisterLAF</a> (std::string const &amp;name)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_r_glut_l_a_f.html">RGlutLAF</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_l_a_f_manager.html#ab2acb63b384102ca8cef532600536d2f">getLAF</a> (std::string name)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Look and feel container </p>
-</div></div>
+</div><hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="ab2acb63b384102ca8cef532600536d2f"></a><!-- doxytag: member="RGlutLAFManager::getLAF" ref="ab2acb63b384102ca8cef532600536d2f" args="(std::string name)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_r_glut_l_a_f.html">RGlutLAF</a> * RGlutLAFManager::getLAF </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Retrieves the LAF object for the given name. </p>
+
+</div>
+</div>
+<a class="anchor" id="a9817db61bd2f377e0217f85a59266f9a"></a><!-- doxytag: member="RGlutLAFManager::registerLAF" ref="a9817db61bd2f377e0217f85a59266f9a" args="(std::string const &amp;name, RGlutLAF *laf)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutLAFManager::registerLAF </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_r_glut_l_a_f.html">RGlutLAF</a> *&#160;</td>
+          <td class="paramname"><em>laf</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Registers a LAF. </p>
+
+</div>
+</div>
+<a class="anchor" id="a4eca4cc74003050851112f584668c058"></a><!-- doxytag: member="RGlutLAFManager::unregisterLAF" ref="a4eca4cc74003050851112f584668c058" args="(std::string const &amp;name)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutLAFManager::unregisterLAF </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Removes a LAF. </p>
+
+</div>
+</div>
+</div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
@@ -125,7 +188,7 @@ static <a class="el" href="class_r_glut_l_a_f.html">RGlutLAF</a> *&#160;</td><td
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -135,7 +198,7 @@ static <a class="el" href="class_r_glut_l_a_f.html">RGlutLAF</a> *&#160;</td><td
 </div>
 
 
-    <li class="footer">Generated on Wed Nov 9 2011 10:47:20 for glutes by
+    <li class="footer">Generated on Fri Nov 11 2011 14:15:32 for glutes by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.5.1 </li>
    </ul>

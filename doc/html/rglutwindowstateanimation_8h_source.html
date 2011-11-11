@@ -175,12 +175,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00078"></a>00078     }
 <a name="l00079"></a>00079 
 <a name="l00080"></a>00080     <span class="keywordtype">void</span> setEasingCurve(RGlutEasingCurve::Type type) {
-<a name="l00081"></a>00081         mEasingCurve.setType(type);
+<a name="l00081"></a>00081         mEasingCurve.<a class="code" href="class_r_glut_easing_curve.html#ad2c5787327000fb06a249f1b84da6226">setType</a>(type);
 <a name="l00082"></a>00082     }
 <a name="l00083"></a>00083 
 <a name="l00084"></a>00084 <span class="keyword">private</span>:
 <a name="l00085"></a>00085     <span class="keywordtype">void</span> update(<span class="keywordtype">int</span> time);
-<a name="l00086"></a>00086     <span class="keywordtype">int</span> interpolate(<span class="keywordtype">int</span> start, <span class="keywordtype">int</span> end, <span class="keywordtype">float</span> t);
+<a name="l00086"></a>00086     <span class="keywordtype">int</span> interpolate(<span class="keywordtype">int</span> <a class="code" href="class_r_glut_animation.html#ab2ef34163f537ce5c3a9bdd91bf59e4e">start</a>, <span class="keywordtype">int</span> end, <span class="keywordtype">float</span> t);
 <a name="l00087"></a>00087 
 <a name="l00088"></a>00088 <span class="keyword">private</span>:
 <a name="l00089"></a>00089     <a class="code" href="class_r_glut_window.html">RGlutWindow</a> *mWindow;
@@ -203,7 +203,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -213,7 +213,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 
-    <li class="footer">Generated on Wed Nov 9 2011 10:47:19 for glutes by
+    <li class="footer">Generated on Fri Nov 11 2011 14:15:31 for glutes by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.5.1 </li>
    </ul>

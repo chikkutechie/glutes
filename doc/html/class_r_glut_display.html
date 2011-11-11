@@ -76,6 +76,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
       <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
 </div>
@@ -107,18 +108,69 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a14ef72076368c94e4071cedef9728b74"></a><!-- doxytag: member="RGlutDisplay::display" ref="a14ef72076368c94e4071cedef9728b74" args="()" -->
-Display *&#160;</td><td class="memItemRight" valign="bottom"><b>display</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4e97cc23339826767fc9163a15e32ba9"></a><!-- doxytag: member="RGlutDisplay::flush" ref="a4e97cc23339826767fc9163a15e32ba9" args="()" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>flush</b> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">Display *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_display.html#a14ef72076368c94e4071cedef9728b74">display</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_display.html#a4e97cc23339826767fc9163a15e32ba9">flush</a> ()</td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2c76fe98971947f68f7fd26d010176c9"></a><!-- doxytag: member="RGlutDisplay::instance" ref="a2c76fe98971947f68f7fd26d010176c9" args="()" -->
-static <a class="el" href="class_r_glut_display.html">RGlutDisplay</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>instance</b> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_r_glut_display.html">RGlutDisplay</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_display.html#a2c76fe98971947f68f7fd26d010176c9">instance</a> ()</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Holds display instance(Singleton class) </p>
-</div></div>
+</div><hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a14ef72076368c94e4071cedef9728b74"></a><!-- doxytag: member="RGlutDisplay::display" ref="a14ef72076368c94e4071cedef9728b74" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Display* RGlutDisplay::display </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Retrieves the X11 display. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The X11 display. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a4e97cc23339826767fc9163a15e32ba9"></a><!-- doxytag: member="RGlutDisplay::flush" ref="a4e97cc23339826767fc9163a15e32ba9" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutDisplay::flush </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Flushes the display queue. </p>
+
+</div>
+</div>
+<a class="anchor" id="a2c76fe98971947f68f7fd26d010176c9"></a><!-- doxytag: member="RGlutDisplay::instance" ref="a2c76fe98971947f68f7fd26d010176c9" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_r_glut_display.html">RGlutDisplay</a> * RGlutDisplay::instance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Retrieves the singleton instance of display. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The singleton instance of display. </dd></dl>
+
+</div>
+</div>
+</div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
@@ -128,7 +180,7 @@ static <a class="el" href="class_r_glut_display.html">RGlutDisplay</a> *&#160;</
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -138,7 +190,7 @@ static <a class="el" href="class_r_glut_display.html">RGlutDisplay</a> *&#160;</
 </div>
 
 
-    <li class="footer">Generated on Wed Nov 9 2011 10:47:20 for glutes by
+    <li class="footer">Generated on Fri Nov 11 2011 14:15:31 for glutes by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.5.1 </li>
    </ul>

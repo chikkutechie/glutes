@@ -46,19 +46,59 @@ public:
     RGlutGC(RGlutWindow *window);
     ~RGlutGC();
 
+    /**
+     * Sets the foreground color
+     */
     void setForegroundColor(RGlutColor const &color);
+    /**
+     * Sets the background color
+     */
     void setBackgroundColor(RGlutColor const &color);
 
+    /**
+     * Fill the given area.
+     * @param x x position
+     * @param y y position
+     * @param width width of the rectangle
+     * @param height height of the rectangle
+     */
     void fillRectangle(int x, int y, int w, int h);
 
+    /**
+     * Sets the font.
+     * @param font The font object to set
+     */
     void setFont(RGlutFont const &font);
+    /**
+     * Retrieves the font.
+     */
     RGlutFont font() const {
         return mFont;
     }
 
+    /**
+     * Retrieves the width that will be used for the given string.
+     * @param str The string for which the width should be found.
+     */
     int textWidth(std::string const &str);
+    /**
+     * Draws the given string.
+     * @param x x position
+     * @param y y position
+     * @param str The string which should be drawn
+     */
     void drawString(int x, int y, std::string const &str);
 
+    /**
+     * Draws the given pixmap.
+     * @param pmap The Pixmap which should be drawn
+     * @param sx source x position(pixmap x position)
+     * @param sy source y position(pixmap y position)
+     * @param width The width that is to draw from Pixmap
+     * @param height The height that is to draw from Pixmap 
+     * @param dx destination x position(window x position)
+     * @param dy destination y position(window y position)
+     */
     void drawPixmap(Pixmap pmap, int sx, int sy, int width, int height, int dx, int dy);
 
 private:

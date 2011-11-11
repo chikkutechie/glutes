@@ -46,20 +46,53 @@ public:
     RGlutLAF();
     virtual ~RGlutLAF();
 
+    /**
+     * Retrieves the default font for the FW.
+     */
     virtual RGlutFont defaultFont();
+    /**
+     * Retrieves the menu font for the FW.
+     */
     virtual RGlutFont menuItemFont();
 
+    /**
+     * Retrieves the maximum menu width for the FW.
+     */
     virtual int maximumMenuWidth();
+    /**
+     * Retrieves the maximum menu item height for the FW.
+     */
     virtual int maximumMenuItemHeight();
+    /**
+     * Retrieves the minimum menu width for the FW.
+     */
     virtual int minimumMenuWidth();
+    /**
+     * Retrieves the minimum menu item height for the FW.
+     */
     virtual int minimumMenuItemHeight();
 
+    /**
+     * Retrieves the menu item gap for the FW.
+     */
     virtual int menuItemGap();
 
+    /**
+     * Retrieves the menu background color for the FW.
+     */
     virtual RGlutColor getMenuBackgroundColor();
+    /**
+     * Retrieves the menu text color for the FW.
+     */
     virtual RGlutColor getMenuTextColor();
 
+    /**
+     * Creates the normal menu item background.
+     */
     virtual Pixmap createMenuItemBackgroundNormal(int w, int h);
+    /**
+     * Creates the pressed menu item background.
+     */
     virtual Pixmap createMenuItemBackgroundPressed(int w, int h);
 
 private:

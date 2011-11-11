@@ -44,6 +44,9 @@ public:
     RGlutLinearGradient()
     {}
 
+    /**
+     * Creates pixmap for the linear gradient.
+     */
     Pixmap createPixmap(int w, int h);
 
 private:

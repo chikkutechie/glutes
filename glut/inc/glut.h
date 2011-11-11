@@ -21,7 +21,7 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
@@ -68,9 +68,9 @@
 extern "C" {
 #endif
 
-/* 
- * Display mode definitions
- */
+    /*
+     * Display mode definitions
+     */
 #define GLUT_RGB                            0
 #define GLUT_RGBA                           GLUT_RGB
 #define GLUT_INDEX                          1
@@ -80,16 +80,16 @@ extern "C" {
 #define GLUT_ALPHA                          8
 #define GLUT_DEPTH                          16
 #define GLUT_STENCIL                        32
-/* 
- * RGB color component 
- */
+    /*
+     * RGB color component
+     */
 #define GLUT_RED                            0
 #define GLUT_GREEN                          1
 #define GLUT_BLUE                           2
 
-/*
- * The glutGet parameters
- */
+    /*
+     * The glutGet parameters
+     */
 #define  GLUT_WINDOW_X                      0x0064
 #define  GLUT_WINDOW_Y                      0x0065
 #define  GLUT_WINDOW_WIDTH                  0x0066
@@ -108,90 +108,90 @@ extern "C" {
 #define  GLUT_SCREEN_WIDTH_MM               0x00CA
 #define  GLUT_SCREEN_HEIGHT_MM              0x00CB
 #define  GLUT_MENU_NUM_ITEMS                0x012C
-/* 
- * Mouse buttons.
- */
+    /*
+     * Mouse buttons.
+     */
 #define GLUT_LEFT_BUTTON                    0
 #define GLUT_MIDDLE_BUTTON                  1
 #define GLUT_RIGHT_BUTTON                   2
 
-/* 
- * Mouse button  state.
- */
+    /*
+     * Mouse button  state.
+     */
 #define GLUT_DOWN                           0
 #define GLUT_UP                             1
 
-/* 
- * glutGetModifiers return mask.
- */
+    /*
+     * glutGetModifiers return mask.
+     */
 #define GLUT_ACTIVE_SHIFT                   1
 #define GLUT_ACTIVE_CTRL                    2
 #define GLUT_ACTIVE_ALT                     4
 
-/* 
- * Initialization functions 
- */
-APIENTRY void glutInit(int *argp, char **argv);
-APIENTRY void glutInitDisplayMode(unsigned int mode);
-APIENTRY void glutInitWindowPosition(int x, int y);
-APIENTRY void glutInitWindowSize(int width, int height);
+    /*
+     * Initialization functions
+     */
+    APIENTRY void glutInit(int *argp, char **argv);
+    APIENTRY void glutInitDisplayMode(unsigned int mode);
+    APIENTRY void glutInitWindowPosition(int x, int y);
+    APIENTRY void glutInitWindowSize(int width, int height);
 
-/* 
- * Main loop function 
- */
-APIENTRY void glutMainLoop();
+    /*
+     * Main loop function
+     */
+    APIENTRY void glutMainLoop();
 
-/* 
- * Window management functions 
- */
-APIENTRY int glutCreateWindow(const char *title);
-APIENTRY void glutDestroyWindow(int win);
-APIENTRY int glutGetWindow();
-APIENTRY void glutSetWindow(int win);
-APIENTRY void glutSetWindowTitle(const char *title);
-APIENTRY void glutShowWindow();
-APIENTRY void glutHideWindow();
-APIENTRY void glutPositionWindow(int x, int y);
-APIENTRY void glutReshapeWindow(int width, int height);
-APIENTRY void glutPopWindow();
-APIENTRY void glutPushWindow();
-APIENTRY void glutFullScreen();
+    /*
+     * Window management functions
+     */
+    APIENTRY int glutCreateWindow(const char *title);
+    APIENTRY void glutDestroyWindow(int win);
+    APIENTRY int glutGetWindow();
+    APIENTRY void glutSetWindow(int win);
+    APIENTRY void glutSetWindowTitle(const char *title);
+    APIENTRY void glutShowWindow();
+    APIENTRY void glutHideWindow();
+    APIENTRY void glutPositionWindow(int x, int y);
+    APIENTRY void glutReshapeWindow(int width, int height);
+    APIENTRY void glutPopWindow();
+    APIENTRY void glutPushWindow();
+    APIENTRY void glutFullScreen();
 
-/*
- * Display related functions 
- */
-APIENTRY void glutPostRedisplay();
-APIENTRY void glutPostWindowRedisplay(int win);
-APIENTRY void glutSwapBuffers();
+    /*
+     * Display related functions
+     */
+    APIENTRY void glutPostRedisplay();
+    APIENTRY void glutPostWindowRedisplay(int win);
+    APIENTRY void glutSwapBuffers();
 
-/* 
- * Callback functions 
- */
-APIENTRY void glutDisplayFunc(void (*func)());
-APIENTRY void glutReshapeFunc(void (*func)(int, int));
-APIENTRY void glutKeyboardFunc(void (*func)(unsigned char key, int x, int y));
-APIENTRY void glutMouseFunc(void (*func)(int button, int state, int x, int y));
-APIENTRY void glutMotionFunc(void (*func)(int x, int y));
-APIENTRY void glutPassiveMotionFunc(void (*func)(int x, int y));
-APIENTRY void glutTimerFunc(unsigned int millis, void (*func)(int), int value);
+    /*
+     * Callback functions
+     */
+    APIENTRY void glutDisplayFunc(void (*func)());
+    APIENTRY void glutReshapeFunc(void (*func)(int, int));
+    APIENTRY void glutKeyboardFunc(void (*func)(unsigned char key, int x, int y));
+    APIENTRY void glutMouseFunc(void (*func)(int button, int state, int x, int y));
+    APIENTRY void glutMotionFunc(void (*func)(int x, int y));
+    APIENTRY void glutPassiveMotionFunc(void (*func)(int x, int y));
+    APIENTRY void glutTimerFunc(unsigned int millis, void (*func)(int), int value);
 
-/* 
- * Menu related functions 
- */
-APIENTRY int glutCreateMenu(void (*)(int menu));
-APIENTRY void glutDestroyMenu(int menu);
-APIENTRY int glutGetMenu();
-APIENTRY void glutSetMenu(int menu);
-APIENTRY void glutAddMenuEntry(const char* label, int value);
-APIENTRY void glutRemoveMenuItem(int item);
-APIENTRY void glutAttachMenu(int button);
-APIENTRY void glutDetachMenu(int button);
+    /*
+     * Menu related functions
+     */
+    APIENTRY int glutCreateMenu(void ( *)(int menu));
+    APIENTRY void glutDestroyMenu(int menu);
+    APIENTRY int glutGetMenu();
+    APIENTRY void glutSetMenu(int menu);
+    APIENTRY void glutAddMenuEntry(const char *label, int value);
+    APIENTRY void glutRemoveMenuItem(int item);
+    APIENTRY void glutAttachMenu(int button);
+    APIENTRY void glutDetachMenu(int button);
 
-/* 
- * State retrieval functions 
- */
-APIENTRY int  glutGetModifiers();
-APIENTRY int glutGet(unsigned int state);
+    /*
+     * State retrieval functions
+     */
+    APIENTRY int  glutGetModifiers();
+    APIENTRY int glutGet(unsigned int state);
 
 #if defined(__cplusplus)
 }

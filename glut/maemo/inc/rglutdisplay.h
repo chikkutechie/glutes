@@ -42,12 +42,23 @@
 class RGlutDisplay
 {
 public:
+    /**
+     * Retrieves the singleton instance of display.
+     * @return The singleton instance of display.
+     */
     static RGlutDisplay *instance();
 
+    /**
+     * Retrieves the X11 display.
+     * @return The X11 display.
+     */
     Display *display() {
         return mDisplay;
     }
 
+    /**
+     * Flushes the display queue.
+     */
     void flush() {
         XFlush(mDisplay);
     }

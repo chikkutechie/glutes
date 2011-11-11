@@ -21,7 +21,7 @@
  * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
@@ -37,57 +37,55 @@
 
 using namespace std;
 
-std::vector<struct NameValPair*> pairs;
+std::vector<struct NameValPair *> pairs;
 unsigned int uid2 = 0x100039CE;
 unsigned int uid3 = 0x0;
 
-void generateSymbianFiles(std::vector<struct NameValPair*> &);
-void generateINFFile(std::vector<struct NameValPair*> &);
-void generateMMPFile(std::vector<struct NameValPair*> &);
-void generateResourceFile(std::vector<struct NameValPair*> &);
-void generateMainFile(std::vector<struct NameValPair*> &);
+void generateSymbianFiles(std::vector<struct NameValPair *> &);
+void generateINFFile(std::vector<struct NameValPair *> &);
+void generateMMPFile(std::vector<struct NameValPair *> &);
+void generateResourceFile(std::vector<struct NameValPair *> &);
+void generateMainFile(std::vector<struct NameValPair *> &);
 void generatePKGFile(std::vector<struct NameValPair *> &);
 
-std::vector<std::string> * getFiles(int name, std::vector<struct NameValPair*> & pairs);
+std::vector<std::string> * getFiles(int name, std::vector<struct NameValPair *> & pairs);
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
-extern int currentline;
+    extern int currentline;
 
-void yyerror (char const * msg)
-{
-    std::cerr << msg  << " in line " << currentline << std::endl;
-}
+    void yyerror(char const *msg)
+    {
+        std::cerr << msg  << " in line " << currentline << std::endl;
+    }
 
-int yywrap()
-{
-    return 1;
-}
+    int yywrap()
+    {
+        return 1;
+    }
 
-void addNameValPairProperty(int name, struct NameValPair * values)
-{
-    values->name = name;
-    pairs.push_back(values);
-}
+    void addNameValPairProperty(int name, struct NameValPair *values)
+    {
+        values->name = name;
+        pairs.push_back(values);
+    }
 
-struct NameValPair * addNVPair(struct NameValPair * pair, int name, char * value)
-{
-    pair->name = name;
-    ((std::vector<std::string> *)pair->data)->push_back(value);
-    return pair;
-}
+    struct NameValPair *addNVPair(struct NameValPair *pair, int name, char *value) {
+        pair->name = name;
+        ((std::vector<std::string> *)pair->data)->push_back(value);
+        return pair;
+    }
 
-struct NameValPair * createNVPair(int name, char * value)
-{
-    struct NameValPair * pair = new struct NameValPair;
-    pair->name = name;
-    pair->data = (char *)new std::vector<std::string>;
-    ((std::vector<std::string> *)pair->data)->push_back(value);
-    return pair;
-}
+    struct NameValPair *createNVPair(int name, char *value) {
+        struct NameValPair *pair = new struct NameValPair;
+        pair->name = name;
+        pair->data = (char *)new std::vector<std::string>;
+        ((std::vector<std::string> *)pair->data)->push_back(value);
+        return pair;
+    }
 
 #ifdef __cplusplus
 }
@@ -95,15 +93,15 @@ struct NameValPair * createNVPair(int name, char * value)
 
 void generateUIDs();
 
-std::string getMMPFileName(std::vector<struct NameValPair*> & pairs);
-std::string getProjectName(std::vector<struct NameValPair*> & pairs);
+std::string getMMPFileName(std::vector<struct NameValPair *> & pairs);
+std::string getProjectName(std::vector<struct NameValPair *> & pairs);
 
 void generateOutput()
 {
     generateSymbianFiles(pairs);
 }
 
-void generateSymbianFiles(std::vector<struct NameValPair*> & pairs)
+void generateSymbianFiles(std::vector<struct NameValPair *> & pairs)
 {
     generateUIDs();
     generateINFFile(pairs);
@@ -112,7 +110,7 @@ void generateSymbianFiles(std::vector<struct NameValPair*> & pairs)
     generatePKGFile(pairs);
 }
 
-void generateINFFile(std::vector<struct NameValPair*> & pairs)
+void generateINFFile(std::vector<struct NameValPair *> & pairs)
 {
     std::ofstream inffile;
     inffile.open("bld.inf");
@@ -138,7 +136,7 @@ void generateINFFile(std::vector<struct NameValPair*> & pairs)
     inffile.close();
 }
 
-void generateMMPFile(std::vector<struct NameValPair*> & pairs)
+void generateMMPFile(std::vector<struct NameValPair *> & pairs)
 {
     std::ofstream mmpfile;
 
@@ -152,7 +150,7 @@ void generateMMPFile(std::vector<struct NameValPair*> & pairs)
     mmpfile << "TARGET         " << getProjectName(pairs) << ".exe" << std::endl;
     mmpfile << "TARGETTYPE     " << "EXE" << std::endl;
     mmpfile << std::endl;
-    
+
 
     mmpfile << "UID            " << std::hex << "0x" << uid2 << " " << std::hex << "0x" << uid3 << std::endl;
     mmpfile << "SECUREID       " << std::hex << "0x" << uid3 << std::endl;
@@ -199,10 +197,10 @@ void generateMMPFile(std::vector<struct NameValPair*> & pairs)
     if (files) {
         for (std::vector<std::string>::iterator iter = files->begin();
              iter != files->end(); ++iter) {
-                 mmpfile << "SOURCE        " << *iter << std::endl;
+            mmpfile << "SOURCE        " << *iter << std::endl;
         }
     }
-    
+
     mmpfile << std::endl;
 
     mmpfile << "USERINCLUDE    ." << std::endl;
@@ -210,11 +208,11 @@ void generateMMPFile(std::vector<struct NameValPair*> & pairs)
     if (files) {
         for (std::vector<std::string>::iterator iter = files->begin();
              iter != files->end(); ++iter) {
-                 mmpfile << "USERINCLUDE    " << *iter << std::endl;
+            mmpfile << "USERINCLUDE    " << *iter << std::endl;
         }
     }
     mmpfile << std::endl;
-    
+
     mmpfile << "LIBRARY           libstdcppv5.lib" << std::endl;
     mmpfile << "LIBRARY           libpthread.lib" << std::endl;
     mmpfile << "LIBRARY           libc.lib" << std::endl;
@@ -238,20 +236,20 @@ void generateMMPFile(std::vector<struct NameValPair*> & pairs)
     if (files) {
         for (std::vector<std::string>::iterator iter = files->begin();
              iter != files->end(); ++iter) {
-                 mmpfile << "LIBRARY        " << *iter << std::endl;
+            mmpfile << "LIBRARY        " << *iter << std::endl;
         }
     }
     mmpfile << std::endl;
     mmpfile << "CAPABILITY       None" << std::endl;
     mmpfile << std::endl;
-    
+
     mmpfile << "STDCPP" << std::endl;
     mmpfile << std::endl;
-    
+
     mmpfile.close();
 }
 
-void generateResourceFile(std::vector<struct NameValPair*> & pairs)
+void generateResourceFile(std::vector<struct NameValPair *> & pairs)
 {
     std::ofstream rssfile;
     std::string rssfilename = getProjectName(pairs) + ".rss";
@@ -297,7 +295,7 @@ void generateResourceFile(std::vector<struct NameValPair*> & pairs)
 
     regrssfile << "RESOURCE APP_REGISTRATION_INFO" << std::endl;
     regrssfile << "    {" << std::endl;
-    regrssfile << "    app_file=" << getProjectName(pairs) <<";" << std::endl;
+    regrssfile << "    app_file=" << getProjectName(pairs) << ";" << std::endl;
     regrssfile << "    localisable_resource_file=qtn_loc_resource_file_1;" << std::endl;
     regrssfile << "    localisable_resource_id = R_LOCALISABLE_APP_INFO;" << std::endl;
     regrssfile << "    }" << std::endl;
@@ -307,42 +305,42 @@ void generateResourceFile(std::vector<struct NameValPair*> & pairs)
 
 void generatePKGFile(std::vector<struct NameValPair *> & pair)
 {
-	std::string projectName = getProjectName(pairs);
+    std::string projectName = getProjectName(pairs);
 
-	std::string pkgfilename =  projectName+ ".pkg";
+    std::string pkgfilename =  projectName + ".pkg";
 
     std::ofstream pkgfile;
     pkgfile.open(pkgfilename.c_str());
 
-	pkgfile << "; Language" << std::endl;
-	pkgfile << "&EN" << std::endl;
-	pkgfile << std::endl;
+    pkgfile << "; Language" << std::endl;
+    pkgfile << "&EN" << std::endl;
+    pkgfile << std::endl;
 
 
-	pkgfile << "; SIS header: name, uid, version" << std::endl;
-	pkgfile << "#{\"" << getProjectName(pairs) << "\"},(" << std::hex << "0x" << uid3 << "),1,0,0" << std::endl;
-	pkgfile << std::endl;
+    pkgfile << "; SIS header: name, uid, version" << std::endl;
+    pkgfile << "#{\"" << getProjectName(pairs) << "\"},(" << std::hex << "0x" << uid3 << "),1,0,0" << std::endl;
+    pkgfile << std::endl;
 
-	pkgfile << "; Default localized vendor name" << std::endl;
-	pkgfile << "%{\"Vendor\"}" << std::endl;
-	pkgfile << std::endl;
+    pkgfile << "; Default localized vendor name" << std::endl;
+    pkgfile << "%{\"Vendor\"}" << std::endl;
+    pkgfile << std::endl;
 
-	pkgfile << "; Default unique vendor name" << std::endl;
-	pkgfile << ":\"Vendor\"" << std::endl;
-	pkgfile << std::endl;
+    pkgfile << "; Default unique vendor name" << std::endl;
+    pkgfile << ":\"Vendor\"" << std::endl;
+    pkgfile << std::endl;
 
-	pkgfile << "; DEPLOYMENT" << std::endl;
-	pkgfile << "\"/epoc32/release/armv5/urel/" << projectName << ".exe\" - \"!:\\sys\\bin\\"
-		    << projectName << ".exe\"" << std::endl;
-	pkgfile << "\"/epoc32/data/z/resource/apps/" << projectName << ".rsc\" - \"!:\\resource\\apps\\" 
-			<< projectName << ".rsc\"" << std::endl;
+    pkgfile << "; DEPLOYMENT" << std::endl;
+    pkgfile << "\"/epoc32/release/armv5/urel/" << projectName << ".exe\" - \"!:\\sys\\bin\\"
+            << projectName << ".exe\"" << std::endl;
+    pkgfile << "\"/epoc32/data/z/resource/apps/" << projectName << ".rsc\" - \"!:\\resource\\apps\\"
+            << projectName << ".rsc\"" << std::endl;
 
-	pkgfile << "\"/epoc32/data/z/private/10003a3f/import/apps/" 
-		    << projectName << "_reg.rsc\" - \"!:\\private\\10003a3f\\import\\apps\\" 
-			<< projectName << "_reg.rsc\"" << std::endl;
-	pkgfile << std::endl;
+    pkgfile << "\"/epoc32/data/z/private/10003a3f/import/apps/"
+            << projectName << "_reg.rsc\" - \"!:\\private\\10003a3f\\import\\apps\\"
+            << projectName << "_reg.rsc\"" << std::endl;
+    pkgfile << std::endl;
 
-	pkgfile.close();
+    pkgfile.close();
 }
 
 void generateUIDs()
@@ -350,7 +348,7 @@ void generateUIDs()
     if (uid3 == 0) {
         uid2 = 0x100039CE;
         time_t rawtime;
-        tm * ptm;
+        tm *ptm;
 
         time(&rawtime);
 
@@ -365,28 +363,28 @@ void generateUIDs()
     }
 }
 
-std::string getMMPFileName(std::vector<struct NameValPair*> & pairs)
+std::string getMMPFileName(std::vector<struct NameValPair *> & pairs)
 {
     return getProjectName(pairs) + ".mmp";
 }
 
-std::string getProjectName(std::vector<struct NameValPair*> & pairs)
+std::string getProjectName(std::vector<struct NameValPair *> & pairs)
 {
-    for (std::vector<struct NameValPair*>::iterator iter = pairs.begin(); iter != pairs.end(); ++iter) {
+    for (std::vector<struct NameValPair *>::iterator iter = pairs.begin(); iter != pairs.end(); ++iter) {
         if ((*iter)->name == BINPRG) {
             return (*((std::vector<std::string> *)((*iter)->data)))[0];
-        } 
+        }
     }
 
     return "";
 }
 
-std::vector<std::string> * getFiles(int name, std::vector<struct NameValPair*> & pairs)
+std::vector<std::string> * getFiles(int name, std::vector<struct NameValPair *> & pairs)
 {
-    for (std::vector<struct NameValPair*>::iterator iter = pairs.begin(); iter != pairs.end(); ++iter) {
+    for (std::vector<struct NameValPair *>::iterator iter = pairs.begin(); iter != pairs.end(); ++iter) {
         if ((*iter)->name == name) {
             return ((std::vector<std::string> *)((*iter)->data));
-        } 
+        }
     }
 
     return 0;

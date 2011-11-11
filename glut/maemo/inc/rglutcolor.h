@@ -38,12 +38,22 @@
 class RGlutColor
 {
 public:
+    /**
+     * Creates a color object from RGB.
+     * @param r Red (0-255)
+     * @param g Green (0-255)
+     * @param b Blue (0-255)
+     */
     RGlutColor(int r = 0, int g = 0, int b = 0);
     RGlutColor(RGlutColor const &);
     ~RGlutColor();
 
     RGlutColor &operator=(RGlutColor const &);
 
+    /**
+     * Retrieves the pixel in XColor object.
+     * @return The pixel in XColor object.
+     */
     unsigned long pixel() const {
         return mColor.pixel;
     }

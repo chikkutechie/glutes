@@ -53,6 +53,11 @@ public:
     virtual ~RGlutGradient()
     {}
 
+    /**
+     * Add stop point for gradient.
+     * @param offset The offset for which color to be set
+     * @param c The color for the offset
+     */
     void addStop(float offset, color c) {
         mStops.insert(std::pair<float, color>(offset, c));
     }

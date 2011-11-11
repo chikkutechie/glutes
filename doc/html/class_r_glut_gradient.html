@@ -76,6 +76,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
       <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
 </div>
@@ -119,8 +120,7 @@ Classes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_gradient_1_1color.html">color</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a28708e8e6d6138b4af162270efd6f860"></a><!-- doxytag: member="RGlutGradient::addStop" ref="a28708e8e6d6138b4af162270efd6f860" args="(float offset, color c)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addStop</b> (float offset, <a class="el" href="class_r_glut_gradient_1_1color.html">color</a> c)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_gradient.html#a28708e8e6d6138b4af162270efd6f860">addStop</a> (float offset, <a class="el" href="class_r_glut_gradient_1_1color.html">color</a> c)</td></tr>
 <tr><td colspan="2"><h2><a name="pro-types"></a>
 Protected Types</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae0d915cfd054a2d2e3409a1d7c641b60"></a><!-- doxytag: member="RGlutGradient::Stops" ref="ae0d915cfd054a2d2e3409a1d7c641b60" args="" -->
@@ -136,7 +136,43 @@ Stops&#160;</td><td class="memItemRight" valign="bottom"><b>mStops</b></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Gradient class </p>
-</div></div>
+</div><hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a28708e8e6d6138b4af162270efd6f860"></a><!-- doxytag: member="RGlutGradient::addStop" ref="a28708e8e6d6138b4af162270efd6f860" args="(float offset, color c)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutGradient::addStop </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_r_glut_gradient_1_1color.html">color</a>&#160;</td>
+          <td class="paramname"><em>c</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Add stop point for gradient. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">offset</td><td>The offset for which color to be set </td></tr>
+    <tr><td class="paramname">c</td><td>The color for the offset </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
@@ -146,7 +182,7 @@ Stops&#160;</td><td class="memItemRight" valign="bottom"><b>mStops</b></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -156,7 +192,7 @@ Stops&#160;</td><td class="memItemRight" valign="bottom"><b>mStops</b></td></tr>
 </div>
 
 
-    <li class="footer">Generated on Wed Nov 9 2011 10:47:20 for glutes by
+    <li class="footer">Generated on Fri Nov 11 2011 14:15:32 for glutes by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.5.1 </li>
    </ul>

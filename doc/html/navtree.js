@@ -87,6 +87,7 @@ var NAVTREE =
       ] ],
       [ "RGlutApplication::TimerEntry", "class_r_glut_application_1_1_timer_entry.html", null ]
     ] ],
+    [ "Class Members", "functions.html", null ],
     [ "File List", "files.html", [
       [ "O:/OpenGL/glut/glut/common/inc/rcommon.h", null, null ],
       [ "O:/OpenGL/glut/glut/common/inc/reglglutglbinder.h", null, null ],

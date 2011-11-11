@@ -41,9 +41,18 @@
 class RGlutLAFManager
 {
 public:
+    /**
+     * Registers a LAF.
+     */
     static void registerLAF(std::string const &name, RGlutLAF *laf);
+    /**
+     * Removes a LAF.
+     */
     static void unregisterLAF(std::string const &name);
 
+    /**
+     * Retrieves the LAF object for the given name.
+     */
     static RGlutLAF *getLAF(std::string name);
 
 private:

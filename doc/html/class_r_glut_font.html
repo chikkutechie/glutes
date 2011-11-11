@@ -76,6 +76,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
       <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
 </div>
@@ -112,18 +113,67 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>RGlutFont</b> (<a class="el" href="class_r_glut_font.html">RGlutFont</a> const &amp;)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aab5167e211687c82ded9bde511953b8d"></a><!-- doxytag: member="RGlutFont::operator=" ref="aab5167e211687c82ded9bde511953b8d" args="(RGlutFont const &amp;)" -->
 <a class="el" href="class_r_glut_font.html">RGlutFont</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="class_r_glut_font.html">RGlutFont</a> const &amp;)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a23ed3c4047ece3d9ad6007e62836ca9b"></a><!-- doxytag: member="RGlutFont::id" ref="a23ed3c4047ece3d9ad6007e62836ca9b" args="() const " -->
-Font&#160;</td><td class="memItemRight" valign="bottom"><b>id</b> () const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9bf81bcef88945210923fee2bdbd58ca"></a><!-- doxytag: member="RGlutFont::fontStruct" ref="a9bf81bcef88945210923fee2bdbd58ca" args="()" -->
-XFontStruct *&#160;</td><td class="memItemRight" valign="bottom"><b>fontStruct</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af350216ad616b30074ac4210d5beebe9"></a><!-- doxytag: member="RGlutFont::textHeight" ref="af350216ad616b30074ac4210d5beebe9" args="() const " -->
-int&#160;</td><td class="memItemRight" valign="bottom"><b>textHeight</b> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">Font&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_font.html#a23ed3c4047ece3d9ad6007e62836ca9b">id</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">XFontStruct *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_font.html#a9bf81bcef88945210923fee2bdbd58ca">fontStruct</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_font.html#af350216ad616b30074ac4210d5beebe9">textHeight</a> () const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8406be0d72cad23457b3b049153252e9"></a><!-- doxytag: member="RGlutFont::fontInfoPrint" ref="a8406be0d72cad23457b3b049153252e9" args="() const " -->
 void&#160;</td><td class="memItemRight" valign="bottom"><b>fontInfoPrint</b> () const </td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Wrapper for X11 font </p>
-</div></div>
+</div><hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a9bf81bcef88945210923fee2bdbd58ca"></a><!-- doxytag: member="RGlutFont::fontStruct" ref="a9bf81bcef88945210923fee2bdbd58ca" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">XFontStruct * RGlutFont::fontStruct </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Retrieves the X11 XFontStruct. </p>
+
+</div>
+</div>
+<a class="anchor" id="a23ed3c4047ece3d9ad6007e62836ca9b"></a><!-- doxytag: member="RGlutFont::id" ref="a23ed3c4047ece3d9ad6007e62836ca9b" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Font RGlutFont::id </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Retrieves the X11 Font. </p>
+
+</div>
+</div>
+<a class="anchor" id="af350216ad616b30074ac4210d5beebe9"></a><!-- doxytag: member="RGlutFont::textHeight" ref="af350216ad616b30074ac4210d5beebe9" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int RGlutFont::textHeight </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Retrieves height of the text for the font. </p>
+
+</div>
+</div>
+</div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
@@ -133,7 +183,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>fontInfoPrint</b> () 
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -143,7 +193,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>fontInfoPrint</b> () 
 </div>
 
 
-    <li class="footer">Generated on Wed Nov 9 2011 10:47:20 for glutes by
+    <li class="footer">Generated on Fri Nov 11 2011 14:15:31 for glutes by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.5.1 </li>
    </ul>

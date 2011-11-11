@@ -46,13 +46,23 @@ public:
         : mType(type)
     {}
 
+    /**
+     * Retrieves the type of easing curve
+     */
     Type type() const {
         return mType;
     }
+    /**
+     * Sets the type of easing curve
+     */
     void setType(Type type) {
         mType = type;
     }
 
+    /**
+     * Evaluate the easing curve for the given value
+     * @param t The value(0-1) for which easing cure should be calculated.
+     */
     float eval(float t);
 
 private:

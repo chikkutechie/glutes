@@ -47,32 +47,66 @@ public:
     RGlutApplication(RGlutWindow *window = 0);
     virtual ~RGlutApplication();
 
+    /**
+     * Sets the main window of the application.
+     * @param window The main window pointer. Ownership is transfered to the application.
+     */
     void setMainWindow(RGlutWindow *window) {
         mMainWindow = window;
     }
 
+    /**
+     * Retrieves the main window of the application.
+     * @return The main window object.
+     */
     RGlutWindow *mainWindow() {
         return mMainWindow;
     }
 
+    /**
+     * Retrieves the Look And Feel for the application.
+     * @return The Look And Feel of the application.
+     */
     RGlutLAF *LAF() {
         return mLAF;
     }
 
+    /**
+     * Sets the main Look And Feel for the application.
+     * @param name LAF name.
+     */
     RGlutLAF *setLAF(std::string const &name);
 
+    /**
+     * Retrieves the screen width.
+     * @return The screen width.
+     */
     int screenWidth() const {
         return mScreenWidth;
     }
+    /**
+     * Retrieves the screen height.
+     * @return The screen height.
+     */
     int screenHeight() const {
         return mScreenHeight;
     }
+    /**
+     * Retrieves the screen number in X11.
+     * @return The screen number in X11.
+     */
     int screen() const {
         return mScreenNumber;
     }
 
+    /**
+     * Starts the event loop.
+     */
     void exec();
 
+    /**
+     * Retrieves the active application pointer.
+     */
     static RGlutApplication *activeApplication() {
         return mActiveApplication;
     }

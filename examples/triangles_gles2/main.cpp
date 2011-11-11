@@ -27,8 +27,8 @@
  */
 
 #include <vector>
-#include <math.h>
-#include <string.h>
+#include <string>
+#include <cmath>
 
 #if defined(GLUT_ES2)
 #include <glut.h>
@@ -72,6 +72,48 @@ float matrix[4 * 4];
 
 std::vector<GLfloat> triangleColors;
 std::vector<GLfloat> trianglePaths;
+
+enum MenuIds {
+    ZoomMenu = 10,
+    ExitMenu = 20
+};
+
+static const char *ZoomInText  = "Zoom In";
+static const char *ZoomOutText = "Zoom Out";
+static const char *PauseText   = "Pause";
+static const char *ExitText    = "Exit";
+
+class TrianglesState
+{
+public:
+    GLfloat xRot;
+    GLfloat yRot;
+
+    int scaleCount;
+    int scaleDir;
+    int doRotations;
+    int changeAnimState;
+    int menuId;
+    std::string zoomMenuText;
+    std::string animMenuText;
+};
+
+TrianglesState *state = 0;
+
+int  init();
+void scale();
+void display();
+void reshape(int w, int h);
+void menu(int id);
+void scale();
+void timeout(int);
+void createMenu();
+void parallel(float left, float right, float bottom, float top, float near, float far, float matrix[4 * 4]);
+void translate(float tx, float ty, float tz, float matrix[4 * 4]);
+float *multimatrix4x4(float matrix1[4 * 4], float matrix2[4 * 4], float matrix3[4 * 4]);
+void rotate(float angle, float x, float y, float z, float matrix[4 * 4]);
+void scale(float sx, float sy, float sz, float matrix[4 * 4]);
+
 
 void parallel(float left, float right, float bottom, float top, float near, float far, float matrix[4 * 4])
 {
@@ -200,6 +242,70 @@ void scale(float sx, float sy, float sz, float matrix[4 * 4])
     matrix[2 * 4 + 3] *= sz;
 }
 
+void menu(int id)
+{
+    switch (id) {
+    case ZoomMenu: {
+        scale();
+        break;
+    }
+
+    case ExitMenu: {
+        exit(0);
+        break;
+    }
+    }
+}
+
+void scale()
+{
+    float scaleUnit = 1.0f;
+
+    if (state->scaleDir < 0) {
+        if (state->scaleCount <= 0) {
+            state->scaleCount = 0;
+            state->scaleDir = state->scaleDir * -1;
+
+            state->zoomMenuText = ZoomOutText;
+
+            createMenu();
+
+        } else {
+            scaleUnit = 1.0f / 0.8f;
+            state->scaleCount--;
+        }
+    } else {
+        if (state->scaleCount >= 10) {
+            state->scaleCount = 10;
+            state->scaleDir = state->scaleDir * -1;
+
+            state->zoomMenuText = ZoomInText;
+
+            createMenu();
+
+        } else {
+            scaleUnit = 0.8f;
+            state->scaleCount++;
+        }
+    }
+    scale(scaleUnit, scaleUnit, scaleUnit, matrix);
+}
+
+void createMenu()
+{
+    if (state->menuId) {
+        glutDestroyMenu(state->menuId);
+        state->menuId = 0;
+    }
+
+    state->menuId = glutCreateMenu(menu);
+
+    glutAddMenuEntry(state->zoomMenuText.c_str(), ZoomMenu);
+    glutAddMenuEntry(ExitText, ExitMenu);
+
+    glutAttachMenu(GLUT_LEFT_BUTTON);
+}
+
 int init()
 {
     program = glCreateProgram();
@@ -275,6 +381,21 @@ int init()
         trianglePaths.push_back(0.0f);
     }
 
+    state = new TrianglesState;
+
+    state->xRot        = 0.0f;
+    state->yRot        = 0.0f;
+
+    state->scaleCount      = 0;
+    state->scaleDir        = 1;
+    state->doRotations     = 1;
+    state->changeAnimState = 0;
+    state->menuId          = 0;
+    state->zoomMenuText  = ZoomOutText;
+    state->animMenuText  = PauseText;
+
+    createMenu();
+
     return 1;
 }
 
@@ -323,44 +444,6 @@ void reshape(int w, int h)
     }
 }
 
-void mouseFunction(int button, int state, int, int)
-{
-    switch (button) {
-    case GLUT_LEFT_BUTTON: {
-        if (state == GLUT_DOWN) {
-            float scaleUnit = 1.0f;
-
-            if (scaleDir < 0) {
-                if (scaleCount <= 0) {
-                    scaleCount = 0;
-                    scaleDir = scaleDir * -1;
-                } else {
-                    scaleUnit = 1.0f / 0.8f;
-                    scaleCount--;
-                }
-            } else {
-                if (scaleCount >= 10) {
-                    scaleCount = 10;
-                    scaleDir = scaleDir * -1;
-                } else {
-                    scaleUnit = 0.8f;
-                    scaleCount++;
-                }
-            }
-            scale(scaleUnit, scaleUnit, scaleUnit, matrix);
-        }
-        break;
-    }
-    case GLUT_MIDDLE_BUTTON: {
-        break;
-    }
-    case GLUT_RIGHT_BUTTON: {
-        break;
-    }
-
-    }
-}
-
 void keyboard(unsigned char key, int, int)
 {
     switch (key) {
@@ -404,11 +487,14 @@ int main(int argc, char **argv)
 #endif
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutCreateWindow(argv[0]);
+    
+    glutFullScreen();
+
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
     glutTimerFunc(30, timeout, 0);
-    glutMouseFunc(mouseFunction);
     glutKeyboardFunc(keyboard);
+
 
     if (!init()) {
         exit(1);
@@ -416,5 +502,7 @@ int main(int argc, char **argv)
 
     glutMainLoop();
 
+    delete state;
+    
     return 0;
 }

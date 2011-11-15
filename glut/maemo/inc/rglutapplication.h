@@ -39,7 +39,7 @@ class RGlutLAF;
 
 /**
  * @class RGlutApplication
- *        Application class
+ * @brief Application class.
  */
 class RGlutApplication
 {
@@ -49,6 +49,7 @@ public:
 
     /**
      * Sets the main window of the application.
+     * @see RGlutWindow
      * @param window The main window pointer. Ownership is transfered to the application.
      */
     void setMainWindow(RGlutWindow *window) {
@@ -57,6 +58,7 @@ public:
 
     /**
      * Retrieves the main window of the application.
+     * @see RGlutWindow
      * @return The main window object.
      */
     RGlutWindow *mainWindow() {
@@ -65,6 +67,7 @@ public:
 
     /**
      * Retrieves the Look And Feel for the application.
+     * @see RGlutLAF
      * @return The Look And Feel of the application.
      */
     RGlutLAF *LAF() {
@@ -73,6 +76,7 @@ public:
 
     /**
      * Sets the main Look And Feel for the application.
+     * @see RGlutLAF
      * @param name LAF name.
      */
     RGlutLAF *setLAF(std::string const &name);

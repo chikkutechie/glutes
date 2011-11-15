@@ -35,11 +35,14 @@
 
 /**
  * @class RGlutWindowStateAnimation
- *        Animation implementation for window properties
+ * @brief Animation implementation for window properties.
  */
 class RGlutWindowStateAnimation: public RGlutAnimation
 {
 public:
+    /*!
+     * @enum The state that can be animated for RGlutWindow class.
+     */
     enum WindowState {
         Position,
         Size,
@@ -48,35 +51,66 @@ public:
 
     RGlutWindowStateAnimation(RGlutWindow *window);
 
+    /*!
+     * Sets the winidow state that should be animated.
+     */
     void setWindowState(WindowState state) {
         mWindowState = state;
     }
 
+    /*!
+     * Sets start postion, this applies for Position state animation only.
+     * @see WindowState.
+     */
     void setStartPos(RGlutPointI point) {
         mWindowRectStart.setX1(point.x());
         mWindowRectStart.setY1(point.y());
     }
+    /*!
+     * Sets end postion, this applies for Position state animation only.
+     * @see WindowState.
+     */
     void setEndPos(RGlutPointI point) {
         mWindowRectEnd.setX1(point.x());
         mWindowRectEnd.setY1(point.y());
     }
 
+    /*!
+     * Sets start size, this applies for Size state animation only.
+     * @see WindowState.
+     */
     void setStartSize(RGlutSizeI size) {
         mWindowRectStart.setWidth(size.width());
         mWindowRectStart.setHeight(size.height());
     }
+    /*!
+     * Sets end size, this applies for Size state animation only.
+     * @see WindowState.
+     */
     void setEndSize(RGlutSizeI size) {
         mWindowRectEnd.setWidth(size.width());
         mWindowRectEnd.setHeight(size.height());
     }
 
+    /*!
+     * Sets start rect, this applies for Rect state animation only.
+     * @see WindowState.
+     */
     void setStartRect(RGlutRectI rect) {
         mWindowRectStart = rect;
     }
+    /*!
+     * Sets end rect, this applies for Rect state animation only.
+     * @see WindowState.
+     */
     void setEndRect(RGlutRectI rect) {
         mWindowRectEnd = rect;
     }
 
+    /*!
+     * Sets the type of easing curve that should be used for animation.
+     * @see RGlutEasingCurve
+     */
     void setEasingCurve(RGlutEasingCurve::Type type) {
         mEasingCurve.setType(type);
     }

@@ -34,7 +34,7 @@
 
 /**
  * @class RGlutMaemoWindow
- *        Window implementation for glut
+ * @brief Window class implementation for maemo glut.
  */
 class RGlutMaemoWindow: public RGlutWindow
 {

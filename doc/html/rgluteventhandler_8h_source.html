@@ -130,23 +130,44 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00033"></a>00033 <span class="comment"></span>
 <a name="l00034"></a>00034 <span class="comment">/**</span>
 <a name="l00035"></a>00035 <span class="comment"> * @class RGlutEventHandler</span>
-<a name="l00036"></a>00036 <span class="comment"> *        Listner for events</span>
+<a name="l00036"></a>00036 <span class="comment"> * @brief Listner for events.</span>
 <a name="l00037"></a>00037 <span class="comment"> */</span>
-<a name="l00038"></a><a class="code" href="class_r_glut_event_handler.html">00038</a> <span class="keyword">class </span><a class="code" href="class_r_glut_event_handler.html">RGlutEventHandler</a>
+<a name="l00038"></a><a class="code" href="class_r_glut_event_handler.html">00038</a> <span class="keyword">class </span><a class="code" href="class_r_glut_event_handler.html" title="Listner for events.">RGlutEventHandler</a>
 <a name="l00039"></a>00039 {
 <a name="l00040"></a>00040 <span class="keyword">public</span>:
-<a name="l00041"></a>00041     <span class="keyword">virtual</span> ~<a class="code" href="class_r_glut_event_handler.html">RGlutEventHandler</a>() {}
-<a name="l00042"></a>00042 
-<a name="l00043"></a>00043     <span class="keyword">virtual</span> <span class="keywordtype">void</span> draw() = 0;
-<a name="l00044"></a>00044     <span class="keyword">virtual</span> <span class="keywordtype">void</span> reshape(<span class="keywordtype">int</span> w, <span class="keywordtype">int</span> h) = 0;
-<a name="l00045"></a>00045     <span class="keyword">virtual</span> <span class="keywordtype">void</span> rerect(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">int</span> w, <span class="keywordtype">int</span> h) = 0;
-<a name="l00046"></a>00046     <span class="keyword">virtual</span> <span class="keywordtype">void</span> repos(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y) = 0;
-<a name="l00047"></a>00047     <span class="keyword">virtual</span> <span class="keywordtype">void</span> keyboard(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> key, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> modifier, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y) = 0;
-<a name="l00048"></a>00048     <span class="keyword">virtual</span> <span class="keywordtype">void</span> mouse(<span class="keywordtype">int</span> button, <span class="keywordtype">int</span> modifier, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">bool</span> pressed = <span class="keyword">true</span>) = 0;
-<a name="l00049"></a>00049     <span class="keyword">virtual</span> <span class="keywordtype">void</span> motion(<span class="keywordtype">int</span> button, <span class="keywordtype">int</span> modifier, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y) = 0;
-<a name="l00050"></a>00050 };
-<a name="l00051"></a>00051 
-<a name="l00052"></a>00052 <span class="preprocessor">#endif</span>
+<a name="l00041"></a>00041     <span class="keyword">virtual</span> ~<a class="code" href="class_r_glut_event_handler.html" title="Listner for events.">RGlutEventHandler</a>() {}
+<a name="l00042"></a>00042 <span class="comment"></span>
+<a name="l00043"></a>00043 <span class="comment">    /*!</span>
+<a name="l00044"></a>00044 <span class="comment">     * Draw callback</span>
+<a name="l00045"></a>00045 <span class="comment">     */</span>
+<a name="l00046"></a>00046     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_r_glut_event_handler.html#a767393d750d38f03bf50015f0b27de2a">draw</a>() = 0;<span class="comment"></span>
+<a name="l00047"></a>00047 <span class="comment">    /*!</span>
+<a name="l00048"></a>00048 <span class="comment">     * Shape callback</span>
+<a name="l00049"></a>00049 <span class="comment">     */</span>
+<a name="l00050"></a>00050     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_r_glut_event_handler.html#ab6f860b60411463b53287a27879234b6">reshape</a>(<span class="keywordtype">int</span> w, <span class="keywordtype">int</span> h) = 0;<span class="comment"></span>
+<a name="l00051"></a>00051 <span class="comment">    /*!</span>
+<a name="l00052"></a>00052 <span class="comment">     * Rect change callback</span>
+<a name="l00053"></a>00053 <span class="comment">     */</span>
+<a name="l00054"></a>00054     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_r_glut_event_handler.html#aea3d0ff7173de93275cb0f3485c05132">rerect</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">int</span> w, <span class="keywordtype">int</span> h) = 0;<span class="comment"></span>
+<a name="l00055"></a>00055 <span class="comment">    /*!</span>
+<a name="l00056"></a>00056 <span class="comment">     * Postion change callback</span>
+<a name="l00057"></a>00057 <span class="comment">     */</span>
+<a name="l00058"></a>00058     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_r_glut_event_handler.html#ae9b1628c7466571e34e0f391ff2ea9e9">repos</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y) = 0;<span class="comment"></span>
+<a name="l00059"></a>00059 <span class="comment">    /*!</span>
+<a name="l00060"></a>00060 <span class="comment">     * Keyboad event callback</span>
+<a name="l00061"></a>00061 <span class="comment">     */</span>
+<a name="l00062"></a>00062     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_r_glut_event_handler.html#ac212b2da44c7d9f70eb85ec2a62f6366">keyboard</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> key, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> modifier, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y) = 0;<span class="comment"></span>
+<a name="l00063"></a>00063 <span class="comment">    /*!</span>
+<a name="l00064"></a>00064 <span class="comment">     * Mouse press callback</span>
+<a name="l00065"></a>00065 <span class="comment">     */</span>
+<a name="l00066"></a>00066     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_r_glut_event_handler.html#aca5c820a04dd62cf69bcb905ad7baac4">mouse</a>(<span class="keywordtype">int</span> button, <span class="keywordtype">int</span> modifier, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">bool</span> pressed = <span class="keyword">true</span>) = 0;<span class="comment"></span>
+<a name="l00067"></a>00067 <span class="comment">    /*!</span>
+<a name="l00068"></a>00068 <span class="comment">     * Mouse motion callback</span>
+<a name="l00069"></a>00069 <span class="comment">     */</span>
+<a name="l00070"></a>00070     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_r_glut_event_handler.html#afe051e9d1c762efd8d62ef6dc92fee09">motion</a>(<span class="keywordtype">int</span> button, <span class="keywordtype">int</span> modifier, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y) = 0;
+<a name="l00071"></a>00071 };
+<a name="l00072"></a>00072 
+<a name="l00073"></a>00073 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
@@ -167,7 +188,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 
-    <li class="footer">Generated on Fri Nov 11 2011 14:15:31 for glutes by
+    <li class="footer">Generated on Tue Nov 15 2011 10:57:41 for glutes by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.5.1 </li>
    </ul>

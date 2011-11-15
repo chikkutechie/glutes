@@ -133,9 +133,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00036"></a>00036 <span class="comment"></span>
 <a name="l00037"></a>00037 <span class="comment">/**</span>
 <a name="l00038"></a>00038 <span class="comment"> * @class REGLProperties</span>
-<a name="l00039"></a>00039 <span class="comment"> *        Manages properties of EGL</span>
+<a name="l00039"></a>00039 <span class="comment"> * @brief Manages properties of EGL.</span>
 <a name="l00040"></a>00040 <span class="comment"> */</span>
-<a name="l00041"></a><a class="code" href="class_r_e_g_l_properties.html">00041</a> <span class="keyword">class </span><a class="code" href="class_r_e_g_l_properties.html">REGLProperties</a>
+<a name="l00041"></a><a class="code" href="class_r_e_g_l_properties.html">00041</a> <span class="keyword">class </span><a class="code" href="class_r_e_g_l_properties.html" title="Manages properties of EGL.">REGLProperties</a>
 <a name="l00042"></a>00042 {
 <a name="l00043"></a>00043 <span class="keyword">private</span>:
 <a name="l00044"></a>00044     <span class="keyword">class </span>AttributePair
@@ -161,28 +161,38 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00064"></a>00064         SurfaceAttribute,
 <a name="l00065"></a>00065     };
 <a name="l00066"></a>00066 
-<a name="l00067"></a>00067     <a class="code" href="class_r_e_g_l_properties.html">REGLProperties</a>()
+<a name="l00067"></a>00067     <a class="code" href="class_r_e_g_l_properties.html" title="Manages properties of EGL.">REGLProperties</a>()
 <a name="l00068"></a>00068     {}
-<a name="l00069"></a>00069 
-<a name="l00070"></a>00070     <span class="keywordtype">void</span> addProperty(<span class="keywordtype">int</span> name, <span class="keywordtype">int</span> value);
-<a name="l00071"></a>00071     <span class="keywordtype">void</span> removeProperty(<span class="keywordtype">int</span> name);
-<a name="l00072"></a>00072 
-<a name="l00073"></a>00073     EGLint *getAttributes(Type type);
-<a name="l00074"></a>00074 
-<a name="l00075"></a>00075 <span class="keyword">private</span>:
-<a name="l00076"></a>00076     <span class="keywordtype">void</span> addProperty(Attributes &amp;attributes, <span class="keywordtype">int</span> name, <span class="keywordtype">int</span> value);
-<a name="l00077"></a>00077     <span class="keywordtype">void</span> removeProperty(Attributes &amp;attributes, <span class="keywordtype">int</span> name);
-<a name="l00078"></a>00078 
-<a name="l00079"></a>00079     Attributes *getAttributesVector(Type type);
-<a name="l00080"></a>00080 
-<a name="l00081"></a>00081 <span class="keyword">private</span>:
-<a name="l00082"></a>00082     Attributes mConfigAttributes;
-<a name="l00083"></a>00083     Attributes mContextAttributes;
-<a name="l00084"></a>00084     Attributes mSurfaceAttributes;
-<a name="l00085"></a>00085 };
-<a name="l00086"></a>00086 
-<a name="l00087"></a>00087 <span class="preprocessor">#endif</span>
-<a name="l00088"></a>00088 <span class="preprocessor"></span>
+<a name="l00069"></a>00069 <span class="comment"></span>
+<a name="l00070"></a>00070 <span class="comment">    /*!</span>
+<a name="l00071"></a>00071 <span class="comment">     * Set the given property name and value.</span>
+<a name="l00072"></a>00072 <span class="comment">     * The type of property is automatically determined.</span>
+<a name="l00073"></a>00073 <span class="comment">     */</span>
+<a name="l00074"></a>00074     <span class="keywordtype">void</span> <a class="code" href="class_r_e_g_l_properties.html#a0c9a55d989c3376446f5e465a0d97bc6">addProperty</a>(<span class="keywordtype">int</span> name, <span class="keywordtype">int</span> value);<span class="comment"></span>
+<a name="l00075"></a>00075 <span class="comment">    /*!</span>
+<a name="l00076"></a>00076 <span class="comment">     * remove the given property.</span>
+<a name="l00077"></a>00077 <span class="comment">     */</span>
+<a name="l00078"></a>00078     <span class="keywordtype">void</span> <a class="code" href="class_r_e_g_l_properties.html#a6bf19b47c74cf1c330dd143f7409f002">removeProperty</a>(<span class="keywordtype">int</span> name);
+<a name="l00079"></a>00079 <span class="comment"></span>
+<a name="l00080"></a>00080 <span class="comment">    /*!</span>
+<a name="l00081"></a>00081 <span class="comment">     * Retries the attribute set for the given type</span>
+<a name="l00082"></a>00082 <span class="comment">     */</span>
+<a name="l00083"></a>00083     EGLint *<a class="code" href="class_r_e_g_l_properties.html#a90e8aa0fa8ddfa267fc6fc29b7ed4c03">getAttributes</a>(Type type);
+<a name="l00084"></a>00084 
+<a name="l00085"></a>00085 <span class="keyword">private</span>:
+<a name="l00086"></a>00086     <span class="keywordtype">void</span> <a class="code" href="class_r_e_g_l_properties.html#a0c9a55d989c3376446f5e465a0d97bc6">addProperty</a>(Attributes &amp;attributes, <span class="keywordtype">int</span> name, <span class="keywordtype">int</span> value);
+<a name="l00087"></a>00087     <span class="keywordtype">void</span> <a class="code" href="class_r_e_g_l_properties.html#a6bf19b47c74cf1c330dd143f7409f002">removeProperty</a>(Attributes &amp;attributes, <span class="keywordtype">int</span> name);
+<a name="l00088"></a>00088 
+<a name="l00089"></a>00089     Attributes *getAttributesVector(Type type);
+<a name="l00090"></a>00090 
+<a name="l00091"></a>00091 <span class="keyword">private</span>:
+<a name="l00092"></a>00092     Attributes mConfigAttributes;
+<a name="l00093"></a>00093     Attributes mContextAttributes;
+<a name="l00094"></a>00094     Attributes mSurfaceAttributes;
+<a name="l00095"></a>00095 };
+<a name="l00096"></a>00096 
+<a name="l00097"></a>00097 <span class="preprocessor">#endif</span>
+<a name="l00098"></a>00098 <span class="preprocessor"></span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
@@ -203,7 +213,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 
-    <li class="footer">Generated on Fri Nov 11 2011 14:15:31 for glutes by
+    <li class="footer">Generated on Tue Nov 15 2011 10:57:41 for glutes by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.5.1 </li>
    </ul>

@@ -103,6 +103,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="REGLProperties" -->
+<p>Manages properties of EGL.  
+ <a href="class_r_e_g_l_properties.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="reglproperties_8h_source.html">reglproperties.h</a>&gt;</code></p>
 
 <p><a href="class_r_e_g_l_properties-members.html">List of all members.</a></p>
@@ -118,16 +121,78 @@ Public Types</h2></td></tr>
  }</td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0c9a55d989c3376446f5e465a0d97bc6"></a><!-- doxytag: member="REGLProperties::addProperty" ref="a0c9a55d989c3376446f5e465a0d97bc6" args="(int name, int value)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addProperty</b> (int name, int value)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6bf19b47c74cf1c330dd143f7409f002"></a><!-- doxytag: member="REGLProperties::removeProperty" ref="a6bf19b47c74cf1c330dd143f7409f002" args="(int name)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>removeProperty</b> (int name)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a90e8aa0fa8ddfa267fc6fc29b7ed4c03"></a><!-- doxytag: member="REGLProperties::getAttributes" ref="a90e8aa0fa8ddfa267fc6fc29b7ed4c03" args="(Type type)" -->
-EGLint *&#160;</td><td class="memItemRight" valign="bottom"><b>getAttributes</b> (Type type)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_e_g_l_properties.html#a0c9a55d989c3376446f5e465a0d97bc6">addProperty</a> (int name, int value)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_e_g_l_properties.html#a6bf19b47c74cf1c330dd143f7409f002">removeProperty</a> (int name)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">EGLint *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_e_g_l_properties.html#a90e8aa0fa8ddfa267fc6fc29b7ed4c03">getAttributes</a> (Type type)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>Manages properties of EGL </p>
-</div></div>
+<div class="textblock"><p>Manages properties of EGL. </p>
+</div><hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a0c9a55d989c3376446f5e465a0d97bc6"></a><!-- doxytag: member="REGLProperties::addProperty" ref="a0c9a55d989c3376446f5e465a0d97bc6" args="(int name, int value)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void REGLProperties::addProperty </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Set the given property name and value. The type of property is automatically determined. </p>
+
+</div>
+</div>
+<a class="anchor" id="a90e8aa0fa8ddfa267fc6fc29b7ed4c03"></a><!-- doxytag: member="REGLProperties::getAttributes" ref="a90e8aa0fa8ddfa267fc6fc29b7ed4c03" args="(Type type)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">EGLint * REGLProperties::getAttributes </td>
+          <td>(</td>
+          <td class="paramtype">Type&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Retries the attribute set for the given type </p>
+
+</div>
+</div>
+<a class="anchor" id="a6bf19b47c74cf1c330dd143f7409f002"></a><!-- doxytag: member="REGLProperties::removeProperty" ref="a6bf19b47c74cf1c330dd143f7409f002" args="(int name)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void REGLProperties::removeProperty </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>remove the given property. </p>
+
+</div>
+</div>
+</div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
@@ -147,7 +212,7 @@ EGLint *&#160;</td><td class="memItemRight" valign="bottom"><b>getAttributes</b>
 </div>
 
 
-    <li class="footer">Generated on Fri Nov 11 2011 14:15:31 for glutes by
+    <li class="footer">Generated on Tue Nov 15 2011 10:57:42 for glutes by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.5.1 </li>
    </ul>

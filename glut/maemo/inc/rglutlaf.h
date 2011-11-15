@@ -38,7 +38,7 @@
 
 /**
  * @class RGlutLAF
- *        Look and feel class
+ * @brief Defines basic FW properties.
  */
 class RGlutLAF
 {
@@ -79,10 +79,12 @@ public:
 
     /**
      * Retrieves the menu background color for the FW.
+     * @see RGlutColor
      */
     virtual RGlutColor getMenuBackgroundColor();
     /**
      * Retrieves the menu text color for the FW.
+     * @see RGlutColor
      */
     virtual RGlutColor getMenuTextColor();
 

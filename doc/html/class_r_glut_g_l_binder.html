@@ -103,6 +103,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="RGlutGLBinder" -->
+<p>Base class for binding OpenGL/OpenVG to underlining windowing system and managing resources.  
+ <a href="class_r_glut_g_l_binder.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="rglutglbinder_8h_source.html">rglutglbinder.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for RGlutGLBinder:</div>
@@ -127,18 +130,12 @@ typedef int *&#160;</td><td class="memItemRight" valign="bottom"><b>Surface</b><
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0219d7ccd744fc35f06a4254bce1522d"></a><!-- doxytag: member="RGlutGLBinder::RGlutGLBinder" ref="a0219d7ccd744fc35f06a4254bce1522d" args="(API a=OPENGL_ES_API)" -->
 &#160;</td><td class="memItemRight" valign="bottom"><b>RGlutGLBinder</b> (API a=OPENGL_ES_API)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4c9c687da8e9ff47d4758c93bf031139"></a><!-- doxytag: member="RGlutGLBinder::initialize" ref="a4c9c687da8e9ff47d4758c93bf031139" args="()=0" -->
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>initialize</b> ()=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a671f2dd1241871076a6d82df6b20acc9"></a><!-- doxytag: member="RGlutGLBinder::createSurface" ref="a671f2dd1241871076a6d82df6b20acc9" args="(Surface surface, int width, int height)=0" -->
-virtual unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>createSurface</b> (Surface surface, int width, int height)=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad40d50228095c4515a9a2c6cea948a84"></a><!-- doxytag: member="RGlutGLBinder::makeCurrent" ref="ad40d50228095c4515a9a2c6cea948a84" args="(unsigned int surface)=0" -->
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>makeCurrent</b> (unsigned int surface)=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5df318ad6455c84b27a962939a8bafcd"></a><!-- doxytag: member="RGlutGLBinder::destroySurface" ref="a5df318ad6455c84b27a962939a8bafcd" args="(unsigned int surface)=0" -->
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>destroySurface</b> (unsigned int surface)=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2dda0015bab6a9269a16a0b84dcae745"></a><!-- doxytag: member="RGlutGLBinder::swapBuffer" ref="a2dda0015bab6a9269a16a0b84dcae745" args="(unsigned int surface)=0" -->
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>swapBuffer</b> (unsigned int surface)=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a55ca2fcb2f3426c0d21eb0e0ce93edf9"></a><!-- doxytag: member="RGlutGLBinder::terminate" ref="a55ca2fcb2f3426c0d21eb0e0ce93edf9" args="()=0" -->
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>terminate</b> ()=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_g_l_binder.html#a4c9c687da8e9ff47d4758c93bf031139">initialize</a> ()=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_g_l_binder.html#a671f2dd1241871076a6d82df6b20acc9">createSurface</a> (Surface surface, int width, int height)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_g_l_binder.html#ad40d50228095c4515a9a2c6cea948a84">makeCurrent</a> (unsigned int surface)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_g_l_binder.html#a5df318ad6455c84b27a962939a8bafcd">destroySurface</a> (unsigned int surface)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_g_l_binder.html#a2dda0015bab6a9269a16a0b84dcae745">swapBuffer</a> (unsigned int surface)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_g_l_binder.html#a55ca2fcb2f3426c0d21eb0e0ce93edf9">terminate</a> ()=0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a557b0ed82e7b1116a6ccfb6ca065f80a"></a><!-- doxytag: member="RGlutGLBinder::addProperty" ref="a557b0ed82e7b1116a6ccfb6ca065f80a" args="(int, int)" -->
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>addProperty</b> (int, int)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abf32f16ef60b75a0f2aaae4fd59d0196"></a><!-- doxytag: member="RGlutGLBinder::removeProperty" ref="abf32f16ef60b75a0f2aaae4fd59d0196" args="(int)" -->
@@ -193,8 +190,143 @@ Protected Attributes</h2></td></tr>
 API&#160;</td><td class="memItemRight" valign="bottom"><b>mAPI</b></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>Base class for binding OpenGL/OpenVG to underlining windowing system and managing resources </p>
-</div></div>
+<div class="textblock"><p>Base class for binding OpenGL/OpenVG to underlining windowing system and managing resources. </p>
+</div><hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a671f2dd1241871076a6d82df6b20acc9"></a><!-- doxytag: member="RGlutGLBinder::createSurface" ref="a671f2dd1241871076a6d82df6b20acc9" args="(Surface surface, int width, int height)=0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual unsigned int RGlutGLBinder::createSurface </td>
+          <td>(</td>
+          <td class="paramtype">Surface&#160;</td>
+          <td class="paramname"><em>surface</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>height</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Creates the surface for rendering. </p>
+
+<p>Implemented in <a class="el" href="class_r_e_g_l_glut_g_l_binder.html#afd67f2631139c7d08740295fb13dec59">REGLGlutGLBinder</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5df318ad6455c84b27a962939a8bafcd"></a><!-- doxytag: member="RGlutGLBinder::destroySurface" ref="a5df318ad6455c84b27a962939a8bafcd" args="(unsigned int surface)=0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void RGlutGLBinder::destroySurface </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>surface</em></td><td>)</td>
+          <td><code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Destroys the passed surface. Current surface and context will to set to null. </p>
+
+<p>Implemented in <a class="el" href="class_r_e_g_l_glut_g_l_binder.html#a3fc0b68232b023a9784db984cd9da9e4">REGLGlutGLBinder</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4c9c687da8e9ff47d4758c93bf031139"></a><!-- doxytag: member="RGlutGLBinder::initialize" ref="a4c9c687da8e9ff47d4758c93bf031139" args="()=0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool RGlutGLBinder::initialize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Does the initialization </p>
+
+<p>Implemented in <a class="el" href="class_r_e_g_l_glut_g_l_binder.html#aad3a39848efebf25f4ee599105535d04">REGLGlutGLBinder</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad40d50228095c4515a9a2c6cea948a84"></a><!-- doxytag: member="RGlutGLBinder::makeCurrent" ref="ad40d50228095c4515a9a2c6cea948a84" args="(unsigned int surface)=0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool RGlutGLBinder::makeCurrent </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>surface</em></td><td>)</td>
+          <td><code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Makes the given surface as the current surface. </p>
+
+<p>Implemented in <a class="el" href="class_r_e_g_l_glut_g_l_binder.html#a0781b9a57bad860f96a9e3f6352725f8">REGLGlutGLBinder</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2dda0015bab6a9269a16a0b84dcae745"></a><!-- doxytag: member="RGlutGLBinder::swapBuffer" ref="a2dda0015bab6a9269a16a0b84dcae745" args="(unsigned int surface)=0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void RGlutGLBinder::swapBuffer </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>surface</em></td><td>)</td>
+          <td><code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>swap the back buffer </p>
+
+<p>Implemented in <a class="el" href="class_r_e_g_l_glut_g_l_binder.html#abe9d3af47f584868ba89d7c4ff7f1634">REGLGlutGLBinder</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a55ca2fcb2f3426c0d21eb0e0ce93edf9"></a><!-- doxytag: member="RGlutGLBinder::terminate" ref="a55ca2fcb2f3426c0d21eb0e0ce93edf9" args="()=0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void RGlutGLBinder::terminate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Terminate the binding. </p>
+
+<p>Implemented in <a class="el" href="class_r_e_g_l_glut_g_l_binder.html#a097513589a969c53b8a78dfc7c8e5100">REGLGlutGLBinder</a>.</p>
+
+</div>
+</div>
+</div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
@@ -214,7 +346,7 @@ API&#160;</td><td class="memItemRight" valign="bottom"><b>mAPI</b></td></tr>
 </div>
 
 
-    <li class="footer">Generated on Fri Nov 11 2011 14:15:32 for glutes by
+    <li class="footer">Generated on Tue Nov 15 2011 10:57:42 for glutes by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.5.1 </li>
    </ul>

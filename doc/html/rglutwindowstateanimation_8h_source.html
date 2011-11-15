@@ -132,67 +132,101 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00035"></a>00035 <span class="comment"></span>
 <a name="l00036"></a>00036 <span class="comment">/**</span>
 <a name="l00037"></a>00037 <span class="comment"> * @class RGlutWindowStateAnimation</span>
-<a name="l00038"></a>00038 <span class="comment"> *        Animation implementation for window properties</span>
+<a name="l00038"></a>00038 <span class="comment"> * @brief Animation implementation for window properties.</span>
 <a name="l00039"></a>00039 <span class="comment"> */</span>
-<a name="l00040"></a><a class="code" href="class_r_glut_window_state_animation.html">00040</a> <span class="keyword">class </span><a class="code" href="class_r_glut_window_state_animation.html">RGlutWindowStateAnimation</a>: <span class="keyword">public</span> <a class="code" href="class_r_glut_animation.html">RGlutAnimation</a>
+<a name="l00040"></a><a class="code" href="class_r_glut_window_state_animation.html">00040</a> <span class="keyword">class </span><a class="code" href="class_r_glut_window_state_animation.html" title="Animation implementation for window properties.">RGlutWindowStateAnimation</a>: <span class="keyword">public</span> <a class="code" href="class_r_glut_animation.html" title="Base class for animation(or effects) framework.">RGlutAnimation</a>
 <a name="l00041"></a>00041 {
-<a name="l00042"></a>00042 <span class="keyword">public</span>:
-<a name="l00043"></a>00043     <span class="keyword">enum</span> WindowState {
-<a name="l00044"></a>00044         Position,
-<a name="l00045"></a>00045         Size,
-<a name="l00046"></a>00046         PositionAndSize
-<a name="l00047"></a>00047     };
-<a name="l00048"></a>00048 
-<a name="l00049"></a>00049     <a class="code" href="class_r_glut_window_state_animation.html">RGlutWindowStateAnimation</a>(<a class="code" href="class_r_glut_window.html">RGlutWindow</a> *window);
-<a name="l00050"></a>00050 
-<a name="l00051"></a>00051     <span class="keywordtype">void</span> setWindowState(WindowState state) {
-<a name="l00052"></a>00052         mWindowState = state;
-<a name="l00053"></a>00053     }
-<a name="l00054"></a>00054 
-<a name="l00055"></a>00055     <span class="keywordtype">void</span> setStartPos(<a class="code" href="class_r_glut_point.html">RGlutPointI</a> point) {
-<a name="l00056"></a>00056         mWindowRectStart.setX1(point.x());
-<a name="l00057"></a>00057         mWindowRectStart.setY1(point.y());
-<a name="l00058"></a>00058     }
-<a name="l00059"></a>00059     <span class="keywordtype">void</span> setEndPos(<a class="code" href="class_r_glut_point.html">RGlutPointI</a> point) {
-<a name="l00060"></a>00060         mWindowRectEnd.setX1(point.x());
-<a name="l00061"></a>00061         mWindowRectEnd.setY1(point.y());
-<a name="l00062"></a>00062     }
-<a name="l00063"></a>00063 
-<a name="l00064"></a>00064     <span class="keywordtype">void</span> setStartSize(<a class="code" href="class_r_glut_size.html">RGlutSizeI</a> size) {
-<a name="l00065"></a>00065         mWindowRectStart.setWidth(size.width());
-<a name="l00066"></a>00066         mWindowRectStart.setHeight(size.height());
-<a name="l00067"></a>00067     }
-<a name="l00068"></a>00068     <span class="keywordtype">void</span> setEndSize(<a class="code" href="class_r_glut_size.html">RGlutSizeI</a> size) {
-<a name="l00069"></a>00069         mWindowRectEnd.setWidth(size.width());
-<a name="l00070"></a>00070         mWindowRectEnd.setHeight(size.height());
-<a name="l00071"></a>00071     }
-<a name="l00072"></a>00072 
-<a name="l00073"></a>00073     <span class="keywordtype">void</span> setStartRect(<a class="code" href="class_r_glut_rect.html">RGlutRectI</a> rect) {
-<a name="l00074"></a>00074         mWindowRectStart = rect;
-<a name="l00075"></a>00075     }
-<a name="l00076"></a>00076     <span class="keywordtype">void</span> setEndRect(<a class="code" href="class_r_glut_rect.html">RGlutRectI</a> rect) {
-<a name="l00077"></a>00077         mWindowRectEnd = rect;
-<a name="l00078"></a>00078     }
-<a name="l00079"></a>00079 
-<a name="l00080"></a>00080     <span class="keywordtype">void</span> setEasingCurve(RGlutEasingCurve::Type type) {
-<a name="l00081"></a>00081         mEasingCurve.<a class="code" href="class_r_glut_easing_curve.html#ad2c5787327000fb06a249f1b84da6226">setType</a>(type);
-<a name="l00082"></a>00082     }
-<a name="l00083"></a>00083 
-<a name="l00084"></a>00084 <span class="keyword">private</span>:
-<a name="l00085"></a>00085     <span class="keywordtype">void</span> update(<span class="keywordtype">int</span> time);
-<a name="l00086"></a>00086     <span class="keywordtype">int</span> interpolate(<span class="keywordtype">int</span> <a class="code" href="class_r_glut_animation.html#ab2ef34163f537ce5c3a9bdd91bf59e4e">start</a>, <span class="keywordtype">int</span> end, <span class="keywordtype">float</span> t);
-<a name="l00087"></a>00087 
-<a name="l00088"></a>00088 <span class="keyword">private</span>:
-<a name="l00089"></a>00089     <a class="code" href="class_r_glut_window.html">RGlutWindow</a> *mWindow;
-<a name="l00090"></a>00090     WindowState mWindowState;
-<a name="l00091"></a>00091     <a class="code" href="class_r_glut_rect.html">RGlutRectI</a> mWindowRectStart;
-<a name="l00092"></a>00092     <a class="code" href="class_r_glut_rect.html">RGlutRectI</a> mWindowRectEnd;
-<a name="l00093"></a>00093     <a class="code" href="class_r_glut_easing_curve.html">RGlutEasingCurve</a> mEasingCurve;
-<a name="l00094"></a>00094 };
-<a name="l00095"></a>00095 
-<a name="l00096"></a>00096 <span class="preprocessor">#endif</span>
-<a name="l00097"></a>00097 <span class="preprocessor"></span>
-<a name="l00098"></a>00098 
+<a name="l00042"></a>00042 <span class="keyword">public</span>:<span class="comment"></span>
+<a name="l00043"></a>00043 <span class="comment">    /*!</span>
+<a name="l00044"></a>00044 <span class="comment">     * @enum The state that can be animated for RGlutWindow class.</span>
+<a name="l00045"></a>00045 <span class="comment">     */</span>
+<a name="l00046"></a>00046     <span class="keyword">enum</span> WindowState {
+<a name="l00047"></a>00047         Position,
+<a name="l00048"></a>00048         Size,
+<a name="l00049"></a>00049         PositionAndSize
+<a name="l00050"></a>00050     };
+<a name="l00051"></a>00051 
+<a name="l00052"></a>00052     <a class="code" href="class_r_glut_window_state_animation.html" title="Animation implementation for window properties.">RGlutWindowStateAnimation</a>(<a class="code" href="class_r_glut_window.html" title="Window class implementation, wrapper for X11 window.">RGlutWindow</a> *window);
+<a name="l00053"></a>00053 <span class="comment"></span>
+<a name="l00054"></a>00054 <span class="comment">    /*!</span>
+<a name="l00055"></a>00055 <span class="comment">     * Sets the winidow state that should be animated.</span>
+<a name="l00056"></a>00056 <span class="comment">     */</span>
+<a name="l00057"></a><a class="code" href="class_r_glut_window_state_animation.html#a2959667f1979ad88b42b4364b81233e2">00057</a>     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_window_state_animation.html#a2959667f1979ad88b42b4364b81233e2">setWindowState</a>(WindowState state) {
+<a name="l00058"></a>00058         mWindowState = state;
+<a name="l00059"></a>00059     }
+<a name="l00060"></a>00060 <span class="comment"></span>
+<a name="l00061"></a>00061 <span class="comment">    /*!</span>
+<a name="l00062"></a>00062 <span class="comment">     * Sets start postion, this applies for Position state animation only.</span>
+<a name="l00063"></a>00063 <span class="comment">     * @see WindowState.</span>
+<a name="l00064"></a>00064 <span class="comment">     */</span>
+<a name="l00065"></a><a class="code" href="class_r_glut_window_state_animation.html#a4e5e2da390065872280c9ff1d4c1bb2c">00065</a>     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_window_state_animation.html#a4e5e2da390065872280c9ff1d4c1bb2c">setStartPos</a>(<a class="code" href="class_r_glut_point.html" title="Template class for simple point.">RGlutPointI</a> point) {
+<a name="l00066"></a>00066         mWindowRectStart.<a class="code" href="class_r_glut_rect.html#aa4f785b658bffb4bcdd094f44f97ef3c">setX1</a>(point.<a class="code" href="class_r_glut_point.html#a75a759546f7387147d34aedf11480684">x</a>());
+<a name="l00067"></a>00067         mWindowRectStart.<a class="code" href="class_r_glut_rect.html#ad8cd674e05d72396006f3d4d986e0887">setY1</a>(point.<a class="code" href="class_r_glut_point.html#adc5de0574afa2d122e348604650307c6">y</a>());
+<a name="l00068"></a>00068     }<span class="comment"></span>
+<a name="l00069"></a>00069 <span class="comment">    /*!</span>
+<a name="l00070"></a>00070 <span class="comment">     * Sets end postion, this applies for Position state animation only.</span>
+<a name="l00071"></a>00071 <span class="comment">     * @see WindowState.</span>
+<a name="l00072"></a>00072 <span class="comment">     */</span>
+<a name="l00073"></a><a class="code" href="class_r_glut_window_state_animation.html#a0975fe4a8a1f3dc5ed3f0c635ee9ff68">00073</a>     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_window_state_animation.html#a0975fe4a8a1f3dc5ed3f0c635ee9ff68">setEndPos</a>(<a class="code" href="class_r_glut_point.html" title="Template class for simple point.">RGlutPointI</a> point) {
+<a name="l00074"></a>00074         mWindowRectEnd.<a class="code" href="class_r_glut_rect.html#aa4f785b658bffb4bcdd094f44f97ef3c">setX1</a>(point.<a class="code" href="class_r_glut_point.html#a75a759546f7387147d34aedf11480684">x</a>());
+<a name="l00075"></a>00075         mWindowRectEnd.<a class="code" href="class_r_glut_rect.html#ad8cd674e05d72396006f3d4d986e0887">setY1</a>(point.<a class="code" href="class_r_glut_point.html#adc5de0574afa2d122e348604650307c6">y</a>());
+<a name="l00076"></a>00076     }
+<a name="l00077"></a>00077 <span class="comment"></span>
+<a name="l00078"></a>00078 <span class="comment">    /*!</span>
+<a name="l00079"></a>00079 <span class="comment">     * Sets start size, this applies for Size state animation only.</span>
+<a name="l00080"></a>00080 <span class="comment">     * @see WindowState.</span>
+<a name="l00081"></a>00081 <span class="comment">     */</span>
+<a name="l00082"></a><a class="code" href="class_r_glut_window_state_animation.html#aa61af26bfa7b9ddc00876fc10f838f7c">00082</a>     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_window_state_animation.html#aa61af26bfa7b9ddc00876fc10f838f7c">setStartSize</a>(<a class="code" href="class_r_glut_size.html" title="Size class implementation.">RGlutSizeI</a> size) {
+<a name="l00083"></a>00083         mWindowRectStart.<a class="code" href="class_r_glut_rect.html#abd59fc1c563f36828d967e438251303d">setWidth</a>(size.<a class="code" href="class_r_glut_size.html#a8b57e620ca7e72a49f7e62027581b505">width</a>());
+<a name="l00084"></a>00084         mWindowRectStart.<a class="code" href="class_r_glut_rect.html#a3fbedeb38e16b54dc1d88165ff8fc2bf">setHeight</a>(size.<a class="code" href="class_r_glut_size.html#aa3c7e7ed6864ceed05359e62b687139d">height</a>());
+<a name="l00085"></a>00085     }<span class="comment"></span>
+<a name="l00086"></a>00086 <span class="comment">    /*!</span>
+<a name="l00087"></a>00087 <span class="comment">     * Sets end size, this applies for Size state animation only.</span>
+<a name="l00088"></a>00088 <span class="comment">     * @see WindowState.</span>
+<a name="l00089"></a>00089 <span class="comment">     */</span>
+<a name="l00090"></a><a class="code" href="class_r_glut_window_state_animation.html#a6d716d8f7c89ad61370d9e7c5781435e">00090</a>     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_window_state_animation.html#a6d716d8f7c89ad61370d9e7c5781435e">setEndSize</a>(<a class="code" href="class_r_glut_size.html" title="Size class implementation.">RGlutSizeI</a> size) {
+<a name="l00091"></a>00091         mWindowRectEnd.<a class="code" href="class_r_glut_rect.html#abd59fc1c563f36828d967e438251303d">setWidth</a>(size.<a class="code" href="class_r_glut_size.html#a8b57e620ca7e72a49f7e62027581b505">width</a>());
+<a name="l00092"></a>00092         mWindowRectEnd.<a class="code" href="class_r_glut_rect.html#a3fbedeb38e16b54dc1d88165ff8fc2bf">setHeight</a>(size.<a class="code" href="class_r_glut_size.html#aa3c7e7ed6864ceed05359e62b687139d">height</a>());
+<a name="l00093"></a>00093     }
+<a name="l00094"></a>00094 <span class="comment"></span>
+<a name="l00095"></a>00095 <span class="comment">    /*!</span>
+<a name="l00096"></a>00096 <span class="comment">     * Sets start rect, this applies for Rect state animation only.</span>
+<a name="l00097"></a>00097 <span class="comment">     * @see WindowState.</span>
+<a name="l00098"></a>00098 <span class="comment">     */</span>
+<a name="l00099"></a><a class="code" href="class_r_glut_window_state_animation.html#ae25fd230753777e5b99c98e3f3f53408">00099</a>     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_window_state_animation.html#ae25fd230753777e5b99c98e3f3f53408">setStartRect</a>(<a class="code" href="class_r_glut_rect.html">RGlutRectI</a> rect) {
+<a name="l00100"></a>00100         mWindowRectStart = rect;
+<a name="l00101"></a>00101     }<span class="comment"></span>
+<a name="l00102"></a>00102 <span class="comment">    /*!</span>
+<a name="l00103"></a>00103 <span class="comment">     * Sets end rect, this applies for Rect state animation only.</span>
+<a name="l00104"></a>00104 <span class="comment">     * @see WindowState.</span>
+<a name="l00105"></a>00105 <span class="comment">     */</span>
+<a name="l00106"></a><a class="code" href="class_r_glut_window_state_animation.html#a32cf0df6c35b8fe6c86d7596908f37f0">00106</a>     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_window_state_animation.html#a32cf0df6c35b8fe6c86d7596908f37f0">setEndRect</a>(<a class="code" href="class_r_glut_rect.html">RGlutRectI</a> rect) {
+<a name="l00107"></a>00107         mWindowRectEnd = rect;
+<a name="l00108"></a>00108     }
+<a name="l00109"></a>00109 <span class="comment"></span>
+<a name="l00110"></a>00110 <span class="comment">    /*!</span>
+<a name="l00111"></a>00111 <span class="comment">     * Sets the type of easing curve that should be used for animation.</span>
+<a name="l00112"></a>00112 <span class="comment">     * @see RGlutEasingCurve</span>
+<a name="l00113"></a>00113 <span class="comment">     */</span>
+<a name="l00114"></a><a class="code" href="class_r_glut_window_state_animation.html#af9a795c210cc52aaba6a3d8c79b67b29">00114</a>     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_window_state_animation.html#af9a795c210cc52aaba6a3d8c79b67b29">setEasingCurve</a>(RGlutEasingCurve::Type type) {
+<a name="l00115"></a>00115         mEasingCurve.<a class="code" href="class_r_glut_easing_curve.html#ad2c5787327000fb06a249f1b84da6226">setType</a>(type);
+<a name="l00116"></a>00116     }
+<a name="l00117"></a>00117 
+<a name="l00118"></a>00118 <span class="keyword">private</span>:
+<a name="l00119"></a>00119     <span class="keywordtype">void</span> update(<span class="keywordtype">int</span> time);
+<a name="l00120"></a>00120     <span class="keywordtype">int</span> interpolate(<span class="keywordtype">int</span> <a class="code" href="class_r_glut_animation.html#ab2ef34163f537ce5c3a9bdd91bf59e4e">start</a>, <span class="keywordtype">int</span> end, <span class="keywordtype">float</span> t);
+<a name="l00121"></a>00121 
+<a name="l00122"></a>00122 <span class="keyword">private</span>:
+<a name="l00123"></a>00123     <a class="code" href="class_r_glut_window.html" title="Window class implementation, wrapper for X11 window.">RGlutWindow</a> *mWindow;
+<a name="l00124"></a>00124     WindowState mWindowState;
+<a name="l00125"></a>00125     <a class="code" href="class_r_glut_rect.html">RGlutRectI</a> mWindowRectStart;
+<a name="l00126"></a>00126     <a class="code" href="class_r_glut_rect.html">RGlutRectI</a> mWindowRectEnd;
+<a name="l00127"></a>00127     <a class="code" href="class_r_glut_easing_curve.html" title="Easing curve implementation, mainly for animation FW.">RGlutEasingCurve</a> mEasingCurve;
+<a name="l00128"></a>00128 };
+<a name="l00129"></a>00129 
+<a name="l00130"></a>00130 <span class="preprocessor">#endif</span>
+<a name="l00131"></a>00131 <span class="preprocessor"></span>
+<a name="l00132"></a>00132 
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
@@ -213,7 +247,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 
-    <li class="footer">Generated on Fri Nov 11 2011 14:15:31 for glutes by
+    <li class="footer">Generated on Tue Nov 15 2011 10:57:42 for glutes by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.5.1 </li>
    </ul>

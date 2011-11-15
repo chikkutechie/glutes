@@ -33,19 +33,40 @@
 
 /**
  * @class RGlutEventHandler
- *        Listner for events
+ * @brief Listner for events.
  */
 class RGlutEventHandler
 {
 public:
     virtual ~RGlutEventHandler() {}
 
+    /*!
+     * Draw callback
+     */
     virtual void draw() = 0;
+    /*!
+     * Shape callback
+     */
     virtual void reshape(int w, int h) = 0;
+    /*!
+     * Rect change callback
+     */
     virtual void rerect(int x, int y, int w, int h) = 0;
+    /*!
+     * Postion change callback
+     */
     virtual void repos(int x, int y) = 0;
+    /*!
+     * Keyboad event callback
+     */
     virtual void keyboard(unsigned char key, unsigned int modifier, int x, int y) = 0;
+    /*!
+     * Mouse press callback
+     */
     virtual void mouse(int button, int modifier, int x, int y, bool pressed = true) = 0;
+    /*!
+     * Mouse motion callback
+     */
     virtual void motion(int button, int modifier, int x, int y) = 0;
 };
 

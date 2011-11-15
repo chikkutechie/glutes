@@ -102,20 +102,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="RGlutWindowStateAnimation" --><!-- doxytag: inherits="RGlutAnimation" -->
+<p>Animation implementation for window properties.  
+ <a href="class_r_glut_window_state_animation.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="rglutwindowstateanimation_8h_source.html">rglutwindowstateanimation.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for RGlutWindowStateAnimation:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_r_glut_window_state_animation__inherit__graph.png" border="0" usemap="#_r_glut_window_state_animation_inherit__map" alt="Inheritance graph"/></div>
 <map name="_r_glut_window_state_animation_inherit__map" id="_r_glut_window_state_animation_inherit__map">
-<area shape="rect" id="node2" href="class_r_glut_animation.html" title="{RGlutAnimation\n|# mState\l# mTimer\l# mDuration\l# mTime\l# mInterval\l# mListner\l|+ RGlutAnimation()\l+ ~RGlutAnimation()\l+ duration()\l+ setDuration()\l+ interval()\l+ setInterval()\l+ start()\l+ stop()\l+ setListner()\l# update()\l# timeExpired()\l}" alt="" coords="40,6,179,327"/></map>
+<area shape="rect" id="node2" href="class_r_glut_animation.html" title="Base class for animation(or effects) framework." alt="" coords="49,6,217,375"/></map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for RGlutWindowStateAnimation:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_r_glut_window_state_animation__coll__graph.png" border="0" usemap="#_r_glut_window_state_animation_coll__map" alt="Collaboration graph"/></div>
 <map name="_r_glut_window_state_animation_coll__map" id="_r_glut_window_state_animation_coll__map">
-<area shape="rect" id="node2" href="class_r_glut_animation.html" title="{RGlutAnimation\n|# mState\l# mTimer\l# mDuration\l# mTime\l# mInterval\l# mListner\l|+ RGlutAnimation()\l+ ~RGlutAnimation()\l+ duration()\l+ setDuration()\l+ interval()\l+ setInterval()\l+ start()\l+ stop()\l+ setListner()\l# update()\l# timeExpired()\l}" alt="" coords="193,249,332,570"/><area shape="rect" id="node4" href="class_r_glut_animation_listner.html" title="{RGlutAnimationListner\n||+ ~RGlutAnimationListner()\l+ started()\l+ stopped()\l}" alt="" coords="5,38,184,151"/><area shape="rect" id="node6" href="class_r_glut_time.html" title="{RGlutTime\n||+ RGlutTime()\l+ start()\l+ elapsed()\l+ currentTime()\l}" alt="" coords="208,30,317,159"/><area shape="rect" id="node8" href="class_r_glut_timer.html" title="{RGlutTimer\n||+ RGlutTimer()\l+ ~RGlutTimer()\l+ interval()\l+ setInterval()\l+ start()\l+ stop()\l+ run()\l}" alt="" coords="341,6,456,183"/></map>
+<area shape="rect" id="node2" href="class_r_glut_animation.html" title="Base class for animation(or effects) framework." alt="" coords="232,275,400,645"/><area shape="rect" id="node4" href="class_r_glut_animation_listner.html" title="{RGlutAnimationListner\n||+ ~RGlutAnimationListner()\l+ started()\l+ stopped()\l}" alt="" coords="5,43,224,170"/><area shape="rect" id="node6" href="class_r_glut_time.html" title="Time class implementation for different platform." alt="" coords="248,34,384,179"/><area shape="rect" id="node8" href="class_r_glut_timer.html" title="Timer class implementation." alt="" coords="408,6,547,207"/></map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="class_r_glut_window_state_animation-members.html">List of all members.</a></p>
@@ -130,26 +133,170 @@ Public Types</h2></td></tr>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a163cdce0a90dc12acf4f2d56934139f1"></a><!-- doxytag: member="RGlutWindowStateAnimation::RGlutWindowStateAnimation" ref="a163cdce0a90dc12acf4f2d56934139f1" args="(RGlutWindow *window)" -->
 &#160;</td><td class="memItemRight" valign="bottom"><b>RGlutWindowStateAnimation</b> (<a class="el" href="class_r_glut_window.html">RGlutWindow</a> *window)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2959667f1979ad88b42b4364b81233e2"></a><!-- doxytag: member="RGlutWindowStateAnimation::setWindowState" ref="a2959667f1979ad88b42b4364b81233e2" args="(WindowState state)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setWindowState</b> (WindowState state)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4e5e2da390065872280c9ff1d4c1bb2c"></a><!-- doxytag: member="RGlutWindowStateAnimation::setStartPos" ref="a4e5e2da390065872280c9ff1d4c1bb2c" args="(RGlutPointI point)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setStartPos</b> (<a class="el" href="class_r_glut_point.html">RGlutPointI</a> point)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0975fe4a8a1f3dc5ed3f0c635ee9ff68"></a><!-- doxytag: member="RGlutWindowStateAnimation::setEndPos" ref="a0975fe4a8a1f3dc5ed3f0c635ee9ff68" args="(RGlutPointI point)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setEndPos</b> (<a class="el" href="class_r_glut_point.html">RGlutPointI</a> point)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa61af26bfa7b9ddc00876fc10f838f7c"></a><!-- doxytag: member="RGlutWindowStateAnimation::setStartSize" ref="aa61af26bfa7b9ddc00876fc10f838f7c" args="(RGlutSizeI size)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setStartSize</b> (<a class="el" href="class_r_glut_size.html">RGlutSizeI</a> size)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6d716d8f7c89ad61370d9e7c5781435e"></a><!-- doxytag: member="RGlutWindowStateAnimation::setEndSize" ref="a6d716d8f7c89ad61370d9e7c5781435e" args="(RGlutSizeI size)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setEndSize</b> (<a class="el" href="class_r_glut_size.html">RGlutSizeI</a> size)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae25fd230753777e5b99c98e3f3f53408"></a><!-- doxytag: member="RGlutWindowStateAnimation::setStartRect" ref="ae25fd230753777e5b99c98e3f3f53408" args="(RGlutRectI rect)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setStartRect</b> (<a class="el" href="class_r_glut_rect.html">RGlutRectI</a> rect)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a32cf0df6c35b8fe6c86d7596908f37f0"></a><!-- doxytag: member="RGlutWindowStateAnimation::setEndRect" ref="a32cf0df6c35b8fe6c86d7596908f37f0" args="(RGlutRectI rect)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setEndRect</b> (<a class="el" href="class_r_glut_rect.html">RGlutRectI</a> rect)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af9a795c210cc52aaba6a3d8c79b67b29"></a><!-- doxytag: member="RGlutWindowStateAnimation::setEasingCurve" ref="af9a795c210cc52aaba6a3d8c79b67b29" args="(RGlutEasingCurve::Type type)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setEasingCurve</b> (RGlutEasingCurve::Type type)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_window_state_animation.html#a2959667f1979ad88b42b4364b81233e2">setWindowState</a> (WindowState state)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_window_state_animation.html#a4e5e2da390065872280c9ff1d4c1bb2c">setStartPos</a> (<a class="el" href="class_r_glut_point.html">RGlutPointI</a> point)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_window_state_animation.html#a0975fe4a8a1f3dc5ed3f0c635ee9ff68">setEndPos</a> (<a class="el" href="class_r_glut_point.html">RGlutPointI</a> point)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_window_state_animation.html#aa61af26bfa7b9ddc00876fc10f838f7c">setStartSize</a> (<a class="el" href="class_r_glut_size.html">RGlutSizeI</a> size)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_window_state_animation.html#a6d716d8f7c89ad61370d9e7c5781435e">setEndSize</a> (<a class="el" href="class_r_glut_size.html">RGlutSizeI</a> size)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_window_state_animation.html#ae25fd230753777e5b99c98e3f3f53408">setStartRect</a> (<a class="el" href="class_r_glut_rect.html">RGlutRectI</a> rect)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_window_state_animation.html#a32cf0df6c35b8fe6c86d7596908f37f0">setEndRect</a> (<a class="el" href="class_r_glut_rect.html">RGlutRectI</a> rect)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_window_state_animation.html#af9a795c210cc52aaba6a3d8c79b67b29">setEasingCurve</a> (RGlutEasingCurve::Type type)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>Animation implementation for window properties </p>
-</div></div>
+<div class="textblock"><p>Animation implementation for window properties. </p>
+</div><hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="af9a795c210cc52aaba6a3d8c79b67b29"></a><!-- doxytag: member="RGlutWindowStateAnimation::setEasingCurve" ref="af9a795c210cc52aaba6a3d8c79b67b29" args="(RGlutEasingCurve::Type type)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutWindowStateAnimation::setEasingCurve </td>
+          <td>(</td>
+          <td class="paramtype">RGlutEasingCurve::Type&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Sets the type of easing curve that should be used for animation. </p>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_r_glut_easing_curve.html" title="Easing curve implementation, mainly for animation FW.">RGlutEasingCurve</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a0975fe4a8a1f3dc5ed3f0c635ee9ff68"></a><!-- doxytag: member="RGlutWindowStateAnimation::setEndPos" ref="a0975fe4a8a1f3dc5ed3f0c635ee9ff68" args="(RGlutPointI point)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutWindowStateAnimation::setEndPos </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_r_glut_point.html">RGlutPointI</a>&#160;</td>
+          <td class="paramname"><em>point</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Sets end postion, this applies for Position state animation only. </p>
+<dl class="see"><dt><b>See also:</b></dt><dd>WindowState. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a32cf0df6c35b8fe6c86d7596908f37f0"></a><!-- doxytag: member="RGlutWindowStateAnimation::setEndRect" ref="a32cf0df6c35b8fe6c86d7596908f37f0" args="(RGlutRectI rect)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutWindowStateAnimation::setEndRect </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_r_glut_rect.html">RGlutRectI</a>&#160;</td>
+          <td class="paramname"><em>rect</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Sets end rect, this applies for Rect state animation only. </p>
+<dl class="see"><dt><b>See also:</b></dt><dd>WindowState. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a6d716d8f7c89ad61370d9e7c5781435e"></a><!-- doxytag: member="RGlutWindowStateAnimation::setEndSize" ref="a6d716d8f7c89ad61370d9e7c5781435e" args="(RGlutSizeI size)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutWindowStateAnimation::setEndSize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_r_glut_size.html">RGlutSizeI</a>&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Sets end size, this applies for Size state animation only. </p>
+<dl class="see"><dt><b>See also:</b></dt><dd>WindowState. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a4e5e2da390065872280c9ff1d4c1bb2c"></a><!-- doxytag: member="RGlutWindowStateAnimation::setStartPos" ref="a4e5e2da390065872280c9ff1d4c1bb2c" args="(RGlutPointI point)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutWindowStateAnimation::setStartPos </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_r_glut_point.html">RGlutPointI</a>&#160;</td>
+          <td class="paramname"><em>point</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Sets start postion, this applies for Position state animation only. </p>
+<dl class="see"><dt><b>See also:</b></dt><dd>WindowState. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae25fd230753777e5b99c98e3f3f53408"></a><!-- doxytag: member="RGlutWindowStateAnimation::setStartRect" ref="ae25fd230753777e5b99c98e3f3f53408" args="(RGlutRectI rect)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutWindowStateAnimation::setStartRect </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_r_glut_rect.html">RGlutRectI</a>&#160;</td>
+          <td class="paramname"><em>rect</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Sets start rect, this applies for Rect state animation only. </p>
+<dl class="see"><dt><b>See also:</b></dt><dd>WindowState. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aa61af26bfa7b9ddc00876fc10f838f7c"></a><!-- doxytag: member="RGlutWindowStateAnimation::setStartSize" ref="aa61af26bfa7b9ddc00876fc10f838f7c" args="(RGlutSizeI size)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutWindowStateAnimation::setStartSize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_r_glut_size.html">RGlutSizeI</a>&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Sets start size, this applies for Size state animation only. </p>
+<dl class="see"><dt><b>See also:</b></dt><dd>WindowState. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a2959667f1979ad88b42b4364b81233e2"></a><!-- doxytag: member="RGlutWindowStateAnimation::setWindowState" ref="a2959667f1979ad88b42b4364b81233e2" args="(WindowState state)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutWindowStateAnimation::setWindowState </td>
+          <td>(</td>
+          <td class="paramtype">WindowState&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Sets the winidow state that should be animated. </p>
+
+</div>
+</div>
+</div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
@@ -169,7 +316,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setEasingCurve</b> (R
 </div>
 
 
-    <li class="footer">Generated on Fri Nov 11 2011 14:15:32 for glutes by
+    <li class="footer">Generated on Tue Nov 15 2011 10:57:42 for glutes by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.5.1 </li>
    </ul>

@@ -1,5 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$class_r_glut_animation_listner.html" title="{RGlutAnimationListner\n||+ ~RGlutAnimationListner()\l+ started()\l+ stopped()\l}" alt="" coords="5,38,184,151"/>
-<area shape="rect" id="node4" href="$class_r_glut_time.html" title="{RGlutTime\n||+ RGlutTime()\l+ start()\l+ elapsed()\l+ currentTime()\l}" alt="" coords="208,30,317,159"/>
-<area shape="rect" id="node6" href="$class_r_glut_timer.html" title="{RGlutTimer\n||+ RGlutTimer()\l+ ~RGlutTimer()\l+ interval()\l+ setInterval()\l+ start()\l+ stop()\l+ run()\l}" alt="" coords="341,6,456,183"/>
+<area shape="rect" id="node2" href="$class_r_glut_animation_listner.html" title="{RGlutAnimationListner\n||+ ~RGlutAnimationListner()\l+ started()\l+ stopped()\l}" alt="" coords="5,43,224,170"/>
+<area shape="rect" id="node4" href="$class_r_glut_time.html" title="Time class implementation for different platform." alt="" coords="248,34,384,179"/>
+<area shape="rect" id="node6" href="$class_r_glut_timer.html" title="Timer class implementation." alt="" coords="408,6,547,207"/>
 </map>

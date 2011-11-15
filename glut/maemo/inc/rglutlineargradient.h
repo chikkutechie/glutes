@@ -36,7 +36,7 @@
 
 /**
  * @class RGlutLinearGradient
- *        Linear gradient implementation
+ * @brief Linear gradient implementation.
  */
 class RGlutLinearGradient: public RGlutGradient
 {

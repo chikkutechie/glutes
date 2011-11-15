@@ -35,7 +35,7 @@ class RGlutWindow;
 
 /**
  * @class RGlutGradient
- *        Gradient class
+ * @brief Gradient base class.
  */
 class RGlutGradient
 {

@@ -37,7 +37,7 @@
 
 /**
  * @class RGlutDisplay
- *        Holds display instance(Singleton class)
+ * @brief X11 display wrapper.
  */
 class RGlutDisplay
 {

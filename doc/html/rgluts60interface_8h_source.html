@@ -138,9 +138,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00041"></a>00041 <span class="keyword">class </span>CEikonEnv;
 <a name="l00042"></a>00042 
 <a name="l00043"></a>00043 <span class="keyword">class </span><a class="code" href="class_r_glut_control.html">RGlutControl</a>;
-<a name="l00044"></a>00044 <span class="keyword">class </span><a class="code" href="class_r_glut_g_l_binder.html">RGlutGLBinder</a>;
+<a name="l00044"></a>00044 <span class="keyword">class </span><a class="code" href="class_r_glut_g_l_binder.html" title="Base class for binding OpenGL/OpenVG to underlining windowing system and managing resources...">RGlutGLBinder</a>;
 <a name="l00045"></a>00045 
-<a name="l00046"></a><a class="code" href="class_r_glut_s60_interface.html">00046</a> <span class="keyword">class </span><a class="code" href="class_r_glut_s60_interface.html">RGlutS60Interface</a>: <span class="keyword">public</span> <a class="code" href="class_r_glut_interface.html">RGlutInterface</a>, <span class="keyword">public</span> <a class="code" href="class_r_glut_event_handler.html">RGlutEventHandler</a>
+<a name="l00046"></a><a class="code" href="class_r_glut_s60_interface.html">00046</a> <span class="keyword">class </span><a class="code" href="class_r_glut_s60_interface.html">RGlutS60Interface</a>: <span class="keyword">public</span> <a class="code" href="class_r_glut_interface.html" title="Base class for the implementation of glut for different platform. If glut should be ported on to a ne...">RGlutInterface</a>, <span class="keyword">public</span> <a class="code" href="class_r_glut_event_handler.html" title="Listner for events.">RGlutEventHandler</a>
 <a name="l00047"></a>00047 {
 <a name="l00048"></a>00048 <span class="keyword">private</span>:
 <a name="l00049"></a>00049     <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> ID_START_INDEX = 100;
@@ -151,46 +151,46 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00054"></a>00054     <a class="code" href="class_r_glut_s60_interface.html">RGlutS60Interface</a>();
 <a name="l00055"></a>00055     ~<a class="code" href="class_r_glut_s60_interface.html">RGlutS60Interface</a>();
 <a name="l00056"></a>00056 
-<a name="l00057"></a>00057     <span class="keywordtype">void</span> intialize(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv);
-<a name="l00058"></a>00058     <span class="keywordtype">void</span> terminate();
-<a name="l00059"></a>00059     <span class="keywordtype">void</span> initDisplayMode(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> mode);
+<a name="l00057"></a>00057     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_s60_interface.html#afcb44294f41d8a179e29aeec0f2e9ff7">intialize</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv);
+<a name="l00058"></a>00058     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_s60_interface.html#a259b05e8bfac53ebb9d73169df27cd1f">terminate</a>();
+<a name="l00059"></a>00059     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_s60_interface.html#ae79bd04d0acdafead02982c7fca06b6c">initDisplayMode</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> mode);
 <a name="l00060"></a>00060 
-<a name="l00061"></a>00061     <span class="keywordtype">void</span> timerFunc(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> millis, <span class="keywordtype">void</span> (*func)(<span class="keywordtype">int</span>), <span class="keywordtype">int</span> value);
-<a name="l00062"></a>00062     <span class="keywordtype">int</span>  createWindow();
-<a name="l00063"></a>00063     <span class="keywordtype">void</span> destroyWindow(<span class="keywordtype">int</span> win);
-<a name="l00064"></a>00064     <span class="keywordtype">int</span> getWindow();
-<a name="l00065"></a>00065     <span class="keywordtype">void</span> setWindow(<span class="keywordtype">int</span> win);
-<a name="l00066"></a>00066     <span class="keywordtype">void</span> setWindowTitle(<span class="keyword">const</span> <span class="keywordtype">char</span> *title);
-<a name="l00067"></a>00067     <span class="keywordtype">void</span> showWindow();
-<a name="l00068"></a>00068     <span class="keywordtype">void</span> fullScreen();
-<a name="l00069"></a>00069     <span class="keywordtype">void</span> hideWindow();
-<a name="l00070"></a>00070     <span class="keywordtype">void</span> positionWindow(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);
-<a name="l00071"></a>00071     <span class="keywordtype">void</span> reshapeWindow(<span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height);
-<a name="l00072"></a>00072     <span class="keywordtype">void</span> popWindow();
-<a name="l00073"></a>00073     <span class="keywordtype">void</span> pushWindow();
-<a name="l00074"></a>00074     <span class="keywordtype">void</span> exec();
-<a name="l00075"></a>00075     <span class="keywordtype">void</span> redraw(<span class="keywordtype">int</span> win = 0);
-<a name="l00076"></a>00076     <span class="keywordtype">void</span> flush();
+<a name="l00061"></a>00061     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_s60_interface.html#a2a53b40786acf2860d08587ce62926c2">timerFunc</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> millis, <span class="keywordtype">void</span> (*func)(<span class="keywordtype">int</span>), <span class="keywordtype">int</span> value);
+<a name="l00062"></a>00062     <span class="keywordtype">int</span>  <a class="code" href="class_r_glut_s60_interface.html#a59d8200a8e9915aba657e89a651a4a9b">createWindow</a>();
+<a name="l00063"></a>00063     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_s60_interface.html#a0a6b6490c1d8fa9ef77fec0b14eb621b">destroyWindow</a>(<span class="keywordtype">int</span> win);
+<a name="l00064"></a>00064     <span class="keywordtype">int</span> <a class="code" href="class_r_glut_s60_interface.html#a81024d377b4443f98a7e9e89b610fe40">getWindow</a>();
+<a name="l00065"></a>00065     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_s60_interface.html#a4cbc4646ed3a7c349c883b96d687c6c8">setWindow</a>(<span class="keywordtype">int</span> win);
+<a name="l00066"></a>00066     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_s60_interface.html#ac558d0d109a001ea466fdd1e1384e35a">setWindowTitle</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *title);
+<a name="l00067"></a>00067     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_s60_interface.html#ab233d4a3a9f6e1602057a81ca2b580f4">showWindow</a>();
+<a name="l00068"></a>00068     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_s60_interface.html#aaa014a52e28779186b1400bb390320a4">fullScreen</a>();
+<a name="l00069"></a>00069     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_s60_interface.html#ad80900273e17b0bae04231ce042d89c4">hideWindow</a>();
+<a name="l00070"></a>00070     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_s60_interface.html#acbf9530af31f4d578e9ecfaac60dfb34">positionWindow</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);
+<a name="l00071"></a>00071     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_s60_interface.html#a1a5d181651156cb2899965692c864836">reshapeWindow</a>(<span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height);
+<a name="l00072"></a>00072     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_s60_interface.html#a038ca7e926ea493ace000f5b8bdd5276">popWindow</a>();
+<a name="l00073"></a>00073     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_s60_interface.html#a080a2271c2f01d78750cc9f0647b09ae">pushWindow</a>();
+<a name="l00074"></a>00074     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_s60_interface.html#aee934af9b7b8824e119555bea3305ed9">exec</a>();
+<a name="l00075"></a>00075     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_s60_interface.html#a8b38d1358fb0570e1f034c7796d61610">redraw</a>(<span class="keywordtype">int</span> win = 0);
+<a name="l00076"></a>00076     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_s60_interface.html#ab6771ff8c8a37ac0fe8c5138720dd9b5">flush</a>();
 <a name="l00077"></a>00077 
-<a name="l00078"></a>00078     <span class="keyword">virtual</span> <span class="keywordtype">void</span> draw();
-<a name="l00079"></a>00079     <span class="keyword">virtual</span> <span class="keywordtype">void</span> reshape(<span class="keywordtype">int</span> w, <span class="keywordtype">int</span> h);
-<a name="l00080"></a>00080     <span class="keyword">virtual</span> <span class="keywordtype">void</span> rerect(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">int</span> w, <span class="keywordtype">int</span> h);
-<a name="l00081"></a>00081     <span class="keyword">virtual</span> <span class="keywordtype">void</span> repos(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);
-<a name="l00082"></a>00082     <span class="keyword">virtual</span> <span class="keywordtype">void</span> keyboard(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> key, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> modifier, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);
-<a name="l00083"></a>00083     <span class="keyword">virtual</span> <span class="keywordtype">void</span> mouse(<span class="keywordtype">int</span> button, <span class="keywordtype">int</span> modifier, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">bool</span> pressed = <span class="keyword">true</span>);
-<a name="l00084"></a>00084     <span class="keyword">virtual</span> <span class="keywordtype">void</span> motion(<span class="keywordtype">int</span>, <span class="keywordtype">int</span>, <span class="keywordtype">int</span>, <span class="keywordtype">int</span>) {}
+<a name="l00078"></a>00078     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_r_glut_s60_interface.html#a115020f55179258dedc991e231a3c6b1">draw</a>();
+<a name="l00079"></a>00079     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_r_glut_s60_interface.html#a9f07c0b22a79706438b53df2f7ba2ffc">reshape</a>(<span class="keywordtype">int</span> w, <span class="keywordtype">int</span> h);
+<a name="l00080"></a>00080     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_r_glut_s60_interface.html#a435f0a3757f73cb8b6a985ed649b68a3">rerect</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">int</span> w, <span class="keywordtype">int</span> h);
+<a name="l00081"></a>00081     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_r_glut_s60_interface.html#af90fb40332ad08484fd615ae852e9dc3">repos</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);
+<a name="l00082"></a>00082     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_r_glut_s60_interface.html#a670ffe80c1663a51122016dbeb67d04b">keyboard</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> key, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> modifier, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);
+<a name="l00083"></a>00083     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_r_glut_s60_interface.html#a6b92991adfa24b03d001348fa4d9bb66">mouse</a>(<span class="keywordtype">int</span> button, <span class="keywordtype">int</span> modifier, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">bool</span> pressed = <span class="keyword">true</span>);
+<a name="l00084"></a><a class="code" href="class_r_glut_s60_interface.html#abe8a10dead90a270f6808e852c2acf07">00084</a>     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_r_glut_s60_interface.html#abe8a10dead90a270f6808e852c2acf07">motion</a>(<span class="keywordtype">int</span>, <span class="keywordtype">int</span>, <span class="keywordtype">int</span>, <span class="keywordtype">int</span>) {}
 <a name="l00085"></a>00085 
-<a name="l00086"></a>00086     <span class="keyword">virtual</span> <span class="keywordtype">int</span> createMenu(<span class="keywordtype">void</span> ( *)(<span class="keywordtype">int</span> menu));
-<a name="l00087"></a>00087     <span class="keyword">virtual</span> <span class="keywordtype">void</span> destroyMenu(<span class="keywordtype">int</span> menu);
-<a name="l00088"></a>00088     <span class="keyword">virtual</span> <span class="keywordtype">int</span> getMenu();
-<a name="l00089"></a>00089     <span class="keyword">virtual</span> <span class="keywordtype">void</span> setMenu(<span class="keywordtype">int</span> menu);
-<a name="l00090"></a>00090     <span class="keyword">virtual</span> <span class="keywordtype">void</span> addMenuEntry(<span class="keyword">const</span> <span class="keywordtype">char</span> *label, <span class="keywordtype">int</span> value);
-<a name="l00091"></a>00091     <span class="keyword">virtual</span> <span class="keywordtype">void</span> removeMenuItem(<span class="keywordtype">int</span> item);
-<a name="l00092"></a>00092     <span class="keyword">virtual</span> <span class="keywordtype">void</span> attachMenu(<span class="keywordtype">int</span> button);
-<a name="l00093"></a>00093     <span class="keyword">virtual</span> <span class="keywordtype">void</span> detachMenu(<span class="keywordtype">int</span> button);
+<a name="l00086"></a>00086     <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="class_r_glut_s60_interface.html#ae739020f4da699716363bdb822e441a8">createMenu</a>(<span class="keywordtype">void</span> ( *)(<span class="keywordtype">int</span> menu));
+<a name="l00087"></a>00087     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_r_glut_s60_interface.html#aa231a62702300eb7754f0b6b6517a0ef">destroyMenu</a>(<span class="keywordtype">int</span> menu);
+<a name="l00088"></a>00088     <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="class_r_glut_s60_interface.html#a99b138943d2d8d84dd51a78c41114235">getMenu</a>();
+<a name="l00089"></a>00089     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_r_glut_s60_interface.html#a7bda04cc5781026ff5380c722647bb1c">setMenu</a>(<span class="keywordtype">int</span> menu);
+<a name="l00090"></a>00090     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_r_glut_s60_interface.html#a86434103bd627e8455c2632b5fb522c9">addMenuEntry</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *label, <span class="keywordtype">int</span> value);
+<a name="l00091"></a>00091     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_r_glut_s60_interface.html#a43b61526e3c1f02ea750ea8ca3373947">removeMenuItem</a>(<span class="keywordtype">int</span> item);
+<a name="l00092"></a>00092     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_r_glut_s60_interface.html#ad829b40edea6903bc2c0d523f6bbfba4">attachMenu</a>(<span class="keywordtype">int</span> button);
+<a name="l00093"></a>00093     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_r_glut_s60_interface.html#a80859bce38510d12836ef2dae4ebb517">detachMenu</a>(<span class="keywordtype">int</span> button);
 <a name="l00094"></a>00094 
-<a name="l00095"></a>00095     <span class="keywordtype">int</span> getModifiers();
-<a name="l00096"></a>00096     <span class="keyword">virtual</span> <span class="keywordtype">int</span> getValue(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> state);
+<a name="l00095"></a>00095     <span class="keywordtype">int</span> <a class="code" href="class_r_glut_s60_interface.html#a0395e9fdc4030e95a36a7a5f336677e4">getModifiers</a>();
+<a name="l00096"></a>00096     <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="class_r_glut_s60_interface.html#a8eaf9c55e25870ef2f60e07d6dad2e42">getValue</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> state);
 <a name="l00097"></a>00097 
 <a name="l00098"></a>00098 <span class="keyword">private</span>:
 <a name="l00099"></a>00099     <span class="keyword">class </span>ControlEntry
@@ -271,7 +271,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00174"></a>00174     <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> mDisplayMode;
 <a name="l00175"></a>00175     CEikonEnv *mEikonEnv;
 <a name="l00176"></a>00176     <span class="keywordtype">int</span> mCurrentControl;
-<a name="l00177"></a>00177     <a class="code" href="class_r_glut_g_l_binder.html">RGlutGLBinder</a> *mBinder;
+<a name="l00177"></a>00177     <a class="code" href="class_r_glut_g_l_binder.html" title="Base class for binding OpenGL/OpenVG to underlining windowing system and managing resources...">RGlutGLBinder</a> *mBinder;
 <a name="l00178"></a>00178     RArray&lt;ControlEntry&gt; mControllist;
 <a name="l00179"></a>00179     RArray&lt;ControlEntry&gt; mControlStack;
 <a name="l00180"></a>00180 
@@ -315,7 +315,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 
-    <li class="footer">Generated on Fri Nov 11 2011 14:15:31 for glutes by
+    <li class="footer">Generated on Tue Nov 15 2011 10:57:42 for glutes by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.5.1 </li>
    </ul>

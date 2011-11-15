@@ -1,4 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$class_r_glut_l_a_f.html" title="{RGlutLAF\n||+ RGlutLAF()\l+ ~RGlutLAF()\l+ defaultFont()\l+ menuItemFont()\l+ maximumMenuWidth()\l+ maximumMenuItemHeight()\l+ minimumMenuWidth()\l+ minimumMenuItemHeight()\l+ menuItemGap()\l+ getMenuBackgroundColor()\l+ getMenuTextColor()\l+ createMenuItemBackgroundNormal()\l+ createMenuItemBackgroundPressed()\l}" alt="" coords="5,190,256,463"/>
-<area shape="rect" id="node4" href="$class_r_glut_window.html" title="{RGlutWindow\n|# mDisplay\l# mParent\l# mParentWindow\l# mWindow\l# mX\l# mY\l# mWidth\l# mHeight\l# mVisible\l# mTitle\l# mChilds\l|+ RGlutWindow()\l+ ~RGlutWindow()\l+ pos()\l+ setPos()\l+ size()\l+ setSize()\l+ setGeometry()\l+ geometry()\l+ setTitle()\l+ setFullscreen()\l+ setBackgroundColor()\l+ clear()\l+ isVisible()\l+ show()\l+ hide()\l+ redraw()\l+ draw()\l+ handleEvent()\l+ display()\l+ window()\l+ parent()\l+ addChild()\l+ removeChild()\l+ removeFromParent()\l# create()\l# destroy()\l}" alt="" coords="280,6,437,647"/>
+<area shape="rect" id="node2" href="$class_r_glut_l_a_f.html" title="Defines basic FW properties." alt="" coords="5,221,317,534"/>
+<area shape="rect" id="node4" href="$class_r_glut_window.html" title="Window class implementation, wrapper for X11 window." alt="" coords="341,6,536,749"/>
 </map>

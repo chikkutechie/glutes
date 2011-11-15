@@ -132,81 +132,94 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00035"></a>00035 <span class="preprocessor">#include &quot;rglutwindow.h&quot;</span>
 <a name="l00036"></a>00036 <span class="preprocessor">#include &quot;rglutcolor.h&quot;</span>
 <a name="l00037"></a>00037 
-<a name="l00038"></a>00038 <span class="keyword">class </span><a class="code" href="class_r_glut_g_c.html">RGlutGC</a>;
+<a name="l00038"></a>00038 <span class="keyword">class </span><a class="code" href="class_r_glut_g_c.html" title="Basic drawing function implementation.">RGlutGC</a>;
 <a name="l00039"></a>00039 <span class="comment"></span>
 <a name="l00040"></a>00040 <span class="comment">/**</span>
 <a name="l00041"></a>00041 <span class="comment"> * @class RGlutMenu</span>
-<a name="l00042"></a>00042 <span class="comment"> *        Menu implementation</span>
+<a name="l00042"></a>00042 <span class="comment"> * @brief Popu menu implementation.</span>
 <a name="l00043"></a>00043 <span class="comment"> */</span>
-<a name="l00044"></a><a class="code" href="class_r_glut_menu.html">00044</a> <span class="keyword">class </span><a class="code" href="class_r_glut_menu.html">RGlutMenu</a>: <span class="keyword">public</span> <a class="code" href="class_r_glut_window.html">RGlutWindow</a>
+<a name="l00044"></a><a class="code" href="class_r_glut_menu.html">00044</a> <span class="keyword">class </span><a class="code" href="class_r_glut_menu.html" title="Popu menu implementation.">RGlutMenu</a>: <span class="keyword">public</span> <a class="code" href="class_r_glut_window.html" title="Window class implementation, wrapper for X11 window.">RGlutWindow</a>
 <a name="l00045"></a>00045 {
 <a name="l00046"></a>00046 <span class="keyword">public</span>:
-<a name="l00047"></a>00047     <a class="code" href="class_r_glut_menu.html">RGlutMenu</a>(<span class="keywordtype">void</span> (*callback)(<span class="keywordtype">int</span>), <a class="code" href="class_r_glut_window.html">RGlutWindow</a> *parent = 0);
-<a name="l00048"></a>00048     ~<a class="code" href="class_r_glut_menu.html">RGlutMenu</a>();
-<a name="l00049"></a>00049 
-<a name="l00050"></a>00050     <span class="keywordtype">void</span> addEntry(std::string name, <span class="keywordtype">int</span> <span class="keywordtype">id</span>);
-<a name="l00051"></a>00051 
-<a name="l00052"></a>00052     <span class="keywordtype">void</span> removeEntry(<span class="keywordtype">int</span> <span class="keywordtype">id</span>) {
-<a name="l00053"></a>00053     }
-<a name="l00054"></a>00054 
-<a name="l00055"></a>00055     <a class="code" href="class_r_glut_point.html">RGlutPointI</a> preferedPos(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);
-<a name="l00056"></a>00056 
-<a name="l00057"></a>00057     <span class="keywordtype">void</span> hide();
-<a name="l00058"></a>00058     <span class="keywordtype">void</span> draw();
-<a name="l00059"></a>00059 
-<a name="l00060"></a>00060     <span class="keywordtype">bool</span> handleEvent(XEvent &amp;event);
-<a name="l00061"></a>00061 
-<a name="l00062"></a>00062 <span class="keyword">private</span>:
-<a name="l00063"></a>00063     <span class="keyword">class </span>MenuEntry
-<a name="l00064"></a>00064     {
-<a name="l00065"></a>00065     <span class="keyword">public</span>:
-<a name="l00066"></a>00066         MenuEntry()
-<a name="l00067"></a>00067         {}
-<a name="l00068"></a>00068         MenuEntry(std::string name, <span class="keywordtype">int</span> <span class="keywordtype">id</span>)
-<a name="l00069"></a>00069             : mName(name),
-<a name="l00070"></a>00070               mId(<span class="keywordtype">id</span>)
-<a name="l00071"></a>00071         {}
+<a name="l00047"></a>00047     <a class="code" href="class_r_glut_menu.html" title="Popu menu implementation.">RGlutMenu</a>(<span class="keywordtype">void</span> (*callback)(<span class="keywordtype">int</span>), <a class="code" href="class_r_glut_window.html" title="Window class implementation, wrapper for X11 window.">RGlutWindow</a> *<a class="code" href="class_r_glut_window.html#ae9fa604e0a5f05366f2bbc550aaa9f1e">parent</a> = 0);
+<a name="l00048"></a>00048     ~<a class="code" href="class_r_glut_menu.html" title="Popu menu implementation.">RGlutMenu</a>();
+<a name="l00049"></a>00049 <span class="comment"></span>
+<a name="l00050"></a>00050 <span class="comment">    /*!</span>
+<a name="l00051"></a>00051 <span class="comment">     * Add a menu entry</span>
+<a name="l00052"></a>00052 <span class="comment">     * @param name Name that will be displayed</span>
+<a name="l00053"></a>00053 <span class="comment">     * @param id Id used to identify the menu item</span>
+<a name="l00054"></a>00054 <span class="comment">     */</span>
+<a name="l00055"></a>00055     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_menu.html#a456e983634bf4e0501d67479bdb46940">addEntry</a>(std::string name, <span class="keywordtype">int</span> <span class="keywordtype">id</span>);
+<a name="l00056"></a>00056 <span class="comment"></span>
+<a name="l00057"></a>00057 <span class="comment">    /*!</span>
+<a name="l00058"></a>00058 <span class="comment">     * Removes the menu item with the given id</span>
+<a name="l00059"></a>00059 <span class="comment">     * @param id The menu item id to be removed</span>
+<a name="l00060"></a>00060 <span class="comment">     */</span>
+<a name="l00061"></a><a class="code" href="class_r_glut_menu.html#a1353d41de8b9dc9e85ae88e92a15a635">00061</a>     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_menu.html#a1353d41de8b9dc9e85ae88e92a15a635">removeEntry</a>(<span class="keywordtype">int</span> <span class="keywordtype">id</span>) {
+<a name="l00062"></a>00062     }
+<a name="l00063"></a>00063 <span class="comment"></span>
+<a name="l00064"></a>00064 <span class="comment">    /*!</span>
+<a name="l00065"></a>00065 <span class="comment">     * Returns the position within the window that will fit in to the parent window</span>
+<a name="l00066"></a>00066 <span class="comment">     * @see RGlutPointI</span>
+<a name="l00067"></a>00067 <span class="comment">     */</span>
+<a name="l00068"></a>00068     <a class="code" href="class_r_glut_point.html" title="Template class for simple point.">RGlutPointI</a> <a class="code" href="class_r_glut_menu.html#a148ecee1ac070fe4f2978681ca9d1ead">preferedPos</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);
+<a name="l00069"></a>00069 
+<a name="l00070"></a>00070     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_menu.html#a652f11bbb578324c72b376dc2dbe489a">hide</a>();
+<a name="l00071"></a>00071     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_menu.html#a405dc34d0d859e5210d5d25ed05674df">draw</a>();
 <a name="l00072"></a>00072 
-<a name="l00073"></a>00073         std::string mName;
-<a name="l00074"></a>00074         <span class="keywordtype">int</span> mId;
-<a name="l00075"></a>00075         <span class="keywordtype">int</span> mX;
-<a name="l00076"></a>00076         <span class="keywordtype">int</span> mY;
-<a name="l00077"></a>00077         <span class="keywordtype">int</span> mWidth;
-<a name="l00078"></a>00078         <span class="keywordtype">int</span> mHeight;
-<a name="l00079"></a>00079     };
-<a name="l00080"></a>00080 
-<a name="l00081"></a>00081 <span class="keyword">private</span>:
-<a name="l00082"></a>00082     <a class="code" href="class_r_glut_menu.html">RGlutMenu</a>(<a class="code" href="class_r_glut_menu.html">RGlutMenu</a> <span class="keyword">const</span> &amp;);
-<a name="l00083"></a>00083     <a class="code" href="class_r_glut_menu.html">RGlutMenu</a> &amp;operator=(<a class="code" href="class_r_glut_menu.html">RGlutMenu</a> <span class="keyword">const</span> &amp;);
-<a name="l00084"></a>00084 
-<a name="l00085"></a>00085     <span class="keywordtype">void</span> create();
-<a name="l00086"></a>00086     <span class="keywordtype">void</span> destroy();
-<a name="l00087"></a>00087     <span class="keywordtype">void</span> drawBackground();
-<a name="l00088"></a>00088     <span class="keywordtype">void</span> drawItemBackgroundPressed(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">int</span> w, <span class="keywordtype">int</span> h);
-<a name="l00089"></a>00089     <span class="keywordtype">void</span> drawItemBackgroundNormal(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">int</span> w, <span class="keywordtype">int</span> h);
-<a name="l00090"></a>00090     <span class="keywordtype">void</span> createPixmaps(<span class="keywordtype">int</span> w, <span class="keywordtype">int</span> h);
-<a name="l00091"></a>00091     <span class="keywordtype">void</span> updateSize();
-<a name="l00092"></a>00092     MenuEntry *getMenuEntry(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);
+<a name="l00073"></a>00073     <span class="keywordtype">bool</span> <a class="code" href="class_r_glut_menu.html#aa324c370e6404e07818ae4575034f6bd">handleEvent</a>(XEvent &amp;event);
+<a name="l00074"></a>00074 
+<a name="l00075"></a>00075 <span class="keyword">private</span>:
+<a name="l00076"></a>00076     <span class="keyword">class </span>MenuEntry
+<a name="l00077"></a>00077     {
+<a name="l00078"></a>00078     <span class="keyword">public</span>:
+<a name="l00079"></a>00079         MenuEntry()
+<a name="l00080"></a>00080         {}
+<a name="l00081"></a>00081         MenuEntry(std::string name, <span class="keywordtype">int</span> <span class="keywordtype">id</span>)
+<a name="l00082"></a>00082             : mName(name),
+<a name="l00083"></a>00083               mId(id)
+<a name="l00084"></a>00084         {}
+<a name="l00085"></a>00085 
+<a name="l00086"></a>00086         std::string mName;
+<a name="l00087"></a>00087         <span class="keywordtype">int</span> mId;
+<a name="l00088"></a>00088         <span class="keywordtype">int</span> mX;
+<a name="l00089"></a>00089         <span class="keywordtype">int</span> mY;
+<a name="l00090"></a>00090         <span class="keywordtype">int</span> mWidth;
+<a name="l00091"></a>00091         <span class="keywordtype">int</span> mHeight;
+<a name="l00092"></a>00092     };
 <a name="l00093"></a>00093 
 <a name="l00094"></a>00094 <span class="keyword">private</span>:
-<a name="l00095"></a>00095     std::vector&lt;MenuEntry&gt; mMenuEntries;
-<a name="l00096"></a>00096     void (*mCallback)(int);
-<a name="l00097"></a>00097     <span class="keywordtype">int</span> mPressedId;
-<a name="l00098"></a>00098     <a class="code" href="class_r_glut_color.html">RGlutColor</a> mColor;
-<a name="l00099"></a>00099     Pixmap mItemNormalPixmap;
-<a name="l00100"></a>00100     Pixmap mItemPressedPixmap;
-<a name="l00101"></a>00101     <span class="keywordtype">bool</span> mPixmapCreated;
-<a name="l00102"></a>00102     <a class="code" href="class_r_glut_color.html">RGlutColor</a> mTextColor;
-<a name="l00103"></a>00103     <a class="code" href="class_r_glut_g_c.html">RGlutGC</a> *mGC;
-<a name="l00104"></a>00104     <span class="keywordtype">int</span> mMenuGap;
-<a name="l00105"></a>00105     <span class="keywordtype">int</span> mMinMenuWidth;
-<a name="l00106"></a>00106     <span class="keywordtype">int</span> mMinMenuItemHeight;
-<a name="l00107"></a>00107     <span class="keywordtype">int</span> mMaxMenuWidth;
-<a name="l00108"></a>00108     <span class="keywordtype">int</span> mMaxMenuItemHeight;
-<a name="l00109"></a>00109 };
-<a name="l00110"></a>00110 
-<a name="l00111"></a>00111 <span class="preprocessor">#endif</span>
-<a name="l00112"></a>00112 <span class="preprocessor"></span>
+<a name="l00095"></a>00095     <a class="code" href="class_r_glut_menu.html" title="Popu menu implementation.">RGlutMenu</a>(<a class="code" href="class_r_glut_menu.html" title="Popu menu implementation.">RGlutMenu</a> <span class="keyword">const</span> &amp;);
+<a name="l00096"></a>00096     <a class="code" href="class_r_glut_menu.html" title="Popu menu implementation.">RGlutMenu</a> &amp;operator=(<a class="code" href="class_r_glut_menu.html" title="Popu menu implementation.">RGlutMenu</a> <span class="keyword">const</span> &amp;);
+<a name="l00097"></a>00097 
+<a name="l00098"></a>00098     <span class="keywordtype">void</span> create();
+<a name="l00099"></a>00099     <span class="keywordtype">void</span> destroy();
+<a name="l00100"></a>00100     <span class="keywordtype">void</span> drawBackground();
+<a name="l00101"></a>00101     <span class="keywordtype">void</span> drawItemBackgroundPressed(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">int</span> w, <span class="keywordtype">int</span> h);
+<a name="l00102"></a>00102     <span class="keywordtype">void</span> drawItemBackgroundNormal(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">int</span> w, <span class="keywordtype">int</span> h);
+<a name="l00103"></a>00103     <span class="keywordtype">void</span> createPixmaps(<span class="keywordtype">int</span> w, <span class="keywordtype">int</span> h);
+<a name="l00104"></a>00104     <span class="keywordtype">void</span> updateSize();
+<a name="l00105"></a>00105     MenuEntry *getMenuEntry(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);
+<a name="l00106"></a>00106 
+<a name="l00107"></a>00107 <span class="keyword">private</span>:
+<a name="l00108"></a>00108     std::vector&lt;MenuEntry&gt; mMenuEntries;
+<a name="l00109"></a>00109     void (*mCallback)(int);
+<a name="l00110"></a>00110     <span class="keywordtype">int</span> mPressedId;
+<a name="l00111"></a>00111     <a class="code" href="class_r_glut_color.html" title="Easy to use class to represent color(R, G, B).">RGlutColor</a> mColor;
+<a name="l00112"></a>00112     Pixmap mItemNormalPixmap;
+<a name="l00113"></a>00113     Pixmap mItemPressedPixmap;
+<a name="l00114"></a>00114     <span class="keywordtype">bool</span> mPixmapCreated;
+<a name="l00115"></a>00115     <a class="code" href="class_r_glut_color.html" title="Easy to use class to represent color(R, G, B).">RGlutColor</a> mTextColor;
+<a name="l00116"></a>00116     <a class="code" href="class_r_glut_g_c.html" title="Basic drawing function implementation.">RGlutGC</a> *mGC;
+<a name="l00117"></a>00117     <span class="keywordtype">int</span> mMenuGap;
+<a name="l00118"></a>00118     <span class="keywordtype">int</span> mMinMenuWidth;
+<a name="l00119"></a>00119     <span class="keywordtype">int</span> mMinMenuItemHeight;
+<a name="l00120"></a>00120     <span class="keywordtype">int</span> mMaxMenuWidth;
+<a name="l00121"></a>00121     <span class="keywordtype">int</span> mMaxMenuItemHeight;
+<a name="l00122"></a>00122 };
+<a name="l00123"></a>00123 
+<a name="l00124"></a>00124 <span class="preprocessor">#endif</span>
+<a name="l00125"></a>00125 <span class="preprocessor"></span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
@@ -227,7 +240,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 
-    <li class="footer">Generated on Fri Nov 11 2011 14:15:31 for glutes by
+    <li class="footer">Generated on Tue Nov 15 2011 10:57:42 for glutes by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.5.1 </li>
    </ul>

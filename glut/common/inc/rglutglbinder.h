@@ -33,7 +33,7 @@
 
 /**
  * @class RGlutGLBinder
- *        Base class for binding OpenGL/OpenVG to underlining windowing system
+ * @brief Base class for binding OpenGL/OpenVG to underlining windowing system
  *        and managing resources
  */
 class RGlutGLBinder
@@ -52,11 +52,34 @@ public:
     RGlutGLBinder(API a = OPENGL_ES_API) : mAPI(a) {}
     virtual ~RGlutGLBinder() {}
 
+    /*!
+     * Does the initialization
+     */
     virtual bool initialize() = 0;
+    
+    /*!
+     * Creates the surface for rendering.
+     */
     virtual unsigned int createSurface(Surface surface, int width, int height) = 0;
+    
+    /*!
+     * Makes the given surface as the current surface.
+     */
     virtual bool makeCurrent(unsigned int surface) = 0;
+    
+    /*!
+     * Destroys the passed surface. Current surface and context will to set to null.
+     */
     virtual void destroySurface(unsigned int surface) = 0;
+    
+    /*!
+     * swap the back buffer
+     */
     virtual void swapBuffer(unsigned int surface) = 0;
+    
+    /*!
+     * Terminate the binding.
+     */
     virtual void terminate() = 0;
 
     virtual void addProperty(int, int) {}

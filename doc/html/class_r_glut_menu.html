@@ -102,20 +102,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="RGlutMenu" --><!-- doxytag: inherits="RGlutWindow" -->
+<p>Popu menu implementation.  
+ <a href="class_r_glut_menu.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="rglutmenu_8h_source.html">rglutmenu.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for RGlutMenu:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_r_glut_menu__inherit__graph.png" border="0" usemap="#_r_glut_menu_inherit__map" alt="Inheritance graph"/></div>
 <map name="_r_glut_menu_inherit__map" id="_r_glut_menu_inherit__map">
-<area shape="rect" id="node2" href="class_r_glut_window.html" title="{RGlutWindow\n|# mDisplay\l# mParent\l# mParentWindow\l# mWindow\l# mX\l# mY\l# mWidth\l# mHeight\l# mVisible\l# mTitle\l# mChilds\l|+ RGlutWindow()\l+ ~RGlutWindow()\l+ pos()\l+ setPos()\l+ size()\l+ setSize()\l+ setGeometry()\l+ geometry()\l+ setTitle()\l+ setFullscreen()\l+ setBackgroundColor()\l+ clear()\l+ isVisible()\l+ show()\l+ hide()\l+ redraw()\l+ draw()\l+ handleEvent()\l+ display()\l+ window()\l+ parent()\l+ addChild()\l+ removeChild()\l+ removeFromParent()\l# create()\l# destroy()\l}" alt="" coords="5,6,163,647"/></map>
+<area shape="rect" id="node2" href="class_r_glut_window.html" title="Window class implementation, wrapper for X11 window." alt="" coords="5,6,200,749"/></map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for RGlutMenu:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_r_glut_menu__coll__graph.png" border="0" usemap="#_r_glut_menu_coll__map" alt="Collaboration graph"/></div>
 <map name="_r_glut_menu_coll__map" id="_r_glut_menu_coll__map">
-<area shape="rect" id="node2" href="class_r_glut_window.html" title="{RGlutWindow\n|# mDisplay\l# mParent\l# mParentWindow\l# mWindow\l# mX\l# mY\l# mWidth\l# mHeight\l# mVisible\l# mTitle\l# mChilds\l|+ RGlutWindow()\l+ ~RGlutWindow()\l+ pos()\l+ setPos()\l+ size()\l+ setSize()\l+ setGeometry()\l+ geometry()\l+ setTitle()\l+ setFullscreen()\l+ setBackgroundColor()\l+ clear()\l+ isVisible()\l+ show()\l+ hide()\l+ redraw()\l+ draw()\l+ handleEvent()\l+ display()\l+ window()\l+ parent()\l+ addChild()\l+ removeChild()\l+ removeFromParent()\l# create()\l# destroy()\l}" alt="" coords="5,6,163,647"/></map>
+<area shape="rect" id="node2" href="class_r_glut_window.html" title="Window class implementation, wrapper for X11 window." alt="" coords="5,6,200,749"/></map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="class_r_glut_menu-members.html">List of all members.</a></p>
@@ -127,22 +130,163 @@ Classes</h2></td></tr>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6510b57ecb99236c560c3865121cfff1"></a><!-- doxytag: member="RGlutMenu::RGlutMenu" ref="a6510b57ecb99236c560c3865121cfff1" args="(void(*callback)(int), RGlutWindow *parent=0)" -->
 &#160;</td><td class="memItemRight" valign="bottom"><b>RGlutMenu</b> (void(*callback)(int), <a class="el" href="class_r_glut_window.html">RGlutWindow</a> *parent=0)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a456e983634bf4e0501d67479bdb46940"></a><!-- doxytag: member="RGlutMenu::addEntry" ref="a456e983634bf4e0501d67479bdb46940" args="(std::string name, int id)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addEntry</b> (std::string name, int id)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1353d41de8b9dc9e85ae88e92a15a635"></a><!-- doxytag: member="RGlutMenu::removeEntry" ref="a1353d41de8b9dc9e85ae88e92a15a635" args="(int id)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>removeEntry</b> (int id)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a148ecee1ac070fe4f2978681ca9d1ead"></a><!-- doxytag: member="RGlutMenu::preferedPos" ref="a148ecee1ac070fe4f2978681ca9d1ead" args="(int x, int y)" -->
-<a class="el" href="class_r_glut_point.html">RGlutPointI</a>&#160;</td><td class="memItemRight" valign="bottom"><b>preferedPos</b> (int x, int y)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a652f11bbb578324c72b376dc2dbe489a"></a><!-- doxytag: member="RGlutMenu::hide" ref="a652f11bbb578324c72b376dc2dbe489a" args="()" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>hide</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a405dc34d0d859e5210d5d25ed05674df"></a><!-- doxytag: member="RGlutMenu::draw" ref="a405dc34d0d859e5210d5d25ed05674df" args="()" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>draw</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa324c370e6404e07818ae4575034f6bd"></a><!-- doxytag: member="RGlutMenu::handleEvent" ref="aa324c370e6404e07818ae4575034f6bd" args="(XEvent &amp;event)" -->
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>handleEvent</b> (XEvent &amp;event)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_menu.html#a456e983634bf4e0501d67479bdb46940">addEntry</a> (std::string name, int id)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_menu.html#a1353d41de8b9dc9e85ae88e92a15a635">removeEntry</a> (int id)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_r_glut_point.html">RGlutPointI</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_menu.html#a148ecee1ac070fe4f2978681ca9d1ead">preferedPos</a> (int x, int y)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_menu.html#a652f11bbb578324c72b376dc2dbe489a">hide</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_menu.html#a405dc34d0d859e5210d5d25ed05674df">draw</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_menu.html#aa324c370e6404e07818ae4575034f6bd">handleEvent</a> (XEvent &amp;event)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>Menu implementation </p>
-</div></div>
+<div class="textblock"><p>Popu menu implementation. </p>
+</div><hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a456e983634bf4e0501d67479bdb46940"></a><!-- doxytag: member="RGlutMenu::addEntry" ref="a456e983634bf4e0501d67479bdb46940" args="(std::string name, int id)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutMenu::addEntry </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Add a menu entry </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Name that will be displayed </td></tr>
+    <tr><td class="paramname">id</td><td>Id used to identify the menu item </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a405dc34d0d859e5210d5d25ed05674df"></a><!-- doxytag: member="RGlutMenu::draw" ref="a405dc34d0d859e5210d5d25ed05674df" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutMenu::draw </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Callback for draw event. </p>
+
+<p>Reimplemented from <a class="el" href="class_r_glut_window.html#a063903abad3ed2dee0929d7b15816c3f">RGlutWindow</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa324c370e6404e07818ae4575034f6bd"></a><!-- doxytag: member="RGlutMenu::handleEvent" ref="aa324c370e6404e07818ae4575034f6bd" args="(XEvent &amp;event)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool RGlutMenu::handleEvent </td>
+          <td>(</td>
+          <td class="paramtype">XEvent &amp;&#160;</td>
+          <td class="paramname"><em>event</em></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Event handler function. </p>
+
+<p>Reimplemented from <a class="el" href="class_r_glut_window.html#a1ebe7e5ab0015f084717843332fde416">RGlutWindow</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a652f11bbb578324c72b376dc2dbe489a"></a><!-- doxytag: member="RGlutMenu::hide" ref="a652f11bbb578324c72b376dc2dbe489a" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutMenu::hide </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Hides the window. </p>
+
+<p>Reimplemented from <a class="el" href="class_r_glut_window.html#a062c55b747dfd7405edc735ee90fe3f8">RGlutWindow</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a148ecee1ac070fe4f2978681ca9d1ead"></a><!-- doxytag: member="RGlutMenu::preferedPos" ref="a148ecee1ac070fe4f2978681ca9d1ead" args="(int x, int y)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_r_glut_point.html">RGlutPointI</a> RGlutMenu::preferedPos </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Returns the position within the window that will fit in to the parent window </p>
+<dl class="see"><dt><b>See also:</b></dt><dd>RGlutPointI </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a1353d41de8b9dc9e85ae88e92a15a635"></a><!-- doxytag: member="RGlutMenu::removeEntry" ref="a1353d41de8b9dc9e85ae88e92a15a635" args="(int id)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutMenu::removeEntry </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Removes the menu item with the given id </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>The menu item id to be removed </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
@@ -162,7 +306,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>handleEvent</b> (XEve
 </div>
 
 
-    <li class="footer">Generated on Fri Nov 11 2011 14:15:32 for glutes by
+    <li class="footer">Generated on Tue Nov 15 2011 10:57:42 for glutes by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.5.1 </li>
    </ul>

@@ -106,14 +106,14 @@ Inheritance diagram for RGlutS60Interface:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_r_glut_s60_interface__inherit__graph.png" border="0" usemap="#_r_glut_s60_interface_inherit__map" alt="Inheritance graph"/></div>
 <map name="_r_glut_s60_interface_inherit__map" id="_r_glut_s60_interface_inherit__map">
-<area shape="rect" id="node2" href="class_r_glut_interface.html" title="{RGlutInterface\n|+ TitleLength\l# mWindowProperty\l# mCallbacks\l# mRenderer\l# mOrientation\l|+ RGlutInterface()\l+ ~RGlutInterface()\l+ intialize()\l+ terminate()\l+ initDisplayMode()\l+ createWindow()\l+ destroyWindow()\l+ getWindow()\l+ setWindow()\l+ setWindowTitle()\l+ showWindow()\l+ fullScreen()\l+ hideWindow()\l+ positionWindow()\l+ reshapeWindow()\l+ popWindow()\l+ pushWindow()\l+ timerFunc()\l+ exec()\l+ redraw()\l+ flush()\l+ createMenu()\l+ destroyMenu()\l+ getMenu()\l+ setMenu()\l+ addMenuEntry()\l+ removeMenuItem()\l+ attachMenu()\l+ detachMenu()\l+ getModifiers()\l+ getValue()\l+ setKeyboardFunc()\l+ setMouseFunc()\l+ setMotionFunc()\l+ setPassiveMotionFunc()\l+ setRenderer()\l+ getRenderer()\l+ setOrientation()\l+ getOrientation()\l+ setPos()\l+ setSize()\l+ setTitle()\l+ setDrawFnc()\l+ setReshapeFunc()\l+ getInterface()\l+ destroyInterface()\l}" alt="" coords="5,6,176,871"/><area shape="rect" id="node4" href="class_r_glut_event_handler.html" title="{RGlutEventHandler\n||+ ~RGlutEventHandler()\l+ draw()\l+ reshape()\l+ rerect()\l+ repos()\l+ keyboard()\l+ mouse()\l+ motion()\l}" alt="" coords="200,342,357,535"/></map>
+<area shape="rect" id="node2" href="class_r_glut_interface.html" title="Base class for the implementation of glut for different platform. If glut should be ported on to a ne..." alt="" coords="5,6,216,1010"/><area shape="rect" id="node4" href="class_r_glut_event_handler.html" title="Listner for events." alt="" coords="240,398,432,618"/></map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for RGlutS60Interface:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_r_glut_s60_interface__coll__graph.png" border="0" usemap="#_r_glut_s60_interface_coll__map" alt="Collaboration graph"/></div>
 <map name="_r_glut_s60_interface_coll__map" id="_r_glut_s60_interface_coll__map">
-<area shape="rect" id="node2" href="class_r_glut_interface.html" title="{RGlutInterface\n|+ TitleLength\l# mWindowProperty\l# mCallbacks\l# mRenderer\l# mOrientation\l|+ RGlutInterface()\l+ ~RGlutInterface()\l+ intialize()\l+ terminate()\l+ initDisplayMode()\l+ createWindow()\l+ destroyWindow()\l+ getWindow()\l+ setWindow()\l+ setWindowTitle()\l+ showWindow()\l+ fullScreen()\l+ hideWindow()\l+ positionWindow()\l+ reshapeWindow()\l+ popWindow()\l+ pushWindow()\l+ timerFunc()\l+ exec()\l+ redraw()\l+ flush()\l+ createMenu()\l+ destroyMenu()\l+ getMenu()\l+ setMenu()\l+ addMenuEntry()\l+ removeMenuItem()\l+ attachMenu()\l+ detachMenu()\l+ getModifiers()\l+ getValue()\l+ setKeyboardFunc()\l+ setMouseFunc()\l+ setMotionFunc()\l+ setPassiveMotionFunc()\l+ setRenderer()\l+ getRenderer()\l+ setOrientation()\l+ getOrientation()\l+ setPos()\l+ setSize()\l+ setTitle()\l+ setDrawFnc()\l+ setReshapeFunc()\l+ getInterface()\l+ destroyInterface()\l}" alt="" coords="133,249,304,1114"/><area shape="rect" id="node4" href="struct_r_glut_interface_1_1_glut_callbacks.html" title="{RGlutInterface::GlutCallbacks\n|+ draw\l+ reshape\l+ repos\l+ keyboard\l+ mouse\l+ motion\l+ passiveMotion\l|+ GlutCallbacks()\l}" alt="" coords="5,6,197,183"/><area shape="rect" id="node6" href="struct_r_glut_interface_1_1_glut_window_property.html" title="{RGlutInterface::GlutWindowProperty\n|+ mTitle\l+ mX\l+ mY\l+ mWidth\l+ mHeight\l|+ GlutWindowProperty()\l}" alt="" coords="221,22,451,167"/><area shape="rect" id="node8" href="class_r_glut_event_handler.html" title="{RGlutEventHandler\n||+ ~RGlutEventHandler()\l+ draw()\l+ reshape()\l+ rerect()\l+ repos()\l+ keyboard()\l+ mouse()\l+ motion()\l}" alt="" coords="328,585,485,778"/></map>
+<area shape="rect" id="node2" href="class_r_glut_interface.html" title="Base class for the implementation of glut for different platform. If glut should be ported on to a ne..." alt="" coords="157,275,368,1279"/><area shape="rect" id="node4" href="struct_r_glut_interface_1_1_glut_callbacks.html" title="{RGlutInterface::GlutCallbacks\n|+ draw\l+ reshape\l+ repos\l+ keyboard\l+ mouse\l+ motion\l+ passiveMotion\l|+ GlutCallbacks()\l}" alt="" coords="5,6,237,207"/><area shape="rect" id="node6" href="struct_r_glut_interface_1_1_glut_window_property.html" title="{RGlutInterface::GlutWindowProperty\n|+ mTitle\l+ mX\l+ mY\l+ mWidth\l+ mHeight\l|+ GlutWindowProperty()\l}" alt="" coords="261,25,547,189"/><area shape="rect" id="node8" href="class_r_glut_event_handler.html" title="Listner for events." alt="" coords="392,667,584,887"/></map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="class_r_glut_s60_interface-members.html">List of all members.</a></p>
@@ -125,79 +125,921 @@ Classes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><b>TimerEntry</b></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afcb44294f41d8a179e29aeec0f2e9ff7"></a><!-- doxytag: member="RGlutS60Interface::intialize" ref="afcb44294f41d8a179e29aeec0f2e9ff7" args="(int argc, char **argv)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>intialize</b> (int argc, char **argv)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a259b05e8bfac53ebb9d73169df27cd1f"></a><!-- doxytag: member="RGlutS60Interface::terminate" ref="a259b05e8bfac53ebb9d73169df27cd1f" args="()" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>terminate</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae79bd04d0acdafead02982c7fca06b6c"></a><!-- doxytag: member="RGlutS60Interface::initDisplayMode" ref="ae79bd04d0acdafead02982c7fca06b6c" args="(unsigned int mode)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>initDisplayMode</b> (unsigned int mode)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2a53b40786acf2860d08587ce62926c2"></a><!-- doxytag: member="RGlutS60Interface::timerFunc" ref="a2a53b40786acf2860d08587ce62926c2" args="(unsigned int millis, void(*func)(int), int value)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>timerFunc</b> (unsigned int millis, void(*func)(int), int value)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a59d8200a8e9915aba657e89a651a4a9b"></a><!-- doxytag: member="RGlutS60Interface::createWindow" ref="a59d8200a8e9915aba657e89a651a4a9b" args="()" -->
-int&#160;</td><td class="memItemRight" valign="bottom"><b>createWindow</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0a6b6490c1d8fa9ef77fec0b14eb621b"></a><!-- doxytag: member="RGlutS60Interface::destroyWindow" ref="a0a6b6490c1d8fa9ef77fec0b14eb621b" args="(int win)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>destroyWindow</b> (int win)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a81024d377b4443f98a7e9e89b610fe40"></a><!-- doxytag: member="RGlutS60Interface::getWindow" ref="a81024d377b4443f98a7e9e89b610fe40" args="()" -->
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getWindow</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4cbc4646ed3a7c349c883b96d687c6c8"></a><!-- doxytag: member="RGlutS60Interface::setWindow" ref="a4cbc4646ed3a7c349c883b96d687c6c8" args="(int win)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setWindow</b> (int win)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac558d0d109a001ea466fdd1e1384e35a"></a><!-- doxytag: member="RGlutS60Interface::setWindowTitle" ref="ac558d0d109a001ea466fdd1e1384e35a" args="(const char *title)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setWindowTitle</b> (const char *title)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab233d4a3a9f6e1602057a81ca2b580f4"></a><!-- doxytag: member="RGlutS60Interface::showWindow" ref="ab233d4a3a9f6e1602057a81ca2b580f4" args="()" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>showWindow</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaa014a52e28779186b1400bb390320a4"></a><!-- doxytag: member="RGlutS60Interface::fullScreen" ref="aaa014a52e28779186b1400bb390320a4" args="()" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>fullScreen</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad80900273e17b0bae04231ce042d89c4"></a><!-- doxytag: member="RGlutS60Interface::hideWindow" ref="ad80900273e17b0bae04231ce042d89c4" args="()" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>hideWindow</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acbf9530af31f4d578e9ecfaac60dfb34"></a><!-- doxytag: member="RGlutS60Interface::positionWindow" ref="acbf9530af31f4d578e9ecfaac60dfb34" args="(int x, int y)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>positionWindow</b> (int x, int y)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1a5d181651156cb2899965692c864836"></a><!-- doxytag: member="RGlutS60Interface::reshapeWindow" ref="a1a5d181651156cb2899965692c864836" args="(int width, int height)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>reshapeWindow</b> (int width, int height)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a038ca7e926ea493ace000f5b8bdd5276"></a><!-- doxytag: member="RGlutS60Interface::popWindow" ref="a038ca7e926ea493ace000f5b8bdd5276" args="()" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>popWindow</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a080a2271c2f01d78750cc9f0647b09ae"></a><!-- doxytag: member="RGlutS60Interface::pushWindow" ref="a080a2271c2f01d78750cc9f0647b09ae" args="()" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>pushWindow</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aee934af9b7b8824e119555bea3305ed9"></a><!-- doxytag: member="RGlutS60Interface::exec" ref="aee934af9b7b8824e119555bea3305ed9" args="()" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>exec</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8b38d1358fb0570e1f034c7796d61610"></a><!-- doxytag: member="RGlutS60Interface::redraw" ref="a8b38d1358fb0570e1f034c7796d61610" args="(int win=0)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>redraw</b> (int win=0)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab6771ff8c8a37ac0fe8c5138720dd9b5"></a><!-- doxytag: member="RGlutS60Interface::flush" ref="ab6771ff8c8a37ac0fe8c5138720dd9b5" args="()" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>flush</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a115020f55179258dedc991e231a3c6b1"></a><!-- doxytag: member="RGlutS60Interface::draw" ref="a115020f55179258dedc991e231a3c6b1" args="()" -->
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>draw</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9f07c0b22a79706438b53df2f7ba2ffc"></a><!-- doxytag: member="RGlutS60Interface::reshape" ref="a9f07c0b22a79706438b53df2f7ba2ffc" args="(int w, int h)" -->
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>reshape</b> (int w, int h)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a435f0a3757f73cb8b6a985ed649b68a3"></a><!-- doxytag: member="RGlutS60Interface::rerect" ref="a435f0a3757f73cb8b6a985ed649b68a3" args="(int x, int y, int w, int h)" -->
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>rerect</b> (int x, int y, int w, int h)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af90fb40332ad08484fd615ae852e9dc3"></a><!-- doxytag: member="RGlutS60Interface::repos" ref="af90fb40332ad08484fd615ae852e9dc3" args="(int x, int y)" -->
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>repos</b> (int x, int y)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a670ffe80c1663a51122016dbeb67d04b"></a><!-- doxytag: member="RGlutS60Interface::keyboard" ref="a670ffe80c1663a51122016dbeb67d04b" args="(unsigned char key, unsigned int modifier, int x, int y)" -->
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>keyboard</b> (unsigned char key, unsigned int modifier, int x, int y)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6b92991adfa24b03d001348fa4d9bb66"></a><!-- doxytag: member="RGlutS60Interface::mouse" ref="a6b92991adfa24b03d001348fa4d9bb66" args="(int button, int modifier, int x, int y, bool pressed=true)" -->
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>mouse</b> (int button, int modifier, int x, int y, bool pressed=true)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abe8a10dead90a270f6808e852c2acf07"></a><!-- doxytag: member="RGlutS60Interface::motion" ref="abe8a10dead90a270f6808e852c2acf07" args="(int, int, int, int)" -->
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>motion</b> (int, int, int, int)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae739020f4da699716363bdb822e441a8"></a><!-- doxytag: member="RGlutS60Interface::createMenu" ref="ae739020f4da699716363bdb822e441a8" args="(void(*)(int menu))" -->
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>createMenu</b> (void(*)(int menu))</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa231a62702300eb7754f0b6b6517a0ef"></a><!-- doxytag: member="RGlutS60Interface::destroyMenu" ref="aa231a62702300eb7754f0b6b6517a0ef" args="(int menu)" -->
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>destroyMenu</b> (int menu)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a99b138943d2d8d84dd51a78c41114235"></a><!-- doxytag: member="RGlutS60Interface::getMenu" ref="a99b138943d2d8d84dd51a78c41114235" args="()" -->
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>getMenu</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7bda04cc5781026ff5380c722647bb1c"></a><!-- doxytag: member="RGlutS60Interface::setMenu" ref="a7bda04cc5781026ff5380c722647bb1c" args="(int menu)" -->
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setMenu</b> (int menu)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a86434103bd627e8455c2632b5fb522c9"></a><!-- doxytag: member="RGlutS60Interface::addMenuEntry" ref="a86434103bd627e8455c2632b5fb522c9" args="(const char *label, int value)" -->
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>addMenuEntry</b> (const char *label, int value)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a43b61526e3c1f02ea750ea8ca3373947"></a><!-- doxytag: member="RGlutS60Interface::removeMenuItem" ref="a43b61526e3c1f02ea750ea8ca3373947" args="(int item)" -->
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>removeMenuItem</b> (int item)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad829b40edea6903bc2c0d523f6bbfba4"></a><!-- doxytag: member="RGlutS60Interface::attachMenu" ref="ad829b40edea6903bc2c0d523f6bbfba4" args="(int button)" -->
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>attachMenu</b> (int button)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a80859bce38510d12836ef2dae4ebb517"></a><!-- doxytag: member="RGlutS60Interface::detachMenu" ref="a80859bce38510d12836ef2dae4ebb517" args="(int button)" -->
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>detachMenu</b> (int button)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0395e9fdc4030e95a36a7a5f336677e4"></a><!-- doxytag: member="RGlutS60Interface::getModifiers" ref="a0395e9fdc4030e95a36a7a5f336677e4" args="()" -->
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getModifiers</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8eaf9c55e25870ef2f60e07d6dad2e42"></a><!-- doxytag: member="RGlutS60Interface::getValue" ref="a8eaf9c55e25870ef2f60e07d6dad2e42" args="(unsigned int state)" -->
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>getValue</b> (unsigned int state)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#afcb44294f41d8a179e29aeec0f2e9ff7">intialize</a> (int argc, char **argv)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#a259b05e8bfac53ebb9d73169df27cd1f">terminate</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#ae79bd04d0acdafead02982c7fca06b6c">initDisplayMode</a> (unsigned int mode)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#a2a53b40786acf2860d08587ce62926c2">timerFunc</a> (unsigned int millis, void(*func)(int), int value)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#a59d8200a8e9915aba657e89a651a4a9b">createWindow</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#a0a6b6490c1d8fa9ef77fec0b14eb621b">destroyWindow</a> (int win)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#a81024d377b4443f98a7e9e89b610fe40">getWindow</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#a4cbc4646ed3a7c349c883b96d687c6c8">setWindow</a> (int win)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#ac558d0d109a001ea466fdd1e1384e35a">setWindowTitle</a> (const char *title)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#ab233d4a3a9f6e1602057a81ca2b580f4">showWindow</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#aaa014a52e28779186b1400bb390320a4">fullScreen</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#ad80900273e17b0bae04231ce042d89c4">hideWindow</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#acbf9530af31f4d578e9ecfaac60dfb34">positionWindow</a> (int x, int y)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#a1a5d181651156cb2899965692c864836">reshapeWindow</a> (int width, int height)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#a038ca7e926ea493ace000f5b8bdd5276">popWindow</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#a080a2271c2f01d78750cc9f0647b09ae">pushWindow</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#aee934af9b7b8824e119555bea3305ed9">exec</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#a8b38d1358fb0570e1f034c7796d61610">redraw</a> (int win=0)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#ab6771ff8c8a37ac0fe8c5138720dd9b5">flush</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#a115020f55179258dedc991e231a3c6b1">draw</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#a9f07c0b22a79706438b53df2f7ba2ffc">reshape</a> (int w, int h)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#a435f0a3757f73cb8b6a985ed649b68a3">rerect</a> (int x, int y, int w, int h)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#af90fb40332ad08484fd615ae852e9dc3">repos</a> (int x, int y)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#a670ffe80c1663a51122016dbeb67d04b">keyboard</a> (unsigned char key, unsigned int modifier, int x, int y)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#a6b92991adfa24b03d001348fa4d9bb66">mouse</a> (int button, int modifier, int x, int y, bool pressed=true)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#abe8a10dead90a270f6808e852c2acf07">motion</a> (int, int, int, int)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#ae739020f4da699716363bdb822e441a8">createMenu</a> (void(*)(int menu))</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#aa231a62702300eb7754f0b6b6517a0ef">destroyMenu</a> (int menu)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#a99b138943d2d8d84dd51a78c41114235">getMenu</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#a7bda04cc5781026ff5380c722647bb1c">setMenu</a> (int menu)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#a86434103bd627e8455c2632b5fb522c9">addMenuEntry</a> (const char *label, int value)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#a43b61526e3c1f02ea750ea8ca3373947">removeMenuItem</a> (int item)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#ad829b40edea6903bc2c0d523f6bbfba4">attachMenu</a> (int button)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#a80859bce38510d12836ef2dae4ebb517">detachMenu</a> (int button)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#a0395e9fdc4030e95a36a7a5f336677e4">getModifiers</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_s60_interface.html#a8eaf9c55e25870ef2f60e07d6dad2e42">getValue</a> (unsigned int state)</td></tr>
 </table>
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a86434103bd627e8455c2632b5fb522c9"></a><!-- doxytag: member="RGlutS60Interface::addMenuEntry" ref="a86434103bd627e8455c2632b5fb522c9" args="(const char *label, int value)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutS60Interface::addMenuEntry </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>label</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>glutAddMenuEntry functionality will be implemented by this function. </p>
+
+<p>Implements <a class="el" href="class_r_glut_interface.html#a75de1c7ce87c1902b32d8146ff51ec03">RGlutInterface</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad829b40edea6903bc2c0d523f6bbfba4"></a><!-- doxytag: member="RGlutS60Interface::attachMenu" ref="ad829b40edea6903bc2c0d523f6bbfba4" args="(int button)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutS60Interface::attachMenu </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>button</em></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>glutAttachMenu functionality will be implemented by this function. </p>
+
+<p>Implements <a class="el" href="class_r_glut_interface.html#ab7b004d454cf024c50b20d68b748ea52">RGlutInterface</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae739020f4da699716363bdb822e441a8"></a><!-- doxytag: member="RGlutS60Interface::createMenu" ref="ae739020f4da699716363bdb822e441a8" args="(void(*)(int menu))" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int RGlutS60Interface::createMenu </td>
+          <td>(</td>
+          <td class="paramtype">void(*)(int menu)&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>glutCreateMenu functionality will be implemented by this function. </p>
+
+<p>Implements <a class="el" href="class_r_glut_interface.html#aceb283b8992276b8c218c1099ccc6edc">RGlutInterface</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a59d8200a8e9915aba657e89a651a4a9b"></a><!-- doxytag: member="RGlutS60Interface::createWindow" ref="a59d8200a8e9915aba657e89a651a4a9b" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int RGlutS60Interface::createWindow </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Creates a glut window. glutCreateWindow functionality will be implemented by this function. </p>
+
+<p>Implements <a class="el" href="class_r_glut_interface.html#a3231021b2cabc745acc8410af09ab4cd">RGlutInterface</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa231a62702300eb7754f0b6b6517a0ef"></a><!-- doxytag: member="RGlutS60Interface::destroyMenu" ref="aa231a62702300eb7754f0b6b6517a0ef" args="(int menu)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutS60Interface::destroyMenu </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>menu</em></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>glutDestroyMenu functionality will be implemented by this function. </p>
+
+<p>Implements <a class="el" href="class_r_glut_interface.html#aeca20f6430e575ae44414839b99c4f9b">RGlutInterface</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0a6b6490c1d8fa9ef77fec0b14eb621b"></a><!-- doxytag: member="RGlutS60Interface::destroyWindow" ref="a0a6b6490c1d8fa9ef77fec0b14eb621b" args="(int win)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutS60Interface::destroyWindow </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>win</em></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>glutDestroyWindow functionality will be implemented by this function. </p>
+
+<p>Implements <a class="el" href="class_r_glut_interface.html#ad19edcdd68375c254dea9618c2883c65">RGlutInterface</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a80859bce38510d12836ef2dae4ebb517"></a><!-- doxytag: member="RGlutS60Interface::detachMenu" ref="a80859bce38510d12836ef2dae4ebb517" args="(int button)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutS60Interface::detachMenu </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>button</em></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>glutDetachMenu functionality will be implemented by this function. </p>
+
+<p>Implements <a class="el" href="class_r_glut_interface.html#a1b8d4d1a5ced049c222e0035f45223b0">RGlutInterface</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a115020f55179258dedc991e231a3c6b1"></a><!-- doxytag: member="RGlutS60Interface::draw" ref="a115020f55179258dedc991e231a3c6b1" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutS60Interface::draw </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Draw callback </p>
+
+<p>Implements <a class="el" href="class_r_glut_event_handler.html#a767393d750d38f03bf50015f0b27de2a">RGlutEventHandler</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aee934af9b7b8824e119555bea3305ed9"></a><!-- doxytag: member="RGlutS60Interface::exec" ref="aee934af9b7b8824e119555bea3305ed9" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutS60Interface::exec </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>glutMainLoop functionality will be implemented by this function. </p>
+
+<p>Implements <a class="el" href="class_r_glut_interface.html#ae05d016d2fb6958a97e48575fbc95e32">RGlutInterface</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab6771ff8c8a37ac0fe8c5138720dd9b5"></a><!-- doxytag: member="RGlutS60Interface::flush" ref="ab6771ff8c8a37ac0fe8c5138720dd9b5" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutS60Interface::flush </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>glutSwapBuffers functionality will be implemented by this function. </p>
+
+<p>Implements <a class="el" href="class_r_glut_interface.html#a684e54a7ee2f283d2840e00968819c6d">RGlutInterface</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aaa014a52e28779186b1400bb390320a4"></a><!-- doxytag: member="RGlutS60Interface::fullScreen" ref="aaa014a52e28779186b1400bb390320a4" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutS60Interface::fullScreen </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>glutFullScreen functionality will be implemented by this function. </p>
+
+<p>Implements <a class="el" href="class_r_glut_interface.html#a88b128dfd1c59e9e62952963433d547b">RGlutInterface</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a99b138943d2d8d84dd51a78c41114235"></a><!-- doxytag: member="RGlutS60Interface::getMenu" ref="a99b138943d2d8d84dd51a78c41114235" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int RGlutS60Interface::getMenu </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>glutGetMenu functionality will be implemented by this function. </p>
+
+<p>Implements <a class="el" href="class_r_glut_interface.html#a624a19bde8c22563488b7b640272a254">RGlutInterface</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0395e9fdc4030e95a36a7a5f336677e4"></a><!-- doxytag: member="RGlutS60Interface::getModifiers" ref="a0395e9fdc4030e95a36a7a5f336677e4" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int RGlutS60Interface::getModifiers </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>glutGetModifiers functionality will be implemented by this function. </p>
+
+<p>Implements <a class="el" href="class_r_glut_interface.html#a85e3b1db3afd46c98365a334101a021f">RGlutInterface</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8eaf9c55e25870ef2f60e07d6dad2e42"></a><!-- doxytag: member="RGlutS60Interface::getValue" ref="a8eaf9c55e25870ef2f60e07d6dad2e42" args="(unsigned int state)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int RGlutS60Interface::getValue </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>glutGet functionality will be implemented by this function. </p>
+
+<p>Implements <a class="el" href="class_r_glut_interface.html#ad3434c1eff7518b5ac62a504f607b00f">RGlutInterface</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a81024d377b4443f98a7e9e89b610fe40"></a><!-- doxytag: member="RGlutS60Interface::getWindow" ref="a81024d377b4443f98a7e9e89b610fe40" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int RGlutS60Interface::getWindow </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>glutGetWindow functionality will be implemented by this function. </p>
+
+<p>Implements <a class="el" href="class_r_glut_interface.html#a020269011ae08fb38aed9fa1631d4eaa">RGlutInterface</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad80900273e17b0bae04231ce042d89c4"></a><!-- doxytag: member="RGlutS60Interface::hideWindow" ref="ad80900273e17b0bae04231ce042d89c4" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutS60Interface::hideWindow </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>glutHideWindow functionality will be implemented by this function. </p>
+
+<p>Implements <a class="el" href="class_r_glut_interface.html#af86613e56ff5b80de6acbd414da7e10d">RGlutInterface</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae79bd04d0acdafead02982c7fca06b6c"></a><!-- doxytag: member="RGlutS60Interface::initDisplayMode" ref="ae79bd04d0acdafead02982c7fca06b6c" args="(unsigned int mode)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutS60Interface::initDisplayMode </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>mode</em></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Sets the mode of glut. glutInitDisplayMode functionality will be implemented by this function. </p>
+
+<p>Implements <a class="el" href="class_r_glut_interface.html#afb34ea806cd56d7b8dce3b037c9af51b">RGlutInterface</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="afcb44294f41d8a179e29aeec0f2e9ff7"></a><!-- doxytag: member="RGlutS60Interface::intialize" ref="afcb44294f41d8a179e29aeec0f2e9ff7" args="(int argc, char **argv)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutS60Interface::intialize </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>argv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Does the initialization. glutInit functionality will be implemented by this function. </p>
+
+<p>Implements <a class="el" href="class_r_glut_interface.html#a6df6d052eb889be276c566a5e299ca48">RGlutInterface</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a670ffe80c1663a51122016dbeb67d04b"></a><!-- doxytag: member="RGlutS60Interface::keyboard" ref="a670ffe80c1663a51122016dbeb67d04b" args="(unsigned char key, unsigned int modifier, int x, int y)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutS60Interface::keyboard </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>modifier</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Keyboad event callback </p>
+
+<p>Implements <a class="el" href="class_r_glut_event_handler.html#ac212b2da44c7d9f70eb85ec2a62f6366">RGlutEventHandler</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="abe8a10dead90a270f6808e852c2acf07"></a><!-- doxytag: member="RGlutS60Interface::motion" ref="abe8a10dead90a270f6808e852c2acf07" args="(int, int, int, int)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void RGlutS60Interface::motion </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>button</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>modifier</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Mouse motion callback </p>
+
+<p>Implements <a class="el" href="class_r_glut_event_handler.html#afe051e9d1c762efd8d62ef6dc92fee09">RGlutEventHandler</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6b92991adfa24b03d001348fa4d9bb66"></a><!-- doxytag: member="RGlutS60Interface::mouse" ref="a6b92991adfa24b03d001348fa4d9bb66" args="(int button, int modifier, int x, int y, bool pressed=true)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutS60Interface::mouse </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>button</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>modifier</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>pressed</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Mouse press callback </p>
+
+<p>Implements <a class="el" href="class_r_glut_event_handler.html#aca5c820a04dd62cf69bcb905ad7baac4">RGlutEventHandler</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a038ca7e926ea493ace000f5b8bdd5276"></a><!-- doxytag: member="RGlutS60Interface::popWindow" ref="a038ca7e926ea493ace000f5b8bdd5276" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutS60Interface::popWindow </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>glutPopWindow functionality will be implemented by this function. </p>
+
+<p>Implements <a class="el" href="class_r_glut_interface.html#a54506dcd9ef2218f7d2b37fe20c133e5">RGlutInterface</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="acbf9530af31f4d578e9ecfaac60dfb34"></a><!-- doxytag: member="RGlutS60Interface::positionWindow" ref="acbf9530af31f4d578e9ecfaac60dfb34" args="(int x, int y)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutS60Interface::positionWindow </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>glutPositionWindow functionality will be implemented by this function. </p>
+
+<p>Implements <a class="el" href="class_r_glut_interface.html#ab0b9a6bf69c8265417a60718e3d4d08d">RGlutInterface</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a080a2271c2f01d78750cc9f0647b09ae"></a><!-- doxytag: member="RGlutS60Interface::pushWindow" ref="a080a2271c2f01d78750cc9f0647b09ae" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutS60Interface::pushWindow </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>glutPushWindow functionality will be implemented by this function. </p>
+
+<p>Implements <a class="el" href="class_r_glut_interface.html#a83df8537118228f60eb9d98c13d120c2">RGlutInterface</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8b38d1358fb0570e1f034c7796d61610"></a><!-- doxytag: member="RGlutS60Interface::redraw" ref="a8b38d1358fb0570e1f034c7796d61610" args="(int win=0)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutS60Interface::redraw </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>win</em> = <code>0</code></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>glutPostRedisplay functionality will be implemented by this function. </p>
+
+<p>Implements <a class="el" href="class_r_glut_interface.html#af4faf5a1c5984a1ef058cebf45cc4124">RGlutInterface</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a43b61526e3c1f02ea750ea8ca3373947"></a><!-- doxytag: member="RGlutS60Interface::removeMenuItem" ref="a43b61526e3c1f02ea750ea8ca3373947" args="(int item)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutS60Interface::removeMenuItem </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>item</em></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>glutRemoveMenuItem functionality will be implemented by this function. </p>
+
+<p>Implements <a class="el" href="class_r_glut_interface.html#afafc6956aa5a1112688d774007dc83bc">RGlutInterface</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af90fb40332ad08484fd615ae852e9dc3"></a><!-- doxytag: member="RGlutS60Interface::repos" ref="af90fb40332ad08484fd615ae852e9dc3" args="(int x, int y)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutS60Interface::repos </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Postion change callback </p>
+
+<p>Implements <a class="el" href="class_r_glut_event_handler.html#ae9b1628c7466571e34e0f391ff2ea9e9">RGlutEventHandler</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a435f0a3757f73cb8b6a985ed649b68a3"></a><!-- doxytag: member="RGlutS60Interface::rerect" ref="a435f0a3757f73cb8b6a985ed649b68a3" args="(int x, int y, int w, int h)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutS60Interface::rerect </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>h</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Rect change callback </p>
+
+<p>Implements <a class="el" href="class_r_glut_event_handler.html#aea3d0ff7173de93275cb0f3485c05132">RGlutEventHandler</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9f07c0b22a79706438b53df2f7ba2ffc"></a><!-- doxytag: member="RGlutS60Interface::reshape" ref="a9f07c0b22a79706438b53df2f7ba2ffc" args="(int w, int h)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutS60Interface::reshape </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>h</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Shape callback </p>
+
+<p>Implements <a class="el" href="class_r_glut_event_handler.html#ab6f860b60411463b53287a27879234b6">RGlutEventHandler</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1a5d181651156cb2899965692c864836"></a><!-- doxytag: member="RGlutS60Interface::reshapeWindow" ref="a1a5d181651156cb2899965692c864836" args="(int width, int height)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutS60Interface::reshapeWindow </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>height</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>glutReshapeWindow functionality will be implemented by this function. </p>
+
+<p>Implements <a class="el" href="class_r_glut_interface.html#a9ca69aef775c01a6ef83b92f32512b14">RGlutInterface</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7bda04cc5781026ff5380c722647bb1c"></a><!-- doxytag: member="RGlutS60Interface::setMenu" ref="a7bda04cc5781026ff5380c722647bb1c" args="(int menu)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutS60Interface::setMenu </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>menu</em></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>glutSetMenu functionality will be implemented by this function. </p>
+
+<p>Implements <a class="el" href="class_r_glut_interface.html#af1e743763176f9f108c08c470d900164">RGlutInterface</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4cbc4646ed3a7c349c883b96d687c6c8"></a><!-- doxytag: member="RGlutS60Interface::setWindow" ref="a4cbc4646ed3a7c349c883b96d687c6c8" args="(int win)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutS60Interface::setWindow </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>win</em></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>glutSetWindow functionality will be implemented by this function. </p>
+
+<p>Implements <a class="el" href="class_r_glut_interface.html#a4cfb85f0c81abc5c8ddc1703660ceddb">RGlutInterface</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac558d0d109a001ea466fdd1e1384e35a"></a><!-- doxytag: member="RGlutS60Interface::setWindowTitle" ref="ac558d0d109a001ea466fdd1e1384e35a" args="(const char *title)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutS60Interface::setWindowTitle </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>title</em></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>glutSetWindowTitle functionality will be implemented by this function. </p>
+
+<p>Implements <a class="el" href="class_r_glut_interface.html#a8e96605143c52a247956a85788f34c93">RGlutInterface</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab233d4a3a9f6e1602057a81ca2b580f4"></a><!-- doxytag: member="RGlutS60Interface::showWindow" ref="ab233d4a3a9f6e1602057a81ca2b580f4" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutS60Interface::showWindow </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>glutShowWindow functionality will be implemented by this function. </p>
+
+<p>Implements <a class="el" href="class_r_glut_interface.html#a92659056ab5d6a86739bed060d9365ff">RGlutInterface</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a259b05e8bfac53ebb9d73169df27cd1f"></a><!-- doxytag: member="RGlutS60Interface::terminate" ref="a259b05e8bfac53ebb9d73169df27cd1f" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutS60Interface::terminate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Terminate the glut. </p>
+
+<p>Implements <a class="el" href="class_r_glut_interface.html#ae535fa45eaedc81e6944085b41602a19">RGlutInterface</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2a53b40786acf2860d08587ce62926c2"></a><!-- doxytag: member="RGlutS60Interface::timerFunc" ref="a2a53b40786acf2860d08587ce62926c2" args="(unsigned int millis, void(*func)(int), int value)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutS60Interface::timerFunc </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>millis</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(*)(int)&#160;</td>
+          <td class="paramname"><em>func</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>glutTimerFunc functionality will be implemented by this function. </p>
+
+<p>Implements <a class="el" href="class_r_glut_interface.html#aad3ae12d1522610dbeef8aed60a8ab97">RGlutInterface</a>.</p>
+
+</div>
+</div>
 </div>
 </div>
   <div id="nav-path" class="navpath">
@@ -218,7 +1060,7 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>getValue</b> (
 </div>
 
 
-    <li class="footer">Generated on Fri Nov 11 2011 14:15:32 for glutes by
+    <li class="footer">Generated on Tue Nov 15 2011 10:57:42 for glutes by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.5.1 </li>
    </ul>

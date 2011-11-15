@@ -36,13 +36,14 @@
 
 /**
  * @class RGlutLAFManager
- *        Look and feel container
+ * @brief Look and feel container.
  */
 class RGlutLAFManager
 {
 public:
     /**
      * Registers a LAF.
+     * @see RGlutLAF
      */
     static void registerLAF(std::string const &name, RGlutLAF *laf);
     /**
@@ -52,6 +53,7 @@ public:
 
     /**
      * Retrieves the LAF object for the given name.
+     * @see RGlutLAF
      */
     static RGlutLAF *getLAF(std::string name);
 

@@ -101,20 +101,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="RGlutMaemoWindow" --><!-- doxytag: inherits="RGlutWindow" -->
+<p>Window class implementation for maemo glut.  
+ <a href="class_r_glut_maemo_window.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="rglutmaemowindow_8h_source.html">rglutmaemowindow.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for RGlutMaemoWindow:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_r_glut_maemo_window__inherit__graph.png" border="0" usemap="#_r_glut_maemo_window_inherit__map" alt="Inheritance graph"/></div>
 <map name="_r_glut_maemo_window_inherit__map" id="_r_glut_maemo_window_inherit__map">
-<area shape="rect" id="node2" href="class_r_glut_window.html" title="{RGlutWindow\n|# mDisplay\l# mParent\l# mParentWindow\l# mWindow\l# mX\l# mY\l# mWidth\l# mHeight\l# mVisible\l# mTitle\l# mChilds\l|+ RGlutWindow()\l+ ~RGlutWindow()\l+ pos()\l+ setPos()\l+ size()\l+ setSize()\l+ setGeometry()\l+ geometry()\l+ setTitle()\l+ setFullscreen()\l+ setBackgroundColor()\l+ clear()\l+ isVisible()\l+ show()\l+ hide()\l+ redraw()\l+ draw()\l+ handleEvent()\l+ display()\l+ window()\l+ parent()\l+ addChild()\l+ removeChild()\l+ removeFromParent()\l# create()\l# destroy()\l}" alt="" coords="12,6,169,647"/></map>
+<area shape="rect" id="node2" href="class_r_glut_window.html" title="Window class implementation, wrapper for X11 window." alt="" coords="12,6,207,749"/></map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for RGlutMaemoWindow:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_r_glut_maemo_window__coll__graph.png" border="0" usemap="#_r_glut_maemo_window_coll__map" alt="Collaboration graph"/></div>
 <map name="_r_glut_maemo_window_coll__map" id="_r_glut_maemo_window_coll__map">
-<area shape="rect" id="node2" href="class_r_glut_window.html" title="{RGlutWindow\n|# mDisplay\l# mParent\l# mParentWindow\l# mWindow\l# mX\l# mY\l# mWidth\l# mHeight\l# mVisible\l# mTitle\l# mChilds\l|+ RGlutWindow()\l+ ~RGlutWindow()\l+ pos()\l+ setPos()\l+ size()\l+ setSize()\l+ setGeometry()\l+ geometry()\l+ setTitle()\l+ setFullscreen()\l+ setBackgroundColor()\l+ clear()\l+ isVisible()\l+ show()\l+ hide()\l+ redraw()\l+ draw()\l+ handleEvent()\l+ display()\l+ window()\l+ parent()\l+ addChild()\l+ removeChild()\l+ removeFromParent()\l# create()\l# destroy()\l}" alt="" coords="12,6,169,647"/></map>
+<area shape="rect" id="node2" href="class_r_glut_window.html" title="Window class implementation, wrapper for X11 window." alt="" coords="12,6,207,749"/></map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="class_r_glut_maemo_window-members.html">List of all members.</a></p>
@@ -123,16 +126,54 @@ Collaboration diagram for RGlutMaemoWindow:</div>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1b819f2824a7a0eba13f774e11178d25"></a><!-- doxytag: member="RGlutMaemoWindow::RGlutMaemoWindow" ref="a1b819f2824a7a0eba13f774e11178d25" args="(RGlutEventHandler *eh)" -->
 &#160;</td><td class="memItemRight" valign="bottom"><b>RGlutMaemoWindow</b> (<a class="el" href="class_r_glut_event_handler.html">RGlutEventHandler</a> *eh)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4a5514775225f6280d425b13eaa03405"></a><!-- doxytag: member="RGlutMaemoWindow::draw" ref="a4a5514775225f6280d425b13eaa03405" args="()" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>draw</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2125ae4248f4a6aa30bfd49a7ed9bece"></a><!-- doxytag: member="RGlutMaemoWindow::handleEvent" ref="a2125ae4248f4a6aa30bfd49a7ed9bece" args="(XEvent &amp;event)" -->
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>handleEvent</b> (XEvent &amp;event)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_maemo_window.html#a4a5514775225f6280d425b13eaa03405">draw</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_maemo_window.html#a2125ae4248f4a6aa30bfd49a7ed9bece">handleEvent</a> (XEvent &amp;event)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acbfb32adf358959e578b375e30b1af0e"></a><!-- doxytag: member="RGlutMaemoWindow::currentXEvent" ref="acbfb32adf358959e578b375e30b1af0e" args="()" -->
 XEvent *&#160;</td><td class="memItemRight" valign="bottom"><b>currentXEvent</b> ()</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>Window implementation for glut </p>
-</div></div>
+<div class="textblock"><p>Window class implementation for maemo glut. </p>
+</div><hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a4a5514775225f6280d425b13eaa03405"></a><!-- doxytag: member="RGlutMaemoWindow::draw" ref="a4a5514775225f6280d425b13eaa03405" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutMaemoWindow::draw </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Callback for draw event. </p>
+
+<p>Reimplemented from <a class="el" href="class_r_glut_window.html#a063903abad3ed2dee0929d7b15816c3f">RGlutWindow</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2125ae4248f4a6aa30bfd49a7ed9bece"></a><!-- doxytag: member="RGlutMaemoWindow::handleEvent" ref="a2125ae4248f4a6aa30bfd49a7ed9bece" args="(XEvent &amp;event)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool RGlutMaemoWindow::handleEvent </td>
+          <td>(</td>
+          <td class="paramtype">XEvent &amp;&#160;</td>
+          <td class="paramname"><em>event</em></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Event handler function. </p>
+
+<p>Reimplemented from <a class="el" href="class_r_glut_window.html#a1ebe7e5ab0015f084717843332fde416">RGlutWindow</a>.</p>
+
+</div>
+</div>
+</div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
@@ -152,7 +193,7 @@ XEvent *&#160;</td><td class="memItemRight" valign="bottom"><b>currentXEvent</b>
 </div>
 
 
-    <li class="footer">Generated on Fri Nov 11 2011 14:15:32 for glutes by
+    <li class="footer">Generated on Tue Nov 15 2011 10:57:42 for glutes by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.5.1 </li>
    </ul>

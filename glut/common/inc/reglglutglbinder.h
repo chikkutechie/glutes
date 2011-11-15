@@ -57,15 +57,42 @@ public:
     REGLGlutGLBinder(API api);
     ~REGLGlutGLBinder();
 
+    /*!
+     * Sets the native display. This will be passed to eglGetDisplay.
+     * @apram display display to set as native display
+     */
     void setNativeDisplay(int display) {
         mNativeDisplay = display;
     }
 
+    /*!
+     * Does the EGL initialization
+     */
     bool initialize();
+    
+    /*!
+     * Creates the EGLSurface
+     */
     unsigned int createSurface(Surface  surface, int width, int height);
+    
+    /*!
+     * Makes the given surface as the current surface.
+     */
     bool makeCurrent(unsigned int surface);
+    
+    /*!
+     * Destroys the passed surface. Current surface and context will to set to null.
+     */
     void destroySurface(unsigned int surface);
+    
+    /*!
+     * Calls the eglSwapBuffers
+     */
     void swapBuffer(unsigned int surface);
+    
+    /*!
+     * Terminate the egl display, context.
+     */
     void terminate();
 
     void addProperty(int name, int value) {

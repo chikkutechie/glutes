@@ -101,6 +101,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="RGlutTimer" -->
+<p>Timer class implementation.  
+ <a href="class_r_glut_timer.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="rgluttimer_8h_source.html">rgluttimer.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for RGlutTimer:</div>
@@ -112,20 +115,102 @@ Inheritance diagram for RGlutTimer:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3d5c47a6d7fc50b589e539150474fa2a"></a><!-- doxytag: member="RGlutTimer::interval" ref="a3d5c47a6d7fc50b589e539150474fa2a" args="()" -->
-int&#160;</td><td class="memItemRight" valign="bottom"><b>interval</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa0a24142b195e33ec23e7e680ee1f474"></a><!-- doxytag: member="RGlutTimer::setInterval" ref="aa0a24142b195e33ec23e7e680ee1f474" args="(int interval)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setInterval</b> (int interval)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1d4f2ad81b131b220ab4c7a04f97fae7"></a><!-- doxytag: member="RGlutTimer::start" ref="a1d4f2ad81b131b220ab4c7a04f97fae7" args="()" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>start</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a467cb7a3b59e4af7dc28111d0be3f7f0"></a><!-- doxytag: member="RGlutTimer::stop" ref="a467cb7a3b59e4af7dc28111d0be3f7f0" args="()" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>stop</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a75adfebcf0c44e4c11416961c9487f29"></a><!-- doxytag: member="RGlutTimer::run" ref="a75adfebcf0c44e4c11416961c9487f29" args="()=0" -->
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>run</b> ()=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_timer.html#a3d5c47a6d7fc50b589e539150474fa2a">interval</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_timer.html#aa0a24142b195e33ec23e7e680ee1f474">setInterval</a> (int interval)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_timer.html#a1d4f2ad81b131b220ab4c7a04f97fae7">start</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_timer.html#a467cb7a3b59e4af7dc28111d0be3f7f0">stop</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_timer.html#a75adfebcf0c44e4c11416961c9487f29">run</a> ()=0</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>Timer class implementation </p>
-</div></div>
+<div class="textblock"><p>Timer class implementation. </p>
+</div><hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a3d5c47a6d7fc50b589e539150474fa2a"></a><!-- doxytag: member="RGlutTimer::interval" ref="a3d5c47a6d7fc50b589e539150474fa2a" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int RGlutTimer::interval </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Retrieves the interval for the timer. </p>
+
+</div>
+</div>
+<a class="anchor" id="a75adfebcf0c44e4c11416961c9487f29"></a><!-- doxytag: member="RGlutTimer::run" ref="a75adfebcf0c44e4c11416961c9487f29" args="()=0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void RGlutTimer::run </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>This function will be getting called once the timer expires. </p>
+
+</div>
+</div>
+<a class="anchor" id="aa0a24142b195e33ec23e7e680ee1f474"></a><!-- doxytag: member="RGlutTimer::setInterval" ref="aa0a24142b195e33ec23e7e680ee1f474" args="(int interval)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutTimer::setInterval </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>interval</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Sets the interval for the timer. </p>
+
+</div>
+</div>
+<a class="anchor" id="a1d4f2ad81b131b220ab4c7a04f97fae7"></a><!-- doxytag: member="RGlutTimer::start" ref="a1d4f2ad81b131b220ab4c7a04f97fae7" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutTimer::start </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Starts the timer. </p>
+
+</div>
+</div>
+<a class="anchor" id="a467cb7a3b59e4af7dc28111d0be3f7f0"></a><!-- doxytag: member="RGlutTimer::stop" ref="a467cb7a3b59e4af7dc28111d0be3f7f0" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGlutTimer::stop </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Stops the timer. </p>
+
+</div>
+</div>
+</div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
@@ -145,7 +230,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>run</b> ()=0<
 </div>
 
 
-    <li class="footer">Generated on Fri Nov 11 2011 14:15:32 for glutes by
+    <li class="footer">Generated on Tue Nov 15 2011 10:57:42 for glutes by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.5.1 </li>
    </ul>

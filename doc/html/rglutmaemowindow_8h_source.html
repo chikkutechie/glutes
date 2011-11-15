@@ -131,23 +131,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00034"></a>00034 <span class="comment"></span>
 <a name="l00035"></a>00035 <span class="comment">/**</span>
 <a name="l00036"></a>00036 <span class="comment"> * @class RGlutMaemoWindow</span>
-<a name="l00037"></a>00037 <span class="comment"> *        Window implementation for glut</span>
+<a name="l00037"></a>00037 <span class="comment"> * @brief Window class implementation for maemo glut.</span>
 <a name="l00038"></a>00038 <span class="comment"> */</span>
-<a name="l00039"></a><a class="code" href="class_r_glut_maemo_window.html">00039</a> <span class="keyword">class </span><a class="code" href="class_r_glut_maemo_window.html">RGlutMaemoWindow</a>: <span class="keyword">public</span> <a class="code" href="class_r_glut_window.html">RGlutWindow</a>
+<a name="l00039"></a><a class="code" href="class_r_glut_maemo_window.html">00039</a> <span class="keyword">class </span><a class="code" href="class_r_glut_maemo_window.html" title="Window class implementation for maemo glut.">RGlutMaemoWindow</a>: <span class="keyword">public</span> <a class="code" href="class_r_glut_window.html" title="Window class implementation, wrapper for X11 window.">RGlutWindow</a>
 <a name="l00040"></a>00040 {
 <a name="l00041"></a>00041 <span class="keyword">public</span>:
-<a name="l00042"></a>00042     <a class="code" href="class_r_glut_maemo_window.html">RGlutMaemoWindow</a>(<a class="code" href="class_r_glut_event_handler.html">RGlutEventHandler</a> *eh);
-<a name="l00043"></a>00043     ~<a class="code" href="class_r_glut_maemo_window.html">RGlutMaemoWindow</a>();
+<a name="l00042"></a>00042     <a class="code" href="class_r_glut_maemo_window.html" title="Window class implementation for maemo glut.">RGlutMaemoWindow</a>(<a class="code" href="class_r_glut_event_handler.html" title="Listner for events.">RGlutEventHandler</a> *eh);
+<a name="l00043"></a>00043     ~<a class="code" href="class_r_glut_maemo_window.html" title="Window class implementation for maemo glut.">RGlutMaemoWindow</a>();
 <a name="l00044"></a>00044 
-<a name="l00045"></a>00045     <span class="keywordtype">void</span> draw();
+<a name="l00045"></a>00045     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_maemo_window.html#a4a5514775225f6280d425b13eaa03405">draw</a>();
 <a name="l00046"></a>00046 
-<a name="l00047"></a>00047     <span class="keywordtype">bool</span> handleEvent(XEvent &amp;event);
+<a name="l00047"></a>00047     <span class="keywordtype">bool</span> <a class="code" href="class_r_glut_maemo_window.html#a2125ae4248f4a6aa30bfd49a7ed9bece">handleEvent</a>(XEvent &amp;event);
 <a name="l00048"></a>00048     XEvent *currentXEvent() {
 <a name="l00049"></a>00049         <span class="keywordflow">return</span> mCurrentEvent;
 <a name="l00050"></a>00050     }
 <a name="l00051"></a>00051 
 <a name="l00052"></a>00052 <span class="keyword">private</span>:
-<a name="l00053"></a>00053     <a class="code" href="class_r_glut_event_handler.html">RGlutEventHandler</a> *mEH;
+<a name="l00053"></a>00053     <a class="code" href="class_r_glut_event_handler.html" title="Listner for events.">RGlutEventHandler</a> *mEH;
 <a name="l00054"></a>00054     XEvent *mCurrentEvent;
 <a name="l00055"></a>00055 };
 <a name="l00056"></a>00056 
@@ -172,7 +172,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 
-    <li class="footer">Generated on Fri Nov 11 2011 14:15:31 for glutes by
+    <li class="footer">Generated on Tue Nov 15 2011 10:57:42 for glutes by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.5.1 </li>
    </ul>

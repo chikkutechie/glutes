@@ -33,7 +33,7 @@
 
 /**
  * @class RGlutColor
- *        Easy to use class to represent color(R, G, B)
+ * @brief Easy to use class to represent color(R, G, B).
  */
 class RGlutColor
 {

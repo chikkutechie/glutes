@@ -31,7 +31,7 @@
 
 /**
  * @class RGlutRect
- *        Rectangle class implementation
+ * @brief Rectangle class implementation.
  */
 template <typename T>
 class RGlutRect
@@ -51,42 +51,80 @@ public:
         return ((width() == 0) | (height() == 0));
     }
 
+    /*!
+     * Retrieves x1 value
+     */
     T x1() const {
         return mX1;
     }
+    /*!
+     * Retrieves y1 value
+     */
     T y1() const {
         return mY1;
     }
+    /*!
+     * Retrieves x2 value
+     */
     T x2() const {
         return mX2;
     }
+    /*!
+     * Retrieves y2 value
+     */
     T y2() const {
         return mY2;
     }
 
+    /*!
+     * Sets X1 value
+     */
     void setX1(T v) {
         mX1 = v;
     }
+    /*!
+     * Sets Y1 value
+     */
     void setY1(T v) {
         mY1 = v;
     }
+    /*!
+     * Sets X2 value
+     */
     void setX2(T v) {
         mX2 = v;
     }
+    /*!
+     * Sets Y2 value
+     */
     void setY2(T v) {
         mY2 = v;
     }
 
+    /*!
+     * Sets height of the rectangle.
+     */
     void setHeight(T v) {
         setY2(y1() + v);
     }
+    
+    /*!
+     * Retrieves height of the rectangle.
+     */
     T height() const {
         return mY2 - mY1;
     }
 
+    /*!
+     * Sets width of the rectangle.
+     */
     void setWidth(T v) {
         setX2(x1() + v);
     }
+    
+    /*!
+     * Retrieves height of the rectangle.
+     */
     T width() const {
         return mX2 - mX1;
     }

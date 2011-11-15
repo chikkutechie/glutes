@@ -38,7 +38,7 @@ class RGlutWindow;
 
 /**
  * @class RGlutGC
- *        Basic GC implementation
+ * @brief Basic drawing function implementation.
  */
 class RGlutGC
 {
@@ -48,10 +48,12 @@ public:
 
     /**
      * Sets the foreground color
+     * @see RGlutColor
      */
     void setForegroundColor(RGlutColor const &color);
     /**
      * Sets the background color
+     * @see RGlutColor
      */
     void setBackgroundColor(RGlutColor const &color);
 
@@ -66,11 +68,13 @@ public:
 
     /**
      * Sets the font.
+     * @see RGlutFont
      * @param font The font object to set
      */
     void setFont(RGlutFont const &font);
     /**
      * Retrieves the font.
+     * @see RGlutFont
      */
     RGlutFont font() const {
         return mFont;

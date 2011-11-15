@@ -135,22 +135,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00038"></a>00038 <span class="comment"></span>
 <a name="l00039"></a>00039 <span class="comment">/**</span>
 <a name="l00040"></a>00040 <span class="comment"> * @class RGlutLAF</span>
-<a name="l00041"></a>00041 <span class="comment"> *        Look and feel class</span>
+<a name="l00041"></a>00041 <span class="comment"> * @brief Defines basic FW properties.</span>
 <a name="l00042"></a>00042 <span class="comment"> */</span>
-<a name="l00043"></a><a class="code" href="class_r_glut_l_a_f.html">00043</a> <span class="keyword">class </span><a class="code" href="class_r_glut_l_a_f.html">RGlutLAF</a>
+<a name="l00043"></a><a class="code" href="class_r_glut_l_a_f.html">00043</a> <span class="keyword">class </span><a class="code" href="class_r_glut_l_a_f.html" title="Defines basic FW properties.">RGlutLAF</a>
 <a name="l00044"></a>00044 {
 <a name="l00045"></a>00045 <span class="keyword">public</span>:
-<a name="l00046"></a>00046     <a class="code" href="class_r_glut_l_a_f.html">RGlutLAF</a>();
-<a name="l00047"></a>00047     <span class="keyword">virtual</span> ~<a class="code" href="class_r_glut_l_a_f.html">RGlutLAF</a>();
+<a name="l00046"></a>00046     <a class="code" href="class_r_glut_l_a_f.html" title="Defines basic FW properties.">RGlutLAF</a>();
+<a name="l00047"></a>00047     <span class="keyword">virtual</span> ~<a class="code" href="class_r_glut_l_a_f.html" title="Defines basic FW properties.">RGlutLAF</a>();
 <a name="l00048"></a>00048 <span class="comment"></span>
 <a name="l00049"></a>00049 <span class="comment">    /**</span>
 <a name="l00050"></a>00050 <span class="comment">     * Retrieves the default font for the FW.</span>
 <a name="l00051"></a>00051 <span class="comment">     */</span>
-<a name="l00052"></a>00052     <span class="keyword">virtual</span> <a class="code" href="class_r_glut_font.html">RGlutFont</a> <a class="code" href="class_r_glut_l_a_f.html#a2bc63edde14264bef76a7061e9f622ba">defaultFont</a>();<span class="comment"></span>
+<a name="l00052"></a>00052     <span class="keyword">virtual</span> <a class="code" href="class_r_glut_font.html" title="Wrapper for X11 font.">RGlutFont</a> <a class="code" href="class_r_glut_l_a_f.html#a2bc63edde14264bef76a7061e9f622ba">defaultFont</a>();<span class="comment"></span>
 <a name="l00053"></a>00053 <span class="comment">    /**</span>
 <a name="l00054"></a>00054 <span class="comment">     * Retrieves the menu font for the FW.</span>
 <a name="l00055"></a>00055 <span class="comment">     */</span>
-<a name="l00056"></a>00056     <span class="keyword">virtual</span> <a class="code" href="class_r_glut_font.html">RGlutFont</a> <a class="code" href="class_r_glut_l_a_f.html#a2b4ba6a6f15efbee046da3cdb4c05a1b">menuItemFont</a>();
+<a name="l00056"></a>00056     <span class="keyword">virtual</span> <a class="code" href="class_r_glut_font.html" title="Wrapper for X11 font.">RGlutFont</a> <a class="code" href="class_r_glut_l_a_f.html#a2b4ba6a6f15efbee046da3cdb4c05a1b">menuItemFont</a>();
 <a name="l00057"></a>00057 <span class="comment"></span>
 <a name="l00058"></a>00058 <span class="comment">    /**</span>
 <a name="l00059"></a>00059 <span class="comment">     * Retrieves the maximum menu width for the FW.</span>
@@ -176,28 +176,30 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00079"></a>00079 <span class="comment"></span>
 <a name="l00080"></a>00080 <span class="comment">    /**</span>
 <a name="l00081"></a>00081 <span class="comment">     * Retrieves the menu background color for the FW.</span>
-<a name="l00082"></a>00082 <span class="comment">     */</span>
-<a name="l00083"></a>00083     <span class="keyword">virtual</span> <a class="code" href="class_r_glut_color.html">RGlutColor</a> <a class="code" href="class_r_glut_l_a_f.html#a5e16d59f3247971c7a849f62420cb7e5">getMenuBackgroundColor</a>();<span class="comment"></span>
-<a name="l00084"></a>00084 <span class="comment">    /**</span>
-<a name="l00085"></a>00085 <span class="comment">     * Retrieves the menu text color for the FW.</span>
-<a name="l00086"></a>00086 <span class="comment">     */</span>
-<a name="l00087"></a>00087     <span class="keyword">virtual</span> <a class="code" href="class_r_glut_color.html">RGlutColor</a> <a class="code" href="class_r_glut_l_a_f.html#a4670364f5d632895ff566d478d677811">getMenuTextColor</a>();
-<a name="l00088"></a>00088 <span class="comment"></span>
-<a name="l00089"></a>00089 <span class="comment">    /**</span>
-<a name="l00090"></a>00090 <span class="comment">     * Creates the normal menu item background.</span>
-<a name="l00091"></a>00091 <span class="comment">     */</span>
-<a name="l00092"></a>00092     <span class="keyword">virtual</span> Pixmap <a class="code" href="class_r_glut_l_a_f.html#aa05b952f97b381c3132ba308e51c5e29">createMenuItemBackgroundNormal</a>(<span class="keywordtype">int</span> w, <span class="keywordtype">int</span> h);<span class="comment"></span>
-<a name="l00093"></a>00093 <span class="comment">    /**</span>
-<a name="l00094"></a>00094 <span class="comment">     * Creates the pressed menu item background.</span>
-<a name="l00095"></a>00095 <span class="comment">     */</span>
-<a name="l00096"></a>00096     <span class="keyword">virtual</span> Pixmap <a class="code" href="class_r_glut_l_a_f.html#a77e1d3f3f9907c203081bb7ec28208f4">createMenuItemBackgroundPressed</a>(<span class="keywordtype">int</span> w, <span class="keywordtype">int</span> h);
-<a name="l00097"></a>00097 
-<a name="l00098"></a>00098 <span class="keyword">private</span>:
+<a name="l00082"></a>00082 <span class="comment">     * @see RGlutColor</span>
+<a name="l00083"></a>00083 <span class="comment">     */</span>
+<a name="l00084"></a>00084     <span class="keyword">virtual</span> <a class="code" href="class_r_glut_color.html" title="Easy to use class to represent color(R, G, B).">RGlutColor</a> <a class="code" href="class_r_glut_l_a_f.html#a5e16d59f3247971c7a849f62420cb7e5">getMenuBackgroundColor</a>();<span class="comment"></span>
+<a name="l00085"></a>00085 <span class="comment">    /**</span>
+<a name="l00086"></a>00086 <span class="comment">     * Retrieves the menu text color for the FW.</span>
+<a name="l00087"></a>00087 <span class="comment">     * @see RGlutColor</span>
+<a name="l00088"></a>00088 <span class="comment">     */</span>
+<a name="l00089"></a>00089     <span class="keyword">virtual</span> <a class="code" href="class_r_glut_color.html" title="Easy to use class to represent color(R, G, B).">RGlutColor</a> <a class="code" href="class_r_glut_l_a_f.html#a4670364f5d632895ff566d478d677811">getMenuTextColor</a>();
+<a name="l00090"></a>00090 <span class="comment"></span>
+<a name="l00091"></a>00091 <span class="comment">    /**</span>
+<a name="l00092"></a>00092 <span class="comment">     * Creates the normal menu item background.</span>
+<a name="l00093"></a>00093 <span class="comment">     */</span>
+<a name="l00094"></a>00094     <span class="keyword">virtual</span> Pixmap <a class="code" href="class_r_glut_l_a_f.html#aa05b952f97b381c3132ba308e51c5e29">createMenuItemBackgroundNormal</a>(<span class="keywordtype">int</span> w, <span class="keywordtype">int</span> h);<span class="comment"></span>
+<a name="l00095"></a>00095 <span class="comment">    /**</span>
+<a name="l00096"></a>00096 <span class="comment">     * Creates the pressed menu item background.</span>
+<a name="l00097"></a>00097 <span class="comment">     */</span>
+<a name="l00098"></a>00098     <span class="keyword">virtual</span> Pixmap <a class="code" href="class_r_glut_l_a_f.html#a77e1d3f3f9907c203081bb7ec28208f4">createMenuItemBackgroundPressed</a>(<span class="keywordtype">int</span> w, <span class="keywordtype">int</span> h);
 <a name="l00099"></a>00099 
-<a name="l00100"></a>00100 };
+<a name="l00100"></a>00100 <span class="keyword">private</span>:
 <a name="l00101"></a>00101 
-<a name="l00102"></a>00102 <span class="preprocessor">#endif</span>
-<a name="l00103"></a>00103 <span class="preprocessor"></span>
+<a name="l00102"></a>00102 };
+<a name="l00103"></a>00103 
+<a name="l00104"></a>00104 <span class="preprocessor">#endif</span>
+<a name="l00105"></a>00105 <span class="preprocessor"></span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
@@ -218,7 +220,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 
-    <li class="footer">Generated on Fri Nov 11 2011 14:15:31 for glutes by
+    <li class="footer">Generated on Tue Nov 15 2011 10:57:42 for glutes by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.5.1 </li>
    </ul>

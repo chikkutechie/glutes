@@ -33,7 +33,7 @@
 
 /**
  * @class RGlutInterface
- *        Base class for the implementation of glut for different platform.
+ * @brief Base class for the implementation of glut for different platform.
  *        If glut should be ported on to a new platform derive from this -
  *        class.
  */
@@ -62,55 +62,177 @@ public:
     static RGlutInterface *getInterface();
     static bool destroyInterface();
 
+    /*!
+     * Does the initialization. glutInit functionality will be implemented by this function.
+     */
     virtual void intialize(int argc, char **argv) = 0;
+    
+    /*!
+     * Terminate the glut.
+     */
     virtual void terminate() = 0;
+    
+    /*!
+     * Sets the mode of glut. glutInitDisplayMode functionality will be implemented by this function.
+     */
     virtual void initDisplayMode(unsigned int mode) = 0;
 
+    /*!
+     * Creates a glut window. glutCreateWindow functionality will be implemented by this function.
+     */
     virtual int createWindow() = 0;
+    
+    /*!
+     * glutDestroyWindow functionality will be implemented by this function.
+     */
     virtual void destroyWindow(int win) = 0;
+    
+    /*!
+     * glutGetWindow functionality will be implemented by this function.
+     */
     virtual int getWindow() = 0;
+    
+    /*!
+     * glutSetWindow functionality will be implemented by this function.
+     */
     virtual void setWindow(int win) = 0;
+    
+    /*!
+     * glutSetWindowTitle functionality will be implemented by this function.
+     */
     virtual void setWindowTitle(const char *title) = 0;
+    
+    /*!
+     * glutShowWindow functionality will be implemented by this function.
+     */
     virtual void showWindow() = 0;
+    
+    /*!
+     * glutFullScreen functionality will be implemented by this function.
+     */
     virtual void fullScreen() = 0;
+    
+    /*!
+     * glutHideWindow functionality will be implemented by this function.
+     */
     virtual void hideWindow() = 0;
+    
+    /*!
+     * glutPositionWindow functionality will be implemented by this function.
+     */
     virtual void positionWindow(int x, int y) = 0;
+    
+    /*!
+     * glutReshapeWindow functionality will be implemented by this function.
+     */
     virtual void reshapeWindow(int width, int height) = 0;
+    
+    /*!
+     * glutPopWindow functionality will be implemented by this function.
+     */
     virtual void popWindow() = 0;
+    
+    /*!
+     * glutPushWindow functionality will be implemented by this function.
+     */
     virtual void pushWindow() = 0;
 
+    /*!
+     * glutTimerFunc functionality will be implemented by this function.
+     */
     virtual void timerFunc(unsigned int millis, void (*func)(int), int value) = 0;
 
+    /*!
+     * glutMainLoop functionality will be implemented by this function.
+     */
     virtual void exec() = 0;
+    
+    /*!
+     * glutPostRedisplay functionality will be implemented by this function.
+     */
     virtual void redraw(int win = 0) = 0;
+    
+    /*!
+     * glutSwapBuffers functionality will be implemented by this function.
+     */
     virtual void flush() = 0;
 
+    /*!
+     * glutCreateMenu functionality will be implemented by this function.
+     */
     virtual int createMenu(void ( *)(int menu)) = 0;
+    
+    /*!
+     * glutDestroyMenu functionality will be implemented by this function.
+     */
     virtual void destroyMenu(int menu) = 0;
+    
+    /*!
+     * glutGetMenu functionality will be implemented by this function.
+     */
     virtual int getMenu() = 0;
+    
+    /*!
+     * glutSetMenu functionality will be implemented by this function.
+     */
     virtual void setMenu(int menu) = 0;
+    
+    /*!
+     * glutAddMenuEntry functionality will be implemented by this function.
+     */
     virtual void addMenuEntry(const char *label, int value) = 0;
+    
+    /*!
+     * glutRemoveMenuItem functionality will be implemented by this function.
+     */
     virtual void removeMenuItem(int item) = 0;
+    
+    /*!
+     * glutAttachMenu functionality will be implemented by this function.
+     */
     virtual void attachMenu(int button) = 0;
+    
+    /*!
+     * glutDetachMenu functionality will be implemented by this function.
+     */
     virtual void detachMenu(int button) = 0;
 
+    /*!
+     * glutGetModifiers functionality will be implemented by this function.
+     */
     virtual int getModifiers() = 0;
+    
+    /*!
+     * glutGet functionality will be implemented by this function.
+     */
     virtual int getValue(unsigned int state) = 0;
 
 public:
+    /*!
+     * glutKeyboardFunc functionality will be implemented by this function.
+     */
     void setKeyboardFunc(void (*func)(unsigned char key, int x, int y)) {
         mCallbacks.keyboard = func;
     }
 
+    /*!
+     * glutMouseFunc functionality will be implemented by this function.
+     */
     void setMouseFunc(void (*func)(int button, int state, int x, int y)) {
         mCallbacks.mouse = func;
     }
 
+    /*!
+     * glutMotionFunc functionality will be implemented by this function.
+     */
     int setMotionFunc(void (*func)(int x, int y)) {
         mCallbacks.motion = func;
         return 0;
     }
 
+    /*!
+     * glutPassiveMotionFunc functionality will be implemented by this function.
+     */
     int setPassiveMotionFunc(void (*func)(int x, int y)) {
         mCallbacks.passiveMotion = func;
         return 0;

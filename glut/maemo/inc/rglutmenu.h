@@ -39,7 +39,7 @@ class RGlutGC;
 
 /**
  * @class RGlutMenu
- *        Menu implementation
+ * @brief Popu menu implementation.
  */
 class RGlutMenu: public RGlutWindow
 {
@@ -47,11 +47,24 @@ public:
     RGlutMenu(void (*callback)(int), RGlutWindow *parent = 0);
     ~RGlutMenu();
 
+    /*!
+     * Add a menu entry
+     * @param name Name that will be displayed
+     * @param id Id used to identify the menu item
+     */
     void addEntry(std::string name, int id);
 
+    /*!
+     * Removes the menu item with the given id
+     * @param id The menu item id to be removed
+     */
     void removeEntry(int id) {
     }
 
+    /*!
+     * Returns the position within the window that will fit in to the parent window
+     * @see RGlutPointI
+     */
     RGlutPointI preferedPos(int x, int y);
 
     void hide();

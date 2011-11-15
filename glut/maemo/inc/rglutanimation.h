@@ -45,20 +45,7 @@ public:
 
 /**
  * @class RGlutAnimation
- *        Base class for animation(or effects) framework.<br>
- *        To implement an Animation class derive from this class and implement
- *        void update(int) method.<br>
- *        For Example:
- *        @code
- *        class MyAnimation: public RGlutAnimation
- *        {
- *        public:
- *            void update(int)
- *            {
- *            // do the updation of the state here
- *            }
- *        };
- *        @endcode
+ * @brief Base class for animation(or effects) framework.
  */
 class RGlutAnimation
 {
@@ -121,6 +108,10 @@ public:
     }
 
 protected:
+    
+    /*!
+     * Update function will be called when the timer expires.
+     */
     virtual void update(int time) = 0;
     virtual void timeExpired();
 

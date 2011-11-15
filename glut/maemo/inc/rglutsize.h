@@ -31,7 +31,7 @@
 
 /**
  * @class RGlutSize
- *        Size class implementation
+ * @brief Size class implementation.
  */
 template <typename T>
 class RGlutSize
@@ -47,22 +47,37 @@ public:
           mHeight(height)
     {}
 
+    /*!
+     * Sets width of the rectangle.
+     */
     void setWidth(const T &width) {
         mWidth = width;
     }
 
+    /*!
+     * Retrieves width of the rectangle.
+     */
     T width() const {
         return mWidth;
     }
 
+    /*!
+     * Sets height of the rectangle.
+     */
     void setHeight(const T &height) {
         mHeight = height;
     }
 
+    /*!
+     * Retreives height of the rectangle.
+     */
     T height() const {
         return mHeight;
     }
 
+    /*!
+     * Checks whether the size has height as 0 or width as 0.
+     */
     bool isNull() {
         return mWidth == 0 || mHeight = 0;
     }

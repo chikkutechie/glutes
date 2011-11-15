@@ -1,4 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$class_r_glut_gradient.html" title="RGlutGradient" alt="" coords="5,5,109,33"/>
-<area shape="rect" id="node3" href="$class_r_glut_linear_gradient.html" title="RGlutLinearGradient" alt="" coords="157,5,296,33"/>
+<area shape="rect" id="node1" href="$class_r_glut_gradient.html" title="Gradient base class." alt="" coords="5,5,128,35"/>
+<area shape="rect" id="node3" href="$class_r_glut_linear_gradient.html" title="Linear gradient implementation." alt="" coords="176,5,344,35"/>
 </map>

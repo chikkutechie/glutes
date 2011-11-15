@@ -34,7 +34,7 @@
 
 /**
  * @class RGlutFont
- *        Wrapper for X11 font
+ * @brief Wrapper for X11 font.
  */
 class RGlutFont
 {

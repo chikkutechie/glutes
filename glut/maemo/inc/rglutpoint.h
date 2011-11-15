@@ -31,7 +31,7 @@
 
 /**
  * @class RGlutPoint
- *        Template for point class
+ * @brief Template class for simple point.
  */
 template <typename T>
 class RGlutPoint
@@ -47,18 +47,30 @@ public:
           mY(y)
     {}
 
+    /*!
+     * Sets X value
+     */
     void setX(const T &x) {
         mX = x;
     }
 
+    /*!
+     * Retrieves X value
+     */
     T x() const {
         return mX;
     }
 
+    /*!
+     * Sets Y value
+     */
     void setY(const T &y) {
         mY = y;
     }
-
+    
+    /*!
+     * Retrieves Y value
+     */
     T y() const {
         return mY;
     }

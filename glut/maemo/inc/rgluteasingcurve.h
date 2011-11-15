@@ -31,7 +31,7 @@
 
 /**
  * @class RGlutEasingCurve
- *        Easing curve implementation
+ * @brief Easing curve implementation, mainly for animation FW.
  */
 class RGlutEasingCurve
 {

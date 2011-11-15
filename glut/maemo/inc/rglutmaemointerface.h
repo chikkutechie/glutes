@@ -53,7 +53,7 @@ class RGlutTimer;
 
 /**
  * @class RGlutMaemoInterface
- *        Maemo glut interface implementation
+ * @brief Maemo glut interface implementation.
  */
 class RGlutMaemoInterface: public RGlutInterface, public RGlutEventHandler
 {

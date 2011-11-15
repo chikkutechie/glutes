@@ -103,20 +103,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="RGlutAnimation" -->
+<p>Base class for animation(or effects) framework.  
+ <a href="class_r_glut_animation.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="rglutanimation_8h_source.html">rglutanimation.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for RGlutAnimation:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_r_glut_animation__inherit__graph.png" border="0" usemap="#_r_glut_animation_inherit__map" alt="Inheritance graph"/></div>
 <map name="_r_glut_animation_inherit__map" id="_r_glut_animation_inherit__map">
-<area shape="rect" id="node3" href="class_r_glut_window_state_animation.html" title="{RGlutWindowStateAnimation\n||+ RGlutWindowStateAnimation()\l+ setWindowState()\l+ setStartPos()\l+ setEndPos()\l+ setStartSize()\l+ setEndSize()\l+ setStartRect()\l+ setEndRect()\l+ setEasingCurve()\l}" alt="" coords="5,377,213,586"/></map>
+<area shape="rect" id="node3" href="class_r_glut_window_state_animation.html" title="Animation implementation for window properties." alt="" coords="5,425,261,663"/></map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for RGlutAnimation:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_r_glut_animation__coll__graph.png" border="0" usemap="#_r_glut_animation_coll__map" alt="Collaboration graph"/></div>
 <map name="_r_glut_animation_coll__map" id="_r_glut_animation_coll__map">
-<area shape="rect" id="node2" href="class_r_glut_animation_listner.html" title="{RGlutAnimationListner\n||+ ~RGlutAnimationListner()\l+ started()\l+ stopped()\l}" alt="" coords="5,38,184,151"/><area shape="rect" id="node4" href="class_r_glut_time.html" title="{RGlutTime\n||+ RGlutTime()\l+ start()\l+ elapsed()\l+ currentTime()\l}" alt="" coords="208,30,317,159"/><area shape="rect" id="node6" href="class_r_glut_timer.html" title="{RGlutTimer\n||+ RGlutTimer()\l+ ~RGlutTimer()\l+ interval()\l+ setInterval()\l+ start()\l+ stop()\l+ run()\l}" alt="" coords="341,6,456,183"/></map>
+<area shape="rect" id="node2" href="class_r_glut_animation_listner.html" title="{RGlutAnimationListner\n||+ ~RGlutAnimationListner()\l+ started()\l+ stopped()\l}" alt="" coords="5,43,224,170"/><area shape="rect" id="node4" href="class_r_glut_time.html" title="Time class implementation for different platform." alt="" coords="248,34,384,179"/><area shape="rect" id="node6" href="class_r_glut_timer.html" title="Timer class implementation." alt="" coords="408,6,547,207"/></map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="class_r_glut_animation-members.html">List of all members.</a></p>
@@ -132,8 +135,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_animation.html#ae923904f5dd2a6acc6a5d2fa472446c4">setListner</a> (<a class="el" href="class_r_glut_animation_listner.html">RGlutAnimationListner</a> *l)</td></tr>
 <tr><td colspan="2"><h2><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9152de4d2592d10c6d9e9c4b53e45e7c"></a><!-- doxytag: member="RGlutAnimation::update" ref="a9152de4d2592d10c6d9e9c4b53e45e7c" args="(int time)=0" -->
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> (int time)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_glut_animation.html#a9152de4d2592d10c6d9e9c4b53e45e7c">update</a> (int time)=0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adf1ab2d5110f40987bb9e620e7b82cdd"></a><!-- doxytag: member="RGlutAnimation::timeExpired" ref="adf1ab2d5110f40987bb9e620e7b82cdd" args="()" -->
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>timeExpired</b> ()</td></tr>
 <tr><td colspan="2"><h2><a name="pro-attribs"></a>
@@ -152,13 +154,13 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>mInterval</b></td></tr
 <a class="el" href="class_r_glut_animation_listner.html">RGlutAnimationListner</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>mListner</b></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>Base class for animation(or effects) framework.<br/>
- To implement an Animation class derive from this class and implement void update(int) method.<br/>
+<div class="textblock"><p>Base class for animation(or effects) framework. </p>
+<p>To implement an Animation class derive from this class and implement void <a class="el" href="class_r_glut_animation.html#a9152de4d2592d10c6d9e9c4b53e45e7c">update(int)</a> method.<br/>
  For Example: </p>
-<div class="fragment"><pre class="fragment">        <span class="keyword">class </span>MyAnimation: <span class="keyword">public</span> <a class="code" href="class_r_glut_animation.html">RGlutAnimation</a>
+<div class="fragment"><pre class="fragment">        <span class="keyword">class </span>MyAnimation: <span class="keyword">public</span> <a class="code" href="class_r_glut_animation.html" title="Base class for animation(or effects) framework.">RGlutAnimation</a>
         {
         <span class="keyword">public</span>:
-            <span class="keywordtype">void</span> update(<span class="keywordtype">int</span>)
+            <span class="keywordtype">void</span> <a class="code" href="class_r_glut_animation.html#a9152de4d2592d10c6d9e9c4b53e45e7c">update</a>(<span class="keywordtype">int</span>)
             {
             <span class="comment">// do the updation of the state here</span>
             }
@@ -306,6 +308,24 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>mInterval</b></td></tr
 
 </div>
 </div>
+<a class="anchor" id="a9152de4d2592d10c6d9e9c4b53e45e7c"></a><!-- doxytag: member="RGlutAnimation::update" ref="a9152de4d2592d10c6d9e9c4b53e45e7c" args="(int time)=0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void RGlutAnimation::update </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>time</em></td><td>)</td>
+          <td><code> [protected, pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Update function will be called when the timer expires. </p>
+
+</div>
+</div>
 </div>
 </div>
   <div id="nav-path" class="navpath">
@@ -326,7 +346,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>mInterval</b></td></tr
 </div>
 
 
-    <li class="footer">Generated on Fri Nov 11 2011 14:15:31 for glutes by
+    <li class="footer">Generated on Tue Nov 15 2011 10:57:42 for glutes by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.5.1 </li>
    </ul>

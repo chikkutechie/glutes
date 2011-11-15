@@ -128,29 +128,39 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00031"></a>00031 <span class="preprocessor"></span><span class="comment"></span>
 <a name="l00032"></a>00032 <span class="comment">/**</span>
 <a name="l00033"></a>00033 <span class="comment"> * @class RGlutTime</span>
-<a name="l00034"></a>00034 <span class="comment"> *        Time class implementation for different platform</span>
+<a name="l00034"></a>00034 <span class="comment"> * @brief Time class implementation for different platform</span>
 <a name="l00035"></a>00035 <span class="comment"> */</span>
-<a name="l00036"></a><a class="code" href="class_r_glut_time.html">00036</a> <span class="keyword">class </span><a class="code" href="class_r_glut_time.html">RGlutTime</a>
+<a name="l00036"></a><a class="code" href="class_r_glut_time.html">00036</a> <span class="keyword">class </span><a class="code" href="class_r_glut_time.html" title="Time class implementation for different platform.">RGlutTime</a>
 <a name="l00037"></a>00037 {
 <a name="l00038"></a>00038 <span class="keyword">public</span>:
-<a name="l00039"></a>00039     <a class="code" href="class_r_glut_time.html">RGlutTime</a>();
-<a name="l00040"></a>00040 
-<a name="l00041"></a>00041     <span class="keywordtype">void</span> start();
-<a name="l00042"></a>00042     <span class="keywordtype">int</span> elapsed() <span class="keyword">const</span>;
-<a name="l00043"></a>00043 
-<a name="l00044"></a>00044     <span class="keyword">static</span> <a class="code" href="class_r_glut_time.html">RGlutTime</a> currentTime();
-<a name="l00045"></a>00045 
-<a name="l00046"></a>00046 <span class="keyword">private</span>:
-<a name="l00047"></a>00047     <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> fromTimeComponentToMS(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> hour,
-<a name="l00048"></a>00048             <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> minute,
-<a name="l00049"></a>00049             <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> sec,
-<a name="l00050"></a>00050             <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> msec = 0);
-<a name="l00051"></a>00051 <span class="keyword">private</span>:
-<a name="l00052"></a>00052     <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> mMS;
-<a name="l00053"></a>00053 };
-<a name="l00054"></a>00054 
-<a name="l00055"></a>00055 <span class="preprocessor">#endif</span>
-<a name="l00056"></a>00056 <span class="preprocessor"></span>
+<a name="l00039"></a>00039     <a class="code" href="class_r_glut_time.html" title="Time class implementation for different platform.">RGlutTime</a>();
+<a name="l00040"></a>00040 <span class="comment"></span>
+<a name="l00041"></a>00041 <span class="comment">    /*!</span>
+<a name="l00042"></a>00042 <span class="comment">     * Capture the current time and set it.</span>
+<a name="l00043"></a>00043 <span class="comment">     */</span>
+<a name="l00044"></a>00044     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_time.html#ad2682e72a376857a07c895d49a47b78a">start</a>();
+<a name="l00045"></a>00045     <span class="comment"></span>
+<a name="l00046"></a>00046 <span class="comment">    /*!</span>
+<a name="l00047"></a>00047 <span class="comment">     * Returns the time passed from start time.</span>
+<a name="l00048"></a>00048 <span class="comment">     */</span>
+<a name="l00049"></a>00049     <span class="keywordtype">int</span> <a class="code" href="class_r_glut_time.html#ab0a54de2d3bc7b746951fb2f5d445f77">elapsed</a>() <span class="keyword">const</span>;
+<a name="l00050"></a>00050 <span class="comment"></span>
+<a name="l00051"></a>00051 <span class="comment">    /*!</span>
+<a name="l00052"></a>00052 <span class="comment">     * Retunns the current time</span>
+<a name="l00053"></a>00053 <span class="comment">     */</span>
+<a name="l00054"></a>00054     <span class="keyword">static</span> <a class="code" href="class_r_glut_time.html" title="Time class implementation for different platform.">RGlutTime</a> <a class="code" href="class_r_glut_time.html#ad21279b459653e25f7c0592817345412">currentTime</a>();
+<a name="l00055"></a>00055 
+<a name="l00056"></a>00056 <span class="keyword">private</span>:
+<a name="l00057"></a>00057     <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> fromTimeComponentToMS(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> hour,
+<a name="l00058"></a>00058             <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> minute,
+<a name="l00059"></a>00059             <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> sec,
+<a name="l00060"></a>00060             <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> msec = 0);
+<a name="l00061"></a>00061 <span class="keyword">private</span>:
+<a name="l00062"></a>00062     <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> mMS;
+<a name="l00063"></a>00063 };
+<a name="l00064"></a>00064 
+<a name="l00065"></a>00065 <span class="preprocessor">#endif</span>
+<a name="l00066"></a>00066 <span class="preprocessor"></span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
@@ -171,7 +181,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 
-    <li class="footer">Generated on Fri Nov 11 2011 14:15:31 for glutes by
+    <li class="footer">Generated on Tue Nov 15 2011 10:57:41 for glutes by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.5.1 </li>
    </ul>

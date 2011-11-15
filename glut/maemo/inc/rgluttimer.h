@@ -31,7 +31,7 @@
 
 /**
  * @class RGlutTimer
- *        Timer class implementation
+ * @brief Timer class implementation.
  */
 class RGlutTimer
 {
@@ -39,10 +39,29 @@ public:
     RGlutTimer();
     virtual ~RGlutTimer();
 
+    /*!
+     * Retrieves the interval for the timer.
+     */
     int interval();
+    
+    /*!
+     * Sets the interval for the timer.
+     */
     void setInterval(int interval);
+    
+    /*!
+     * Starts the timer.
+     */
     void start();
+
+    /*!
+     * Stops the timer.
+     */
     void stop();
+    
+    /*!
+     * This function will be getting called once the timer expires.
+     */
     virtual void run() = 0;
 
 private:

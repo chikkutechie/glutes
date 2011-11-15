@@ -36,7 +36,7 @@
 
 /**
  * @class REGLProperties
- *        Manages properties of EGL
+ * @brief Manages properties of EGL.
  */
 class REGLProperties
 {
@@ -67,9 +67,19 @@ public:
     REGLProperties()
     {}
 
+    /*!
+     * Set the given property name and value.
+     * The type of property is automatically determined.
+     */
     void addProperty(int name, int value);
+    /*!
+     * remove the given property.
+     */
     void removeProperty(int name);
 
+    /*!
+     * Retries the attribute set for the given type
+     */
     EGLint *getAttributes(Type type);
 
 private:

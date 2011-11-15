@@ -43,7 +43,7 @@
 
 /**
  * @class RGlutWindow
- *        Window class implementation, wrapper for X11 window
+ * @brief Window class implementation, wrapper for X11 window.
  */
 class RGlutWindow
 {
@@ -51,56 +51,138 @@ public:
     RGlutWindow(RGlutWindow *parent = 0);
     virtual ~RGlutWindow();
 
+    /*!
+     * Retrieves the window position.
+     * @see RGlutPointI
+     */
     RGlutPointI pos() const {
         return RGlutPointI(mX, mY);
     }
+    
+    /*!
+     * Sets the window position.
+     */
     virtual void setPos(int x, int y);
 
+    /*!
+     * Retrieves the size of the window.
+     * @see RGlutSizeI
+     */
     RGlutSizeI size() const {
         return RGlutSizeI(mWidth, mHeight);
     }
+    
+    /*!
+     * Sets the size of the window.
+     */
     virtual void setSize(int w, int h);
 
+    /*!
+     * Sets the geometry for the window. Geometry is postion + size.
+     */
     virtual void setGeometry(int x, int y, int w, int h);
+    
+    /*!
+     * Retrieves the geometry for the window. Geometry is postion + size.
+     * @see RGlutRectI
+     */
     RGlutRectI geometry() const {
         return RGlutRectI(mX, mY, mWidth, mHeight);
     }
 
+    /*!
+     * Sets the titke for the window
+     * @param title The string which should be set as the title.
+     */
     void setTitle(std::string const &title);
+    
+    /*!
+     * Make the window full screen
+     */
     void setFullscreen();
 
+    /*!
+     * Sets the background color of the window.
+     * @param color The color that should be applied to background
+     */
     void setBackgroundColor(RGlutColor const &color);
+    
+    /*!
+     * Clears the window.
+     */
     void clear();
 
+    /*!
+     * Checks whether the window is visible.
+     * @return true is window is visible
+     */
     bool isVisible() const {
         return mVisible;
     }
+    
+    /*!
+     * Shows the window. The parent window should be visible inorder the window to be visible.
+     */
     virtual void show();
+    
+    /*!
+     * Hides the window.
+     */
     virtual void hide();
 
+    /*!
+     * Causes the window to redraw.
+     */
     virtual void redraw();
+    
+    /*!
+     * Callback for draw event.
+     */
     virtual void draw();
 
+    /*!
+     * Event handler function.
+     */
     virtual bool handleEvent(XEvent &event);
 
+    /*!
+     * Returns the X11 Display object associated with the window.
+     */
     Display *display() const {
         return mDisplay;
     }
 
+    /*!
+     * Returns the X11 Window object associated with the window.
+     */
     Window window();
 
+    /*!
+     * Returns the parent window.
+     */
     RGlutWindow *parent() {
         return mParent;
     }
 
+    /*!
+     * Adds the given window as a child
+     * @param window The window which should be added as a child
+     */
     void addChild(RGlutWindow *window) {
         if (window) {
             mChilds.insert(window);
         }
     }
 
+    /*!
+     * Removes the window from child list.
+     * @param window The window that should be removed from child list
+     */
     void removeChild(RGlutWindow *window);
 
+    /*!
+     * Remove this window from the parents child list.
+     */
     void removeFromParent();
 
 private:

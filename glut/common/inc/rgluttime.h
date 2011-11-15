@@ -31,16 +31,26 @@
 
 /**
  * @class RGlutTime
- *        Time class implementation for different platform
+ * @brief Time class implementation for different platform
  */
 class RGlutTime
 {
 public:
     RGlutTime();
 
+    /*!
+     * Capture the current time and set it.
+     */
     void start();
+    
+    /*!
+     * Returns the time passed from start time.
+     */
     int elapsed() const;
 
+    /*!
+     * Retunns the current time
+     */
     static RGlutTime currentTime();
 
 private:

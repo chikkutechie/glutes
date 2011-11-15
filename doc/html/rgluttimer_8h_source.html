@@ -128,25 +128,44 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00031"></a>00031 <span class="preprocessor"></span><span class="comment"></span>
 <a name="l00032"></a>00032 <span class="comment">/**</span>
 <a name="l00033"></a>00033 <span class="comment"> * @class RGlutTimer</span>
-<a name="l00034"></a>00034 <span class="comment"> *        Timer class implementation</span>
+<a name="l00034"></a>00034 <span class="comment"> * @brief Timer class implementation.</span>
 <a name="l00035"></a>00035 <span class="comment"> */</span>
-<a name="l00036"></a><a class="code" href="class_r_glut_timer.html">00036</a> <span class="keyword">class </span><a class="code" href="class_r_glut_timer.html">RGlutTimer</a>
+<a name="l00036"></a><a class="code" href="class_r_glut_timer.html">00036</a> <span class="keyword">class </span><a class="code" href="class_r_glut_timer.html" title="Timer class implementation.">RGlutTimer</a>
 <a name="l00037"></a>00037 {
 <a name="l00038"></a>00038 <span class="keyword">public</span>:
-<a name="l00039"></a>00039     <a class="code" href="class_r_glut_timer.html">RGlutTimer</a>();
-<a name="l00040"></a>00040     <span class="keyword">virtual</span> ~<a class="code" href="class_r_glut_timer.html">RGlutTimer</a>();
-<a name="l00041"></a>00041 
-<a name="l00042"></a>00042     <span class="keywordtype">int</span> interval();
-<a name="l00043"></a>00043     <span class="keywordtype">void</span> setInterval(<span class="keywordtype">int</span> interval);
-<a name="l00044"></a>00044     <span class="keywordtype">void</span> start();
-<a name="l00045"></a>00045     <span class="keywordtype">void</span> stop();
-<a name="l00046"></a>00046     <span class="keyword">virtual</span> <span class="keywordtype">void</span> run() = 0;
-<a name="l00047"></a>00047 
-<a name="l00048"></a>00048 <span class="keyword">private</span>:
-<a name="l00049"></a>00049     <span class="keywordtype">int</span> mInterval;
-<a name="l00050"></a>00050 };
-<a name="l00051"></a>00051 
-<a name="l00052"></a>00052 <span class="preprocessor">#endif</span>
+<a name="l00039"></a>00039     <a class="code" href="class_r_glut_timer.html" title="Timer class implementation.">RGlutTimer</a>();
+<a name="l00040"></a>00040     <span class="keyword">virtual</span> ~<a class="code" href="class_r_glut_timer.html" title="Timer class implementation.">RGlutTimer</a>();
+<a name="l00041"></a>00041 <span class="comment"></span>
+<a name="l00042"></a>00042 <span class="comment">    /*!</span>
+<a name="l00043"></a>00043 <span class="comment">     * Retrieves the interval for the timer.</span>
+<a name="l00044"></a>00044 <span class="comment">     */</span>
+<a name="l00045"></a>00045     <span class="keywordtype">int</span> <a class="code" href="class_r_glut_timer.html#a3d5c47a6d7fc50b589e539150474fa2a">interval</a>();
+<a name="l00046"></a>00046     <span class="comment"></span>
+<a name="l00047"></a>00047 <span class="comment">    /*!</span>
+<a name="l00048"></a>00048 <span class="comment">     * Sets the interval for the timer.</span>
+<a name="l00049"></a>00049 <span class="comment">     */</span>
+<a name="l00050"></a>00050     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_timer.html#aa0a24142b195e33ec23e7e680ee1f474">setInterval</a>(<span class="keywordtype">int</span> interval);
+<a name="l00051"></a>00051     <span class="comment"></span>
+<a name="l00052"></a>00052 <span class="comment">    /*!</span>
+<a name="l00053"></a>00053 <span class="comment">     * Starts the timer.</span>
+<a name="l00054"></a>00054 <span class="comment">     */</span>
+<a name="l00055"></a>00055     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_timer.html#a1d4f2ad81b131b220ab4c7a04f97fae7">start</a>();
+<a name="l00056"></a>00056 <span class="comment"></span>
+<a name="l00057"></a>00057 <span class="comment">    /*!</span>
+<a name="l00058"></a>00058 <span class="comment">     * Stops the timer.</span>
+<a name="l00059"></a>00059 <span class="comment">     */</span>
+<a name="l00060"></a>00060     <span class="keywordtype">void</span> <a class="code" href="class_r_glut_timer.html#a467cb7a3b59e4af7dc28111d0be3f7f0">stop</a>();
+<a name="l00061"></a>00061     <span class="comment"></span>
+<a name="l00062"></a>00062 <span class="comment">    /*!</span>
+<a name="l00063"></a>00063 <span class="comment">     * This function will be getting called once the timer expires.</span>
+<a name="l00064"></a>00064 <span class="comment">     */</span>
+<a name="l00065"></a>00065     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_r_glut_timer.html#a75adfebcf0c44e4c11416961c9487f29">run</a>() = 0;
+<a name="l00066"></a>00066 
+<a name="l00067"></a>00067 <span class="keyword">private</span>:
+<a name="l00068"></a>00068     <span class="keywordtype">int</span> mInterval;
+<a name="l00069"></a>00069 };
+<a name="l00070"></a>00070 
+<a name="l00071"></a>00071 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
@@ -167,7 +186,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 
-    <li class="footer">Generated on Fri Nov 11 2011 14:15:31 for glutes by
+    <li class="footer">Generated on Tue Nov 15 2011 10:57:42 for glutes by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.5.1 </li>
    </ul>

@@ -30,6 +30,23 @@
 #include "rgluttimer.h"
 #include "rgluttimer.h"
 
+/**
+ * @class RGlutAnimation
+ *        To implement an Animation class derive from this class and implement
+ *        void update(int) method.<br>
+ *        For Example:
+ *        @code
+ *        class MyAnimation: public RGlutAnimation
+ *        {
+ *        public:
+ *            void update(int)
+ *            {
+ *            // do the updation of the state here
+ *            }
+ *        };
+ *        @endcode
+ */
+
 class RGlutAnimationTimer: public RGlutTimer
 {
 public:

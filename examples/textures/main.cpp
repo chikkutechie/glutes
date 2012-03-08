@@ -56,20 +56,20 @@ struct InfoHeader
     unsigned long   mColorsimportant;
 }; 
 
-struct Pixel{
-    unsigned char   mBlue;
-    unsigned char   mGreen;
-    unsigned char   mRed;
-}; 
-
-
-unsigned char * loadBMPData(const unsigned char * data, unsigned int size)
+struct BMPData
 {
     FileHeader mFileHeader;
     InfoHeader mInfoHeader;
     unsigned char * mPixels;
+    
+    BMPData()
+        : mPixels(0)
+    {}
+};
 
-    if (size < sizeof(mFileHeader) + sizeof(mInfoHeader)) {
+BMPData * loadBMPData(const unsigned char * data, unsigned int size)
+{
+    if (size < sizeof(FileHeader) + sizeof(InfoHeader)) {
         return 0;
     }
 
@@ -78,68 +78,71 @@ unsigned char * loadBMPData(const unsigned char * data, unsigned int size)
         return 0;
     }
 
+    BMPData * bmpData = new BMPData;
+
     int offset = 0;
-    std::memcpy(&mFileHeader.mType, data + offset, sizeof(mFileHeader.mType));
-    offset += sizeof(mFileHeader.mType);
+    std::memcpy(&bmpData->mFileHeader.mType, data + offset, sizeof(bmpData->mFileHeader.mType));
+    offset += sizeof(bmpData->mFileHeader.mType);
 
-    std::memcpy(&mFileHeader.mSize, data + offset, sizeof(mFileHeader.mSize));
-    offset += sizeof(mFileHeader.mSize);
+    std::memcpy(&bmpData->mFileHeader.mSize, data + offset, sizeof(bmpData->mFileHeader.mSize));
+    offset += sizeof(bmpData->mFileHeader.mSize);
 
-    std::memcpy(&mFileHeader.mReserved1, data + offset, sizeof(mFileHeader.mReserved1));
-    offset += sizeof(mFileHeader.mReserved1);
+    std::memcpy(&bmpData->mFileHeader.mReserved1, data + offset, sizeof(bmpData->mFileHeader.mReserved1));
+    offset += sizeof(bmpData->mFileHeader.mReserved1);
     
-    std::memcpy(&mFileHeader.mReserved2, data + offset, sizeof(mFileHeader.mReserved2));
-    offset += sizeof(mFileHeader.mReserved2);
+    std::memcpy(&bmpData->mFileHeader.mReserved2, data + offset, sizeof(bmpData->mFileHeader.mReserved2));
+    offset += sizeof(bmpData->mFileHeader.mReserved2);
     
-    std::memcpy(&mFileHeader.mOffsetbits, data + offset, sizeof(mFileHeader.mOffsetbits));
-    offset += sizeof(mFileHeader.mOffsetbits);
+    std::memcpy(&bmpData->mFileHeader.mOffsetbits, data + offset, sizeof(bmpData->mFileHeader.mOffsetbits));
+    offset += sizeof(bmpData->mFileHeader.mOffsetbits);
     
-    std::memcpy(&mInfoHeader.mSize, data + offset, sizeof(mInfoHeader.mSize));
-    offset += sizeof(mInfoHeader.mSize);
+    std::memcpy(&bmpData->mInfoHeader.mSize, data + offset, sizeof(bmpData->mInfoHeader.mSize));
+    offset += sizeof(bmpData->mInfoHeader.mSize);
     
-    std::memcpy(&mInfoHeader.mWidth, data + offset, sizeof(mInfoHeader.mWidth));
-    offset += sizeof(mInfoHeader.mWidth);
+    std::memcpy(&bmpData->mInfoHeader.mWidth, data + offset, sizeof(bmpData->mInfoHeader.mWidth));
+    offset += sizeof(bmpData->mInfoHeader.mWidth);
     
-    std::memcpy(&mInfoHeader.mHeight, data + offset, sizeof(mInfoHeader.mHeight));
-    offset += sizeof(mInfoHeader.mHeight);
+    std::memcpy(&bmpData->mInfoHeader.mHeight, data + offset, sizeof(bmpData->mInfoHeader.mHeight));
+    offset += sizeof(bmpData->mInfoHeader.mHeight);
     
-    std::memcpy(&mInfoHeader.mPlanes, data + offset, sizeof(mInfoHeader.mPlanes));
-	offset += sizeof(mInfoHeader.mPlanes);
+    std::memcpy(&bmpData->mInfoHeader.mPlanes, data + offset, sizeof(bmpData->mInfoHeader.mPlanes));
+	offset += sizeof(bmpData->mInfoHeader.mPlanes);
 
-    std::memcpy(&mInfoHeader.mBitcount, data + offset, sizeof(mInfoHeader.mBitcount));
-	offset += sizeof(mInfoHeader.mBitcount);
+    std::memcpy(&bmpData->mInfoHeader.mBitcount, data + offset, sizeof(bmpData->mInfoHeader.mBitcount));
+	offset += sizeof(bmpData->mInfoHeader.mBitcount);
 
-    std::memcpy(&mInfoHeader.mCompression, data + offset, sizeof(mInfoHeader.mCompression));
-	offset += sizeof(mInfoHeader.mCompression);
+    std::memcpy(&bmpData->mInfoHeader.mCompression, data + offset, sizeof(bmpData->mInfoHeader.mCompression));
+	offset += sizeof(bmpData->mInfoHeader.mCompression);
 
-    std::memcpy(&mInfoHeader.mSizeimage, data + offset, sizeof(mInfoHeader.mSizeimage));
-	offset += sizeof(mInfoHeader.mSizeimage);
+    std::memcpy(&bmpData->mInfoHeader.mSizeimage, data + offset, sizeof(bmpData->mInfoHeader.mSizeimage));
+	offset += sizeof(bmpData->mInfoHeader.mSizeimage);
 
-    std::memcpy(&mInfoHeader.mXpelspermeter, data + offset, sizeof(mInfoHeader.mXpelspermeter));
-	offset += sizeof(mInfoHeader.mXpelspermeter);
+    std::memcpy(&bmpData->mInfoHeader.mXpelspermeter, data + offset, sizeof(bmpData->mInfoHeader.mXpelspermeter));
+	offset += sizeof(bmpData->mInfoHeader.mXpelspermeter);
 
-    std::memcpy(&mInfoHeader.mYpelspermeter, data + offset, sizeof(mInfoHeader.mYpelspermeter));
-	offset += sizeof(mInfoHeader.mYpelspermeter);
+    std::memcpy(&bmpData->mInfoHeader.mYpelspermeter, data + offset, sizeof(bmpData->mInfoHeader.mYpelspermeter));
+	offset += sizeof(bmpData->mInfoHeader.mYpelspermeter);
 
-    std::memcpy(&mInfoHeader.mColorsused, data + offset, sizeof(mInfoHeader.mColorsused));
-	offset += sizeof(mInfoHeader.mColorsused);
+    std::memcpy(&bmpData->mInfoHeader.mColorsused, data + offset, sizeof(bmpData->mInfoHeader.mColorsused));
+	offset += sizeof(bmpData->mInfoHeader.mColorsused);
 
-    std::memcpy(&mInfoHeader.mColorsimportant, data + offset, sizeof(mInfoHeader.mColorsimportant));
-	offset += sizeof(mInfoHeader.mColorsimportant);
+    std::memcpy(&bmpData->mInfoHeader.mColorsimportant, data + offset, sizeof(bmpData->mInfoHeader.mColorsimportant));
+	offset += sizeof(bmpData->mInfoHeader.mColorsimportant);
 
-    if (mInfoHeader.mCompression) {
-        return false;
+    if (bmpData->mInfoHeader.mCompression) {
+        delete bmpData;
+        return 0;
     }
 
-    unsigned int dataSize = size - mFileHeader.mOffsetbits;
-    mPixels = new unsigned char[dataSize];
+    unsigned int dataSize = size - bmpData->mFileHeader.mOffsetbits;
+    bmpData->mPixels = new unsigned char[dataSize];
 
-    memcpy(mPixels, data + mFileHeader.mOffsetbits, dataSize);
+    memcpy(bmpData->mPixels, data + bmpData->mFileHeader.mOffsetbits, dataSize);
 
-    return mPixels;
+    return bmpData;
 }
 
-unsigned char * loadBMPFile(const char * fileName)
+BMPData * loadBMPFile(const char * fileName)
 {
     std::ifstream file(fileName, std::ios::in | std::ios::binary);    
     if (!file.is_open()) {
@@ -153,11 +156,11 @@ unsigned char * loadBMPFile(const char * fileName)
     file.read ((char *)data, size);
     file.close();
 
-    unsigned char * pixels = loadBMPData(data, size);
+    BMPData * bmpData = loadBMPData(data, size);
 
     delete [] data;
 
-    return pixels;
+    return bmpData;
 }
 
 GLuint loadShader(const char * src, GLenum type)
@@ -264,8 +267,9 @@ bool cleanupShadders()
 
 bool initGL()
 {
-    unsigned char * pixels  = loadBMPFile(texFile);
+    BMPData * pixels  = loadBMPFile(texFile);
     if (!pixels) {
+        std::cerr << "Loading File \"" << texFile << "\" Failed" << std::endl;
         return false;
     }
 
@@ -273,26 +277,31 @@ bool initGL()
 
     glGenTextures(1, &pictureID);
     glBindTexture(GL_TEXTURE_2D, pictureID);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 1024, 1024, 0, GL_RGB, GL_UNSIGNED_BYTE, pixels);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, pixels->mInfoHeader.mWidth,
+                 pixels->mInfoHeader.mHeight,
+                 0, GL_RGB, GL_UNSIGNED_BYTE, pixels->mPixels);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-    delete [] pixels;
+    delete pixels;
 
 
-    unsigned char * pixelsLight  = loadBMPFile(texLFile);
+    BMPData * pixelsLight  = loadBMPFile(texLFile);
     if (!pixelsLight) {
+        std::cerr << "Loading File \"" << texLFile << "\" Failed" << std::endl;
         return false;
     }
 
     glGenTextures(1, &lightID);
     glBindTexture(GL_TEXTURE_2D, lightID);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 512, 1024, 0, GL_RGB, GL_UNSIGNED_BYTE, pixelsLight);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, pixels->mInfoHeader.mWidth,
+                 pixels->mInfoHeader.mHeight,
+                 0, GL_RGB, GL_UNSIGNED_BYTE, pixelsLight->mPixels);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-    delete [] pixelsLight;
+    delete pixelsLight;
 
 	if (!initShadders()) {
 		std::cerr << "Shader Initialization Failed" << std::endl;

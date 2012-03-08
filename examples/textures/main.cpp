@@ -21,11 +21,11 @@ typedef struct
 } UserData;
 
 #ifdef _GLES_EMU_
-const char * texFile = "c:\\data\\kunju1.bmp";
-const char * texLFile = "c:\\data\\light2.bmp";
+const char * texFile = "c:\\data\\base.bmp";
+const char * texLFile = "c:\\data\\light.bmp";
 #else
-const char * texFile = "kunju1.bmp";
-const char * texLFile = "light2.bmp";
+const char * texFile = "base.bmp";
+const char * texLFile = "light.bmp";
 #endif
 
 GLuint programID;

@@ -26,10 +26,10 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-bin_PROGRAMME = texturesh
+bin_PROGRAMME = textures
 
-texturesh_SOURCES = ../main.cpp
-texturesh_OBJS = $(patsubst ../%.cpp, %.o, $(texturesh_SOURCES))
+textures_SOURCES = ../main.cpp
+textures_OBJS = $(patsubst ../%.cpp, %.o, $(textures_SOURCES))
 
 CXX = g++
 INCLUDE = -I..
@@ -38,10 +38,10 @@ CXXFLAGS = -g3 $(INCLUDE) -DGLUT_ES2
 all: $(bin_PROGRAMME)
 
 
-$(bin_PROGRAMME): $(texturesh_OBJS)
-	$(CXX) -o $@ $(CXXFLAGS) $(LIBDIR) $(LIBS) $(INCLUDE) $(texturesh_OBJS)
+$(bin_PROGRAMME): $(textures_OBJS)
+	$(CXX) -o $@ $(CXXFLAGS) $(LIBDIR) $(LIBS) $(INCLUDE) $(textures_OBJS)
 
-$(texturesh_OBJS): $(texturesh_SOURCES)
+$(textures_OBJS): $(textures_SOURCES)
 	$(CXX) -c -o $@ $(CXXFLAGS) $<
 
 clean:

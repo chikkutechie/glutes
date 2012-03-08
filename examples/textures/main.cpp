@@ -412,6 +412,16 @@ void reshape(int w, int h)
 	glViewport(0, 0, w, h);
 }
 
+void keyboard(unsigned char key, int, int)
+{
+    switch (key) {
+    case 'q':
+    case 'Q': {
+        exit(0);
+    }
+    }
+}
+
 int main(int argc, char ** argv)
 {
 	const int WindowWidth = 480*2;
@@ -434,10 +444,11 @@ int main(int argc, char ** argv)
 	glutInitWindowSize(WindowWidth, WindowHeight);
 	glutCreateWindow(argv[0]);
 
-	//glutFullScreen();
+	glutFullScreen();
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
-	
+	glutKeyboardFunc(keyboard);
+
 	if (initGL()) {
 		glutMainLoop();
         	terminateGL();

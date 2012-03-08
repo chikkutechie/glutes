@@ -26,19 +26,28 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-SUBDIRS = ../../triangles_gles/maemo ../../triangles_gles2/maemo ../../triangles_vg/maemo ../../textures/maemo
+bin_PROGRAMME = texturesh
 
-all: $(SUBDIRS)
-	for p in  $(SUBDIRS); \
-	do \
-	$(MAKE) -C $$p all ; \
-	done
+texturesh_SOURCES = ../main.cpp
+texturesh_OBJS = $(patsubst ../%.cpp, %.o, $(texturesh_SOURCES))
+
+CXX = g++
+INCLUDE = -I..
+LIBS =  -L../../../glut/maemo/lib -lglut -lGLESv2 -lEGL -lX11
+CXXFLAGS = -g3 $(INCLUDE) -DGLUT_ES2
+all: $(bin_PROGRAMME)
+
+
+$(bin_PROGRAMME): $(texturesh_OBJS)
+	$(CXX) -o $@ $(CXXFLAGS) $(LIBDIR) $(LIBS) $(INCLUDE) $(texturesh_OBJS)
+
+$(texturesh_OBJS): $(texturesh_SOURCES)
+	$(CXX) -c -o $@ $(CXXFLAGS) $<
 
 clean:
-	for p in  $(SUBDIRS); \
-	do \
-	$(MAKE) -C $$p clean ; \
-	done
+	rm -rf *.o $(bin_PROGRAMME)
 
 rebuild: clean all
+
+.PHONY: all
 

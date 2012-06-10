@@ -29,6 +29,8 @@
 #include <vector>
 #include <string>
 #include <cmath>
+#include <cstring>
+#include <iostream>
 
 #if defined(GLUT_ES2)
 #include <glut.h>
@@ -220,7 +222,7 @@ void rotate(float angle, float x, float y, float z, float matrix[4 * 4])
         float resultMat[4 * 4];
         multimatrix4x4(rotMat, matrix, resultMat);
 
-        memcpy(matrix, resultMat, 4 * 4 * sizeof(float));
+        std::memcpy(matrix, resultMat, 4 * 4 * sizeof(float));
     }
 }
 
@@ -321,6 +323,9 @@ int init()
     glGetShaderiv(vshader, GL_COMPILE_STATUS, &result);
 
     if (result != GL_TRUE) {
+        char infoLog[1024] = {'\0'};
+        glGetShaderInfoLog(fshader, sizeof(infoLog)-1, 0, infoLog);
+        std::cerr << "Error : " << infoLog << std::endl;
         return 0;
     }
 
@@ -332,6 +337,9 @@ int init()
     glGetShaderiv(fshader, GL_COMPILE_STATUS, &result);
 
     if (result != GL_TRUE) {
+        char infoLog[1024] = {'\0'};
+        glGetShaderInfoLog(fshader, sizeof(infoLog)-1, 0, infoLog);
+        std::cerr << "Error : " << infoLog << std::endl;
         return 0;
     }
 
@@ -342,6 +350,9 @@ int init()
     GLint lr;
     glGetProgramiv(program, GL_LINK_STATUS, &lr);
     if (lr != GL_TRUE) {
+        char infoLog[1024] = {'\0'};
+        glGetShaderInfoLog(fshader, sizeof(infoLog)-1, 0, infoLog);
+        std::cerr << "Error : " << infoLog << std::endl;
         return 0;
     }
 

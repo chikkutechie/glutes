@@ -35,6 +35,7 @@ using namespace std;
 #include <glut.h>
 #else
 #include <GL/glut.h>
+#include <VG/openvg.h>
 #endif
 
 VGPath path;

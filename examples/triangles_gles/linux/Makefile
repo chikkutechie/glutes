@@ -34,12 +34,12 @@ triangles_gles_OBJS = $(patsubst ../%.cpp, %.o, $(triangles_gles_SOURCES))
 CXX = g++
 INCLUDE = -I..
 LIBS =  -lglut -lGL
-CXXFLAGS = -g3 $(INCLUDE)
+CXXFLAGS = $(INCLUDE)
+
 all: $(bin_PROGRAMME)
 
-
 $(bin_PROGRAMME): $(triangles_gles_OBJS)
-	$(CXX) -o $@ $(CXXFLAGS) $(LIBDIR) $(LIBS) $(INCLUDE) $(triangles_gles_OBJS)
+	$(CXX) -o $@  $(triangles_gles_OBJS) $(CXXFLAGS) $(LIBDIR) $(LIBS) $(INCLUDE)
 
 $(triangles_gles_OBJS): $(triangles_gles_SOURCES)
 	$(CXX) -c -o $@ $(CXXFLAGS) $<

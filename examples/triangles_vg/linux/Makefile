@@ -26,22 +26,22 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-bin_PROGRAMME = triangles_gles2
+bin_PROGRAMME = triangles_vg
 
-triangles_gles2_SOURCES = ../main.cpp
-triangles_gles2_OBJS = $(patsubst ../%.cpp, %.o, $(triangles_gles2_SOURCES))
+triangles_vg_SOURCES = ../main.cpp
+triangles_vg_OBJS = $(patsubst ../%.cpp, %.o, $(triangles_vg_SOURCES))
 
 CXX = g++
 INCLUDE = -I..
-LIBS =  -lglut -lGL
-CXXFLAGS = -g3 $(INCLUDE) -DGL_GLEXT_PROTOTYPES
+LIBS =  -lglut -lOpenVG
+CXXFLAGS = $(INCLUDE)
+
 all: $(bin_PROGRAMME)
 
+$(bin_PROGRAMME): $(triangles_vg_OBJS)
+	$(CXX) -o $@  $(triangles_vg_OBJS) $(CXXFLAGS) $(LIBDIR) $(LIBS) $(INCLUDE)
 
-$(bin_PROGRAMME): $(triangles_gles2_OBJS)
-	$(CXX) -o $@ $(triangles_gles2_OBJS) $(CXXFLAGS) $(LIBDIR) $(LIBS) $(INCLUDE)
-
-$(triangles_gles2_OBJS): $(triangles_gles2_SOURCES)
+$(triangles_vg_OBJS): $(triangles_vg_SOURCES)
 	$(CXX) -c -o $@ $(CXXFLAGS) $<
 
 clean:

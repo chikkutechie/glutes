@@ -8,6 +8,9 @@ syntax: glob
 .cproject
 .project
 *.o
+*.a
+*.so
+*.o.d
 *.obj
 *.dep
 *.exe.*

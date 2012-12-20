@@ -32,7 +32,7 @@ Maemo
 
     In maemo, on device building is only tried. To do this g++ is required togather with needed X11 include files.
 
-    If libX11.so it not available a soft link might need to be created which points to appropriate library(say libX11.so.6)
+    If libX11.so it not available a soft link might be needed to create pointing to appropriate library(say libX11.so.6)
 
     If OpenVG/OpenGLES/EGL/KHR header files are not available get them from Khronos(http://www.khronos.org).
      
